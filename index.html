@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bitaca Cinema - 36 produções audiovisuais fomentadas pelas Leis Paulo Gustavo e Aldir Blanc em Capão Bonito/SP">
+    <meta name="keywords" content="cinema, Capão Bonito, Lei Paulo Gustavo, Aldir Blanc, cultura, audiovisual">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Bitaca Cinema - Capão Bonito">
+    <meta property="og:description" content="Cinema de Capão Bonito: 36 produções, R$ 1,13M em fomento cultural">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/images/og-bitaca.png">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#8B0000">
+
+    <title>Bitaca Cinema - Capão Bonito/SP</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=Oswald:wght@500;700&family=Satisfy&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#home" class="nav__logo">
+                <!-- Logo SVG será inserido aqui -->
+                <svg viewBox="0 0 200 80" class="logo-svg">
+                    <!-- Casinha -->
+                    <polygon points="100,10 120,25 120,40 80,40 80,25" fill="#8B0000" stroke="#0A0A0A" stroke-width="2"/>
+                    <rect x="90" y="28" width="8" height="12" fill="#6B4423"/>
+                    <rect x="105" y="28" width="8" height="12" fill="#6B4423"/>
+                    <!-- Folhagens -->
+                    <path d="M 70,30 Q 65,25 70,20" stroke="#2D5016" stroke-width="3" fill="none"/>
+                    <path d="M 130,30 Q 135,25 130,20" stroke="#2D5016" stroke-width="3" fill="none"/>
+                    <!-- Texto BITACA -->
+                    <text x="40" y="65" font-family="Bebas Neue, sans-serif" font-size="28" font-weight="bold" fill="#8B0000">BITACA</text>
+                    <text x="60" y="78" font-family="Satisfy, cursive" font-size="14" fill="#0A0A0A">Cinema</text>
+                </svg>
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#home" class="nav__link">Início</a></li>
+                    <li class="nav__item"><a href="#catalogo" class="nav__link">Catálogo</a></li>
+                    <li class="nav__item"><a href="#leis" class="nav__link">Sobre as Leis</a></li>
+                    <li class="nav__item"><a href="#analise" class="nav__link">Análise</a></li>
+                    <li class="nav__item"><a href="#contato" class="nav__link">Contato</a></li>
+                </ul>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero__container container">
+            <div class="hero__content" data-aos="fade-up">
+                <h1 class="hero__title">
+                    Cinema de <span class="text-primary">Capão Bonito</span>
+                </h1>
+                <p class="hero__subtitle">
+                    Produções Audiovisuais Fomentadas pelas Leis Paulo Gustavo e Aldir Blanc
+                </p>
+
+                <div class="hero__stats">
+                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                        <span class="stat-number" data-count="36">0</span>
+                        <span class="stat-label">Projetos</span>
+                    </div>
+                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                        <span class="stat-number">R$ 1,13M</span>
+                        <span class="stat-label">Investimento</span>
+                    </div>
+                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                        <span class="stat-number">2025</span>
+                        <span class="stat-label">Lançamentos</span>
+                    </div>
+                </div>
+
+                <div class="hero__cta">
+                    <a href="#catalogo" class="btn btn-primary">Explorar Catálogo</a>
+                    <a href="#leis" class="btn btn-secondary">Saiba Mais</a>
+                </div>
+            </div>
+
+            <div class="hero__decoration">
+                <svg viewBox="0 0 200 200" class="decoration-leaf decoration-leaf-left">
+                    <path d="M50,100 Q20,80 30,50 Q40,20 60,30 Q50,60 50,100" fill="#2D5016" opacity="0.6"/>
+                </svg>
+                <svg viewBox="0 0 200 200" class="decoration-leaf decoration-leaf-right">
+                    <path d="M150,100 Q180,80 170,50 Q160,20 140,30 Q150,60 150,100" fill="#2D5016" opacity="0.6"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo Section -->
+    <section class="catalogo section" id="catalogo">
+        <div class="container">
+            <h2 class="section__title" data-aos="fade-up">Catálogo de Produções</h2>
+            <p class="section__subtitle" data-aos="fade-up" data-aos-delay="100">
+                Explore os 36 projetos audiovisuais fomentados em Capão Bonito
+            </p>
+
+            <!-- Filtros -->
+            <div class="filters" data-aos="fade-up" data-aos-delay="200">
+                <div class="filters__search">
+                    <input type="text" id="search-input" class="search-input" placeholder="Buscar por título ou diretor...">
+                </div>
+
+                <div class="filters__buttons">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="lancado">Lançados</button>
+                    <button class="filter-btn" data-filter="producao">Em Produção</button>
+                    <button class="filter-btn" data-filter="patrimonio">🏛️ Patrimônio</button>
+                    <button class="filter-btn" data-filter="musica">🎵 Música</button>
+                    <button class="filter-btn" data-filter="ambiente">🌳 Ambiente</button>
+                </div>
+            </div>
+
+            <!-- Grid de Filmes -->
+            <div class="filmes-grid" id="filmes-grid">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre as Leis Section -->
+    <section class="leis section" id="leis">
+        <div class="container">
+            <h2 class="section__title" data-aos="fade-up">Sobre as Leis de Fomento</h2>
+
+            <div class="timeline">
+                <!-- Lei Paulo Gustavo -->
+                <div class="timeline__item timeline__item--left" data-aos="fade-right">
+                    <div class="timeline__card">
+                        <div class="timeline__icon">🎭</div>
+                        <h3 class="timeline__title">Lei Paulo Gustavo</h3>
+                        <p class="timeline__subtitle">Lei Complementar nº 195/2022</p>
+
+                        <div class="timeline__stats">
+                            <div class="timeline__stat">
+                                <span class="stat-value">R$ 429.204,92</span>
+                                <span class="stat-label">Investimento CB</span>
+                            </div>
+                            <div class="timeline__stat">
+                                <span class="stat-value">24</span>
+                                <span class="stat-label">Projetos</span>
+                            </div>
+                        </div>
+
+                        <p class="timeline__description">
+                            Maior investimento direto no setor cultural da história do Brasil.
+                            Criada em resposta aos impactos da pandemia, homenageia o ator Paulo Gustavo.
+                        </p>
+
+                        <a href="https://capaobonito.sp.gov.br/lei-paulo-gustavo/" target="_blank" class="btn btn-outline">Saiba Mais</a>
+                    </div>
+                </div>
+
+                <!-- Conectador -->
+                <div class="timeline__connector"></div>
+
+                <!-- PNAB -->
+                <div class="timeline__item timeline__item--right" data-aos="fade-left">
+                    <div class="timeline__card">
+                        <div class="timeline__icon">🎪</div>
+                        <h3 class="timeline__title">Política Nacional Aldir Blanc</h3>
+                        <p class="timeline__subtitle">Lei nº 14.399/2022</p>
+
+                        <div class="timeline__stats">
+                            <div class="timeline__stat">
+                                <span class="stat-value">R$ 354.037,46</span>
+                                <span class="stat-label">PNAB 2024</span>
+                            </div>
+                            <div class="timeline__stat">
+                                <span class="stat-value">7 + 5</span>
+                                <span class="stat-label">Aprovados + Suplentes</span>
+                            </div>
+                        </div>
+
+                        <p class="timeline__description">
+                            Fomento contínuo por 5 anos (2023-2027). Política estruturante que garante
+                            investimento sustentável na cultura, homenageando o compositor Aldir Blanc.
+                        </p>
+
+                        <a href="https://capaobonito.sp.gov.br/lei-aldir-blanc/" target="_blank" class="btn btn-outline">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Análise Cultural Section -->
+    <section class="analise section" id="analise">
+        <div class="container">
+            <h2 class="section__title" data-aos="fade-up">Análise Cultural</h2>
+            <p class="section__subtitle" data-aos="fade-up" data-aos-delay="100">
+                Mapeamento dos eixos temáticos e perfil das produções
+            </p>
+
+            <div class="analise__content">
+                <!-- Gráfico de Eixos -->
+                <div class="chart-container" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="chart-title">3 Eixos Temáticos Principais</h3>
+                    <canvas id="eixos-chart"></canvas>
+                </div>
+
+                <!-- Cards de Eixos -->
+                <div class="eixos-cards">
+                    <div class="eixo-card eixo-card--patrimonio" data-aos="fade-up" data-aos-delay="300">
+                        <div class="eixo-card__icon">🏛️</div>
+                        <h4 class="eixo-card__title">Patrimônio & Memória</h4>
+                        <span class="eixo-card__percentage">38%</span>
+                        <p class="eixo-card__description">
+                            9 projetos focados em preservação histórica e cultural
+                        </p>
+                        <button class="eixo-card__toggle" data-eixo="patrimonio">Ver Projetos</button>
+                    </div>
+
+                    <div class="eixo-card eixo-card--musica" data-aos="fade-up" data-aos-delay="400">
+                        <div class="eixo-card__icon">🎵</div>
+                        <h4 class="eixo-card__title">Cultura Musical</h4>
+                        <span class="eixo-card__percentage">33%</span>
+                        <p class="eixo-card__description">
+                            8 projetos cobrindo do tradicional ao urbano contemporâneo
+                        </p>
+                        <button class="eixo-card__toggle" data-eixo="musica">Ver Projetos</button>
+                    </div>
+
+                    <div class="eixo-card eixo-card--ambiente" data-aos="fade-up" data-aos-delay="500">
+                        <div class="eixo-card__icon">🌳</div>
+                        <h4 class="eixo-card__title">Meio Ambiente</h4>
+                        <span class="eixo-card__percentage">29%</span>
+                        <p class="eixo-card__description">
+                            7 projetos sobre natureza e espaço urbano
+                        </p>
+                        <button class="eixo-card__toggle" data-eixo="ambiente">Ver Projetos</button>
+                    </div>
+                </div>
+
+                <!-- Produtores Destaque -->
+                <div class="produtores-destaque" data-aos="fade-up" data-aos-delay="600">
+                    <h3 class="section__subtitle">Produtores em Destaque</h3>
+                    <div class="produtores-grid">
+                        <div class="produtor-card">
+                            <div class="produtor-avatar">M</div>
+                            <h4 class="produtor-nome">Margarida Scuoteguazza</h4>
+                            <div class="produtor-badges">
+                                <span class="badge badge-gold">🥇 1º LPG</span>
+                                <span class="badge badge-gold">🥇 1º PNAB</span>
+                            </div>
+                            <p class="produtor-projeto">"Ponteia Viola"</p>
+                        </div>
+
+                        <div class="produtor-card">
+                            <div class="produtor-avatar">F</div>
+                            <h4 class="produtor-nome">Flavio Ramos Pereira</h4>
+                            <div class="produtor-badges">
+                                <span class="badge badge-silver">🥈 2º LPG</span>
+                                <span class="badge badge-silver">🥈 2º PNAB</span>
+                            </div>
+                            <p class="produtor-projeto">"Os Cascatinhas"</p>
+                        </div>
+
+                        <div class="produtor-card">
+                            <div class="produtor-avatar">D</div>
+                            <h4 class="produtor-nome">Danilo Cacciacarro</h4>
+                            <div class="produtor-badges">
+                                <span class="badge badge-success">✅ Lançado</span>
+                            </div>
+                            <p class="produtor-projeto">"Ainda que Nada Fosse Meu"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contato">
+        <div class="footer__container container">
+            <div class="footer__content">
+                <!-- Logo & Tagline -->
+                <div class="footer__section">
+                    <div class="footer__logo">
+                        <svg viewBox="0 0 120 60" class="footer-logo-svg">
+                            <polygon points="60,5 72,15 72,25 48,25 48,15" fill="#F5E6D3"/>
+                            <text x="20" y="45" font-family="Bebas Neue" font-size="18" fill="#F5E6D3">BITACA</text>
+                            <text x="30" y="55" font-family="Satisfy" font-size="10" fill="#F5E6D3">Cinema</text>
+                        </svg>
+                    </div>
+                    <p class="footer__tagline">
+                        "Preservando a memória,<br>celebrando a cultura"
+                    </p>
+                </div>
+
+                <!-- Links Rápidos -->
+                <div class="footer__section">
+                    <h4 class="footer__title">Links</h4>
+                    <ul class="footer__links">
+                        <li><a href="#catalogo">Catálogo</a></li>
+                        <li><a href="#leis">Sobre as Leis</a></li>
+                        <li><a href="#analise">Análise Cultural</a></li>
+                        <li><a href="README.md">Documentação</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contato -->
+                <div class="footer__section">
+                    <h4 class="footer__title">Contato</h4>
+                    <ul class="footer__contact">
+                        <li>📧 cultura@capaobonito.sp.gov.br</li>
+                        <li>☎️ (15) 3542-3553</li>
+                        <li>📍 Capão Bonito/SP</li>
+                        <li>👤 Renato Heber de Almeida</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="footer__bottom">
+                <div class="footer__badges">
+                    <span class="footer__badge">🎭 Lei Paulo Gustavo</span>
+                    <span class="footer__badge">🎪 PNAB</span>
+                </div>
+                <p class="footer__copyright">
+                    © 2025 Bitaca Cinema | Última atualização: Outubro 2025
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Filme -->
+    <div class="modal" id="filme-modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__content">
+            <button class="modal__close">&times;</button>
+            <div id="modal-body">
+                <!-- Conteúdo será injetado via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão Voltar ao Topo -->
+    <button class="scroll-top" id="scroll-top" aria-label="Voltar ao topo">
+        ↑
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
