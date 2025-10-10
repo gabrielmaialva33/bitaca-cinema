@@ -27,6 +27,9 @@
 
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
     <!-- Header/Navigation -->
@@ -98,13 +101,9 @@
                 </div>
             </div>
 
-            <div class="hero__decoration">
-                <svg viewBox="0 0 200 200" class="decoration-leaf decoration-leaf-left">
-                    <path d="M50,100 Q20,80 30,50 Q40,20 60,30 Q50,60 50,100" fill="#2D5016" opacity="0.6"/>
-                </svg>
-                <svg viewBox="0 0 200 200" class="decoration-leaf decoration-leaf-right">
-                    <path d="M150,100 Q180,80 170,50 Q160,20 140,30 Q150,60 150,100" fill="#2D5016" opacity="0.6"/>
-                </svg>
+            <!-- Three.js 3D Scene -->
+            <div class="hero__three-scene">
+                <canvas id="three-canvas"></canvas>
             </div>
         </div>
     </section>
@@ -127,9 +126,9 @@
                     <button class="filter-btn active" data-filter="all">Todos</button>
                     <button class="filter-btn" data-filter="lancado">Lançados</button>
                     <button class="filter-btn" data-filter="producao">Em Produção</button>
-                    <button class="filter-btn" data-filter="patrimonio">🏛️ Patrimônio</button>
-                    <button class="filter-btn" data-filter="musica">🎵 Música</button>
-                    <button class="filter-btn" data-filter="ambiente">🌳 Ambiente</button>
+                    <button class="filter-btn" data-filter="patrimonio"><i data-lucide="landmark"></i> Patrimônio</button>
+                    <button class="filter-btn" data-filter="musica"><i data-lucide="music"></i> Música</button>
+                    <button class="filter-btn" data-filter="ambiente"><i data-lucide="trees"></i> Ambiente</button>
                 </div>
             </div>
 
@@ -149,7 +148,7 @@
                 <!-- Lei Paulo Gustavo -->
                 <div class="timeline__item timeline__item--left" data-aos="fade-right">
                     <div class="timeline__card">
-                        <div class="timeline__icon">🎭</div>
+                        <div class="timeline__icon"><i data-lucide="drama"></i></div>
                         <h3 class="timeline__title">Lei Paulo Gustavo</h3>
                         <p class="timeline__subtitle">Lei Complementar nº 195/2022</p>
 
@@ -179,7 +178,7 @@
                 <!-- PNAB -->
                 <div class="timeline__item timeline__item--right" data-aos="fade-left">
                     <div class="timeline__card">
-                        <div class="timeline__icon">🎪</div>
+                        <div class="timeline__icon"><i data-lucide="ticket"></i></div>
                         <h3 class="timeline__title">Política Nacional Aldir Blanc</h3>
                         <p class="timeline__subtitle">Lei nº 14.399/2022</p>
 
@@ -224,7 +223,7 @@
                 <!-- Cards de Eixos -->
                 <div class="eixos-cards">
                     <div class="eixo-card eixo-card--patrimonio" data-aos="fade-up" data-aos-delay="300">
-                        <div class="eixo-card__icon">🏛️</div>
+                        <div class="eixo-card__icon"><i data-lucide="landmark"></i></div>
                         <h4 class="eixo-card__title">Patrimônio & Memória</h4>
                         <span class="eixo-card__percentage">38%</span>
                         <p class="eixo-card__description">
@@ -234,7 +233,7 @@
                     </div>
 
                     <div class="eixo-card eixo-card--musica" data-aos="fade-up" data-aos-delay="400">
-                        <div class="eixo-card__icon">🎵</div>
+                        <div class="eixo-card__icon"><i data-lucide="music"></i></div>
                         <h4 class="eixo-card__title">Cultura Musical</h4>
                         <span class="eixo-card__percentage">33%</span>
                         <p class="eixo-card__description">
@@ -244,7 +243,7 @@
                     </div>
 
                     <div class="eixo-card eixo-card--ambiente" data-aos="fade-up" data-aos-delay="500">
-                        <div class="eixo-card__icon">🌳</div>
+                        <div class="eixo-card__icon"><i data-lucide="trees"></i></div>
                         <h4 class="eixo-card__title">Meio Ambiente</h4>
                         <span class="eixo-card__percentage">29%</span>
                         <p class="eixo-card__description">
@@ -262,8 +261,8 @@
                             <div class="produtor-avatar">M</div>
                             <h4 class="produtor-nome">Margarida Scuoteguazza</h4>
                             <div class="produtor-badges">
-                                <span class="badge badge-gold">🥇 1º LPG</span>
-                                <span class="badge badge-gold">🥇 1º PNAB</span>
+                                <span class="badge badge-gold"><i data-lucide="trophy"></i> 1º LPG</span>
+                                <span class="badge badge-gold"><i data-lucide="trophy"></i> 1º PNAB</span>
                             </div>
                             <p class="produtor-projeto">"Ponteia Viola"</p>
                         </div>
@@ -272,8 +271,8 @@
                             <div class="produtor-avatar">F</div>
                             <h4 class="produtor-nome">Flavio Ramos Pereira</h4>
                             <div class="produtor-badges">
-                                <span class="badge badge-silver">🥈 2º LPG</span>
-                                <span class="badge badge-silver">🥈 2º PNAB</span>
+                                <span class="badge badge-silver"><i data-lucide="medal"></i> 2º LPG</span>
+                                <span class="badge badge-silver"><i data-lucide="medal"></i> 2º PNAB</span>
                             </div>
                             <p class="produtor-projeto">"Os Cascatinhas"</p>
                         </div>
@@ -282,7 +281,7 @@
                             <div class="produtor-avatar">D</div>
                             <h4 class="produtor-nome">Danilo Cacciacarro</h4>
                             <div class="produtor-badges">
-                                <span class="badge badge-success">✅ Lançado</span>
+                                <span class="badge badge-success"><i data-lucide="check-circle"></i> Lançado</span>
                             </div>
                             <p class="produtor-projeto">"Ainda que Nada Fosse Meu"</p>
                         </div>
@@ -325,10 +324,10 @@
                 <div class="footer__section">
                     <h4 class="footer__title">Contato</h4>
                     <ul class="footer__contact">
-                        <li>📧 cultura@capaobonito.sp.gov.br</li>
-                        <li>☎️ (15) 3542-3553</li>
-                        <li>📍 Capão Bonito/SP</li>
-                        <li>👤 Renato Heber de Almeida</li>
+                        <li><i data-lucide="mail"></i> cultura@capaobonito.sp.gov.br</li>
+                        <li><i data-lucide="phone"></i> (15) 3542-3553</li>
+                        <li><i data-lucide="map-pin"></i> Capão Bonito/SP</li>
+                        <li><i data-lucide="user"></i> Renato Heber de Almeida</li>
                     </ul>
                 </div>
             </div>
@@ -336,8 +335,8 @@
             <!-- Bottom -->
             <div class="footer__bottom">
                 <div class="footer__badges">
-                    <span class="footer__badge">🎭 Lei Paulo Gustavo</span>
-                    <span class="footer__badge">🎪 PNAB</span>
+                    <span class="footer__badge"><i data-lucide="drama"></i> Lei Paulo Gustavo</span>
+                    <span class="footer__badge"><i data-lucide="ticket"></i> PNAB</span>
                 </div>
                 <p class="footer__copyright">
                     © 2025 Bitaca Cinema | Última atualização: Outubro 2025
@@ -359,13 +358,20 @@
 
     <!-- Botão Voltar ao Topo -->
     <button class="scroll-top" id="scroll-top" aria-label="Voltar ao topo">
-        ↑
+        <i data-lucide="arrow-up"></i>
     </button>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
     <script src="assets/js/data.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/three-scene.js"></script>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

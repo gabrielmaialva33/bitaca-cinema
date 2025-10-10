@@ -111,6 +111,11 @@ function renderFilmes(filmes) {
     const card = createFilmeCard(filme);
     grid.appendChild(card);
   });
+
+  // Re-initialize Lucide icons after adding new cards
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
 }
 
 function createFilmeCard(filme) {
@@ -119,17 +124,17 @@ function createFilmeCard(filme) {
   card.dataset.id = filme.id;
 
   // Determinar ícone baseado no gênero
-  let icon = '🎬';
-  if (filme.genero.toLowerCase().includes('documentário')) icon = '📽️';
-  if (filme.genero.toLowerCase().includes('videoclipe')) icon = '🎵';
-  if (filme.genero.toLowerCase().includes('animação')) icon = '🎨';
+  let iconName = 'film';
+  if (filme.genero.toLowerCase().includes('documentário')) iconName = 'video';
+  if (filme.genero.toLowerCase().includes('videoclipe')) iconName = 'music';
+  if (filme.genero.toLowerCase().includes('animação')) iconName = 'palette';
 
   // Status badge
   let statusBadge = '';
   if (filme.status === 'lancado') {
-    statusBadge = '<span class="badge badge-success">✅ Lançado</span>';
+    statusBadge = '<span class="badge badge-success"><i data-lucide="check-circle"></i> Lançado</span>';
   } else {
-    statusBadge = '<span class="badge badge-warning">🔄 Em Produção</span>';
+    statusBadge = '<span class="badge badge-warning"><i data-lucide="loader"></i> Em Produção</span>';
   }
 
   // Badges de pontuação
@@ -155,7 +160,7 @@ function createFilmeCard(filme) {
 
   card.innerHTML = `
     <div class="filme-card__poster">
-      ${icon}
+      <i data-lucide="${iconName}"></i>
     </div>
     <div class="filme-card__body">
       <h3 class="filme-card__title">${filme.titulo}</h3>
@@ -248,7 +253,7 @@ function openModal(filme) {
   let content = `
     <div style="text-align: center; margin-bottom: 2rem;">
       <h2 style="font-family: var(--font-title); font-size: 2.5rem; color: var(--vermelho-bitaca); margin-bottom: 0.5rem;">
-        🎬 ${filme.titulo}
+        <i data-lucide="film" style="display: inline-block; vertical-align: middle;"></i> ${filme.titulo}
       </h2>
       <p style="font-family: var(--font-script); font-size: 1.2rem; color: var(--marrom-terra);">
         ${filme.genero} | ${filme.duracao}
@@ -272,7 +277,7 @@ function openModal(filme) {
   content += `
     <div style="background: var(--bege-acolhedor); border-radius: 15px; padding: 1.5rem; margin-bottom: 1.5rem;">
       <h3 style="font-family: var(--font-bold); color: var(--verde-folha); margin-bottom: 1rem; border-bottom: 2px solid var(--verde-folha); padding-bottom: 0.5rem;">
-        📋 FICHA TÉCNICA
+        <i data-lucide="clipboard" style="display: inline-block; vertical-align: middle;"></i> FICHA TÉCNICA
       </h3>
       <p style="margin-bottom: 0.5rem;"><strong>Direção:</strong> ${filme.diretor}</p>
   `;
@@ -302,7 +307,7 @@ function openModal(filme) {
     content += `
       <div style="margin-bottom: 1.5rem;">
         <h3 style="font-family: var(--font-bold); color: var(--laranja-urbano); margin-bottom: 0.75rem;">
-          📝 SINOPSE
+          <i data-lucide="book-open" style="display: inline-block; vertical-align: middle;"></i> SINOPSE
         </h3>
         <p style="line-height: 1.6;">${filme.sinopse}</p>
       </div>
@@ -314,7 +319,7 @@ function openModal(filme) {
     content += `
       <div style="background: #E8F5E9; border-left: 4px solid var(--verde-folha); padding: 1rem; margin-bottom: 1.5rem; border-radius: 8px;">
         <h3 style="font-family: var(--font-bold); color: var(--verde-folha); margin-bottom: 0.75rem;">
-          🎯 PROPÓSITO SOCIAL
+          <i data-lucide="target" style="display: inline-block; vertical-align: middle;"></i> PROPÓSITO SOCIAL
         </h3>
         <p style="line-height: 1.6;">${filme.proposito}</p>
       </div>
@@ -322,33 +327,35 @@ function openModal(filme) {
   }
 
   // Status
-  const statusText = filme.status === 'lancado' ? '✅ Lançado' : '🔄 Em Produção';
+  const statusIcon = filme.status === 'lancado' ? 'check-circle' : 'loader';
+  const statusText = filme.status === 'lancado' ? 'Lançado' : 'Em Produção';
   const statusColor = filme.status === 'lancado' ? 'var(--verde-folha)' : 'var(--laranja-urbano)';
 
   content += `
     <div style="text-align: center; padding-top: 1rem; border-top: 1px solid var(--cinza-claro);">
       <p style="font-size: 1.1rem; color: ${statusColor}; font-weight: 600; margin-bottom: 1rem;">
-        🎬 STATUS: ${statusText}
+        <i data-lucide="film" style="display: inline-block; vertical-align: middle;"></i> STATUS:
+        <i data-lucide="${statusIcon}" style="display: inline-block; vertical-align: middle;"></i> ${statusText}
       </p>
   `;
 
   // Estreia
   if (filme.estreia) {
-    content += `<p style="color: var(--marrom-terra); margin-bottom: 0.5rem;">📅 Estreia: ${filme.estreia}</p>`;
+    content += `<p style="color: var(--marrom-terra); margin-bottom: 0.5rem;"><i data-lucide="calendar" style="display: inline-block; vertical-align: middle;"></i> Estreia: ${filme.estreia}</p>`;
   }
 
   // Local de estreia
   if (filme.local) {
-    content += `<p style="color: var(--marrom-terra); margin-bottom: 1rem;">📍 ${filme.local}</p>`;
+    content += `<p style="color: var(--marrom-terra); margin-bottom: 1rem;"><i data-lucide="map-pin" style="display: inline-block; vertical-align: middle;"></i> ${filme.local}</p>`;
   }
 
   // Links
   if (filme.streaming) {
-    content += `<p style="color: var(--verde-folha); font-weight: 600;">📺 Disponível em streaming</p>`;
+    content += `<p style="color: var(--verde-folha); font-weight: 600;"><i data-lucide="tv" style="display: inline-block; vertical-align: middle;"></i> Disponível em streaming</p>`;
   }
 
   if (filme.youtube) {
-    content += `<a href="${filme.youtube}" target="_blank" class="btn btn-outline" style="margin-top: 1rem;">▶️ Ver no YouTube</a>`;
+    content += `<a href="${filme.youtube}" target="_blank" class="btn btn-outline" style="margin-top: 1rem;"><i data-lucide="play" style="display: inline-block; vertical-align: middle;"></i> Ver no YouTube</a>`;
   }
 
   content += '</div>';
@@ -356,6 +363,11 @@ function openModal(filme) {
   modalBody.innerHTML = content;
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+
+  // Re-initialize Lucide icons in modal
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
 }
 
 function closeModal() {
