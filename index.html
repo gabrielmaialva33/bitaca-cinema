@@ -64,15 +64,23 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section com Galeria -->
     <section class="hero" id="home">
+        <!-- Background Image Overlay -->
+        <div class="hero__bg-image" style="background-image: url('https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1920&q=80'); opacity: 0.15;"></div>
+
         <div class="hero__container container">
             <div class="hero__content" data-aos="fade-up">
-                <h1 class="hero__title">
-                    Cinema de <span class="text-primary">Capão Bonito</span>
-                </h1>
+                <!-- Logo do Bitaca -->
+                <div class="bitaca-brand" data-aos="zoom-in">
+                    <h1 class="hero__title">
+                        🏛️ BITACA <span class="text-accent">CINEMA</span>
+                    </h1>
+                    <p class="hero__tagline">Underground | Visceral | Democrático</p>
+                </div>
+
                 <p class="hero__subtitle">
-                    Produções Audiovisuais Fomentadas pelas Leis Paulo Gustavo e Aldir Blanc
+                    Cinema de Capão Bonito - Produções Audiovisuais Fomentadas pelas Leis Paulo Gustavo e Aldir Blanc
                 </p>
 
                 <div class="hero__stats">
@@ -91,8 +99,22 @@
                 </div>
 
                 <div class="hero__cta">
-                    <a href="#catalogo" class="btn btn-primary">Explorar Catálogo</a>
-                    <a href="#leis" class="btn btn-secondary">Saiba Mais</a>
+                    <a href="#catalogo" class="btn btn-primary">
+                        <i data-lucide="film"></i> Explorar Catálogo
+                    </a>
+                    <a href="#galeria" class="btn btn-secondary">
+                        <i data-lucide="image"></i> Galeria Bitaca
+                    </a>
+                </div>
+
+                <!-- Redes Sociais -->
+                <div class="social-links" data-aos="fade-up" data-aos-delay="400">
+                    <a href="https://www.instagram.com/abitacacb/" target="_blank" class="social-link">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/abitacacb/" target="_blank" class="social-link">
+                        <i data-lucide="facebook"></i>
+                    </a>
                 </div>
             </div>
 
@@ -100,6 +122,54 @@
             <div class="hero__three-scene">
                 <canvas id="three-canvas"></canvas>
             </div>
+        </div>
+    </section>
+
+    <!-- Galeria do Bitaca Café Bar -->
+    <section class="galeria section" id="galeria">
+        <div class="container">
+            <h2 class="section__title" data-aos="fade-up">
+                <i data-lucide="camera"></i> Galeria Bitaca Café Bar
+            </h2>
+            <p class="section__subtitle" data-aos="fade-up" data-aos-delay="100">
+                O espaço cultural que abriga o cinema de Capão Bonito
+            </p>
+
+            <div class="galeria-grid">
+                <!-- Placeholder images - substituir por fotos reais do Instagram/Facebook -->
+                <div class="galeria-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&q=80" alt="Bitaca Café Bar - Fachada">
+                    <div class="galeria-overlay">
+                        <h3>Bitaca Café Bar</h3>
+                        <p>Fachada com casinha pintada</p>
+                    </div>
+                </div>
+                <div class="galeria-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=600&q=80" alt="Shows e Eventos">
+                    <div class="galeria-overlay">
+                        <h3>Shows Ao Vivo</h3>
+                        <p>Música alternativa e underground</p>
+                    </div>
+                </div>
+                <div class="galeria-item" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80" alt="Ambiente do Bar">
+                    <div class="galeria-overlay">
+                        <h3>Ambiente Interno</h3>
+                        <p>Espaço cultural alternativo</p>
+                    </div>
+                </div>
+                <div class="galeria-item" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1511192352-97c94b6e8364?w=600&q=80" alt="Arte Urbana">
+                    <div class="galeria-overlay">
+                        <h3>Arte & Grafite</h3>
+                        <p>Expressão visual local</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="galeria-note" style="text-align: center; margin-top: 2rem; color: #856404;">
+                <strong>📸 Fotos:</strong> Siga <a href="https://www.instagram.com/abitacacb/" target="_blank" style="color: #C41E3A;">@abitacacb</a> no Instagram para ver mais do Bitaca!
+            </p>
         </div>
     </section>
 

@@ -253,10 +253,19 @@ ul {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, #C41E3A 0%, #FF6B35 50%, #8B4513 100%); /* Gradient vibrante */
+  background: linear-gradient(135deg, #0A0A0A 0%, #1a1a1a 50%, #2a2a2a 100%); /* Fundo escuro underground */
   position: relative;
   overflow: hidden;
   margin-top: var(--header-height);
+}
+
+/* Background image overlay */
+.hero__bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
 }
 
 /* Textura de fundo street art / grunge */
@@ -303,9 +312,56 @@ ul {
   text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para destacar */
 }
 
-.hero__title .text-primary {
-  color: var(--amarelo-quente); /* Amarelo vibrante ao invés de vermelho */
+.hero__title .text-accent {
+  color: var(--amarelo-quente); /* Amarelo vibrante */
   text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Bitaca Brand */
+.bitaca-brand {
+  margin-bottom: 2rem;
+}
+
+.hero__tagline {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: var(--bege-acolhedor);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* Social Links no Hero */
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.social-link {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(196, 30, 58, 0.2);
+  border: 2px solid var(--vermelho-bitaca);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  color: var(--vermelho-bitaca);
+}
+
+.social-link:hover {
+  background: var(--vermelho-bitaca);
+  color: var(--branco);
+  transform: scale(1.1) rotate(5deg);
+}
+
+.social-link [data-lucide] {
+  width: 24px;
+  height: 24px;
 }
 
 .hero__subtitle {
