@@ -1,33 +1,36 @@
 /* ===============================================
    BITACA CINEMA - STYLES
    Paleta Autêntica do Bitaca Café Bar
+   Underground, Viceral, Democrático
    =============================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&family=Pacifico&family=Inter:wght@400;600;700;800&display=swap');
 
 /* ===== VARIÁVEIS CSS ===== */
 :root {
-  /* Cores Principais - Bitaca Autêntico */
-  --vermelho-bitaca: #8B0000;
-  --verde-folha: #2D5016;
-  --laranja-urbano: #FF6B35;
-  --bege-acolhedor: #F5E6D3;
+  /* Cores Principais - Bitaca Autêntico (das fotos reais) */
+  --vermelho-bitaca: #C41E3A;      /* Crimson vibrante */
+  --verde-folha: #2D5016;           /* Verde natural */
+  --laranja-urbano: #FF6B35;        /* Laranja street */
+  --bege-acolhedor: #F5DEB3;        /* Wheat quente */
 
   /* Cores Secundárias */
-  --marrom-terra: #6B4423;
-  --amarelo-quente: #FFB700;
-  --preto: #0A0A0A;
-  --branco: #FFFFFF;
-  --cinza-claro: #B4B4B4;
+  --marrom-terra: #8B4513;          /* SaddleBrown rico */
+  --amarelo-quente: #FFB700;        /* Dourado */
+  --preto: #0A0A0A;                 /* Preto quase total */
+  --branco: #FFFFFF;                /* Branco puro */
+  --cinza-claro: #B4B4B4;           /* Cinza médio */
 
   /* Gradientes */
-  --gradient-hero: linear-gradient(135deg, #8B0000 0%, #6B4423 100%);
-  --gradient-card: linear-gradient(180deg, #F5E6D3 0%, #FFFFFF 100%);
-  --gradient-footer: linear-gradient(180deg, #5A0000 0%, #3A0000 100%);
+  --gradient-hero: linear-gradient(135deg, #C41E3A 0%, #8B4513 100%);
+  --gradient-card: linear-gradient(180deg, #F5DEB3 0%, #FFFFFF 100%);
+  --gradient-footer: linear-gradient(180deg, #9B1B30 0%, #6B1220 100%);
 
-  /* Tipografia */
-  --font-title: 'Bebas Neue', sans-serif;
-  --font-script: 'Satisfy', cursive;
-  --font-body: 'Inter', sans-serif;
-  --font-bold: 'Oswald', sans-serif;
+  /* Tipografia - Identidade Urbana Bitaca */
+  --font-title: 'Staatliches', sans-serif;  /* Bold urbano */
+  --font-script: 'Pacifico', cursive;       /* Script legível */
+  --font-body: 'Inter', sans-serif;         /* Moderna clean */
+  --font-bold: 'Inter', sans-serif;         /* Inter bold */
 
   /* Tamanhos */
   --header-height: 4rem;
