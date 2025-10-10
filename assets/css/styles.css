@@ -253,12 +253,13 @@ ul {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: var(--gradient-hero);
+  background: linear-gradient(135deg, #C41E3A 0%, #FF6B35 50%, #8B4513 100%); /* Gradient vibrante */
   position: relative;
   overflow: hidden;
   margin-top: var(--header-height);
 }
 
+/* Textura de fundo street art / grunge */
 .hero::before {
   content: '';
   position: absolute;
@@ -266,13 +267,25 @@ ul {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="2" height="100" fill="rgba(245,230,211,0.05)"/><rect x="10" width="2" height="100" fill="rgba(245,230,211,0.05)"/><rect x="20" width="2" height="100" fill="rgba(245,230,211,0.05)"/></svg>');
-  opacity: 0.3;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(245,230,211,0.03) 0px, transparent 1px, transparent 40px, rgba(245,230,211,0.03) 41px),
+    repeating-linear-gradient(0deg, rgba(245,230,211,0.03) 0px, transparent 1px, transparent 40px, rgba(245,230,211,0.03) 41px),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="30" fill="none" stroke="rgba(255,183,0,0.1)" stroke-width="2"/><path d="M20,50 L80,50 M50,20 L50,80" stroke="rgba(245,230,211,0.1)" stroke-width="1"/></svg>');
+  opacity: 0.6;
+}
+
+/* Overlay escuro sutil para melhorar legibilidade */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.3) 100%);
+  pointer-events: none;
 }
 
 .hero__container {
   position: relative;
-  z-index: 1;
+  z-index: 10; /* Acima dos ::before e ::after */
 }
 
 .hero__content {
@@ -286,13 +299,21 @@ ul {
   line-height: 1.1;
   margin-bottom: 1rem;
   letter-spacing: 3px;
+  color: var(--branco); /* FORÇA branco puro para legibilidade perfeita */
+  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para destacar */
+}
+
+.hero__title .text-primary {
+  color: var(--amarelo-quente); /* Amarelo vibrante ao invés de vermelho */
+  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
 }
 
 .hero__subtitle {
   font-family: var(--font-script);
   font-size: clamp(1.25rem, 3vw, 2rem);
-  color: var(--bege-acolhedor);
+  color: var(--branco); /* Branco puro ao invés de bege */
   margin-bottom: 3rem;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .hero__stats {

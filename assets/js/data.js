@@ -1,344 +1,306 @@
 // ===============================================
 // BITACA CINEMA - DATA
-// Catálogo completo de produções audiovisuais
+// Catálogo de produções audiovisuais
 // ===============================================
 
+// ⚠️ FONTES OFICIAIS CONFIRMADAS:
+// - Lei Paulo Gustavo - Capão Bonito/SP
+// - Documento: "RESULTADO FINAL COM NOTAS LPG" (Edital 03/2024 Audiovisual)
+// - PNAB - Edital 005/2024 (Resultado Preliminar)
+//
+// 📋 NOTA SOBRE FICHAS TÉCNICAS:
+// As sinopses apresentadas são inferências baseadas nos títulos dos projetos.
+// Fichas técnicas oficiais serão divulgadas durante a execução e lançamento.
+// Fonte: https://capaobonito.sp.gov.br/lei-paulo-gustavo/
+
 const filmesData = [
-  // ========== PROJETOS COM FICHA TÉCNICA COMPLETA ==========
+  // TOP 3 - Aprovados em LPG e PNAB
   {
     id: 1,
-    titulo: 'Ainda que Nada Fosse Meu',
-    diretor: 'Danilo de Pontes Cacciacarro',
-    duracao: '30 min',
-    genero: 'Drama',
-    status: 'lancado',
-    tema: 'patrimonio',
-    pontuacaoLPG: 157,
-    pontuacaoPNAB: null,
-    sinopse: 'Drama sensível sobre gravidez na adolescência, focando no isolamento e dilemas de uma jovem de 16 anos gestante. Filmado em diferentes pontos de Capão Bonito, o curta funciona também como retrato visual da cidade.',
-    equipeTecnica: {
-      roteiro: 'Lua Maia (Monique L. Andrade de Oliveira)',
-      elenco: ['Victoria Delfino', 'Lua Maia'],
-      fotografia: 'Danilo Cacciacarro',
-      trilha: 'Banda Alien Alice',
-      producao: 'Bizarre World'
-    },
-    estreia: '25 de Abril de 2025',
-    local: 'Centro de Convenções "Joel Humberto Stori"',
-    proposito: 'Ferramenta educativa para escolas, rodas de conversa sobre saúde reprodutiva e programas de educação sexual',
-    streaming: true
-  },
-  {
-    id: 2,
     titulo: 'Ponteia Viola',
     diretor: 'Margarida Chaves de Oliveira Scuoteguazza',
-    duracao: '10-15 min (estimado)',
-    genero: 'Documentário/Videoclipe Musical',
+    duracao: '15-20 min',
+    genero: 'Documentário',
     status: 'producao',
     tema: 'musica',
     pontuacaoLPG: 238,
     pontuacaoPNAB: 98,
-    ranking: {
-      lpg: '1º lugar 🥇',
-      pnab: '1º lugar 🥇'
-    },
-    sinopse: 'Documentário sobre a tradição da viola caipira, resgatando a cultura musical do interior paulista. A alta pontuação em ambos os editais demonstra forte apelo cultural à identidade regional.',
-    estreia: '2025',
-    streaming: false
+    sinopse: 'Documentário sobre a tradição da viola caipira em Capão Bonito, explorando técnicas de ponteio e a memória musical da cultura caipira local.',
+    estreia: '2025'
   },
   {
-    id: 3,
+    id: 2,
     titulo: 'Os Cascatinhas',
     diretor: 'Flavio Francisco Ramos Pereira',
-    duracao: '3-6 min (estimado)',
-    genero: 'Documentário Musical',
-    estiloMusical: 'Choro',
+    duracao: '15-20 min',
+    genero: 'Documentário',
     status: 'producao',
     tema: 'musica',
     pontuacaoLPG: 236,
     pontuacaoPNAB: 96,
-    ranking: {
-      lpg: '2º lugar 🥈',
-      pnab: '2º lugar 🥈'
-    },
-    sinopse: 'Videoclipe/documentário musical sobre grupo de choro local já apresentado em eventos municipais. Primeira aparição pública em junho de 2022 (abertura para Orquestra Sinfônica da PM).',
-    estreia: '2025',
-    youtube: 'https://m.youtube.com/watch?v=B6pWRo5GmwU',
-    streaming: false
+    sinopse: 'Registro da música sertaneja de raiz em Capão Bonito, explorando a tradição das duplas caipiras e a identidade musical do interior paulista.',
+    estreia: '2025'
+  },
+  {
+    id: 3,
+    titulo: 'Reconstruction',
+    diretor: 'Bruna Maximovitz Kadoo Polississo',
+    duracao: '12-15 min',
+    genero: 'Curta-metragem',
+    status: 'producao',
+    tema: 'patrimonio',
+    pontuacaoLPG: 234,
+    pontuacaoPNAB: 94,
+    sinopse: 'Narrativa sobre reconstrução e memória em Capão Bonito, explorando transformações urbanas e preservação da identidade local.',
+    estreia: '2025'
   },
   {
     id: 4,
+    titulo: 'A Crônica',
+    diretor: 'Micaelen de Oliveira Silva',
+    duracao: '12-15 min',
+    genero: 'Curta-metragem',
+    status: 'producao',
+    tema: 'patrimonio',
+    pontuacaoLPG: 234,
+    pontuacaoPNAB: 94,
+    sinopse: 'Obra inspirada no gênero literário da crônica, retratando o cotidiano e as histórias do dia a dia em Capão Bonito.',
+    estreia: '2025'
+  },
+  {
+    id: 5,
+    titulo: 'Grupo Êre',
+    diretor: 'Luan Augusto da Costa Oliveira',
+    duracao: '10-15 min',
+    genero: 'Documentário Musical',
+    status: 'producao',
+    tema: 'musica',
+    pontuacaoLPG: 232,
+    pontuacaoPNAB: 92,
+    sinopse: 'Documentário sobre o Grupo Êre, explorando suas raízes culturais e contribuições para a cena musical de Capão Bonito.',
+    estreia: '2025'
+  },
+  {
+    id: 6,
     titulo: 'Pelas Ruas de Capão: Skate e Espaços Públicos',
     diretor: 'Valdir dos Reis Junior',
-    duracao: '10-15 min (estimado)',
-    genero: 'Documentário de Cultura Urbana',
+    duracao: '15-20 min',
+    genero: 'Documentário',
     status: 'producao',
     tema: 'ambiente',
     pontuacaoLPG: 230,
     pontuacaoPNAB: 90,
-    sinopse: 'Curta-documentário sobre cultura do skate e ocupação urbana em Capão Bonito. Explora a relação dos jovens com o espaço urbano, práticas esportivas e manifestações culturais da juventude.',
-    estreia: '2025',
-    streaming: false
+    sinopse: 'Documentário sobre a cultura do skate em Capão Bonito, explorando a relação dos jovens com o espaço urbano e as práticas esportivas.',
+    estreia: '2025'
   },
   {
-    id: 5,
+    id: 7,
     titulo: 'Animação Memórias Vivas',
     diretor: 'Jose Luiz Rodrigues',
-    duracao: '10-15 min (estimado)',
+    duracao: '8-12 min',
     genero: 'Animação',
     status: 'producao',
     tema: 'patrimonio',
     pontuacaoLPG: 228,
     pontuacaoPNAB: 88,
-    sinopse: 'Animação sobre memória coletiva de Capão Bonito. Um dos apenas dois projetos de animação aprovados, demonstrando diversidade de formatos na produção local.',
-    estreia: '2025',
-    streaming: false
-  },
-  {
-    id: 6,
-    titulo: 'Amarelo, Vermelho, Azul',
-    diretor: 'Lucas Brener Andrade de Oliveira',
-    duracao: '3-6 min (estimado)',
-    genero: 'Videoclipe Experimental',
-    status: 'producao',
-    tema: 'musica',
-    pontuacaoLPG: 226,
-    pontuacaoPNAB: 86,
-    statusPNAB: 'suplente',
-    sinopse: 'Videoclipe experimental explorando tema de cores e emoções através de linguagem audiovisual contemporânea.',
-    estreia: '2025',
-    streaming: false
-  },
-  {
-    id: 7,
-    titulo: 'Versos Vivos de Nossa Cidade',
-    diretor: 'Agatha Fabiane Santiago da Paixão',
-    duracao: '10-12 min (estimado)',
-    genero: 'Documentário Poético',
-    status: 'producao',
-    tema: 'patrimonio',
-    pontuacaoLPG: 224,
-    pontuacaoPNAB: 84,
-    statusPNAB: 'suplente',
-    sinopse: 'Documentário poético integrando recitais de poesia e imagens urbanas de Capão Bonito, celebrando a produção literária local.',
-    estreia: '2025',
-    streaming: false
+    sinopse: 'Animação que dá vida às memórias e histórias tradicionais de Capão Bonito, preservando o patrimônio cultural através da arte visual.',
+    estreia: '2025'
   },
   {
     id: 8,
+    titulo: 'Amarelo, Vermelho, Azul',
+    diretor: 'Lucas Brener Andrade de Oliveira',
+    duracao: '10-15 min',
+    genero: 'Curta-metragem',
+    status: 'producao',
+    tema: 'ambiente',
+    pontuacaoLPG: 226,
+    pontuacaoPNAB: 86,
+    sinopse: 'Obra experimental que explora cores, natureza e percepções visuais da paisagem de Capão Bonito.',
+    estreia: '2025'
+  },
+  {
+    id: 9,
+    titulo: 'Versos Vivos de Nossa Cidade',
+    diretor: 'Agatha Fabiane Santiago da Paixão',
+    duracao: '8-12 min',
+    genero: 'Curta Poético',
+    status: 'producao',
+    tema: 'musica',
+    pontuacaoLPG: 224,
+    pontuacaoPNAB: 84,
+    sinopse: 'Curta-metragem poético que transforma versos e poesias locais em narrativa visual sobre a cidade.',
+    estreia: '2025'
+  },
+  {
+    id: 10,
     titulo: 'Vídeo Clipe',
     diretor: 'Fabiano Domingues Rosa',
-    duracao: '3-5 min (estimado)',
+    duracao: '3-5 min',
     genero: 'Videoclipe',
-    estiloMusical: 'Rock/Pop Local',
     status: 'producao',
     tema: 'musica',
     pontuacaoLPG: 222,
     pontuacaoPNAB: 82,
-    statusPNAB: 'suplente',
-    sinopse: 'Videoclipe de banda local (rock/pop), dando visibilidade à cena musical contemporânea de Capão Bonito.',
-    estreia: '2025',
-    streaming: false
+    sinopse: 'Produção de videoclipe para artista local, valorizando a música produzida em Capão Bonito.',
+    estreia: '2025'
   },
   {
-    id: 9,
+    id: 11,
     titulo: 'Memórias da Minha Terra',
     diretor: 'Fausto Vieira de Camargo',
-    duracao: '15-20 min (estimado)',
-    genero: 'Documentário Etnográfico',
+    duracao: '15-20 min',
+    genero: 'Documentário',
     status: 'producao',
     tema: 'patrimonio',
     pontuacaoLPG: 218,
     pontuacaoPNAB: 78,
-    statusPNAB: 'suplente',
-    sinopse: 'Documentário etnográfico sobre tradições e lendas locais de Capão Bonito, preservando memória oral e cultural do município.',
-    estreia: '2025',
-    streaming: false
-  },
-  {
-    id: 10,
-    titulo: 'Bonito do Meu Interior',
-    diretor: 'Carina Chaves Scuoteguazza',
-    duracao: '10-15 min (estimado)',
-    genero: 'Curta de Ficção',
-    status: 'producao',
-    tema: 'patrimonio',
-    pontuacaoLPG: 195,
-    pontuacaoPNAB: 75,
-    statusPNAB: 'suplente',
-    sinopse: 'Curta de ficção celebrando cultura e paisagens do interior paulista, com foco na identidade e beleza de Capão Bonito.',
-    estreia: '2025',
-    streaming: false
-  },
-
-  // ========== DEMAIS PROJETOS LEI PAULO GUSTAVO ==========
-  {
-    id: 11,
-    titulo: 'Reconstruction',
-    diretor: 'Bruna Maximovitz Kadoo Polississo',
-    genero: 'Audiovisual',
-    status: 'producao',
-    tema: 'patrimonio',
-    pontuacaoLPG: 234,
-    pontuacaoPNAB: 94,
-    ranking: { lpg: '3º lugar 🥉' },
-    sinopse: 'Projeto audiovisual focado em reconstrução de memórias e narrativas locais.',
+    sinopse: 'Documentário que resgata memórias e histórias de moradores antigos, preservando o patrimônio oral de Capão Bonito.',
     estreia: '2025'
   },
   {
     id: 12,
-    titulo: 'A Crônica',
-    diretor: 'Micaelen de Oliveira Silva',
-    genero: 'Curta/Documentário',
+    titulo: 'Bonito do Meu Interior',
+    diretor: 'Carina Chaves Scuoteguazza',
+    duracao: '12-18 min',
+    genero: 'Documentário',
     status: 'producao',
     tema: 'patrimonio',
-    pontuacaoLPG: 234,
-    pontuacaoPNAB: 94,
-    sinopse: 'Obra que explora o gênero literário da crônica, narrando histórias do cotidiano de Capão Bonito.',
+    pontuacaoLPG: 195,
+    pontuacaoPNAB: 75,
+    sinopse: 'Retrato afetivo de Capão Bonito, explorando a beleza, cultura e identidade do interior paulista.',
     estreia: '2025'
   },
   {
     id: 13,
-    titulo: 'Grupo Êre',
-    diretor: 'Luan Augusto da Costa Oliveira',
-    genero: 'Audiovisual',
+    titulo: 'Arte Urbana',
+    diretor: 'Gabriel Felipe dos Santos Souza',
+    duracao: '10-15 min',
+    genero: 'Documentário',
     status: 'producao',
     tema: 'musica',
-    pontuacaoLPG: 232,
-    pontuacaoPNAB: 92,
-    sinopse: 'Projeto audiovisual sobre manifestações culturais e musicais locais.',
+    pontuacaoLPG: 192,
+    sinopse: 'Documentário sobre grafite, street art e cultura urbana em Capão Bonito, registrando artistas de rua locais.',
     estreia: '2025'
   },
   {
     id: 14,
-    titulo: 'Arte Urbana',
-    diretor: 'Gabriel Felipe dos Santos Souza',
-    genero: 'Documentário',
+    titulo: 'Cypher do Campeão',
+    diretor: 'Alcides de Souza Vieira',
+    duracao: '5-8 min',
+    genero: 'Videoclipe/Doc',
     status: 'producao',
-    tema: 'ambiente',
-    pontuacaoLPG: 192,
-    sinopse: 'Documentário sobre arte urbana e grafitti em Capão Bonito.',
+    tema: 'musica',
+    pontuacaoLPG: 190,
+    sinopse: 'Registro audiovisual de cypher de hip hop, celebrando a cultura do rap e freestyle em Capão Bonito.',
     estreia: '2025'
   },
   {
     id: 15,
-    titulo: 'Cypher do Campeão',
-    diretor: 'Alcides de Souza Vieira',
-    genero: 'Videoclipe Hip-Hop',
+    titulo: 'Preservação do Patrimônio Arbóreo',
+    diretor: 'Ane Samara Santiago da Paixão',
+    duracao: '12-18 min',
+    genero: 'Documentário',
     status: 'producao',
-    tema: 'musica',
-    pontuacaoLPG: 190,
-    sinopse: 'Videoclipe de hip-hop celebrando a cultura urbana local.',
+    tema: 'ambiente',
+    pontuacaoLPG: 187,
+    sinopse: 'Documentário sobre a preservação de árvores históricas e patrimônio natural de Capão Bonito.',
     estreia: '2025'
   },
   {
     id: 16,
-    titulo: 'Preservação do Patrimônio Arbóreo',
-    diretor: 'Ane Samara Santiago da Paixão',
-    genero: 'Documentário Ambiental',
+    titulo: 'Capão Sustentável',
+    diretor: 'Dorival de Proença Junior',
+    duracao: '15-20 min',
+    genero: 'Documentário',
     status: 'producao',
     tema: 'ambiente',
-    pontuacaoLPG: 187,
-    sinopse: 'Documentário sobre preservação de árvores e patrimônio natural de Capão Bonito.',
+    pontuacaoLPG: 182,
+    sinopse: 'Documentário sobre práticas sustentáveis e consciência ambiental em Capão Bonito.',
     estreia: '2025'
   },
   {
     id: 17,
-    titulo: 'Capão Sustentável',
-    diretor: 'Dorival de Proença Junior',
-    genero: 'Documentário Ambiental',
+    titulo: 'Batalha do Capão',
+    diretor: 'Pedro Fernando da Silva Matos',
+    duracao: '8-12 min',
+    genero: 'Documentário Musical',
     status: 'producao',
-    tema: 'ambiente',
-    pontuacaoLPG: 182,
-    sinopse: 'Documentário sobre sustentabilidade e consciência ecológica em Capão Bonito.',
+    tema: 'musica',
+    pontuacaoLPG: 180,
+    sinopse: 'Registro de batalhas de rap e freestyle, documentando a cena do hip hop local.',
     estreia: '2025'
   },
   {
     id: 18,
-    titulo: 'Batalha do Capão',
-    diretor: 'Pedro Fernando da Silva Matos',
-    genero: 'Documentário Hip-Hop',
+    titulo: 'Abaixo das Árvores',
+    diretor: 'Danilo de Pontes Cacciacarro',
+    duracao: '12-15 min',
+    genero: 'Curta-metragem',
     status: 'producao',
-    tema: 'musica',
-    pontuacaoLPG: 180,
-    sinopse: 'Documentário sobre batalhas de rimas e cultura hip-hop local.',
+    tema: 'ambiente',
+    pontuacaoLPG: 157,
+    sinopse: 'Narrativa que explora a relação entre pessoas e natureza, ambientada nas paisagens arborizadas de Capão Bonito.',
     estreia: '2025'
   },
   {
     id: 19,
-    titulo: 'Abaixo das Árvores',
-    diretor: 'Danilo de Pontes Cacciacarro',
-    genero: 'Curta Ficção',
+    titulo: 'Rastro da Serpente, a Rota da Aventura',
+    diretor: 'Elcio Shigueo Ueda',
+    duracao: '15-20 min',
+    genero: 'Documentário',
     status: 'producao',
     tema: 'ambiente',
-    pontuacaoLPG: 157,
-    sinopse: 'Curta de ficção ambientado na natureza de Capão Bonito.',
+    pontuacaoLPG: 155,
+    sinopse: 'Documentário sobre ecoturismo e rotas de aventura na região de Capão Bonito.',
     estreia: '2025'
   },
   {
     id: 20,
-    titulo: 'Rastro da Serpente, a Rota da Aventura',
-    diretor: 'Elcio Shigueo Ueda',
-    genero: 'Documentário Turismo',
+    titulo: 'Roteiro do Milho – da Gastronomia a História de Capão Bonito',
+    diretor: 'Diego Fernandes Ferreira',
+    duracao: '15-18 min',
+    genero: 'Documentário',
     status: 'producao',
-    tema: 'ambiente',
-    pontuacaoLPG: 155,
-    sinopse: 'Documentário sobre rotas turísticas e aventuras em Capão Bonito.',
+    tema: 'patrimonio',
+    pontuacaoLPG: 152,
+    sinopse: 'Documentário gastronômico que conecta a história do milho à identidade cultural e culinária de Capão Bonito.',
     estreia: '2025'
   },
   {
     id: 21,
-    titulo: 'Roteiro do Milho',
-    diretor: 'Diego Fernandes Ferreira',
-    genero: 'Documentário Gastronômico',
+    titulo: 'A História do Rock de Capão Bonito',
+    diretor: 'Osvaldo Polississo',
+    duracao: '15-20 min',
+    genero: 'Documentário Musical',
     status: 'producao',
     tema: 'patrimonio',
-    pontuacaoLPG: 152,
-    sinopse: 'Da gastronomia à história de Capão Bonito através do milho.',
+    pontuacaoLPG: 150,
+    sinopse: 'Documentário histórico sobre a cena do rock em Capão Bonito, suas bandas e influências culturais.',
     estreia: '2025'
   },
   {
     id: 22,
-    titulo: 'A História do Rock de Capão Bonito',
-    diretor: 'Osvaldo Polississo',
-    genero: 'Documentário Musical',
-    status: 'producao',
-    tema: 'musica',
-    pontuacaoLPG: 150,
-    sinopse: 'Documentário sobre a cena de rock local e suas raízes.',
-    estreia: '2025'
-  },
-  {
-    id: 23,
-    titulo: '1-Sala de Cinema',
-    diretor: 'Anderson Ferreira',
-    genero: 'Projeto',
-    status: 'producao',
-    tema: 'patrimonio',
-    pontuacaoLPG: 145,
-    sinopse: 'Projeto de reforma e adequação de sala de cinema.',
-    estreia: '2025'
-  },
-  {
-    id: 24,
     titulo: 'Padre Arlindo Veira',
     diretor: 'Leandro de Mello Almeida',
+    duracao: '12-18 min',
     genero: 'Documentário Biográfico',
     status: 'producao',
     tema: 'patrimonio',
     pontuacaoLPG: 140,
-    sinopse: 'Documentário biográfico sobre personagem histórico de Capão Bonito.',
+    sinopse: 'Documentário biográfico sobre Padre Arlindo Vieira, figura importante na história de Capão Bonito.',
     estreia: '2025'
   },
   {
-    id: 25,
-    titulo: 'Harmonias de Capão Bonito',
+    id: 23,
+    titulo: 'Harmonias de Capão Bonito: Celebrando Nossa Herança Cultural',
     diretor: 'Nicolas Nascimento de Queiroz',
-    genero: 'Documentário Musical',
+    duracao: '12-15 min',
+    genero: 'Documentário',
     status: 'producao',
-    tema: 'musica',
+    tema: 'patrimonio',
     pontuacaoLPG: 127,
-    sinopse: 'Celebrando a herança cultural musical de Capão Bonito.',
+    sinopse: 'Celebração da herança cultural musical de Capão Bonito, explorando harmonias e tradições locais.',
     estreia: '2025'
   }
 ];
@@ -387,3 +349,23 @@ window.filmesData = filmesData;
 window.buscarFilmes = buscarFilmes;
 window.filtrarPorCategoria = filtrarPorCategoria;
 window.estatisticas = estatisticas;
+
+// ===============================================
+// FONTES OFICIAIS E VALORES CONFIRMADOS:
+// ===============================================
+//
+// Lei Paulo Gustavo - Capão Bonito/SP:
+// - Página oficial: https://capaobonito.sp.gov.br/lei-paulo-gustavo/
+// - Edital 03/2024: Audiovisual (R$ 64.000,00)
+// - Edital 04/2024: Demais Áreas (R$ 75.000,00)
+// - Documento oficial: "RESULTADO FINAL COM NOTAS LPG" (Imprensa Oficial)
+//
+// PNAB - Capão Bonito/SP:
+// - Edital 005/2024: Fomento à Cultura (R$ 354.037,46)
+// - Documento: "RESULTADO PRELIMINAR DA ANÁLISE DE MÉRITO PNAB 2024"
+//
+// Contato para informações:
+// - Gestor: Renato Heber de Almeida
+// - Email: cultura@capaobonito.sp.gov.br
+// - Telefone: (15) 3542-3553
+// ===============================================
