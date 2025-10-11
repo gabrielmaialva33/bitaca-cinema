@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initSearch();
     initModal();
     initLightbox();
+    initEixosCards();
     initCharts();
     animateCounters();
 });
@@ -280,6 +281,48 @@ function initFilters() {
             const filmesFiltrados = filtrarPorCategoria(filter);
             renderFilmes(filmesFiltrados);
         });
+    });
+}
+
+// ===== EIXOS CARDS CLICÁVEIS =====
+function initEixosCards() {
+    const eixosCards = document.querySelectorAll('.eixo-card');
+
+    eixosCards.forEach(card => {
+        card.addEventListener('click', () => {
+            // Determinar o filtro baseado na classe do card
+            let filterType = 'all';
+            if (card.classList.contains('eixo-card--patrimonio')) {
+                filterType = 'patrimonio';
+            } else if (card.classList.contains('eixo-card--musica')) {
+                filterType = 'musica';
+            } else if (card.classList.contains('eixo-card--ambiente')) {
+                filterType = 'ambiente';
+            }
+
+            // Scroll suave até o catálogo
+            const catalogoSection = document.getElementById('catalogo');
+            if (catalogoSection) {
+                const offset = 80; // Header height
+                const targetPosition = catalogoSection.offsetTop - offset;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Aguardar o scroll e então aplicar o filtro
+                setTimeout(() => {
+                    // Encontrar e clicar no botão de filtro correspondente
+                    const filterBtn = document.querySelector(`[data-filter="${filterType}"]`);
+                    if (filterBtn) {
+                        filterBtn.click();
+                    }
+                }, 500);
+            }
+        });
+
+        // Adicionar indicação visual de que é clicável
+        card.style.cursor = 'pointer';
     });
 }
 
