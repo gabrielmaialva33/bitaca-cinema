@@ -472,8 +472,73 @@ ul {
     margin-bottom: 3rem;
 }
 
+.filters__top {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
 .filters__search {
-    margin-bottom: 1.5rem;
+    flex: 1;
+    min-width: 280px;
+    max-width: 500px;
+}
+
+.filters__sort {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--bege-acolhedor);
+    padding: 0.75rem 1.25rem;
+    border-radius: 30px;
+    border: 2px solid var(--verde-folha);
+    transition: all 0.3s ease;
+}
+
+.filters__sort:hover {
+    border-color: var(--vermelho-bitaca);
+    box-shadow: 0 4px 12px rgba(45, 80, 22, 0.15);
+}
+
+.sort-label {
+    font-family: var(--font-bold);
+    font-size: 0.9rem;
+    color: var(--marrom-terra);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+.sort-label i {
+    font-size: 1.1rem;
+    color: var(--verde-folha);
+}
+
+.sort-select {
+    background: transparent;
+    border: none;
+    font-family: var(--font-bold);
+    font-size: 0.9rem;
+    color: var(--vermelho-bitaca);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.25rem;
+    outline: none;
+    transition: color 0.3s ease;
+}
+
+.sort-select:hover {
+    color: var(--laranja-urbano);
+}
+
+.sort-select option {
+    background: var(--branco);
+    color: var(--preto);
+    font-family: var(--font-body);
 }
 
 .search-input {
@@ -558,15 +623,25 @@ ul {
 }
 
 .filme-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 4px 8px rgba(45, 80, 22, 0.08),
-    0 8px 16px rgba(45, 80, 22, 0.12),
+    transform: translateY(-16px) scale(1.04);
+    box-shadow: 0 8px 16px rgba(45, 80, 22, 0.12),
     0 16px 32px rgba(45, 80, 22, 0.16),
-    0 24px 48px rgba(45, 80, 22, 0.12);
+    0 24px 48px rgba(45, 80, 22, 0.20),
+    0 32px 64px rgba(45, 80, 22, 0.16);
+    z-index: 10;
 }
 
 .filme-card:hover::before {
     opacity: 1;
+}
+
+/* Preview expandido no hover */
+.filme-card:hover .filme-card__poster {
+    background: linear-gradient(135deg, var(--laranja-urbano) 0%, var(--vermelho-bitaca) 100%);
+}
+
+.filme-card:hover .filme-card__body {
+    background: linear-gradient(180deg, var(--bege-acolhedor) 0%, var(--branco) 100%);
 }
 
 .filme-card.tema-musica {
@@ -660,6 +735,32 @@ ul {
     padding: 1.75rem 1.5rem 1.5rem;
     position: relative;
     z-index: 1;
+}
+
+/* Indicador "Ver Mais" no hover */
+.filme-card::after {
+    content: '👁️ Ver Detalhes';
+    position: absolute;
+    bottom: 1rem;
+    right: 1.5rem;
+    background: var(--vermelho-bitaca);
+    color: var(--branco);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-family: var(--font-bold);
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 15;
+    box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
+}
+
+.filme-card:hover::after {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .filme-card__title {
@@ -780,13 +881,17 @@ ul {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    transition: color 0.3s ease;
+    transition: all 0.4s ease;
     opacity: 0.9;
+    max-height: 4.5em; /* ~3 linhas */
 }
 
 .filme-card:hover .filme-card__sinopse {
     color: var(--preto);
     opacity: 1;
+    -webkit-line-clamp: 5; /* Mostrar até 5 linhas no hover */
+    max-height: 8em; /* ~5 linhas */
+    font-size: 0.95rem;
 }
 
 /* ===== SKELETON LOADERS ===== */

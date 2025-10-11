@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initFilmesGrid();
     initFilters();
     initSearch();
+    initSorting();
     initModal();
     initLightbox();
     initEixosCards();
@@ -92,6 +93,10 @@ function initScrollEffects() {
 }
 
 // ===== GRID DE FILMES =====
+let currentPage = 1;
+const itemsPerPage = 9;
+let currentFilmesArray = [];
+
 function initFilmesGrid() {
     // Mostrar skeletons inicialmente
     showSkeletonCards(6);
@@ -100,6 +105,20 @@ function initFilmesGrid() {
     setTimeout(() => {
         renderFilmes(filmesData);
     }, 800);
+
+    // Inicializar botão "Carregar Mais"
+    initLoadMore();
+}
+
+function initLoadMore() {
+    const loadMoreBtn = document.getElementById('load-more-btn');
+
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            currentPage++;
+            renderFilmes(currentFilmesArray, false); // false = não resetar página
+        });
+    }
 }
 
 function showSkeletonCards(count = 6) {
@@ -137,13 +156,30 @@ function createSkeletonCard() {
     return card;
 }
 
-function renderFilmes(filmes) {
+function renderFilmes(filmes, resetPage = true) {
     const grid = document.getElementById('filmes-grid');
+    const loadMoreContainer = document.getElementById('load-more-container');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const showingCount = document.getElementById('showing-count');
+    const totalCount = document.getElementById('total-count');
+
     if (!grid) return;
 
-    grid.innerHTML = '';
+    // Resetar página se necessário (nova busca/filtro)
+    if (resetPage) {
+        currentPage = 1;
+        currentFilmesArray = filmes;
+        grid.innerHTML = '';
+    }
 
-    if (filmes.length === 0) {
+    // Calcular filmes para mostrar
+    const totalFilmes = filmes.length;
+    const startIndex = resetPage ? 0 : (currentPage - 1) * itemsPerPage;
+    const endIndex = currentPage * itemsPerPage;
+    const filmesToShow = filmes.slice(startIndex, endIndex);
+
+    // Mensagem se não houver filmes
+    if (totalFilmes === 0) {
         grid.innerHTML = `
       <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
         <p style="font-size: 1.2rem; color: var(--marrom-terra);">
@@ -151,13 +187,33 @@ function renderFilmes(filmes) {
         </p>
       </div>
     `;
+        loadMoreContainer.style.display = 'none';
         return;
     }
 
-    filmes.forEach(filme => {
+    // Se resetar, limpar grid; senão, adicionar aos existentes
+    if (resetPage) {
+        grid.innerHTML = '';
+    }
+
+    // Adicionar cards
+    filmesToShow.forEach(filme => {
         const card = createFilmeCard(filme);
         grid.appendChild(card);
     });
+
+    // Atualizar informações de paginação
+    const currentlyShowing = Math.min(endIndex, totalFilmes);
+    showingCount.textContent = currentlyShowing;
+    totalCount.textContent = totalFilmes;
+
+    // Mostrar/esconder botão "Carregar Mais"
+    if (currentlyShowing < totalFilmes) {
+        loadMoreContainer.style.display = 'block';
+        loadMoreBtn.disabled = false;
+    } else {
+        loadMoreContainer.style.display = 'none';
+    }
 
     // Inicializar lazy loading para os cards
     initLazyLoading();
@@ -454,6 +510,58 @@ function initSearch() {
                 renderFilmes(resultados);
             }
         });
+    }
+}
+
+// ===== ORDENAÇÃO =====
+function initSorting() {
+    const sortSelect = document.getElementById('sort-select');
+
+    if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+            const sortType = e.target.value;
+            const currentFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+            const searchTerm = document.getElementById('search-input')?.value || '';
+
+            // Obter filmes filtrados
+            let filmes = filtrarPorCategoria(currentFilter);
+
+            // Aplicar busca se houver termo
+            if (searchTerm.trim() !== '') {
+                filmes = buscarFilmes(searchTerm);
+            }
+
+            // Aplicar ordenação
+            const filmesSorted = sortFilmes(filmes, sortType);
+            renderFilmes(filmesSorted);
+        });
+    }
+}
+
+function sortFilmes(filmes, sortType) {
+    const filmesArray = [...filmes]; // Clone para não modificar original
+
+    switch (sortType) {
+        case 'pontuacao':
+            // Ordenar por pontuação total (LPG + PNAB) decrescente
+            return filmesArray.sort((a, b) => {
+                const pontuacaoA = (a.pontuacaoLPG || 0) + (a.pontuacaoPNAB || 0);
+                const pontuacaoB = (b.pontuacaoLPG || 0) + (b.pontuacaoPNAB || 0);
+                return pontuacaoB - pontuacaoA;
+            });
+
+        case 'alfabetica':
+            // Ordenar alfabeticamente por título (A-Z)
+            return filmesArray.sort((a, b) => {
+                return a.titulo.localeCompare(b.titulo, 'pt-BR');
+            });
+
+        case 'recentes':
+            // Ordenar por ID (ordem original do data.js)
+            return filmesArray.sort((a, b) => a.id - b.id);
+
+        default:
+            return filmesArray;
     }
 }
 
