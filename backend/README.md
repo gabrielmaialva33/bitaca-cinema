@@ -78,7 +78,7 @@ http://localhost:3000/docs
 
 **Setup único** (primeira vez):
 
-1. Configure os GitHub Secrets (ver [.github/SECRETS.md](.github/SECRETS.md)):
+1. Configure os GitHub Secrets (ver [../.github/SECRETS.md](../.github/SECRETS.md)):
    - `SSH_PRIVATE_KEY` - Chave SSH para acessar o servidor
    - `NVIDIA_API_KEY` - Chave da API NVIDIA NIM
    - `ALLOWED_ORIGINS` - Origens CORS permitidas

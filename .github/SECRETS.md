@@ -1,6 +1,6 @@
 # GitHub Secrets Configuration
 
-Para que o deploy automático funcione, você precisa configurar os seguintes secrets no GitHub:
+Para que o deploy automático do backend funcione, você precisa configurar os seguintes secrets no GitHub:
 
 ## Como Adicionar Secrets
 
@@ -80,7 +80,7 @@ Depois de configurar os secrets:
 Você também pode disparar o deploy manualmente:
 
 1. Vá para **Actions**
-2. Selecione **"Deploy to cinewinx"**
+2. Selecione **"Deploy Backend to cinewinx"**
 3. Clique em **"Run workflow"**
 4. Selecione a branch e clique em **"Run workflow"**
 

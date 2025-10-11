@@ -1,4 +1,4 @@
-name: Deploy to cinewinx
+name: Deploy Backend to cinewinx
 
 on:
   push:
@@ -16,7 +16,7 @@ env:
 
 jobs:
   deploy:
-    name: Deploy to VPS
+    name: Deploy Backend to VPS
     runs-on: ubuntu-latest
 
     steps:
