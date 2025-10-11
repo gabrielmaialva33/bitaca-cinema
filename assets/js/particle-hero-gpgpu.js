@@ -156,7 +156,7 @@ class ParticleHeroGPGPU {
     }
 
     copyTextureToFBO(texture, fbo) {
-        const material = new THREE.MeshBasicMaterial({ map: texture });
+        const material = new THREE.MeshBasicMaterial({map: texture});
         const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
         const tempScene = new THREE.Scene();
         tempScene.add(mesh);
@@ -173,11 +173,11 @@ class ParticleHeroGPGPU {
         // Shader que calcula física das partículas na GPU
         const simulationMaterial = new THREE.ShaderMaterial({
             uniforms: {
-                tPosition: { value: null },
-                tVelocity: { value: null },
-                uTime: { value: 0 },
-                uMouse: { value: new THREE.Vector2() },
-                uDeltaTime: { value: 0.016 },
+                tPosition: {value: null},
+                tVelocity: {value: null},
+                uTime: {value: 0},
+                uMouse: {value: new THREE.Vector2()},
+                uDeltaTime: {value: 0.016},
             },
             vertexShader: `
                 varying vec2 vUv;
@@ -274,10 +274,10 @@ class ParticleHeroGPGPU {
         // Velocity update shader
         const velocityMaterial = new THREE.ShaderMaterial({
             uniforms: {
-                tPosition: { value: null },
-                tVelocity: { value: null },
-                uTime: { value: 0 },
-                uMouse: { value: new THREE.Vector2() },
+                tPosition: {value: null},
+                tVelocity: {value: null},
+                uTime: {value: 0},
+                uMouse: {value: new THREE.Vector2()},
             },
             vertexShader: `
                 varying vec2 vUv;
@@ -345,9 +345,9 @@ class ParticleHeroGPGPU {
         // Material que lê posição da textura FBO
         const material = new THREE.ShaderMaterial({
             uniforms: {
-                tPosition: { value: null },
-                uSize: { value: this.isMobile ? 4.0 : 6.0 },
-                uTime: { value: 0 },
+                tPosition: {value: null},
+                uSize: {value: this.isMobile ? 4.0 : 6.0},
+                uTime: {value: 0},
             },
             vertexShader: `
                 uniform sampler2D tPosition;
