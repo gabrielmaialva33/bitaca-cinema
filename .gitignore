@@ -21,3 +21,4 @@ package-lock.json
 .playwright-mcp
 test-results
 tests/report
+backend/.env

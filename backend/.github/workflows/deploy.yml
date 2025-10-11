@@ -1,0 +1,120 @@
+name: Deploy to cinewinx
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+  workflow_dispatch: # Permite executar manualmente
+
+env:
+  SERVER_HOST: 162.12.204.30
+  SERVER_USER: root
+  DEPLOY_DIR: /opt/bitaca-cinema
+  DOMAIN: api.abitaca.com.br
+
+jobs:
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ env.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Create deploy directory structure
+        run: |
+          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "mkdir -p ${{ env.DEPLOY_DIR }}/{nginx/conf.d,nginx/logs,nginx/ssl,logs}"
+
+      - name: Copy files to server
+        run: |
+          cd backend
+          rsync -avz --delete \
+            --exclude '.git' \
+            --exclude '.env' \
+            --exclude '__pycache__' \
+            --exclude '*.pyc' \
+            --exclude 'logs/' \
+            --exclude '.github/' \
+            ./ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/
+
+      - name: Configure environment
+        run: |
+          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} << 'EOF'
+          cd ${{ env.DEPLOY_DIR }}
+
+          # Create .env if doesn't exist
+          if [ ! -f .env ]; then
+            cp .env.example .env
+            echo "NVIDIA_API_KEY=${{ secrets.NVIDIA_API_KEY }}" >> .env
+            echo "ALLOWED_ORIGINS=${{ secrets.ALLOWED_ORIGINS }}" >> .env
+          fi
+          EOF
+
+      - name: Build and deploy containers
+        run: |
+          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} << 'EOF'
+          cd ${{ env.DEPLOY_DIR }}
+
+          # Stop existing containers
+          docker compose down
+
+          # Build with no cache for fresh build
+          docker compose build --no-cache
+
+          # Start containers
+          docker compose up -d
+
+          # Wait for containers to be healthy
+          echo "Waiting for containers to be ready..."
+          sleep 15
+
+          # Show status
+          docker compose ps
+          EOF
+
+      - name: Verify deployment
+        run: |
+          # Wait a bit more for services to fully start
+          sleep 10
+
+          # Check health endpoint
+          for i in {1..5}; do
+            if curl -f http://${{ env.DOMAIN }}/health; then
+              echo "✅ API is healthy!"
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying in 10s..."
+            sleep 10
+          done
+
+          echo "❌ Health check failed after 5 attempts"
+
+          # Show logs for debugging
+          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "cd ${{ env.DEPLOY_DIR }} && docker compose logs --tail=50"
+          exit 1
+
+      - name: Show deployment info
+        if: success()
+        run: |
+          echo "🎉 Deployment successful!"
+          echo "API URL: http://${{ env.DOMAIN }}"
+          echo "Health: http://${{ env.DOMAIN }}/health"
+          echo "Docs: http://${{ env.DOMAIN }}/docs"
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ Deployment failed!"
+          echo "Check logs with: ssh root@${{ env.SERVER_HOST }} 'cd ${{ env.DEPLOY_DIR }} && docker compose logs'"
