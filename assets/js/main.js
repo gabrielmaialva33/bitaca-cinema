@@ -38,7 +38,9 @@ function initNavigation() {
     // Toggle menu mobile
     if (navToggle) {
         navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+            const isOpen = navMenu.classList.toggle('active');
+            navToggle.setAttribute('aria-expanded', isOpen);
+            navToggle.setAttribute('aria-label', isOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação');
         });
     }
 
@@ -264,10 +266,14 @@ function initFilters() {
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remover active de todos
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // Adicionar active ao clicado
+            // Remover active de todos e atualizar aria-pressed
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
+            // Adicionar active ao clicado e atualizar aria-pressed
             btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
 
             // Filtrar filmes
             const filter = btn.dataset.filter;
