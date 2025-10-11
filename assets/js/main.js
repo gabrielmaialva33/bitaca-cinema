@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initModal();
     initLightbox();
     initEixosCards();
+    initPodioShare();
     initCharts();
     animateCounters();
 });
@@ -323,6 +324,52 @@ function initEixosCards() {
 
         // Adicionar indicação visual de que é clicável
         card.style.cursor = 'pointer';
+    });
+}
+
+// ===== COMPARTILHAMENTO SOCIAL NO PÓDIO =====
+function initPodioShare() {
+    const shareBtns = document.querySelectorAll('.share-btn');
+
+    shareBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evitar conflitos com outros eventos
+
+            // Obter dados do card pai
+            const card = btn.closest('.podio-card');
+            if (!card) return;
+
+            const producer = card.dataset.producer || 'Produtor';
+            const project = card.dataset.project || 'Projeto';
+            const position = card.dataset.position || '';
+
+            // Montar mensagem de compartilhamento
+            const message = `🏆 ${position} Lugar - Bitaca Cinema!\n\n` +
+                          `Produtor: ${producer}\n` +
+                          `Projeto: "${project}"\n\n` +
+                          `Confira o catálogo completo de produções audiovisuais de Capão Bonito! 🎬\n` +
+                          `#BitacaCinema #CapãoBonito #LeiPauloGustavo #PNAB`;
+
+            const url = window.location.href;
+            const encodedMessage = encodeURIComponent(message);
+            const encodedUrl = encodeURIComponent(url);
+
+            // Determinar qual rede social
+            let shareUrl = '';
+
+            if (btn.classList.contains('share-btn--twitter')) {
+                shareUrl = `https://twitter.com/intent/tweet?text=${encodedMessage}&url=${encodedUrl}`;
+            } else if (btn.classList.contains('share-btn--facebook')) {
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedMessage}`;
+            } else if (btn.classList.contains('share-btn--whatsapp')) {
+                shareUrl = `https://wa.me/?text=${encodedMessage}%20${encodedUrl}`;
+            }
+
+            // Abrir em nova janela
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            }
+        });
     });
 }
 
