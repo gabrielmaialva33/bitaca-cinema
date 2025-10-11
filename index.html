@@ -23,9 +23,6 @@
     <!-- Styles (fonts importados no CSS) -->
     <link href="assets/css/styles.css" rel="stylesheet">
 
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
     <!-- KeenIcons (Metronic) -->
     <link href="assets/vendors/keenicons/styles.bundle.css" rel="stylesheet">
 </head>
@@ -82,9 +79,9 @@
          style="background-image: url('https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1920&q=80'); opacity: 0.3;"></div>
 
     <div class="hero__container container">
-        <div class="hero__content" data-aos="fade-up">
+        <div class="hero__content">
             <!-- Logo do Bitaca -->
-            <div class="bitaca-brand" data-aos="zoom-in">
+            <div class="bitaca-brand">
                 <h1 class="hero__title">
                     <i class="ki-filled ki-bank" style="font-size: 1.2em; vertical-align: middle;"></i> BITACA <span
                         class="text-accent">CINEMA</span>
@@ -97,15 +94,15 @@
             </p>
 
             <div class="hero__stats">
-                <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="stat-card">
                     <span class="stat-number" data-count="23">0</span>
                     <span class="stat-label">Produções</span>
                 </div>
-                <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="stat-card">
                     <span class="stat-number" data-count="3">0</span>
                     <span class="stat-label">Eixos Temáticos</span>
                 </div>
-                <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="stat-card">
                     <span class="stat-number" data-count="2025">0</span>
                     <span class="stat-label">Estreias</span>
                 </div>
@@ -121,7 +118,7 @@
             </div>
 
             <!-- Redes Sociais -->
-            <div aria-label="Redes sociais" class="social-links" data-aos="fade-up" data-aos-delay="400"
+            <div aria-label="Redes sociais" class="social-links"
                  role="navigation">
                 <a aria-label="Visite nosso Instagram" class="social-link" href="https://www.instagram.com/abitacacb/"
                    rel="noopener noreferrer" target="_blank">
@@ -133,27 +130,22 @@
                 </a>
             </div>
         </div>
-
-        <!-- Three.js Particle System (Mobile-Optimized) -->
-        <div class="hero__particle-scene">
-            <canvas id="particle-canvas"></canvas>
-        </div>
     </div>
 </section>
 
 <!-- Galeria do Bitaca Café Bar -->
 <section class="galeria section" id="galeria">
     <div class="container">
-        <h2 class="section__title" data-aos="fade-up">
+        <h2 class="section__title">
             <i class="ki-filled ki-camera"></i> Galeria Bitaca Café Bar
         </h2>
-        <p class="section__subtitle" data-aos="fade-up" data-aos-delay="100">
+        <p class="section__subtitle">
             O espaço cultural que abriga o cinema de Capão Bonito
         </p>
 
         <div class="galeria-grid">
             <!-- Placeholder images - substituir por fotos reais do Instagram/Facebook -->
-            <div class="galeria-item" data-aos="zoom-in" data-aos-delay="100">
+            <div class="galeria-item">
                 <img alt="Bitaca Café Bar - Fachada"
                      crossorigin="anonymous"
                      loading="lazy"
@@ -163,7 +155,7 @@
                     <p>Fachada com casinha pintada</p>
                 </div>
             </div>
-            <div class="galeria-item" data-aos="zoom-in" data-aos-delay="200">
+            <div class="galeria-item">
                 <img alt="Shows e Eventos"
                      crossorigin="anonymous"
                      loading="lazy"
@@ -173,7 +165,7 @@
                     <p>Música alternativa e underground</p>
                 </div>
             </div>
-            <div class="galeria-item" data-aos="zoom-in" data-aos-delay="300">
+            <div class="galeria-item">
                 <img alt="Ambiente do Bar"
                      crossorigin="anonymous"
                      loading="lazy"
@@ -183,7 +175,7 @@
                     <p>Espaço cultural alternativo</p>
                 </div>
             </div>
-            <div class="galeria-item" data-aos="zoom-in" data-aos-delay="400">
+            <div class="galeria-item">
                 <img alt="Arte Urbana"
                      crossorigin="anonymous"
                      loading="lazy"
@@ -207,11 +199,11 @@
 <!-- Catálogo Section -->
 <section class="catalogo section" id="catalogo">
     <div class="container">
-        <h2 class="section__title" data-aos="fade-up">Catálogo de Produções</h2>
-        <p class="section__subtitle" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="section__title">Catálogo de Produções</h2>
+        <p class="section__subtitle">
             23 produções audiovisuais aprovadas pela Lei Paulo Gustavo
         </p>
-        <div class="alert-info" data-aos="fade-up" data-aos-delay="150"
+        <div class="alert-info"
              style="background: #FFF3CD; border-left: 4px solid #FFB700; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; text-align: center;">
             <p style="color: #856404; font-size: 1rem; margin: 0;">
                 <strong><i class="ki-filled ki-video"></i> Em Produção:</strong> Todos os projetos estão em fase de
@@ -224,7 +216,7 @@
         </div>
 
         <!-- Filtros -->
-        <div class="filters" data-aos="fade-up" data-aos-delay="200" role="search">
+        <div class="filters" role="search">
             <div class="filters__top">
                 <div class="filters__search">
                     <label class="visually-hidden" for="search-input">Buscar produções</label>
@@ -290,11 +282,11 @@
 <!-- Sobre as Leis Section -->
 <section class="leis section" id="leis">
     <div class="container">
-        <h2 class="section__title" data-aos="fade-up">Sobre as Leis de Fomento</h2>
+        <h2 class="section__title">Sobre as Leis de Fomento</h2>
 
         <div class="timeline">
             <!-- Lei Paulo Gustavo -->
-            <div class="timeline__item timeline__item--left" data-aos="fade-right">
+            <div class="timeline__item timeline__item--left">
                 <div class="timeline__card">
                     <div class="timeline__icon"><i class="ki-filled ki-mask-happy"></i></div>
                     <h3 class="timeline__title">Lei Paulo Gustavo</h3>
@@ -329,7 +321,7 @@
             <div class="timeline__connector"></div>
 
             <!-- PNAB -->
-            <div class="timeline__item timeline__item--right" data-aos="fade-left">
+            <div class="timeline__item timeline__item--right">
                 <div class="timeline__card">
                     <div class="timeline__icon"><i class="ki-filled ki-ticket"></i></div>
                     <h3 class="timeline__title">Política Nacional Aldir Blanc</h3>
@@ -365,14 +357,14 @@
 <!-- Análise Cultural Section -->
 <section class="analise section" id="analise">
     <div class="container">
-        <h2 class="section__title" data-aos="fade-up">Análise Cultural</h2>
-        <p class="section__subtitle" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="section__title">Análise Cultural</h2>
+        <p class="section__subtitle">
             Mapeamento dos eixos temáticos e perfil das produções
         </p>
 
         <div class="analise__content">
             <!-- Eixos Temáticos - Aguardando dados oficiais -->
-            <div class="chart-container" data-aos="fade-up" data-aos-delay="200" style="text-align: center;">
+            <div class="chart-container" style="text-align: center;">
                 <h3 class="chart-title">Eixos Temáticos das Produções</h3>
                 <p style="color: var(--marrom-terra); font-size: 1rem; max-width: 600px; margin: 0 auto; line-height: 1.6;">
                     As produções audiovisuais de Capão Bonito abrangem três eixos principais: <strong>Patrimônio &
@@ -383,7 +375,7 @@
 
             <!-- Cards de Eixos -->
             <div class="eixos-cards">
-                <div class="eixo-card eixo-card--patrimonio" data-aos="fade-up" data-aos-delay="300">
+                <div class="eixo-card eixo-card--patrimonio">
                     <div class="eixo-card__icon"><i class="ki-filled ki-bank"></i></div>
                     <h4 class="eixo-card__title">Patrimônio & Memória</h4>
                     <span class="eixo-card__percentage">9</span>
@@ -392,7 +384,7 @@
                     </p>
                 </div>
 
-                <div class="eixo-card eixo-card--musica" data-aos="fade-up" data-aos-delay="400">
+                <div class="eixo-card eixo-card--musica">
                     <div class="eixo-card__icon"><i class="ki-filled ki-note-2"></i></div>
                     <h4 class="eixo-card__title">Cultura Musical</h4>
                     <span class="eixo-card__percentage">8</span>
@@ -401,7 +393,7 @@
                     </p>
                 </div>
 
-                <div class="eixo-card eixo-card--ambiente" data-aos="fade-up" data-aos-delay="500">
+                <div class="eixo-card eixo-card--ambiente">
                     <div class="eixo-card__icon"><i class="ki-filled ki-tree"></i></div>
                     <h4 class="eixo-card__title">Meio Ambiente & Urbano</h4>
                     <span class="eixo-card__percentage">7</span>
@@ -412,7 +404,7 @@
             </div>
 
             <!-- Produtores em Destaque -->
-            <div class="produtores-destaque-section" data-aos="fade-up" data-aos-delay="600">
+            <div class="produtores-destaque-section">
                 <h3 class="produtores-destaque-title">
                     <i class="ki-filled ki-cup"></i> Produtores em Destaque
                 </h3>
@@ -422,7 +414,7 @@
 
                 <div class="podio-grid">
                     <!-- 2º Lugar -->
-                    <div class="podio-card podio-card--silver" data-aos="zoom-in" data-aos-delay="700"
+                    <div class="podio-card podio-card--silver"
                          data-position="2º"
                          data-producer="Flavio Francisco Ramos Pereira"
                          data-project="Os Cascatinhas">
@@ -452,7 +444,7 @@
                     </div>
 
                     <!-- 1º Lugar -->
-                    <div class="podio-card podio-card--gold" data-aos="zoom-in" data-aos-delay="650"
+                    <div class="podio-card podio-card--gold"
                          data-position="1º"
                          data-producer="Margarida Chaves de Oliveira Scuoteguazza"
                          data-project="Ponteia Viola">
@@ -482,7 +474,7 @@
                     </div>
 
                     <!-- 3º Lugar -->
-                    <div class="podio-card podio-card--bronze" data-aos="zoom-in" data-aos-delay="750"
+                    <div class="podio-card podio-card--bronze"
                          data-position="3º"
                          data-producer="Bruna Maximovitz Kadoo Polississo"
                          data-project="Reconstruction">
@@ -616,13 +608,9 @@
 </button>
 
 <!-- Scripts -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/main.js"></script>
-
-<!-- Three.js GPGPU Particle Hero (ES Module) -->
-<script src="assets/js/particle-hero-gpgpu.js" type="module"></script>
 
 <!-- KeenIcons já inicializado via CSS -->
 </body>
