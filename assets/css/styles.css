@@ -589,6 +589,49 @@ ul {
     transition: all 0.4s ease;
 }
 
+/* Badges TOP 3 */
+.top-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-family: var(--font-bold);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.top-badge--gold {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: var(--preto);
+    border: 2px solid #FFED4E;
+}
+
+.top-badge--silver {
+    background: linear-gradient(135deg, #E8E8E8 0%, #C0C0C0 100%);
+    color: var(--preto);
+    border: 2px solid #F5F5F5;
+}
+
+.top-badge--bronze {
+    background: linear-gradient(135deg, #CD7F32 0%, #B5651D 100%);
+    color: var(--branco);
+    border: 2px solid #E8973C;
+}
+
 .filme-card__poster::before {
     content: '';
     position: absolute;
@@ -640,7 +683,7 @@ ul {
 .filme-card__diretor {
     font-size: 0.9rem;
     color: var(--marrom-terra);
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.75rem;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -651,6 +694,36 @@ ul {
     content: '👤';
     font-size: 0.85rem;
     opacity: 0.7;
+}
+
+/* Meta informações (duração e gênero) */
+.filme-card__meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.filme-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--verde-folha);
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    background: rgba(45, 80, 22, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.filme-meta i {
+    font-size: 0.9rem;
+}
+
+.filme-card:hover .filme-meta {
+    background: rgba(45, 80, 22, 0.15);
+    transform: translateY(-2px);
 }
 
 .filme-card__badges {

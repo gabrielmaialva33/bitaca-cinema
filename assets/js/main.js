@@ -211,6 +211,17 @@ function createFilmeCard(filme) {
     if (filme.genero.toLowerCase().includes('videoclipe')) iconName = 'music';
     if (filme.genero.toLowerCase().includes('animação')) iconName = 'color-swatch';
 
+    // Badge TOP 3 (baseado na pontuação combinada)
+    let topBadge = '';
+    const pontuacaoTotal = (filme.pontuacaoLPG || 0) + (filme.pontuacaoPNAB || 0);
+    if (filme.id === 1) { // Ponteia Viola - 1º lugar
+        topBadge = '<div class="top-badge top-badge--gold"><i class="ki-filled ki-crown"></i> TOP 1</div>';
+    } else if (filme.id === 2) { // Os Cascatinhas - 2º lugar
+        topBadge = '<div class="top-badge top-badge--silver"><i class="ki-filled ki-medal-star"></i> TOP 2</div>';
+    } else if (filme.id === 3) { // Reconstruction - 3º lugar
+        topBadge = '<div class="top-badge top-badge--bronze"><i class="ki-filled ki-award"></i> TOP 3</div>';
+    }
+
     // Status badge
     let statusBadge = '';
     if (filme.status === 'lancado') {
@@ -222,31 +233,24 @@ function createFilmeCard(filme) {
     // Badges de pontuação
     let pontuacaoBadges = '';
     if (filme.pontuacaoLPG) {
-        let badgeClass = 'badge';
-        if (filme.ranking && filme.ranking.lpg && filme.ranking.lpg.includes('1º')) {
-            badgeClass = 'badge badge-gold';
-        } else if (filme.ranking && filme.ranking.lpg && filme.ranking.lpg.includes('2º')) {
-            badgeClass = 'badge badge-silver';
-        }
-        pontuacaoBadges += `<span class="${badgeClass}">LPG ${filme.pontuacaoLPG}</span>`;
+        pontuacaoBadges += `<span class="badge">LPG ${filme.pontuacaoLPG}</span>`;
     }
     if (filme.pontuacaoPNAB) {
-        let badgeClass = 'badge';
-        if (filme.ranking && filme.ranking.pnab && filme.ranking.pnab.includes('1º')) {
-            badgeClass = 'badge badge-gold';
-        } else if (filme.ranking && filme.ranking.pnab && filme.ranking.pnab.includes('2º')) {
-            badgeClass = 'badge badge-silver';
-        }
-        pontuacaoBadges += `<span class="${badgeClass}">PNAB ${filme.pontuacaoPNAB}</span>`;
+        pontuacaoBadges += `<span class="badge">PNAB ${filme.pontuacaoPNAB}</span>`;
     }
 
     card.innerHTML = `
     <div class="filme-card__poster">
+      ${topBadge}
       <i class="ki-filled ki-${iconName}"></i>
     </div>
     <div class="filme-card__body">
       <h3 class="filme-card__title">${filme.titulo}</h3>
       <p class="filme-card__diretor"><i class="ki-filled ki-profile-circle"></i> Dir: ${filme.diretor}</p>
+      <div class="filme-card__meta">
+        <span class="filme-meta"><i class="ki-filled ki-time"></i> ${filme.duracao}</span>
+        <span class="filme-meta"><i class="ki-filled ki-category"></i> ${filme.genero}</span>
+      </div>
       <div class="filme-card__badges">
         ${statusBadge}
         ${pontuacaoBadges}
