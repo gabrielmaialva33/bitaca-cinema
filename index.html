@@ -2,442 +2,465 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bitaca Cinema - Catálogo de produções audiovisuais fomentadas pelas Leis Paulo Gustavo e PNAB em Capão Bonito/SP. Underground, Viceral, Democrático.">
-    <meta name="keywords" content="cinema, Capão Bonito, Lei Paulo Gustavo, PNAB, Aldir Blanc, cultura, audiovisual, Bitaca">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Bitaca Cinema - Catálogo de produções audiovisuais fomentadas pelas Leis Paulo Gustavo e PNAB em Capão Bonito/SP. Underground, Viceral, Democrático."
+          name="description">
+    <meta content="cinema, Capão Bonito, Lei Paulo Gustavo, PNAB, Aldir Blanc, cultura, audiovisual, Bitaca"
+          name="keywords">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Bitaca Cinema - Capão Bonito | Cultura Audiovisual">
-    <meta property="og:description" content="Catálogo de produções audiovisuais - Leis Paulo Gustavo e PNAB. Underground, Viceral, Democrático.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="assets/images/og-bitaca.png">
+    <meta content="Bitaca Cinema - Capão Bonito | Cultura Audiovisual" property="og:title">
+    <meta content="Catálogo de produções audiovisuais - Leis Paulo Gustavo e PNAB. Underground, Viceral, Democrático."
+          property="og:description">
+    <meta content="website" property="og:type">
+    <meta content="assets/images/og-bitaca.png" property="og:image">
 
     <!-- Theme -->
-    <meta name="theme-color" content="#C41E3A">
+    <meta content="#C41E3A" name="theme-color">
 
     <title>Bitaca Cinema - Capão Bonito/SP | Underground, Viceral, Democrático</title>
 
     <!-- Styles (fonts importados no CSS) -->
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="assets/css/styles.css" rel="stylesheet">
 
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- KeenIcons (Metronic) -->
-    <link rel="stylesheet" href="assets/vendors/keenicons/styles.bundle.css">
+    <link href="assets/vendors/keenicons/styles.bundle.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Header/Navigation -->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#home" class="nav__logo">
-                <!-- Logo SVG será inserido aqui -->
-                <svg viewBox="0 0 200 80" class="logo-svg">
-                    <!-- Casinha -->
-                    <polygon points="100,10 120,25 120,40 80,40 80,25" fill="#C41E3A" stroke="#0A0A0A" stroke-width="2"/>
-                    <rect x="90" y="28" width="8" height="12" fill="#8B4513"/>
-                    <rect x="105" y="28" width="8" height="12" fill="#8B4513"/>
-                    <!-- Folhagens -->
-                    <path d="M 70,30 Q 65,25 70,20" stroke="#2D5016" stroke-width="3" fill="none"/>
-                    <path d="M 130,30 Q 135,25 130,20" stroke="#2D5016" stroke-width="3" fill="none"/>
-                    <!-- Texto BITACA -->
-                    <text x="40" y="65" font-family="Staatliches, sans-serif" font-size="28" font-weight="bold" fill="#C41E3A">BITACA</text>
-                    <text x="60" y="78" font-family="Pacifico, cursive" font-size="14" fill="#0A0A0A">Cinema</text>
-                </svg>
-            </a>
+<!-- Header/Navigation -->
+<header class="header" id="header">
+    <nav class="nav container">
+        <a class="nav__logo" href="#home">
+            <!-- Logo SVG será inserido aqui -->
+            <svg class="logo-svg" viewBox="0 0 200 80">
+                <!-- Casinha -->
+                <polygon fill="#C41E3A" points="100,10 120,25 120,40 80,40 80,25" stroke="#0A0A0A" stroke-width="2"/>
+                <rect fill="#8B4513" height="12" width="8" x="90" y="28"/>
+                <rect fill="#8B4513" height="12" width="8" x="105" y="28"/>
+                <!-- Folhagens -->
+                <path d="M 70,30 Q 65,25 70,20" fill="none" stroke="#2D5016" stroke-width="3"/>
+                <path d="M 130,30 Q 135,25 130,20" fill="none" stroke="#2D5016" stroke-width="3"/>
+                <!-- Texto BITACA -->
+                <text fill="#C41E3A" font-family="Staatliches, sans-serif" font-size="28" font-weight="bold" x="40"
+                      y="65">BITACA
+                </text>
+                <text fill="#0A0A0A" font-family="Pacifico, cursive" font-size="14" x="60" y="78">Cinema</text>
+            </svg>
+        </a>
 
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item"><a href="#home" class="nav__link">Início</a></li>
-                    <li class="nav__item"><a href="#catalogo" class="nav__link">Catálogo</a></li>
-                    <li class="nav__item"><a href="#leis" class="nav__link">Sobre as Leis</a></li>
-                    <li class="nav__item"><a href="#analise" class="nav__link">Análise</a></li>
-                    <li class="nav__item"><a href="#contato" class="nav__link">Contato</a></li>
-                </ul>
-            </div>
-
-            <div class="nav__toggle" id="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Hero Section com Galeria -->
-    <section class="hero" id="home">
-        <!-- Background Image Overlay -->
-        <div class="hero__bg-image" style="background-image: url('https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1920&q=80'); opacity: 0.15;"></div>
-
-        <div class="hero__container container">
-            <div class="hero__content" data-aos="fade-up">
-                <!-- Logo do Bitaca -->
-                <div class="bitaca-brand" data-aos="zoom-in">
-                    <h1 class="hero__title">
-                        <i class="ki-filled ki-bank" style="font-size: 1.2em; vertical-align: middle;"></i> BITACA <span class="text-accent">CINEMA</span>
-                    </h1>
-                    <p class="hero__tagline">Underground | Visceral | Democrático</p>
-                </div>
-
-                <p class="hero__subtitle">
-                    Cinema de Capão Bonito - Produções Audiovisuais Fomentadas pelas Leis Paulo Gustavo e Aldir Blanc
-                </p>
-
-                <div class="hero__stats">
-                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
-                        <span class="stat-number">23</span>
-                        <span class="stat-label">Produções</span>
-                    </div>
-                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
-                        <span class="stat-number">3</span>
-                        <span class="stat-label">Eixos Temáticos</span>
-                    </div>
-                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
-                        <span class="stat-number">2025</span>
-                        <span class="stat-label">Estreias</span>
-                    </div>
-                </div>
-
-                <div class="hero__cta">
-                    <a href="#catalogo" class="btn btn-primary">
-                        <i class="ki-filled ki-video text-lg"></i> Explorar Catálogo
-                    </a>
-                    <a href="#galeria" class="btn btn-secondary">
-                        <i class="ki-filled ki-picture text-lg"></i> Galeria Bitaca
-                    </a>
-                </div>
-
-                <!-- Redes Sociais -->
-                <div class="social-links" data-aos="fade-up" data-aos-delay="400">
-                    <a href="https://www.instagram.com/abitacacb/" target="_blank" class="social-link">
-                        <i class="ki-filled ki-instagram"></i>
-                    </a>
-                    <a href="https://www.facebook.com/abitacacb/" target="_blank" class="social-link">
-                        <i class="ki-filled ki-facebook"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Three.js 3D Scene -->
-            <div class="hero__three-scene">
-                <canvas id="three-canvas"></canvas>
-            </div>
+        <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+                <li class="nav__item"><a class="nav__link" href="#home">Início</a></li>
+                <li class="nav__item"><a class="nav__link" href="#catalogo">Catálogo</a></li>
+                <li class="nav__item"><a class="nav__link" href="#leis">Sobre as Leis</a></li>
+                <li class="nav__item"><a class="nav__link" href="#analise">Análise</a></li>
+                <li class="nav__item"><a class="nav__link" href="#contato">Contato</a></li>
+            </ul>
         </div>
-    </section>
 
-    <!-- Galeria do Bitaca Café Bar -->
-    <section class="galeria section" id="galeria">
-        <div class="container">
-            <h2 class="section__title" data-aos="fade-up">
-                <i class="ki-filled ki-camera"></i> Galeria Bitaca Café Bar
-            </h2>
-            <p class="section__subtitle" data-aos="fade-up" data-aos-delay="100">
-                O espaço cultural que abriga o cinema de Capão Bonito
+        <div class="nav__toggle" id="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</header>
+
+<!-- Hero Section com Galeria -->
+<section class="hero" id="home">
+    <!-- Background Image Overlay -->
+    <div class="hero__bg-image"
+         style="background-image: url('https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1920&q=80'); opacity: 0.15;"></div>
+
+    <div class="hero__container container">
+        <div class="hero__content" data-aos="fade-up">
+            <!-- Logo do Bitaca -->
+            <div class="bitaca-brand" data-aos="zoom-in">
+                <h1 class="hero__title">
+                    <i class="ki-filled ki-bank" style="font-size: 1.2em; vertical-align: middle;"></i> BITACA <span
+                        class="text-accent">CINEMA</span>
+                </h1>
+                <p class="hero__tagline">Underground | Visceral | Democrático</p>
+            </div>
+
+            <p class="hero__subtitle">
+                Cinema de Capão Bonito - Produções Audiovisuais Fomentadas pelas Leis Paulo Gustavo e Aldir Blanc
             </p>
 
-            <div class="galeria-grid">
-                <!-- Placeholder images - substituir por fotos reais do Instagram/Facebook -->
-                <div class="galeria-item" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&q=85&fm=jpg&fit=crop"
-                         alt="Bitaca Café Bar - Fachada"
-                         loading="lazy"
-                         crossorigin="anonymous">
-                    <div class="galeria-overlay">
-                        <h3>Bitaca Café Bar</h3>
-                        <p>Fachada com casinha pintada</p>
-                    </div>
+            <div class="hero__stats">
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                    <span class="stat-number">23</span>
+                    <span class="stat-label">Produções</span>
                 </div>
-                <div class="galeria-item" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=800&q=85&fm=jpg&fit=crop"
-                         alt="Shows e Eventos"
-                         loading="lazy"
-                         crossorigin="anonymous">
-                    <div class="galeria-overlay">
-                        <h3>Shows Ao Vivo</h3>
-                        <p>Música alternativa e underground</p>
-                    </div>
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Eixos Temáticos</span>
                 </div>
-                <div class="galeria-item" data-aos="zoom-in" data-aos-delay="300">
-                    <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=85&fm=jpg&fit=crop"
-                         alt="Ambiente do Bar"
-                         loading="lazy"
-                         crossorigin="anonymous">
-                    <div class="galeria-overlay">
-                        <h3>Ambiente Interno</h3>
-                        <p>Espaço cultural alternativo</p>
-                    </div>
-                </div>
-                <div class="galeria-item" data-aos="zoom-in" data-aos-delay="400">
-                    <img src="https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?w=800&q=85&fm=jpg&fit=crop"
-                         alt="Arte Urbana"
-                         loading="lazy"
-                         crossorigin="anonymous">
-                    <div class="galeria-overlay">
-                        <h3>Arte & Grafite</h3>
-                        <p>Expressão visual local</p>
-                    </div>
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                    <span class="stat-number">2025</span>
+                    <span class="stat-label">Estreias</span>
                 </div>
             </div>
 
-            <p class="galeria-note" style="text-align: center; margin-top: 2rem; color: #856404;">
-                <strong><i class="ki-filled ki-camera"></i> Fotos:</strong> Siga <a href="https://www.instagram.com/abitacacb/" target="_blank" style="color: #C41E3A;">@abitacacb</a> no Instagram para ver mais do Bitaca!
-            </p>
-        </div>
-    </section>
-
-    <!-- Catálogo Section -->
-    <section class="catalogo section" id="catalogo">
-        <div class="container">
-            <h2 class="section__title" data-aos="fade-up">Catálogo de Produções</h2>
-            <p class="section__subtitle" data-aos="fade-up" data-aos-delay="100">
-                23 produções audiovisuais aprovadas pela Lei Paulo Gustavo
-            </p>
-            <div class="alert-info" data-aos="fade-up" data-aos-delay="150" style="background: #FFF3CD; border-left: 4px solid #FFB700; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; text-align: center;">
-                <p style="color: #856404; font-size: 1rem; margin: 0;">
-                    <strong><i class="ki-filled ki-video"></i> Em Produção:</strong> Todos os projetos estão em fase de produção, com previsão de lançamento para 2025.
-                    Acompanhe as atualizações na <a href="https://capaobonito.sp.gov.br/lei-paulo-gustavo/" target="_blank" style="color: #C41E3A; text-decoration: underline;">Secretaria de Cultura</a>
-                </p>
+            <div class="hero__cta">
+                <a class="btn btn-primary" href="#catalogo">
+                    <i class="ki-filled ki-video text-lg"></i> Explorar Catálogo
+                </a>
+                <a class="btn btn-secondary" href="#galeria">
+                    <i class="ki-filled ki-picture text-lg"></i> Galeria Bitaca
+                </a>
             </div>
 
-            <!-- Filtros -->
-            <div class="filters" data-aos="fade-up" data-aos-delay="200">
-                <div class="filters__search">
-                    <input type="text" id="search-input" class="search-input" placeholder="Buscar por título ou diretor...">
-                </div>
-
-                <div class="filters__buttons">
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="lancado">Lançados</button>
-                    <button class="filter-btn" data-filter="producao">Em Produção</button>
-                    <button class="filter-btn" data-filter="patrimonio"><i class="ki-filled ki-bank"></i> Patrimônio</button>
-                    <button class="filter-btn" data-filter="musica"><i class="ki-filled ki-music"></i> Música</button>
-                    <button class="filter-btn" data-filter="ambiente"><i class="ki-filled ki-tree"></i> Ambiente</button>
-                </div>
-            </div>
-
-            <!-- Grid de Filmes -->
-            <div class="filmes-grid" id="filmes-grid">
-                <!-- Será preenchido via JavaScript -->
+            <!-- Redes Sociais -->
+            <div class="social-links" data-aos="fade-up" data-aos-delay="400">
+                <a class="social-link" href="https://www.instagram.com/abitacacb/" target="_blank">
+                    <i class="ki-filled ki-instagram"></i>
+                </a>
+                <a class="social-link" href="https://www.facebook.com/abitacacb/" target="_blank">
+                    <i class="ki-filled ki-facebook"></i>
+                </a>
             </div>
         </div>
-    </section>
 
-    <!-- Sobre as Leis Section -->
-    <section class="leis section" id="leis">
-        <div class="container">
-            <h2 class="section__title" data-aos="fade-up">Sobre as Leis de Fomento</h2>
+        <!-- Three.js 3D Scene -->
+        <div class="hero__three-scene">
+            <canvas id="three-canvas"></canvas>
+        </div>
+    </div>
+</section>
 
-            <div class="timeline">
-                <!-- Lei Paulo Gustavo -->
-                <div class="timeline__item timeline__item--left" data-aos="fade-right">
-                    <div class="timeline__card">
-                        <div class="timeline__icon"><i class="ki-filled ki-mask-happy"></i></div>
-                        <h3 class="timeline__title">Lei Paulo Gustavo</h3>
-                        <p class="timeline__subtitle">Lei Complementar nº 195/2022</p>
+<!-- Galeria do Bitaca Café Bar -->
+<section class="galeria section" id="galeria">
+    <div class="container">
+        <h2 class="section__title" data-aos="fade-up">
+            <i class="ki-filled ki-camera"></i> Galeria Bitaca Café Bar
+        </h2>
+        <p class="section__subtitle" data-aos="fade-up" data-aos-delay="100">
+            O espaço cultural que abriga o cinema de Capão Bonito
+        </p>
 
-                        <div class="timeline__stats">
-                            <div class="timeline__stat">
-                                <span class="stat-value">R$ 64.000</span>
-                                <span class="stat-label">Edital 03 Audiovisual</span>
-                            </div>
-                            <div class="timeline__stat">
-                                <span class="stat-value">R$ 75.000</span>
-                                <span class="stat-label">Edital 04 Demais Áreas</span>
-                            </div>
+        <div class="galeria-grid">
+            <!-- Placeholder images - substituir por fotos reais do Instagram/Facebook -->
+            <div class="galeria-item" data-aos="zoom-in" data-aos-delay="100">
+                <img alt="Bitaca Café Bar - Fachada"
+                     crossorigin="anonymous"
+                     loading="lazy"
+                     src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&q=85&fm=jpg&fit=crop">
+                <div class="galeria-overlay">
+                    <h3>Bitaca Café Bar</h3>
+                    <p>Fachada com casinha pintada</p>
+                </div>
+            </div>
+            <div class="galeria-item" data-aos="zoom-in" data-aos-delay="200">
+                <img alt="Shows e Eventos"
+                     crossorigin="anonymous"
+                     loading="lazy"
+                     src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=800&q=85&fm=jpg&fit=crop">
+                <div class="galeria-overlay">
+                    <h3>Shows Ao Vivo</h3>
+                    <p>Música alternativa e underground</p>
+                </div>
+            </div>
+            <div class="galeria-item" data-aos="zoom-in" data-aos-delay="300">
+                <img alt="Ambiente do Bar"
+                     crossorigin="anonymous"
+                     loading="lazy"
+                     src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=85&fm=jpg&fit=crop">
+                <div class="galeria-overlay">
+                    <h3>Ambiente Interno</h3>
+                    <p>Espaço cultural alternativo</p>
+                </div>
+            </div>
+            <div class="galeria-item" data-aos="zoom-in" data-aos-delay="400">
+                <img alt="Arte Urbana"
+                     crossorigin="anonymous"
+                     loading="lazy"
+                     src="https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?w=800&q=85&fm=jpg&fit=crop">
+                <div class="galeria-overlay">
+                    <h3>Arte & Grafite</h3>
+                    <p>Expressão visual local</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="galeria-note" style="text-align: center; margin-top: 2rem; color: #856404;">
+            <strong><i class="ki-filled ki-camera"></i> Fotos:</strong> Siga <a
+                href="https://www.instagram.com/abitacacb/" style="color: #C41E3A;" target="_blank">@abitacacb</a> no
+            Instagram para ver mais do Bitaca!
+        </p>
+    </div>
+</section>
+
+<!-- Catálogo Section -->
+<section class="catalogo section" id="catalogo">
+    <div class="container">
+        <h2 class="section__title" data-aos="fade-up">Catálogo de Produções</h2>
+        <p class="section__subtitle" data-aos="fade-up" data-aos-delay="100">
+            23 produções audiovisuais aprovadas pela Lei Paulo Gustavo
+        </p>
+        <div class="alert-info" data-aos="fade-up" data-aos-delay="150"
+             style="background: #FFF3CD; border-left: 4px solid #FFB700; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; text-align: center;">
+            <p style="color: #856404; font-size: 1rem; margin: 0;">
+                <strong><i class="ki-filled ki-video"></i> Em Produção:</strong> Todos os projetos estão em fase de
+                produção, com previsão de lançamento para 2025.
+                Acompanhe as atualizações na <a href="https://capaobonito.sp.gov.br/lei-paulo-gustavo/" style="color: #C41E3A; text-decoration: underline;"
+                                                target="_blank">Secretaria de
+                Cultura</a>
+            </p>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters" data-aos="fade-up" data-aos-delay="200">
+            <div class="filters__search">
+                <input class="search-input" id="search-input" placeholder="Buscar por título ou diretor..." type="text">
+            </div>
+
+            <div class="filters__buttons">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="lancado">Lançados</button>
+                <button class="filter-btn" data-filter="producao">Em Produção</button>
+                <button class="filter-btn" data-filter="patrimonio"><i class="ki-filled ki-bank"></i> Patrimônio
+                </button>
+                <button class="filter-btn" data-filter="musica"><i class="ki-filled ki-music"></i> Música</button>
+                <button class="filter-btn" data-filter="ambiente"><i class="ki-filled ki-tree"></i> Ambiente</button>
+            </div>
+        </div>
+
+        <!-- Grid de Filmes -->
+        <div class="filmes-grid" id="filmes-grid">
+            <!-- Será preenchido via JavaScript -->
+        </div>
+    </div>
+</section>
+
+<!-- Sobre as Leis Section -->
+<section class="leis section" id="leis">
+    <div class="container">
+        <h2 class="section__title" data-aos="fade-up">Sobre as Leis de Fomento</h2>
+
+        <div class="timeline">
+            <!-- Lei Paulo Gustavo -->
+            <div class="timeline__item timeline__item--left" data-aos="fade-right">
+                <div class="timeline__card">
+                    <div class="timeline__icon"><i class="ki-filled ki-mask-happy"></i></div>
+                    <h3 class="timeline__title">Lei Paulo Gustavo</h3>
+                    <p class="timeline__subtitle">Lei Complementar nº 195/2022</p>
+
+                    <div class="timeline__stats">
+                        <div class="timeline__stat">
+                            <span class="stat-value">R$ 64.000</span>
+                            <span class="stat-label">Edital 03 Audiovisual</span>
                         </div>
-
-                        <p class="timeline__description">
-                            Maior investimento direto no setor cultural da história do Brasil.
-                            Criada em resposta aos impactos da pandemia, homenageia o ator Paulo Gustavo.
-                            <br><br>
-                            <strong>Editais em Capão Bonito:</strong> Edital 03/2024 (Audiovisual) e Edital 04/2024 (Demais Áreas Culturais).
-                            Resultados aguardando divulgação oficial.
-                        </p>
-
-                        <a href="https://capaobonito.sp.gov.br/lei-paulo-gustavo/" target="_blank" class="btn btn-outline">Saiba Mais</a>
-                    </div>
-                </div>
-
-                <!-- Conectador -->
-                <div class="timeline__connector"></div>
-
-                <!-- PNAB -->
-                <div class="timeline__item timeline__item--right" data-aos="fade-left">
-                    <div class="timeline__card">
-                        <div class="timeline__icon"><i class="ki-filled ki-ticket"></i></div>
-                        <h3 class="timeline__title">Política Nacional Aldir Blanc</h3>
-                        <p class="timeline__subtitle">Lei nº 14.399/2022</p>
-
-                        <div class="timeline__stats">
-                            <div class="timeline__stat">
-                                <span class="stat-value">2024</span>
-                                <span class="stat-label">Edital 005/2024</span>
-                            </div>
-                            <div class="timeline__stat">
-                                <span class="stat-value"><i class="ki-filled ki-arrows-circle" style="font-size: 2rem;"></i></span>
-                                <span class="stat-label">Em Análise</span>
-                            </div>
+                        <div class="timeline__stat">
+                            <span class="stat-value">R$ 75.000</span>
+                            <span class="stat-label">Edital 04 Demais Áreas</span>
                         </div>
-
-                        <p class="timeline__description">
-                            Fomento contínuo por 5 anos (2023-2027). Política estruturante que garante
-                            investimento sustentável na cultura, homenageando o compositor Aldir Blanc.
-                            <br><br>
-                            <strong>Edital em Capão Bonito:</strong> Chamamento Público 005/2024 para fomento à cultura.
-                            Resultados em processo de análise.
-                        </p>
-
-                        <a href="https://capaobonito.sp.gov.br/lei-aldir-blanc/" target="_blank" class="btn btn-outline">Saiba Mais</a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Análise Cultural Section -->
-    <section class="analise section" id="analise">
-        <div class="container">
-            <h2 class="section__title" data-aos="fade-up">Análise Cultural</h2>
-            <p class="section__subtitle" data-aos="fade-up" data-aos-delay="100">
-                Mapeamento dos eixos temáticos e perfil das produções
-            </p>
-
-            <div class="analise__content">
-                <!-- Eixos Temáticos - Aguardando dados oficiais -->
-                <div class="chart-container" data-aos="fade-up" data-aos-delay="200" style="text-align: center;">
-                    <h3 class="chart-title">Eixos Temáticos das Produções</h3>
-                    <p style="color: var(--marrom-terra); font-size: 1rem; max-width: 600px; margin: 0 auto; line-height: 1.6;">
-                        As produções audiovisuais de Capão Bonito abrangem três eixos principais: <strong>Patrimônio & Memória</strong>, <strong>Cultura Musical</strong> e <strong>Meio Ambiente</strong>.
-                        O detalhamento estatístico será disponibilizado após divulgação oficial dos resultados.
+                    <p class="timeline__description">
+                        Maior investimento direto no setor cultural da história do Brasil.
+                        Criada em resposta aos impactos da pandemia, homenageia o ator Paulo Gustavo.
+                        <br><br>
+                        <strong>Editais em Capão Bonito:</strong> Edital 03/2024 (Audiovisual) e Edital 04/2024 (Demais
+                        Áreas Culturais).
+                        Resultados aguardando divulgação oficial.
                     </p>
-                </div>
 
-                <!-- Cards de Eixos -->
-                <div class="eixos-cards">
-                    <div class="eixo-card eixo-card--patrimonio" data-aos="fade-up" data-aos-delay="300">
-                        <div class="eixo-card__icon"><i class="ki-filled ki-bank"></i></div>
-                        <h4 class="eixo-card__title">Patrimônio & Memória</h4>
-                        <span class="eixo-card__percentage">9</span>
-                        <p class="eixo-card__description">
-                            Projetos focados em preservação histórica, gastronomia e memória cultural
-                        </p>
-                    </div>
-
-                    <div class="eixo-card eixo-card--musica" data-aos="fade-up" data-aos-delay="400">
-                        <div class="eixo-card__icon"><i class="ki-filled ki-music"></i></div>
-                        <h4 class="eixo-card__title">Cultura Musical</h4>
-                        <span class="eixo-card__percentage">8</span>
-                        <p class="eixo-card__description">
-                            Do sertanejo de raiz ao hip hop - diversidade da cena musical local
-                        </p>
-                    </div>
-
-                    <div class="eixo-card eixo-card--ambiente" data-aos="fade-up" data-aos-delay="500">
-                        <div class="eixo-card__icon"><i class="ki-filled ki-tree"></i></div>
-                        <h4 class="eixo-card__title">Meio Ambiente & Urbano</h4>
-                        <span class="eixo-card__percentage">7</span>
-                        <p class="eixo-card__description">
-                            Natureza, preservação, espaço urbano e sustentabilidade
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Produtores em Destaque -->
-                <div class="alert-info" data-aos="fade-up" data-aos-delay="600" style="background: linear-gradient(135deg, #FFF3CD 0%, #FFE8B3 100%); border-left: 4px solid #FFB700; padding: 2.5rem; border-radius: 15px; margin-top: 3rem; text-align: center;">
-                    <h3 style="color: #C41E3A; font-family: 'Staatliches', sans-serif; font-size: 1.8rem; margin-bottom: 1rem;"><i class="ki-filled ki-cup"></i> Produtores em Destaque</h3>
-                    <div style="max-width: 700px; margin: 0 auto;">
-                        <p style="color: #856404; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
-                            <strong>1º Lugar:</strong> Margarida Chaves de Oliveira Scuoteguazza - "Ponteia Viola" (238 pts LPG, 98 pts PNAB)<br>
-                            <strong>2º Lugar:</strong> Flavio Francisco Ramos Pereira - "Os Cascatinhas" (236 pts LPG, 96 pts PNAB)<br>
-                            <strong>3º Lugar:</strong> Bruna Maximovitz Kadoo Polississo - "Reconstruction" (234 pts LPG, 94 pts PNAB)
-                        </p>
-                        <p style="color: #856404; font-size: 0.95rem; margin: 0;">
-                            <em>Dados oficiais: Lei Paulo Gustavo - Edital 03/2024 | PNAB - Edital 005/2024</em>
-                        </p>
-                    </div>
+                    <a class="btn btn-outline" href="https://capaobonito.sp.gov.br/lei-paulo-gustavo/" target="_blank">Saiba
+                        Mais</a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="contato">
-        <div class="footer__container container">
-            <div class="footer__content">
-                <!-- Logo & Tagline -->
-                <div class="footer__section">
-                    <div class="footer__logo">
-                        <svg viewBox="0 0 120 60" class="footer-logo-svg">
-                            <polygon points="60,5 72,15 72,25 48,25 48,15" fill="#F5DEB3"/>
-                            <text x="20" y="45" font-family="Staatliches" font-size="18" fill="#F5DEB3">BITACA</text>
-                            <text x="30" y="55" font-family="Pacifico" font-size="10" fill="#F5DEB3">Cinema</text>
-                        </svg>
+            <!-- Conectador -->
+            <div class="timeline__connector"></div>
+
+            <!-- PNAB -->
+            <div class="timeline__item timeline__item--right" data-aos="fade-left">
+                <div class="timeline__card">
+                    <div class="timeline__icon"><i class="ki-filled ki-ticket"></i></div>
+                    <h3 class="timeline__title">Política Nacional Aldir Blanc</h3>
+                    <p class="timeline__subtitle">Lei nº 14.399/2022</p>
+
+                    <div class="timeline__stats">
+                        <div class="timeline__stat">
+                            <span class="stat-value">2024</span>
+                            <span class="stat-label">Edital 005/2024</span>
+                        </div>
+                        <div class="timeline__stat">
+                            <span class="stat-value"><i class="ki-filled ki-arrows-circle" style="font-size: 2rem;"></i></span>
+                            <span class="stat-label">Em Análise</span>
+                        </div>
                     </div>
-                    <p class="footer__tagline">
-                        "Preservando a memória,<br>celebrando a cultura"
+
+                    <p class="timeline__description">
+                        Fomento contínuo por 5 anos (2023-2027). Política estruturante que garante
+                        investimento sustentável na cultura, homenageando o compositor Aldir Blanc.
+                        <br><br>
+                        <strong>Edital em Capão Bonito:</strong> Chamamento Público 005/2024 para fomento à cultura.
+                        Resultados em processo de análise.
                     </p>
-                </div>
 
-                <!-- Links Rápidos -->
-                <div class="footer__section">
-                    <h4 class="footer__title">Links</h4>
-                    <ul class="footer__links">
-                        <li><a href="#catalogo">Catálogo</a></li>
-                        <li><a href="#leis">Sobre as Leis</a></li>
-                        <li><a href="#analise">Análise Cultural</a></li>
-                        <li><a href="README.md">Documentação</a></li>
-                    </ul>
+                    <a class="btn btn-outline" href="https://capaobonito.sp.gov.br/lei-aldir-blanc/" target="_blank">Saiba
+                        Mais</a>
                 </div>
-
-                <!-- Contato -->
-                <div class="footer__section">
-                    <h4 class="footer__title">Contato</h4>
-                    <ul class="footer__contact">
-                        <li><i class="ki-filled ki-sms"></i> cultura@capaobonito.sp.gov.br</li>
-                        <li><i class="ki-filled ki-phone"></i> (15) 3542-3553</li>
-                        <li><i class="ki-filled ki-map"></i> Capão Bonito/SP</li>
-                        <li><i class="ki-filled ki-profile-circle"></i> Renato Heber de Almeida</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Bottom -->
-            <div class="footer__bottom">
-                <div class="footer__badges">
-                    <span class="footer__badge"><i class="ki-filled ki-mask-happy"></i> Lei Paulo Gustavo</span>
-                    <span class="footer__badge"><i class="ki-filled ki-ticket"></i> PNAB</span>
-                </div>
-                <p class="footer__copyright">
-                    © 2025 Bitaca Cinema | Última atualização: Outubro 2025
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Modal de Filme -->
-    <div class="modal" id="filme-modal">
-        <div class="modal__overlay"></div>
-        <div class="modal__content">
-            <button class="modal__close">&times;</button>
-            <div id="modal-body">
-                <!-- Conteúdo será injetado via JS -->
             </div>
         </div>
     </div>
+</section>
 
-    <!-- Botão Voltar ao Topo -->
-    <button class="scroll-top" id="scroll-top" aria-label="Voltar ao topo">
-        <i class="ki-filled ki-arrow-up"></i>
-    </button>
+<!-- Análise Cultural Section -->
+<section class="analise section" id="analise">
+    <div class="container">
+        <h2 class="section__title" data-aos="fade-up">Análise Cultural</h2>
+        <p class="section__subtitle" data-aos="fade-up" data-aos-delay="100">
+            Mapeamento dos eixos temáticos e perfil das produções
+        </p>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-    <script src="assets/js/data.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/three-effects.js"></script>
+        <div class="analise__content">
+            <!-- Eixos Temáticos - Aguardando dados oficiais -->
+            <div class="chart-container" data-aos="fade-up" data-aos-delay="200" style="text-align: center;">
+                <h3 class="chart-title">Eixos Temáticos das Produções</h3>
+                <p style="color: var(--marrom-terra); font-size: 1rem; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+                    As produções audiovisuais de Capão Bonito abrangem três eixos principais: <strong>Patrimônio &
+                    Memória</strong>, <strong>Cultura Musical</strong> e <strong>Meio Ambiente</strong>.
+                    O detalhamento estatístico será disponibilizado após divulgação oficial dos resultados.
+                </p>
+            </div>
 
-    <!-- KeenIcons já inicializado via CSS -->
+            <!-- Cards de Eixos -->
+            <div class="eixos-cards">
+                <div class="eixo-card eixo-card--patrimonio" data-aos="fade-up" data-aos-delay="300">
+                    <div class="eixo-card__icon"><i class="ki-filled ki-bank"></i></div>
+                    <h4 class="eixo-card__title">Patrimônio & Memória</h4>
+                    <span class="eixo-card__percentage">9</span>
+                    <p class="eixo-card__description">
+                        Projetos focados em preservação histórica, gastronomia e memória cultural
+                    </p>
+                </div>
+
+                <div class="eixo-card eixo-card--musica" data-aos="fade-up" data-aos-delay="400">
+                    <div class="eixo-card__icon"><i class="ki-filled ki-music"></i></div>
+                    <h4 class="eixo-card__title">Cultura Musical</h4>
+                    <span class="eixo-card__percentage">8</span>
+                    <p class="eixo-card__description">
+                        Do sertanejo de raiz ao hip hop - diversidade da cena musical local
+                    </p>
+                </div>
+
+                <div class="eixo-card eixo-card--ambiente" data-aos="fade-up" data-aos-delay="500">
+                    <div class="eixo-card__icon"><i class="ki-filled ki-tree"></i></div>
+                    <h4 class="eixo-card__title">Meio Ambiente & Urbano</h4>
+                    <span class="eixo-card__percentage">7</span>
+                    <p class="eixo-card__description">
+                        Natureza, preservação, espaço urbano e sustentabilidade
+                    </p>
+                </div>
+            </div>
+
+            <!-- Produtores em Destaque -->
+            <div class="alert-info" data-aos="fade-up" data-aos-delay="600"
+                 style="background: linear-gradient(135deg, #FFF3CD 0%, #FFE8B3 100%); border-left: 4px solid #FFB700; padding: 2.5rem; border-radius: 15px; margin-top: 3rem; text-align: center;">
+                <h3 style="color: #C41E3A; font-family: 'Staatliches', sans-serif; font-size: 1.8rem; margin-bottom: 1rem;">
+                    <i class="ki-filled ki-cup"></i> Produtores em Destaque</h3>
+                <div style="max-width: 700px; margin: 0 auto;">
+                    <p style="color: #856404; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
+                        <strong>1º Lugar:</strong> Margarida Chaves de Oliveira Scuoteguazza - "Ponteia Viola" (238 pts
+                        LPG, 98 pts PNAB)<br>
+                        <strong>2º Lugar:</strong> Flavio Francisco Ramos Pereira - "Os Cascatinhas" (236 pts LPG, 96
+                        pts PNAB)<br>
+                        <strong>3º Lugar:</strong> Bruna Maximovitz Kadoo Polississo - "Reconstruction" (234 pts LPG, 94
+                        pts PNAB)
+                    </p>
+                    <p style="color: #856404; font-size: 0.95rem; margin: 0;">
+                        <em>Dados oficiais: Lei Paulo Gustavo - Edital 03/2024 | PNAB - Edital 005/2024</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" id="contato">
+    <div class="footer__container container">
+        <div class="footer__content">
+            <!-- Logo & Tagline -->
+            <div class="footer__section">
+                <div class="footer__logo">
+                    <svg class="footer-logo-svg" viewBox="0 0 120 60">
+                        <polygon fill="#F5DEB3" points="60,5 72,15 72,25 48,25 48,15"/>
+                        <text fill="#F5DEB3" font-family="Staatliches" font-size="18" x="20" y="45">BITACA</text>
+                        <text fill="#F5DEB3" font-family="Pacifico" font-size="10" x="30" y="55">Cinema</text>
+                    </svg>
+                </div>
+                <p class="footer__tagline">
+                    "Preservando a memória,<br>celebrando a cultura"
+                </p>
+            </div>
+
+            <!-- Links Rápidos -->
+            <div class="footer__section">
+                <h4 class="footer__title">Links</h4>
+                <ul class="footer__links">
+                    <li><a href="#catalogo">Catálogo</a></li>
+                    <li><a href="#leis">Sobre as Leis</a></li>
+                    <li><a href="#analise">Análise Cultural</a></li>
+                    <li><a href="README.md">Documentação</a></li>
+                </ul>
+            </div>
+
+            <!-- Contato -->
+            <div class="footer__section">
+                <h4 class="footer__title">Contato</h4>
+                <ul class="footer__contact">
+                    <li><i class="ki-filled ki-sms"></i> cultura@capaobonito.sp.gov.br</li>
+                    <li><i class="ki-filled ki-phone"></i> (15) 3542-3553</li>
+                    <li><i class="ki-filled ki-map"></i> Capão Bonito/SP</li>
+                    <li><i class="ki-filled ki-profile-circle"></i> Renato Heber de Almeida</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom -->
+        <div class="footer__bottom">
+            <div class="footer__badges">
+                <span class="footer__badge"><i class="ki-filled ki-mask-happy"></i> Lei Paulo Gustavo</span>
+                <span class="footer__badge"><i class="ki-filled ki-ticket"></i> PNAB</span>
+            </div>
+            <p class="footer__copyright">
+                © 2025 Bitaca Cinema | Última atualização: Outubro 2025
+            </p>
+        </div>
+    </div>
+</footer>
+
+<!-- Modal de Filme -->
+<div class="modal" id="filme-modal">
+    <div class="modal__overlay"></div>
+    <div class="modal__content">
+        <button class="modal__close">&times;</button>
+        <div id="modal-body">
+            <!-- Conteúdo será injetado via JS -->
+        </div>
+    </div>
+</div>
+
+<!-- Botão Voltar ao Topo -->
+<button aria-label="Voltar ao topo" class="scroll-top" id="scroll-top">
+    <i class="ki-filled ki-arrow-up"></i>
+</button>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/three-effects.js"></script>
+
+<!-- KeenIcons já inicializado via CSS -->
 </body>
 </html>

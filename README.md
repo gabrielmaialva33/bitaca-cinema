@@ -1,4 +1,5 @@
 # 🎬 Cinema de Capão Bonito
+
 ### Produções Audiovisuais Fomentadas pelas Leis Paulo Gustavo e Aldir Blanc
 
 <div align="center">
@@ -22,8 +23,8 @@
 - [Sobre o Projeto](#-sobre-o-projeto)
 - [🎯 Destaques - Projetos com Ficha Técnica](#-destaques---projetos-com-ficha-técnica-completa)
 - [📋 Catálogo Completo](#-catálogo-completo-lei-paulo-gustavo)
-  - [Lei Paulo Gustavo (24 Projetos)](#-catálogo-completo-lei-paulo-gustavo)
-  - [PNAB 2024 (Resultado Preliminar)](#-pnab-2024-resultado-preliminar)
+    - [Lei Paulo Gustavo (24 Projetos)](#-catálogo-completo-lei-paulo-gustavo)
+    - [PNAB 2024 (Resultado Preliminar)](#-pnab-2024-resultado-preliminar)
 - [🔍 Análise Cultural](#-análise-da-produção-audiovisual-local)
 - [📅 Como Acompanhar](#-como-acompanhar-os-lançamentos)
 - [📞 Contatos](#-como-acompanhar-os-lançamentos)
@@ -33,11 +34,14 @@
 
 ## 🌟 Sobre o Projeto
 
-Este repositório documenta o **maior investimento federal em cultura** já realizado em **Capão Bonito/SP**: **36 produções audiovisuais** financiadas por duas políticas públicas históricas - a **Lei Paulo Gustavo** (LPG) e a **Política Nacional Aldir Blanc** (PNAB).
+Este repositório documenta o **maior investimento federal em cultura** já realizado em **Capão Bonito/SP**: **36
+produções audiovisuais** financiadas por duas políticas públicas históricas - a **Lei Paulo Gustavo** (LPG) e a *
+*Política Nacional Aldir Blanc** (PNAB).
 
 ### 📜 Contexto Legal
 
 #### 🎭 Lei Paulo Gustavo (Lei Complementar nº 195/2022)
+
 - **Maior investimento direto no setor cultural da história do Brasil**
 - 💰 **Investimento em Capão Bonito:** R$ 429.204,92
 - Criada em resposta aos impactos da pandemia de Covid-19
@@ -47,6 +51,7 @@ Este repositório documenta o **maior investimento federal em cultura** já real
 - Foco: curtas-metragens, videoclipes, animações e documentários
 
 #### 🎪 Política Nacional Aldir Blanc (Lei nº 14.399/2022)
+
 - **Fomento contínuo por 5 anos** (2023-2027)
 - 💵 **PNAB 2024:** R$ 354.037,46
 - 💵 **PNAB 2025:** R$ 348.275,82
@@ -56,7 +61,10 @@ Este repositório documenta o **maior investimento federal em cultura** já real
 
 ### 🎯 Significado para Capão Bonito
 
-Capão Bonito, município paulista de **1.641 km²** conhecido por sua natureza preservada e turismo ecológico, vivencia um momento único de **transição cultural**: de financiamento esporádico para um **ecossistema audiovisual sustentável**. Este investimento histórico de **mais de R$ 1,1 milhão** permite que a cidade registre sua **identidade cultural** em formato cinematográfico.
+Capão Bonito, município paulista de **1.641 km²** conhecido por sua natureza preservada e turismo ecológico, vivencia um
+momento único de **transição cultural**: de financiamento esporádico para um **ecossistema audiovisual sustentável**.
+Este investimento histórico de **mais de R$ 1,1 milhão** permite que a cidade registre sua **identidade cultural** em
+formato cinematográfico.
 
 ### Status do Projeto (Out/2025)
 
@@ -436,32 +444,32 @@ Capão Bonito, município paulista de **1.641 km²** conhecido por sua natureza 
 
 ### 24 Projetos Audiovisuais Aprovados
 
-| # | Título | Proponente | Pontos | Categoria |
-|---|--------|------------|--------|-----------|
-| 1 | **Ponteia Viola** | Margarida Chaves de Oliveira Scuoteguazza | 238 🥇 | Doc Musical |
-| 2 | **Os Cascatinhas** | Flavio Francisco Ramos Pereira | 236 🥈 | Doc Musical |
-| 3 | **Reconstruction** | Bruna Maximovitz Kadoo Polississo | 234 🥉 | Audiovisual |
-| 4 | **A Crônica** | Micaelen de Oliveira Silva | 234 | Curta/Doc |
-| 5 | **Grupo Êre** | Luan Augusto da Costa Oliveira | 232 | Audiovisual |
-| 6 | **Pelas Ruas de Capão: Skate e Espaços Públicos** | Valdir dos Reis Junior | 230 | Documentário |
-| 7 | **Animação Memórias Vivas** | Jose Luiz Rodrigues | 228 | Animação |
-| 8 | **Amarelo, Vermelho, Azul** | Lucas Brener Andrade de Oliveira | 226 | Videoclipe |
-| 9 | **Versos Vivos de Nossa Cidade** | Agatha Fabiane Santiago da Paixão | 224 | Doc Poético |
-| 10 | **Vídeo Clipe** | Fabiano Domingues Rosa | 222 | Videoclipe |
-| 11 | **Memórias da Minha Terra** | Fausto Vieira de Camargo | 218 | Doc Etnográfico |
-| 12 | **Bonito do Meu Interior** | Carina Chaves Scuoteguazza | 195 | Curta Ficção |
-| 13 | **Arte Urbana** | Gabriel Felipe dos Santos Souza | 192 | Documentário |
-| 14 | **Cypher do Campeão** | Alcides de Souza Vieira | 190 | Videoclipe Hip-Hop |
-| 15 | **Preservação do Patrimônio Arbóreo** | Ane Samara Santiago da Paixão | 187 | Doc Ambiental |
-| 16 | **Capão Sustentável** | Dorival de Proença Junior | 182 | Doc Ambiental |
-| 17 | **Batalha do Capão** | Pedro Fernando da Silva Matos | 180 | Doc Hip-Hop |
-| 18 | **Abaixo das Árvores** | Danilo de Pontes Cacciacarro | 157 | Curta Ficção |
-| 19 | **Rastro da Serpente, a Rota da Aventura** | Elcio Shigueo Ueda | 155 | Doc Turismo |
-| 20 | **Roteiro do Milho** | Diego Fernandes Ferreira | 152 | Doc Gastronômico |
-| 21 | **A História do Rock de Capão Bonito** | Osvaldo Polississo | 150 | Doc Musical |
-| 22 | **1-Sala de Cinema** | Anderson Ferreira | 145 | Projeto |
-| 23 | **Padre Arlindo Veira** | Leandro de Mello Almeida | 140 | Doc Biográfico |
-| 24 | **Harmonias de Capão Bonito** | Nicolas Nascimento de Queiroz | 127 | Doc Musical |
+| #  | Título                                            | Proponente                                | Pontos | Categoria          |
+|----|---------------------------------------------------|-------------------------------------------|--------|--------------------|
+| 1  | **Ponteia Viola**                                 | Margarida Chaves de Oliveira Scuoteguazza | 238 🥇 | Doc Musical        |
+| 2  | **Os Cascatinhas**                                | Flavio Francisco Ramos Pereira            | 236 🥈 | Doc Musical        |
+| 3  | **Reconstruction**                                | Bruna Maximovitz Kadoo Polississo         | 234 🥉 | Audiovisual        |
+| 4  | **A Crônica**                                     | Micaelen de Oliveira Silva                | 234    | Curta/Doc          |
+| 5  | **Grupo Êre**                                     | Luan Augusto da Costa Oliveira            | 232    | Audiovisual        |
+| 6  | **Pelas Ruas de Capão: Skate e Espaços Públicos** | Valdir dos Reis Junior                    | 230    | Documentário       |
+| 7  | **Animação Memórias Vivas**                       | Jose Luiz Rodrigues                       | 228    | Animação           |
+| 8  | **Amarelo, Vermelho, Azul**                       | Lucas Brener Andrade de Oliveira          | 226    | Videoclipe         |
+| 9  | **Versos Vivos de Nossa Cidade**                  | Agatha Fabiane Santiago da Paixão         | 224    | Doc Poético        |
+| 10 | **Vídeo Clipe**                                   | Fabiano Domingues Rosa                    | 222    | Videoclipe         |
+| 11 | **Memórias da Minha Terra**                       | Fausto Vieira de Camargo                  | 218    | Doc Etnográfico    |
+| 12 | **Bonito do Meu Interior**                        | Carina Chaves Scuoteguazza                | 195    | Curta Ficção       |
+| 13 | **Arte Urbana**                                   | Gabriel Felipe dos Santos Souza           | 192    | Documentário       |
+| 14 | **Cypher do Campeão**                             | Alcides de Souza Vieira                   | 190    | Videoclipe Hip-Hop |
+| 15 | **Preservação do Patrimônio Arbóreo**             | Ane Samara Santiago da Paixão             | 187    | Doc Ambiental      |
+| 16 | **Capão Sustentável**                             | Dorival de Proença Junior                 | 182    | Doc Ambiental      |
+| 17 | **Batalha do Capão**                              | Pedro Fernando da Silva Matos             | 180    | Doc Hip-Hop        |
+| 18 | **Abaixo das Árvores**                            | Danilo de Pontes Cacciacarro              | 157    | Curta Ficção       |
+| 19 | **Rastro da Serpente, a Rota da Aventura**        | Elcio Shigueo Ueda                        | 155    | Doc Turismo        |
+| 20 | **Roteiro do Milho**                              | Diego Fernandes Ferreira                  | 152    | Doc Gastronômico   |
+| 21 | **A História do Rock de Capão Bonito**            | Osvaldo Polississo                        | 150    | Doc Musical        |
+| 22 | **1-Sala de Cinema**                              | Anderson Ferreira                         | 145    | Projeto            |
+| 23 | **Padre Arlindo Veira**                           | Leandro de Mello Almeida                  | 140    | Doc Biográfico     |
+| 24 | **Harmonias de Capão Bonito**                     | Nicolas Nascimento de Queiroz             | 127    | Doc Musical        |
 
 > 📌 **Fonte:** Documento oficial "RESULTADO FINAL COM NOTAS LPG - Edição 1303"
 
@@ -471,25 +479,25 @@ Capão Bonito, município paulista de **1.641 km²** conhecido por sua natureza 
 
 ### Projetos Aprovados (7)
 
-| # | Título | Proponente | Pontos | Status |
-|---|--------|------------|--------|--------|
-| 1 | **Ponteia Viola** | Margarida Chaves de Oliveira Scuoteguazza | 98 | ✅ Aprovado |
-| 2 | **Os Cascatinhas** | Flavio Francisco Ramos Pereira | 96 | ✅ Aprovado |
-| 3 | **Reconstruction** | Bruna Maximovitz Kadoo Polississo | 94 | ✅ Aprovado |
-| 4 | **A Crônica** | Micaelen de Oliveira Silva | 94 | ✅ Aprovado |
-| 5 | **Grupo Êre** | Luan Augusto da Costa Oliveira | 92 | ✅ Aprovado |
-| 6 | **Pelas Ruas de Capão: Skate e Espaços Públicos** | Valdir dos Reis Junior | 90 | ✅ Aprovado |
-| 7 | **Animação Memórias Vivas** | Jose Luiz Rodrigues | 88 | ✅ Aprovado |
+| # | Título                                            | Proponente                                | Pontos | Status     |
+|---|---------------------------------------------------|-------------------------------------------|--------|------------|
+| 1 | **Ponteia Viola**                                 | Margarida Chaves de Oliveira Scuoteguazza | 98     | ✅ Aprovado |
+| 2 | **Os Cascatinhas**                                | Flavio Francisco Ramos Pereira            | 96     | ✅ Aprovado |
+| 3 | **Reconstruction**                                | Bruna Maximovitz Kadoo Polississo         | 94     | ✅ Aprovado |
+| 4 | **A Crônica**                                     | Micaelen de Oliveira Silva                | 94     | ✅ Aprovado |
+| 5 | **Grupo Êre**                                     | Luan Augusto da Costa Oliveira            | 92     | ✅ Aprovado |
+| 6 | **Pelas Ruas de Capão: Skate e Espaços Públicos** | Valdir dos Reis Junior                    | 90     | ✅ Aprovado |
+| 7 | **Animação Memórias Vivas**                       | Jose Luiz Rodrigues                       | 88     | ✅ Aprovado |
 
 ### Projetos Suplentes (5)
 
-| # | Título | Proponente | Pontos | Status |
-|---|--------|------------|--------|--------|
-| 1 | **Amarelo, Vermelho, Azul** | Lucas Brener Andrade de Oliveira | 86 | 🟡 Suplente |
-| 2 | **Versos Vivos de Nossa Cidade** | Agatha Fabiane Santiago da Paixão | 84 | 🟡 Suplente |
-| 3 | **Vídeo Clipe** | Fabiano Domingues Rosa | 82 | 🟡 Suplente |
-| 4 | **Memórias da Minha Terra** | Fausto Vieira de Camargo | 78 | 🟡 Suplente |
-| 5 | **Bonito do Meu Interior** | Carina Chaves Scuoteguazza | 75 | 🟡 Suplente |
+| # | Título                           | Proponente                        | Pontos | Status      |
+|---|----------------------------------|-----------------------------------|--------|-------------|
+| 1 | **Amarelo, Vermelho, Azul**      | Lucas Brener Andrade de Oliveira  | 86     | 🟡 Suplente |
+| 2 | **Versos Vivos de Nossa Cidade** | Agatha Fabiane Santiago da Paixão | 84     | 🟡 Suplente |
+| 3 | **Vídeo Clipe**                  | Fabiano Domingues Rosa            | 82     | 🟡 Suplente |
+| 4 | **Memórias da Minha Terra**      | Fausto Vieira de Camargo          | 78     | 🟡 Suplente |
+| 5 | **Bonito do Meu Interior**       | Carina Chaves Scuoteguazza        | 75     | 🟡 Suplente |
 
 > ⚠️ **Atenção:** Resultado preliminar sujeito a alterações após fase de recursos
 
@@ -504,6 +512,7 @@ Capão Bonito, município paulista de **1.641 km²** conhecido por sua natureza 
 #### 1️⃣ 🏛️ Patrimônio e Memória (38%)
 
 **9 projetos** focados em preservação histórica e cultural:
+
 - Memórias da Minha Terra
 - Roteiro do Milho
 - Padre Arlindo Veira
@@ -513,33 +522,40 @@ Capão Bonito, município paulista de **1.641 km²** conhecido por sua natureza 
 - Reconstruction
 - Bonito do Meu Interior
 
-> **Insight:** Forte desejo comunitário de documentar raízes, personagens históricos e tradições locais para as futuras gerações.
+> **Insight:** Forte desejo comunitário de documentar raízes, personagens históricos e tradições locais para as futuras
+> gerações.
 
 #### 2️⃣ 🎵 Cultura Musical Diversificada (33%)
 
 **8 projetos** cobrindo múltiplos gêneros musicais:
 
 **Música Tradicional/Caipira:**
+
 - Ponteia Viola (viola caipira)
 - Os Cascatinhas (choro)
 
 **Rock:**
+
 - A História do Rock de Capão Bonito
 - Vídeo Clipe (rock/pop local)
 
 **Hip-Hop/Rap:**
+
 - Cypher do Campeão
 - Batalha do Capão
 
 **Diversos:**
+
 - Grupo Êre
 - Harmonias de Capão Bonito
 
-> **Insight:** Cena musical plural, do tradicional ao urbano contemporâneo, buscando visibilidade e registro via audiovisual.
+> **Insight:** Cena musical plural, do tradicional ao urbano contemporâneo, buscando visibilidade e registro via
+> audiovisual.
 
 #### 3️⃣ 🌳 Meio Ambiente e Espaço Urbano (29%)
 
 **7 projetos** sobre natureza, sustentabilidade e urbanismo:
+
 - Abaixo das Árvores
 - Preservação do Patrimônio Arbóreo
 - Rastro da Serpente, a Rota da Aventura
@@ -565,13 +581,14 @@ Capão Bonito, município paulista de **1.641 km²** conhecido por sua natureza 
 - **Formato predominante:** Pessoa Física (produtores independentes)
 - **Característica:** Cena emergente com artistas autônomos
 - **Núcleo estabelecido de alto desempenho:**
-  - **Margarida Scuoteguazza** - 1º lugar em LPG e PNAB
-  - **Flavio Ramos Pereira** - 2º lugar em LPG e PNAB
-  - **Valdir dos Reis Junior** - Aprovado em ambos editais
-  - **Jose Luiz Rodrigues** - Aprovado em ambos editais
-  - **Danilo Cacciacarro** - Único com filme já lançado (out/2025)
+    - **Margarida Scuoteguazza** - 1º lugar em LPG e PNAB
+    - **Flavio Ramos Pereira** - 2º lugar em LPG e PNAB
+    - **Valdir dos Reis Junior** - Aprovado em ambos editais
+    - **Jose Luiz Rodrigues** - Aprovado em ambos editais
+    - **Danilo Cacciacarro** - Único com filme já lançado (out/2025)
 
-> **Observação:** Recorrência dos mesmos proponentes indica formação de núcleo especializado em captação de recursos via editais públicos e expertise em produção audiovisual.
+> **Observação:** Recorrência dos mesmos proponentes indica formação de núcleo especializado em captação de recursos via
+> editais públicos e expertise em produção audiovisual.
 
 ---
 
@@ -593,21 +610,23 @@ https://capaobonito.sp.gov.br/
 #### 📱 Redes Sociais
 
 **Divisão de Cultura de Capão Bonito:**
+
 - Facebook: [@culturaa.cb](https://www.facebook.com/culturaa.cb/) (1.033+ seguidores)
 
 **Prefeitura de Capão Bonito:**
+
 - Instagram: [@prefeitura_cb](https://www.instagram.com/prefeitura_cb/)
 
 ### 📞 Contato Direto
 
 **Divisão Municipal de Cultura**
 
-| Informação | Detalhe |
-|------------|---------|
-| **Gestor** | Renato Heber de Almeida |
-| **E-mail** | cultura@capaobonito.sp.gov.br |
-| **Telefone** | (15) 3542-3553 |
-| **Endereço** | Capão Bonito/SP |
+| Informação   | Detalhe                       |
+|--------------|-------------------------------|
+| **Gestor**   | Renato Heber de Almeida       |
+| **E-mail**   | cultura@capaobonito.sp.gov.br |
+| **Telefone** | (15) 3542-3553                |
+| **Endereço** | Capão Bonito/SP               |
 
 ### 📅 Cronograma Estimado
 
@@ -626,9 +645,11 @@ https://capaobonito.sp.gov.br/
 
 ### Status da Documentação (Outubro 2025)
 
-Este projeto enfrenta um desafio comum em políticas públicas de fomento cultural: a **"lacuna da ficha técnica"** - gap entre execução administrativa e divulgação pública das obras.
+Este projeto enfrenta um desafio comum em políticas públicas de fomento cultural: a **"lacuna da ficha técnica"** - gap
+entre execução administrativa e divulgação pública das obras.
 
 #### ✅ O que está documentado:
+
 - Listas oficiais de projetos aprovados
 - Pontuações dos editais
 - Nomes dos proponentes
@@ -636,6 +657,7 @@ Este projeto enfrenta um desafio comum em políticas públicas de fomento cultur
 - Um filme já lançado e disponível
 
 #### ❌ O que ainda não está disponível publicamente:
+
 - Fichas técnicas detalhadas da maioria dos projetos
 - Sinopses oficiais
 - Cronogramas de produção
@@ -646,11 +668,13 @@ Este projeto enfrenta um desafio comum em políticas públicas de fomento cultur
 ### Por que isso acontece?
 
 A administração pública prioriza:
+
 1. **Legalidade do processo seletivo** (transparência nos critérios)
 2. **Prestação de contas financeira** (uso correto do dinheiro público)
 3. **Fiscalização da execução** (cumprimento de prazos e contrapartidas)
 
-A divulgação das **fichas técnicas e conteúdos artísticos** geralmente ocorre apenas durante/após lançamentos oficiais, exibições públicas, festivais e mostras.
+A divulgação das **fichas técnicas e conteúdos artísticos** geralmente ocorre apenas durante/após lançamentos oficiais,
+exibições públicas, festivais e mostras.
 
 ### 🔴 Impacto desta lacuna:
 
@@ -678,6 +702,7 @@ A divulgação das **fichas técnicas e conteúdos artísticos** geralmente ocor
 Criação de um **Repositório Cultural Digital** oficial contendo:
 
 **Para cada projeto financiado:**
+
 - ✅ Ficha técnica completa
 - ✅ Sinopse oficial
 - ✅ Cartaz e materiais de divulgação
@@ -688,6 +713,7 @@ Criação de um **Repositório Cultural Digital** oficial contendo:
 - ✅ Impacto social/educativo da obra
 
 **Benefícios:**
+
 - 📚 Preservação permanente da memória cultural
 - 🎓 Fonte de pesquisa para estudantes e acadêmicos
 - 💰 Maximização do retorno público sobre o investimento
@@ -704,6 +730,7 @@ Este é um projeto de documentação cultural independente e colaborativo.
 ### Formas de Contribuição
 
 #### 📝 Informações sobre Projetos
+
 - Fichas técnicas completas
 - Sinopses oficiais
 - Cartazes e materiais de divulgação
@@ -712,6 +739,7 @@ Este é um projeto de documentação cultural independente e colaborativo.
 - Fotos de bastidores e making-of
 
 #### 🔧 Correções e Atualizações
+
 - Correção de dados incorretos
 - Atualização de status dos projetos
 - Novos projetos aprovados
@@ -808,19 +836,23 @@ Obras a lançar até dez/2025:      ? (a confirmar)
 
 ### Por que só um filme está disponível?
 
-O processo de produção audiovisual leva tempo. Os recursos foram liberados em meados de 2024, e a maioria das produções tem prazo de execução de 12-24 meses. "Ainda que Nada Fosse Meu" foi excepcionalmente rápido, lançando em abril de 2025.
+O processo de produção audiovisual leva tempo. Os recursos foram liberados em meados de 2024, e a maioria das produções
+tem prazo de execução de 12-24 meses. "Ainda que Nada Fosse Meu" foi excepcionalmente rápido, lançando em abril de 2025.
 
 ### Onde posso assistir aos filmes?
 
-Por enquanto, apenas "Ainda que Nada Fosse Meu" está disponível em plataformas de streaming. Os demais projetos devem ser lançados gradualmente até o final de 2025 e início de 2026.
+Por enquanto, apenas "Ainda que Nada Fosse Meu" está disponível em plataformas de streaming. Os demais projetos devem
+ser lançados gradualmente até o final de 2025 e início de 2026.
 
 ### Posso usar os filmes em escolas?
 
-Sim! "Ainda que Nada Fosse Meu" é especialmente recomendado para uso educativo. Entre em contato com a Divisão de Cultura para informações sobre exibição pública e uso educacional das obras.
+Sim! "Ainda que Nada Fosse Meu" é especialmente recomendado para uso educativo. Entre em contato com a Divisão de
+Cultura para informações sobre exibição pública e uso educacional das obras.
 
 ### Como sei quando novos filmes são lançados?
 
-Siga as redes sociais da Divisão de Cultura de Capão Bonito e monitore este repositório, que será atualizado conforme novas informações surgirem.
+Siga as redes sociais da Divisão de Cultura de Capão Bonito e monitore este repositório, que será atualizado conforme
+novas informações surgirem.
 
 ### Posso colaborar com informações?
 
@@ -833,10 +865,12 @@ Sim! Contribuições são muito bem-vindas. Veja a seção "Como Contribuir" par
 Este projeto de documentação está sob a **Licença Creative Commons BY-SA 4.0**.
 
 ### Você pode:
+
 ✅ Compartilhar — copiar e redistribuir o material
 ✅ Adaptar — remixar, transformar e criar a partir do material
 
 ### Sob as condições:
+
 📝 **Atribuição** — Dê o crédito apropriado
 🔄 **CompartilhaIgual** — Distribua sob a mesma licença
 
