@@ -558,14 +558,15 @@ ul {
 }
 
 .filme-card__poster {
-  height: 200px;
-  background: linear-gradient(135deg, var(--vermelho-bitaca), var(--marrom-terra));
+  height: 220px;
+  background: linear-gradient(135deg, var(--vermelho-bitaca) 0%, var(--marrom-terra) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 4rem;
+  font-size: 4.5rem;
   position: relative;
   overflow: hidden;
+  transition: all 0.4s ease;
 }
 
 .filme-card__poster::before {
@@ -574,23 +575,62 @@ ul {
   inset: 0;
   background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
   opacity: 0.5;
+  transition: transform 0.6s ease;
+}
+
+.filme-card:hover .filme-card__poster::before {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.filme-card__poster i {
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s ease;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.filme-card:hover .filme-card__poster i {
+  transform: scale(1.1) rotate(-5deg);
 }
 
 .filme-card__body {
-  padding: 1.5rem;
+  padding: 1.75rem 1.5rem 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .filme-card__title {
   font-family: var(--font-bold);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 700;
   color: var(--vermelho-bitaca);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.filme-card:hover .filme-card__title {
+  color: var(--verde-folha);
 }
 
 .filme-card__diretor {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--marrom-terra);
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filme-card__diretor::before {
+  content: '👤';
+  font-size: 0.85rem;
+  opacity: 0.7;
 }
 
 .filme-card__badges {
@@ -601,42 +641,122 @@ ul {
 }
 
 .badge {
-  padding: 0.4rem 0.8rem;
-  border-radius: 15px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filme-card:hover .badge {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .badge-gold {
-  background: var(--amarelo-quente);
+  background: linear-gradient(135deg, #FFB700 0%, #FF8C00 100%);
   color: var(--preto);
 }
 
 .badge-silver {
-  background: #C0C0C0;
+  background: linear-gradient(135deg, #E8E8E8 0%, #C0C0C0 100%);
   color: var(--preto);
 }
 
 .badge-success {
-  background: var(--verde-folha);
+  background: linear-gradient(135deg, var(--verde-folha) 0%, #1a3d0d 100%);
   color: var(--branco);
 }
 
 .badge-warning {
-  background: var(--laranja-urbano);
+  background: linear-gradient(135deg, var(--laranja-urbano) 0%, #ff4500 100%);
   color: var(--branco);
 }
 
 .filme-card__sinopse {
   font-size: 0.9rem;
-  color: var(--preto);
-  line-height: 1.5;
+  color: var(--marrom-terra);
+  line-height: 1.7;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  transition: color 0.3s ease;
+  opacity: 0.9;
+}
+
+.filme-card:hover .filme-card__sinopse {
+  color: var(--preto);
+  opacity: 1;
+}
+
+/* ===== SKELETON LOADERS ===== */
+.filme-card.skeleton {
+  pointer-events: none;
+}
+
+.filme-card.skeleton .filme-card__poster {
+  background: linear-gradient(90deg, #e0e0e0 0%, #f0f0f0 50%, #e0e0e0 100%);
+  background-size: 200% 100%;
+  animation: skeletonWave 1.5s ease-in-out infinite;
+}
+
+.filme-card.skeleton .filme-card__poster i {
+  opacity: 0;
+}
+
+.skeleton-line {
+  height: 1.2rem;
+  background: linear-gradient(90deg, #e0e0e0 0%, #f0f0f0 50%, #e0e0e0 100%);
+  background-size: 200% 100%;
+  animation: skeletonWave 1.5s ease-in-out infinite;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+.skeleton-line--title {
+  height: 1.4rem;
+  width: 80%;
+}
+
+.skeleton-line--subtitle {
+  height: 0.9rem;
+  width: 60%;
+}
+
+.skeleton-line--text {
+  height: 0.9rem;
+  width: 100%;
+}
+
+.skeleton-line--short {
+  width: 70%;
+}
+
+.skeleton-badge {
+  display: inline-block;
+  height: 1.8rem;
+  width: 5rem;
+  background: linear-gradient(90deg, #e0e0e0 0%, #f0f0f0 50%, #e0e0e0 100%);
+  background-size: 200% 100%;
+  animation: skeletonWave 1.5s ease-in-out infinite;
+  border-radius: 20px;
+  margin-right: 0.5rem;
+}
+
+@keyframes skeletonWave {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 /* ===== TIMELINE (LEIS) ===== */

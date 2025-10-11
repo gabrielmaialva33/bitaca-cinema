@@ -87,7 +87,48 @@ function initScrollEffects() {
 
 // ===== GRID DE FILMES =====
 function initFilmesGrid() {
-  renderFilmes(filmesData);
+  // Mostrar skeletons inicialmente
+  showSkeletonCards(6);
+
+  // Simular loading (em produção, isso seria o carregamento real de dados)
+  setTimeout(() => {
+    renderFilmes(filmesData);
+  }, 800);
+}
+
+function showSkeletonCards(count = 6) {
+  const grid = document.getElementById('filmes-grid');
+  if (!grid) return;
+
+  grid.innerHTML = '';
+
+  for (let i = 0; i < count; i++) {
+    const skeleton = createSkeletonCard();
+    grid.appendChild(skeleton);
+  }
+}
+
+function createSkeletonCard() {
+  const card = document.createElement('div');
+  card.className = 'filme-card skeleton';
+
+  card.innerHTML = `
+    <div class="filme-card__poster">
+      <i class="ki-filled ki-video"></i>
+    </div>
+    <div class="filme-card__body">
+      <div class="skeleton-line skeleton-line--title"></div>
+      <div class="skeleton-line skeleton-line--subtitle"></div>
+      <div class="filme-card__badges">
+        <div class="skeleton-badge"></div>
+        <div class="skeleton-badge"></div>
+      </div>
+      <div class="skeleton-line skeleton-line--text"></div>
+      <div class="skeleton-line skeleton-line--text skeleton-line--short"></div>
+    </div>
+  `;
+
+  return card;
 }
 
 function renderFilmes(filmes) {
@@ -111,6 +152,46 @@ function renderFilmes(filmes) {
     const card = createFilmeCard(filme);
     grid.appendChild(card);
   });
+
+  // Inicializar lazy loading para os cards
+  initLazyLoading();
+}
+
+// ===== LAZY LOADING COM INTERSECTION OBSERVER =====
+function initLazyLoading() {
+  const cards = document.querySelectorAll('.filme-card:not(.skeleton)');
+
+  // Configuração do Intersection Observer
+  const observerOptions = {
+    root: null,
+    rootMargin: '50px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const card = entry.target;
+
+        // Adicionar classe para animação fade-in
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+
+        // Animar entrada do card
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 50);
+
+        // Parar de observar após carregar
+        observer.unobserve(card);
+      }
+    });
+  }, observerOptions);
+
+  // Observar todos os cards
+  cards.forEach(card => observer.observe(card));
 }
 
 function createFilmeCard(filme) {
