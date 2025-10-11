@@ -2356,6 +2356,25 @@ ul {
         width: 48px;
         height: 48px;
     }
+
+    /* Timeline (Leis) - empilhado vertical em mobile */
+    .timeline__connector {
+        display: none; /* Ocultar linha central em mobile */
+    }
+
+    .timeline__item {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+    }
+
+    .timeline__item--left,
+    .timeline__item--right {
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+    }
 }
 
 /* Tablet pequeno (481px - 768px) */
