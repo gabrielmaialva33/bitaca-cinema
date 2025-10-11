@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Embeddings - Bitaca Cinema</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #C41E3A;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    button {
+      background: #C41E3A;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    button:hover {
+      background: #a01830;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .progress {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f8f8f8;
+      border-radius: 6px;
+      display: none;
+    }
+    .progress.active {
+      display: block;
+    }
+    .log {
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      max-height: 400px;
+      overflow-y: auto;
+      background: #0a0a0a;
+      color: #0f0;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 15px;
+    }
+    .log-item {
+      margin: 4px 0;
+    }
+    .log-success { color: #4ade80; }
+    .log-error { color: #f87171; }
+    .log-warning { color: #fbbf24; }
+    .log-info { color: #60a5fa; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .stat-card {
+      background: #f0f9ff;
+      padding: 15px;
+      border-radius: 6px;
+      border-left: 4px solid #3b82f6;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+    }
+    .stat-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1e40af;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f0fdf4;
+      border-left: 4px solid #22c55e;
+      border-radius: 6px;
+      display: none;
+    }
+    .result.active {
+      display: block;
+    }
+    .download-btn {
+      background: #22c55e;
+      margin-top: 15px;
+    }
+    .download-btn:hover {
+      background: #16a34a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 Gerador de Embeddings</h1>
+    <p class="subtitle">Gera embeddings vetoriais das produções usando NVIDIA NIM API</p>
+
+    <div style="margin-bottom: 20px;">
+      <strong>Status:</strong> <span id="status" style="color: #666;">Pronto para iniciar</span>
+    </div>
+
+    <button id="start-btn" onclick="startGeneration()">
+      🚀 Gerar Embeddings
+    </button>
+    <button id="download-btn" onclick="downloadEmbeddings()" style="display: none;" class="download-btn">
+      💾 Baixar embeddings.json
+    </button>
+
+    <div class="stats" id="stats-container" style="display: none;">
+      <div class="stat-card">
+        <div class="stat-label">Total</div>
+        <div class="stat-value" id="total-count">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Processados</div>
+        <div class="stat-value" id="processed-count">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Sucesso</div>
+        <div class="stat-value" id="success-count">0</div>
+      </div>
+    </div>
+
+    <div class="progress" id="progress-container">
+      <div class="log" id="log"></div>
+    </div>
+
+    <div class="result" id="result-container">
+      <h3>✅ Embeddings Gerados com Sucesso!</h3>
+      <p>Tamanho: <strong id="file-size">0 MB</strong></p>
+      <p>Embeddings: <strong id="total-embeddings">0</strong></p>
+      <p>Dimensões: <strong>1024</strong> (NVIDIA nv-embedqa-e5-v5)</p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/chatbot/rag-setup.js"></script>
+
+  <script>
+    const API_KEY = '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';
+    let generatedEmbeddings = null;
+
+    function log(message, type = 'info') {
+      const logEl = document.getElementById('log');
+      const item = document.createElement('div');
+      item.className = `log-item log-${type}`;
+      item.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logEl.appendChild(item);
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    function updateStats(processed, success, total) {
+      document.getElementById('total-count').textContent = total;
+      document.getElementById('processed-count').textContent = processed;
+      document.getElementById('success-count').textContent = success;
+    }
+
+    async function startGeneration() {
+      const startBtn = document.getElementById('start-btn');
+      const downloadBtn = document.getElementById('download-btn');
+      const progressContainer = document.getElementById('progress-container');
+      const statsContainer = document.getElementById('stats-container');
+      const resultContainer = document.getElementById('result-container');
+      const statusEl = document.getElementById('status');
+
+      // Reset
+      startBtn.disabled = true;
+      downloadBtn.style.display = 'none';
+      progressContainer.classList.add('active');
+      statsContainer.style.display = 'grid';
+      resultContainer.classList.remove('active');
+      document.getElementById('log').innerHTML = '';
+
+      statusEl.textContent = 'Gerando embeddings...';
+      statusEl.style.color = '#f59e0b';
+
+      log('🚀 Iniciando geração de embeddings...', 'info');
+      log(`📊 Total de produções: ${filmesData.length}`, 'info');
+
+      const generator = new EmbeddingGenerator(API_KEY);
+      let processed = 0;
+      let success = 0;
+
+      try {
+        const embeddings = await generator.generateAllEmbeddings(
+          filmesData,
+          (current, total, titulo) => {
+            processed = current;
+            log(`[${current}/${total}] ✅ ${titulo}`, 'success');
+            updateStats(current, success + 1, total);
+            success++;
+          }
+        );
+
+        generatedEmbeddings = embeddings;
+
+        const json = generator.exportEmbeddings(embeddings);
+        const sizeInMB = (json.length / 1024 / 1024).toFixed(2);
+
+        log('✅ Todos os embeddings foram gerados!', 'success');
+        log(`📦 Tamanho total: ${sizeInMB} MB`, 'info');
+
+        // Show result
+        document.getElementById('file-size').textContent = `${sizeInMB} MB`;
+        document.getElementById('total-embeddings').textContent = embeddings.length;
+        resultContainer.classList.add('active');
+
+        downloadBtn.style.display = 'inline-block';
+        statusEl.textContent = 'Concluído!';
+        statusEl.style.color = '#22c55e';
+
+      } catch (error) {
+        log(`❌ Erro: ${error.message}`, 'error');
+        statusEl.textContent = 'Erro';
+        statusEl.style.color = '#ef4444';
+      }
+
+      startBtn.disabled = false;
+    }
+
+    function downloadEmbeddings() {
+      if (!generatedEmbeddings) {
+        alert('Nenhum embedding para baixar!');
+        return;
+      }
+
+      const generator = new EmbeddingGenerator(API_KEY);
+      const json = generator.exportEmbeddings(generatedEmbeddings);
+
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'embeddings.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      log('💾 Arquivo baixado: embeddings.json', 'success');
+      alert('Arquivo embeddings.json baixado!\n\n📂 Salve em: assets/data/embeddings.json');
+    }
+  </script>
+</body>
+</html>

@@ -22,6 +22,7 @@
 
     <!-- Styles (fonts importados no CSS) -->
     <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="assets/css/chatbot.css" rel="stylesheet">
 
     <!-- KeenIcons (Metronic) -->
     <link href="assets/vendors/keenicons/styles.bundle.css" rel="stylesheet">
@@ -607,10 +608,102 @@
     <i class="ki-filled ki-arrow-up"></i>
 </button>
 
+<!-- ===== BITACA AI CHATBOT WIDGET ===== -->
+<div class="bitaca-chatbot" id="bitaca-chatbot">
+  <!-- Floating Action Button -->
+  <button class="chatbot-fab" id="chatbot-fab" aria-label="Abrir assistente Bitaca AI">
+    <svg class="chatbot-fab-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+    </svg>
+    <span class="chatbot-fab-badge" id="chatbot-badge">1</span>
+  </button>
+
+  <!-- Chat Window -->
+  <div class="chatbot-container" id="chatbot-container">
+    <!-- Header -->
+    <div class="chatbot-header">
+      <div class="chatbot-header-avatar">
+        🎬
+      </div>
+      <div class="chatbot-header-info">
+        <h4 class="chatbot-header-title">Bitaca AI</h4>
+        <p class="chatbot-header-status">
+          <span class="status-indicator"></span>
+          Online
+        </p>
+      </div>
+      <div class="chatbot-header-actions">
+        <button class="chatbot-action-btn" id="clear-chat" title="Limpar conversa">
+          <i class="ki-outline ki-trash"></i>
+        </button>
+        <button class="chatbot-action-btn" id="close-chat" title="Fechar">
+          ×
+        </button>
+      </div>
+    </div>
+
+    <!-- Messages Area -->
+    <div class="chatbot-messages" id="chatbot-messages">
+      <!-- Mensagens serão adicionadas via JS -->
+    </div>
+
+    <!-- Sugestões Rápidas -->
+    <div class="quick-suggestions">
+      <button class="suggestion-chip" data-suggestion="Quais produções são sobre música?">
+        🎵 Produções Musicais
+      </button>
+      <button class="suggestion-chip" data-suggestion="O que é a Lei Paulo Gustavo?">
+        📖 Lei Paulo Gustavo
+      </button>
+      <button class="suggestion-chip" data-suggestion="Recomendar produções sobre patrimônio">
+        🏛️ Patrimônio
+      </button>
+    </div>
+
+    <!-- Typing Indicator -->
+    <div class="typing-indicator" id="typing-indicator" style="display: none;">
+      <div class="message-avatar">🎬</div>
+      <div class="typing-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Input Area -->
+    <div class="chatbot-input-area">
+      <div class="input-wrapper">
+        <textarea
+          class="chatbot-input"
+          id="chatbot-input"
+          placeholder="Digite sua mensagem..."
+          rows="1"
+          maxlength="500"
+        ></textarea>
+        <button class="input-send-btn" id="send-btn" disabled>
+          <i class="ki-filled ki-send"></i>
+        </button>
+      </div>
+      <div class="input-footer">
+        <span class="powered-by">
+          Powered by <strong>NVIDIA NIM</strong> 🚀
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/main.js"></script>
+
+<!-- Chatbot Scripts -->
+<script src="assets/js/chatbot/intent-detector.js"></script>
+<script src="assets/js/chatbot/streaming-handler.js"></script>
+<script src="assets/js/chatbot/rag-search.js"></script>
+<script src="assets/js/chatbot/bitaca-ai-chatbot.js"></script>
+<script src="assets/js/chatbot/main-integration.js"></script>
 
 <!-- KeenIcons já inicializado via CSS -->
 </body>
