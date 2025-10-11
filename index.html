@@ -559,7 +559,7 @@
 <div class="recorder-modal" id="recorder-modal">
     <div class="recorder-modal__overlay"></div>
     <div class="recorder-modal__content">
-        <button class="recorder-modal__close" data-action="close-recorder" aria-label="Fechar">
+        <button aria-label="Fechar" class="recorder-modal__close" data-action="close-recorder">
             <i class="ki-filled ki-cross"></i>
         </button>
 
@@ -590,9 +590,9 @@
         </div>
 
         <!-- Ready / Recording State -->
-        <div class="recorder-body" data-state="ready" style="display: none;" data-display="block">
+        <div class="recorder-body" data-display="block" data-state="ready" style="display: none;">
             <div class="video-container">
-                <video id="camera-preview" autoplay playsinline muted></video>
+                <video autoplay id="camera-preview" muted playsinline></video>
                 <div class="recording-indicator" style="display: none;">
                     <span class="rec-dot"></span>
                     <span class="rec-text">REC</span>
@@ -609,7 +609,7 @@
         <!-- Recording State (shown when recording) -->
         <div data-state="recording" style="display: none;">
             <div class="video-container">
-                <video id="camera-preview-rec" autoplay playsinline muted></video>
+                <video autoplay id="camera-preview-rec" muted playsinline></video>
                 <div class="recording-indicator">
                     <span class="rec-dot"></span>
                     <span class="rec-text">REC</span>
@@ -633,7 +633,7 @@
         <!-- Preview State -->
         <div class="recorder-body" data-state="preview" style="display: none;">
             <div class="video-container">
-                <video id="recorded-preview" controls playsinline></video>
+                <video controls id="recorded-preview" playsinline></video>
             </div>
             <div class="recorder-controls">
                 <button class="btn btn-secondary" id="btn-retry">
@@ -755,87 +755,87 @@
 
 <!-- ===== BITACA AI CHATBOT WIDGET ===== -->
 <div class="bitaca-chatbot" id="bitaca-chatbot">
-  <!-- Floating Action Button -->
-  <button class="chatbot-fab" id="chatbot-fab" aria-label="Abrir assistente Bitaca AI">
-    <svg class="chatbot-fab-icon" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
-    </svg>
-    <span class="chatbot-fab-badge" id="chatbot-badge">1</span>
-  </button>
+    <!-- Floating Action Button -->
+    <button aria-label="Abrir assistente Bitaca AI" class="chatbot-fab" id="chatbot-fab">
+        <svg class="chatbot-fab-icon" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+        </svg>
+        <span class="chatbot-fab-badge" id="chatbot-badge">1</span>
+    </button>
 
-  <!-- Chat Window -->
-  <div class="chatbot-container" id="chatbot-container">
-    <!-- Header -->
-    <div class="chatbot-header">
-      <div class="chatbot-header-avatar">
-        🎬
-      </div>
-      <div class="chatbot-header-info">
-        <h4 class="chatbot-header-title">Bitaca AI</h4>
-        <p class="chatbot-header-status">
-          <span class="status-indicator"></span>
-          Online
-        </p>
-      </div>
-      <div class="chatbot-header-actions">
-        <button class="chatbot-action-btn" id="clear-chat" title="Limpar conversa">
-          <i class="ki-outline ki-trash"></i>
-        </button>
-        <button class="chatbot-action-btn" id="close-chat" title="Fechar">
-          ×
-        </button>
-      </div>
-    </div>
+    <!-- Chat Window -->
+    <div class="chatbot-container" id="chatbot-container">
+        <!-- Header -->
+        <div class="chatbot-header">
+            <div class="chatbot-header-avatar">
+                🎬
+            </div>
+            <div class="chatbot-header-info">
+                <h4 class="chatbot-header-title">Bitaca AI</h4>
+                <p class="chatbot-header-status">
+                    <span class="status-indicator"></span>
+                    Online
+                </p>
+            </div>
+            <div class="chatbot-header-actions">
+                <button class="chatbot-action-btn" id="clear-chat" title="Limpar conversa">
+                    <i class="ki-outline ki-trash"></i>
+                </button>
+                <button class="chatbot-action-btn" id="close-chat" title="Fechar">
+                    ×
+                </button>
+            </div>
+        </div>
 
-    <!-- Messages Area -->
-    <div class="chatbot-messages" id="chatbot-messages">
-      <!-- Mensagens serão adicionadas via JS -->
-    </div>
+        <!-- Messages Area -->
+        <div class="chatbot-messages" id="chatbot-messages">
+            <!-- Mensagens serão adicionadas via JS -->
+        </div>
 
-    <!-- Sugestões Rápidas -->
-    <div class="quick-suggestions">
-      <button class="suggestion-chip" data-suggestion="Quais produções são sobre música?">
-        🎵 Produções Musicais
-      </button>
-      <button class="suggestion-chip" data-suggestion="O que é a Lei Paulo Gustavo?">
-        📖 Lei Paulo Gustavo
-      </button>
-      <button class="suggestion-chip" data-suggestion="Recomendar produções sobre patrimônio">
-        🏛️ Patrimônio
-      </button>
-    </div>
+        <!-- Sugestões Rápidas -->
+        <div class="quick-suggestions">
+            <button class="suggestion-chip" data-suggestion="Quais produções são sobre música?">
+                🎵 Produções Musicais
+            </button>
+            <button class="suggestion-chip" data-suggestion="O que é a Lei Paulo Gustavo?">
+                📖 Lei Paulo Gustavo
+            </button>
+            <button class="suggestion-chip" data-suggestion="Recomendar produções sobre patrimônio">
+                🏛️ Patrimônio
+            </button>
+        </div>
 
-    <!-- Typing Indicator -->
-    <div class="typing-indicator" id="typing-indicator" style="display: none;">
-      <div class="message-avatar">🎬</div>
-      <div class="typing-dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
+        <!-- Typing Indicator -->
+        <div class="typing-indicator" id="typing-indicator" style="display: none;">
+            <div class="message-avatar">🎬</div>
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
 
-    <!-- Input Area -->
-    <div class="chatbot-input-area">
-      <div class="input-wrapper">
+        <!-- Input Area -->
+        <div class="chatbot-input-area">
+            <div class="input-wrapper">
         <textarea
-          class="chatbot-input"
-          id="chatbot-input"
-          placeholder="Digite sua mensagem..."
-          rows="1"
-          maxlength="500"
+                class="chatbot-input"
+                id="chatbot-input"
+                maxlength="500"
+                placeholder="Digite sua mensagem..."
+                rows="1"
         ></textarea>
-        <button class="input-send-btn" id="send-btn" disabled>
-          <i class="ki-filled ki-send"></i>
-        </button>
-      </div>
-      <div class="input-footer">
+                <button class="input-send-btn" disabled id="send-btn">
+                    <i class="ki-filled ki-send"></i>
+                </button>
+            </div>
+            <div class="input-footer">
         <span class="powered-by">
           Powered by <strong>NVIDIA NIM</strong> 🚀
         </span>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Scripts -->

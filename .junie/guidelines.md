@@ -2,9 +2,12 @@
 
 ## Project Overview
 
-Bitaca Cinema is a vanilla HTML/CSS/JavaScript web application showcasing audiovisual productions from Capão Bonito/SP funded by Lei Paulo Gustavo and PNAB. The project features an AI-powered chatbot using NVIDIA NIM API with RAG (Retrieval Augmented Generation) capabilities.
+Bitaca Cinema is a vanilla HTML/CSS/JavaScript web application showcasing audiovisual productions from Capão Bonito/SP
+funded by Lei Paulo Gustavo and PNAB. The project features an AI-powered chatbot using NVIDIA NIM API with RAG (
+Retrieval Augmented Generation) capabilities.
 
 **Key Technologies:**
+
 - Vanilla JavaScript (ES6+)
 - HTML5 / CSS3
 - Chart.js (via CDN)
@@ -17,7 +20,8 @@ Bitaca Cinema is a vanilla HTML/CSS/JavaScript web application showcasing audiov
 
 ### No Build System Required
 
-This is a **vanilla JavaScript project** with no build tools or package managers. Files are served directly from the filesystem or via a simple HTTP server.
+This is a **vanilla JavaScript project** with no build tools or package managers. Files are served directly from the
+filesystem or via a simple HTTP server.
 
 ### Project Structure
 
@@ -48,6 +52,7 @@ bitaca-cinema/
 ### Running the Project
 
 **Option 1: Simple HTTP Server (Recommended)**
+
 ```bash
 # Python 3
 python3 -m http.server 8000
@@ -75,6 +80,7 @@ Install the "Live Server" extension and right-click `index.html` → "Open with 
 The chatbot requires an NVIDIA NIM API key to function.
 
 **API Details:**
+
 - **Endpoint:** `https://integrate.api.nvidia.com/v1/chat/completions`
 - **Model:** `qwen/qwen3-next-80b-a3b-thinking`
 - **Authentication:** Bearer token
@@ -87,6 +93,7 @@ const chatbot = new BitacaAIChatbot('YOUR_API_KEY_HERE');
 ```
 
 **To set up:**
+
 1. Obtain an API key from [NVIDIA Build](https://build.nvidia.com/)
 2. Replace `'YOUR_API_KEY_HERE'` in `main-integration.js`
 3. Never commit API keys to version control
@@ -98,6 +105,7 @@ The chatbot uses vector embeddings for semantic search over production data.
 **Embeddings File:** `assets/data/embeddings.json`
 
 **Structure:**
+
 ```json
 [
   {
@@ -110,13 +118,15 @@ The chatbot uses vector embeddings for semantic search over production data.
 ```
 
 **To generate embeddings:**
+
 1. Open `generate-embeddings.html` in a browser
 2. Ensure you have a valid NVIDIA API key configured
 3. The page will generate embeddings from `filmesData` in `data.js`
 4. Download the generated `embeddings.json` to `assets/data/`
 
 **Fallback Behavior:**
-If `embeddings.json` is not found, the chatbot will still function but RAG search will be disabled. The chatbot logs a warning: "Embeddings file not found. RAG disabled."
+If `embeddings.json` is not found, the chatbot will still function but RAG search will be disabled. The chatbot logs a
+warning: "Embeddings file not found. RAG disabled."
 
 ---
 
@@ -129,14 +139,17 @@ This project uses simple, dependency-free Node.js tests for data validation. No 
 ### Running Tests
 
 **Prerequisites:**
+
 - Node.js installed (any recent version)
 
 **Execute tests:**
+
 ```bash
 node test-data.js
 ```
 
 **Expected output:**
+
 ```
 🧪 Running Bitaca Cinema Data Tests
 ==================================================
@@ -195,12 +208,14 @@ test('Your test description', () => {
 ### Test Coverage
 
 Current tests validate:
+
 - Data structure integrity (array type, non-empty)
 - Required field presence (id, titulo, diretor, genero, status)
 - Data constraints (unique IDs, valid status values)
 - Data quality (non-empty strings for critical fields)
 
 **Recommended additional tests:**
+
 - Chatbot intent detection accuracy
 - RAG search relevance
 - UI interaction flows (using browser automation tools)
@@ -213,12 +228,14 @@ Current tests validate:
 ### JavaScript Patterns
 
 **Module Organization:**
+
 - Each feature has its own function scope
 - No global namespace pollution
 - Event listeners attached in init functions
 - DOMContentLoaded initialization pattern
 
 **Example structure:**
+
 ```javascript
 document.addEventListener('DOMContentLoaded', function () {
     initNavigation();
@@ -276,6 +293,7 @@ const filmesData = [
 ```
 
 **Accessing Data:**
+
 - In browser: `window.filmesData`
 - In Node tests: Mock `global.window` and eval the file
 
@@ -284,33 +302,34 @@ const filmesData = [
 **Component Breakdown:**
 
 1. **BitacaAIChatbot** (main controller)
-   - Orchestrates all chatbot components
-   - Manages conversation history
-   - Coordinates RAG and API calls
+    - Orchestrates all chatbot components
+    - Manages conversation history
+    - Coordinates RAG and API calls
 
 2. **IntentDetector**
-   - Classifies user intent
-   - Determines if RAG search is needed
-   - Returns intent type and confidence
+    - Classifies user intent
+    - Determines if RAG search is needed
+    - Returns intent type and confidence
 
 3. **StreamingHandler**
-   - Manages streaming responses from NVIDIA API
-   - Handles SSE (Server-Sent Events) parsing
-   - Yields tokens as they arrive
+    - Manages streaming responses from NVIDIA API
+    - Handles SSE (Server-Sent Events) parsing
+    - Yields tokens as they arrive
 
 4. **VectorSearch** (in rag-search.js)
-   - Performs semantic similarity search
-   - Hybrid search (vector + keyword)
-   - Cosine similarity calculations
+    - Performs semantic similarity search
+    - Hybrid search (vector + keyword)
+    - Cosine similarity calculations
 
 5. **main-integration.js**
-   - DOM event handlers
-   - UI updates (message rendering, typing indicators)
-   - User interaction management
+    - DOM event handlers
+    - UI updates (message rendering, typing indicators)
+    - User interaction management
 
 ### API Integration Best Practices
 
 **Error Handling:**
+
 ```javascript
 try {
   const response = await fetch(apiEndpoint, options);
@@ -325,6 +344,7 @@ try {
 ```
 
 **Streaming Pattern:**
+
 ```javascript
 async *streamResponse(messages) {
   const reader = response.body.getReader();
@@ -354,6 +374,7 @@ async *streamResponse(messages) {
 ```
 
 **Key CSS Files:**
+
 - `styles.css` - Main site styles (grid, navigation, cards)
 - `chatbot.css` - Isolated chatbot styles
 
@@ -365,6 +386,7 @@ async *streamResponse(messages) {
 - Alt text for images (when applicable)
 
 Example:
+
 ```html
 <button 
   class="chatbot-fab" 
@@ -408,6 +430,7 @@ Example:
 
 **Browser Console:**
 The chatbot logs detailed information:
+
 ```
 🤖 Initializing Bitaca AI Chatbot...
 ✅ RAG initialized with 23 embeddings
@@ -419,19 +442,19 @@ The chatbot logs detailed information:
 **Common Issues:**
 
 1. **Chatbot not responding:**
-   - Check API key is valid
-   - Verify network tab for API errors
-   - Check browser console for JavaScript errors
+    - Check API key is valid
+    - Verify network tab for API errors
+    - Check browser console for JavaScript errors
 
 2. **RAG not working:**
-   - Ensure `embeddings.json` exists in `assets/data/`
-   - Check file is valid JSON
-   - Verify embeddings were generated with correct model
+    - Ensure `embeddings.json` exists in `assets/data/`
+    - Check file is valid JSON
+    - Verify embeddings were generated with correct model
 
 3. **Data not displaying:**
-   - Verify `filmesData` is properly defined in `data.js`
-   - Check for JavaScript syntax errors
-   - Ensure file is loaded before `main.js`
+    - Verify `filmesData` is properly defined in `data.js`
+    - Check for JavaScript syntax errors
+    - Ensure file is loaded before `main.js`
 
 ---
 
@@ -447,6 +470,7 @@ This project can be deployed to any static hosting service:
 - **AWS S3 + CloudFront:** Upload as static website
 
 **Pre-deployment checklist:**
+
 1. ✅ Remove or obfuscate API keys
 2. ✅ Verify all asset paths are relative
 3. ✅ Test on local server before deploying
@@ -456,6 +480,7 @@ This project can be deployed to any static hosting service:
 ### Environment-Specific Configuration
 
 For production, consider:
+
 - Moving API key to environment variable or backend proxy
 - Implementing rate limiting for API calls
 - Minifying CSS/JS files (optional, currently not minified)
@@ -468,31 +493,32 @@ For production, consider:
 **Potential Enhancements:**
 
 1. **Testing:**
-   - Add browser automation tests (Playwright/Cypress)
-   - API mocking for chatbot tests
-   - Visual regression testing
+    - Add browser automation tests (Playwright/Cypress)
+    - API mocking for chatbot tests
+    - Visual regression testing
 
 2. **Performance:**
-   - Lazy load images
-   - Implement service worker for offline support
-   - Consider code splitting for chatbot modules
+    - Lazy load images
+    - Implement service worker for offline support
+    - Consider code splitting for chatbot modules
 
 3. **Features:**
-   - User authentication for personalized recommendations
-   - Production rating/review system
-   - Social sharing improvements
-   - Multi-language support
+    - User authentication for personalized recommendations
+    - Production rating/review system
+    - Social sharing improvements
+    - Multi-language support
 
 4. **Infrastructure:**
-   - Backend API for secure key management
-   - Database for dynamic production data
-   - Admin panel for content management
+    - Backend API for secure key management
+    - Database for dynamic production data
+    - Admin panel for content management
 
 ---
 
 ## Contact & Support
 
 For questions about this codebase:
+
 - Review the detailed `README.md` for project context
 - Check browser console logs for debugging information
 - Examine individual JS files - they contain inline comments

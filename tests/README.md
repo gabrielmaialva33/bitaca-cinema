@@ -10,17 +10,20 @@ pnpm playwright:install
 ## Executar
 
 ### Testes E2E Local
+
 ```bash
 pnpm serve  # Terminal 1
 pnpm test:e2e  # Terminal 2
 ```
 
 ### Testes E2E Produção (GitHub Pages)
+
 ```bash
 pnpm test:e2e:production
 ```
 
 ### Testes com UI
+
 ```bash
 pnpm test:e2e:ui
 ```

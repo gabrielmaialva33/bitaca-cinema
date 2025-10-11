@@ -79,9 +79,9 @@ http://localhost:3000/docs
 **Setup único** (primeira vez):
 
 1. Configure os GitHub Secrets (ver [../.github/SECRETS.md](../.github/SECRETS.md)):
-   - `SSH_PRIVATE_KEY` - Chave SSH para acessar o servidor
-   - `NVIDIA_API_KEY` - Chave da API NVIDIA NIM
-   - `ALLOWED_ORIGINS` - Origens CORS permitidas
+    - `SSH_PRIVATE_KEY` - Chave SSH para acessar o servidor
+    - `NVIDIA_API_KEY` - Chave da API NVIDIA NIM
+    - `ALLOWED_ORIGINS` - Origens CORS permitidas
 
 2. Faça push para a branch `main`:
    ```bash
@@ -269,13 +269,14 @@ O Docker tem health checks configurados:
 
 ```yaml
 healthcheck:
-  test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+  test: [ "CMD", "curl", "-f", "http://localhost:3000/health" ]
   interval: 30s
   timeout: 10s
   retries: 3
 ```
 
 Status:
+
 ```bash
 docker compose ps
 # api: healthy
@@ -291,6 +292,7 @@ docker compose ps
 Health check do servidor.
 
 **Resposta:**
+
 ```json
 {
   "status": "ok",
@@ -305,10 +307,14 @@ Health check do servidor.
 Chat completions com streaming SSE.
 
 **Request:**
+
 ```json
 {
   "messages": [
-    {"role": "user", "content": "Olá, me conte sobre o Bitaca Cinema"}
+    {
+      "role": "user",
+      "content": "Olá, me conte sobre o Bitaca Cinema"
+    }
   ],
   "temperature": 0.7,
   "max_tokens": 500,
@@ -318,6 +324,7 @@ Chat completions com streaming SSE.
 ```
 
 **Response (SSE):**
+
 ```
 data: {"id":"...", "choices":[{"delta":{"content":"Olá"}}]}
 
@@ -331,6 +338,7 @@ data: [DONE]
 Gerar embeddings de texto.
 
 **Request:**
+
 ```json
 {
   "input": "Bitaca Cinema é um projeto cultural",
@@ -339,11 +347,16 @@ Gerar embeddings de texto.
 ```
 
 **Response:**
+
 ```json
 {
   "data": [
     {
-      "embedding": [0.123, -0.456, ...],
+      "embedding": [
+        0.123,
+        -0.456,
+        ...
+      ],
       "index": 0
     }
   ],
@@ -358,11 +371,13 @@ Gerar embeddings de texto.
 ### Arquivos de Configuração
 
 **nginx/nginx.conf** - Configuração principal
+
 - 4 worker processes (1 por CPU core)
 - Gzip habilitado
 - Rate limiting configurado
 
 **nginx/conf.d/bitaca-api.conf** - Site config
+
 - Upstream com FastAPI
 - Cloudflare real IP detection
 - Rate limiting (60 req/min API, 100 req/min global)
@@ -438,13 +453,13 @@ curl -X POST http://localhost:3000/api/chat/completions \
 
 ## Performance
 
-| Métrica | Valor |
-|---------|-------|
-| Req/s (4 workers) | ~5,000-10,000 |
-| Latência média | ~50-100ms |
-| Uso de memória | ~200MB |
-| Cold start | ~500ms |
-| Conexões simultâneas | ~10,000+ |
+| Métrica              | Valor         |
+|----------------------|---------------|
+| Req/s (4 workers)    | ~5,000-10,000 |
+| Latência média       | ~50-100ms     |
+| Uso de memória       | ~200MB        |
+| Cold start           | ~500ms        |
+| Conexões simultâneas | ~10,000+      |
 
 ---
 
@@ -537,6 +552,7 @@ MIT License - Bitaca Cinema Project
 ## Autor
 
 **Gabriel Maia**
+
 - GitHub: [@gabrielmaialva33](https://github.com/gabrielmaialva33)
 - Projeto: Bitaca Cinema - Capão Bonito/SP
 

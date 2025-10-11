@@ -15,12 +15,14 @@ Para que o deploy automático do backend funcione, você precisa configurar os s
 **Descrição**: Chave SSH privada para acessar o servidor cinewinx
 
 **Como obter**:
+
 ```bash
 # No seu computador local (onde já tem acesso SSH ao servidor)
 cat ~/.ssh/id_rsa
 ```
 
 **Importante**:
+
 - Copie TODO o conteúdo, incluindo as linhas `-----BEGIN OPENSSH PRIVATE KEY-----` e `-----END OPENSSH PRIVATE KEY-----`
 - Se você usa uma chave diferente (id_ed25519, por exemplo), use essa
 - A chave pública correspondente já deve estar em `root@162.12.204.30:~/.ssh/authorized_keys`
@@ -30,11 +32,13 @@ cat ~/.ssh/id_rsa
 **Descrição**: Chave de API da NVIDIA NIM
 
 **Como obter**:
+
 - Acesse: https://build.nvidia.com/
 - Faça login e gere uma API key
 - Copie a chave que começa com `nvapi-`
 
 **Formato**:
+
 ```
 nvapi-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
@@ -44,6 +48,7 @@ nvapi-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 **Descrição**: Origens permitidas para CORS
 
 **Valor padrão**:
+
 ```
 https://gabrielmaialva33.github.io,http://localhost:8000,https://abitaca.com.br
 ```
@@ -56,9 +61,9 @@ Após adicionar os secrets, você pode verificar se estão configurados:
 
 1. Vá para **Settings** → **Secrets and variables** → **Actions**
 2. Você deve ver:
-   - ✅ SSH_PRIVATE_KEY
-   - ✅ NVIDIA_API_KEY
-   - ✅ ALLOWED_ORIGINS (opcional)
+    - ✅ SSH_PRIVATE_KEY
+    - ✅ NVIDIA_API_KEY
+    - ✅ ALLOWED_ORIGINS (opcional)
 
 ## Testando o Deploy
 
@@ -73,7 +78,8 @@ Depois de configurar os secrets:
 
 2. Acesse **Actions** no GitHub para ver o workflow rodando
 
-3. O deploy será executado automaticamente sempre que você fizer push para `main` e modificar arquivos na pasta `backend/`
+3. O deploy será executado automaticamente sempre que você fizer push para `main` e modificar arquivos na pasta
+   `backend/`
 
 ## Deploy Manual
 
