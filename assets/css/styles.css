@@ -629,9 +629,10 @@ ul {
 
 .filmes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
     gap: 2rem;
     padding: 1rem 0;
+    align-items: stretch; /* Garante alturas iguais */
 }
 
 .filme-card {
@@ -645,6 +646,10 @@ ul {
     cursor: pointer;
     border-top: 4px solid var(--verde-folha);
     position: relative;
+    /* Flex para garantir alturas iguais */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .filme-card::before {
@@ -778,6 +783,10 @@ ul {
     padding: 1.75rem 1.5rem 1.5rem;
     position: relative;
     z-index: 1;
+    /* Flex para garantir distribuição uniforme de altura */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Indicador "Ver Mais" no hover */
@@ -927,6 +936,8 @@ ul {
     transition: all 0.4s ease;
     opacity: 0.9;
     max-height: 4.5em; /* ~3 linhas */
+    /* Ocupa espaço restante para equalizar altura */
+    flex: 1;
 }
 
 .filme-card:hover .filme-card__sinopse {
@@ -1124,9 +1135,10 @@ ul {
 
 .eixos-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 2.5rem;
     margin-bottom: 4rem;
+    align-items: stretch; /* Garante alturas iguais */
 }
 
 .eixo-card {
@@ -1141,6 +1153,10 @@ ul {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     user-select: none;
+    /* Flex e altura mínima para equalizar cards */
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
 }
 
 /* Gradiente de fundo animado */
@@ -2190,7 +2206,7 @@ ul {
 
 .galeria-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -2390,6 +2406,12 @@ ul {
     .timeline__stats {
         justify-content: flex-start;
     }
+
+    /* Eixos Temáticos - 1 coluna em mobile */
+    .eixos-cards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
 }
 
 /* Tablet pequeno (481px - 768px) */
@@ -2404,6 +2426,12 @@ ul {
     .galeria-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
+    }
+
+    /* Eixos Temáticos - 2 colunas em tablet pequeno */
+    .eixos-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
     }
 }
 
@@ -2514,5 +2542,11 @@ ul {
     .galeria-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
+    }
+
+    /* Eixos Temáticos - 3 colunas em desktop */
+    .eixos-cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
     }
 }
