@@ -225,10 +225,21 @@
 
         <!-- Filtros -->
         <div class="filters" data-aos="fade-up" data-aos-delay="200" role="search">
-            <div class="filters__search">
-                <label class="visually-hidden" for="search-input">Buscar produções</label>
-                <input aria-label="Buscar por título ou diretor" class="search-input" id="search-input" placeholder="Buscar por título ou diretor..."
-                       type="text">
+            <div class="filters__top">
+                <div class="filters__search">
+                    <label class="visually-hidden" for="search-input">Buscar produções</label>
+                    <input aria-label="Buscar por título ou diretor" class="search-input" id="search-input" placeholder="Buscar por título ou diretor..."
+                           type="text">
+                </div>
+
+                <div class="filters__sort">
+                    <label for="sort-select" class="sort-label"><i class="ki-filled ki-sort"></i> Ordenar por:</label>
+                    <select id="sort-select" class="sort-select" aria-label="Ordenar produções">
+                        <option value="pontuacao">Maior Pontuação</option>
+                        <option value="alfabetica">A-Z (Alfabética)</option>
+                        <option value="recentes">ID (Ordem Original)</option>
+                    </select>
+                </div>
             </div>
 
             <div aria-label="Filtros de categoria" class="filters__buttons" role="group">
