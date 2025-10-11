@@ -51,17 +51,23 @@
             </svg>
         </a>
 
-        <div class="nav__menu" id="nav-menu" role="navigation" aria-label="Menu principal">
+        <div aria-label="Menu principal" class="nav__menu" id="nav-menu" role="navigation">
             <ul class="nav__list">
-                <li class="nav__item"><a class="nav__link" href="#home" aria-label="Ir para página inicial">Início</a></li>
-                <li class="nav__item"><a class="nav__link" href="#catalogo" aria-label="Ver catálogo de produções">Catálogo</a></li>
-                <li class="nav__item"><a class="nav__link" href="#leis" aria-label="Saiba mais sobre as leis de fomento">Sobre as Leis</a></li>
-                <li class="nav__item"><a class="nav__link" href="#analise" aria-label="Ver análise cultural">Análise</a></li>
-                <li class="nav__item"><a class="nav__link" href="#contato" aria-label="Entrar em contato">Contato</a></li>
+                <li class="nav__item"><a aria-label="Ir para página inicial" class="nav__link" href="#home">Início</a>
+                </li>
+                <li class="nav__item"><a aria-label="Ver catálogo de produções" class="nav__link" href="#catalogo">Catálogo</a>
+                </li>
+                <li class="nav__item"><a aria-label="Saiba mais sobre as leis de fomento" class="nav__link"
+                                         href="#leis">Sobre as Leis</a></li>
+                <li class="nav__item"><a aria-label="Ver análise cultural" class="nav__link" href="#analise">Análise</a>
+                </li>
+                <li class="nav__item"><a aria-label="Entrar em contato" class="nav__link" href="#contato">Contato</a>
+                </li>
             </ul>
         </div>
 
-        <div class="nav__toggle" id="nav-toggle" role="button" aria-label="Abrir menu de navegação" aria-expanded="false" tabindex="0">
+        <div aria-expanded="false" aria-label="Abrir menu de navegação" class="nav__toggle" id="nav-toggle"
+             role="button" tabindex="0">
             <span></span>
             <span></span>
             <span></span>
@@ -115,12 +121,15 @@
             </div>
 
             <!-- Redes Sociais -->
-            <div class="social-links" data-aos="fade-up" data-aos-delay="400" role="navigation" aria-label="Redes sociais">
-                <a class="social-link" href="https://www.instagram.com/abitacacb/" target="_blank" rel="noopener noreferrer" aria-label="Visite nosso Instagram">
-                    <i class="ki-filled ki-instagram" aria-hidden="true"></i>
+            <div aria-label="Redes sociais" class="social-links" data-aos="fade-up" data-aos-delay="400"
+                 role="navigation">
+                <a aria-label="Visite nosso Instagram" class="social-link" href="https://www.instagram.com/abitacacb/"
+                   rel="noopener noreferrer" target="_blank">
+                    <i aria-hidden="true" class="ki-filled ki-instagram"></i>
                 </a>
-                <a class="social-link" href="https://www.facebook.com/abitacacb/" target="_blank" rel="noopener noreferrer" aria-label="Visite nosso Facebook">
-                    <i class="ki-filled ki-facebook" aria-hidden="true"></i>
+                <a aria-label="Visite nosso Facebook" class="social-link" href="https://www.facebook.com/abitacacb/"
+                   rel="noopener noreferrer" target="_blank">
+                    <i aria-hidden="true" class="ki-filled ki-facebook"></i>
                 </a>
             </div>
         </div>
@@ -178,8 +187,8 @@
                 <img alt="Arte Urbana"
                      crossorigin="anonymous"
                      loading="lazy"
-                     src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&q=85&fm=jpg&fit=crop"
-                     onerror="this.src='https://images.unsplash.com/photo-1569163139394-de4798aa62b6?w=800&q=85&fm=jpg&fit=crop'">
+                     onerror="this.src='https://images.unsplash.com/photo-1569163139394-de4798aa62b6?w=800&q=85&fm=jpg&fit=crop'"
+                     src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&q=85&fm=jpg&fit=crop">
                 <div class="galeria-overlay">
                     <h3>Arte & Grafite</h3>
                     <p>Expressão visual local</p>
@@ -207,7 +216,8 @@
             <p style="color: #856404; font-size: 1rem; margin: 0;">
                 <strong><i class="ki-filled ki-video"></i> Em Produção:</strong> Todos os projetos estão em fase de
                 produção, com previsão de lançamento para 2025.
-                Acompanhe as atualizações na <a href="https://capaobonito.sp.gov.br/lei-paulo-gustavo/" style="color: #C41E3A; text-decoration: underline;"
+                Acompanhe as atualizações na <a href="https://capaobonito.sp.gov.br/lei-paulo-gustavo/"
+                                                style="color: #C41E3A; text-decoration: underline;"
                                                 target="_blank">Secretaria de
                 Cultura</a>
             </p>
@@ -216,23 +226,39 @@
         <!-- Filtros -->
         <div class="filters" data-aos="fade-up" data-aos-delay="200" role="search">
             <div class="filters__search">
-                <label for="search-input" class="visually-hidden">Buscar produções</label>
-                <input class="search-input" id="search-input" placeholder="Buscar por título ou diretor..." type="text" aria-label="Buscar por título ou diretor">
+                <label class="visually-hidden" for="search-input">Buscar produções</label>
+                <input aria-label="Buscar por título ou diretor" class="search-input" id="search-input" placeholder="Buscar por título ou diretor..."
+                       type="text">
             </div>
 
-            <div class="filters__buttons" role="group" aria-label="Filtros de categoria">
-                <button class="filter-btn active" data-filter="all" aria-pressed="true" aria-label="Mostrar todas as produções">Todos</button>
-                <button class="filter-btn" data-filter="lancado" aria-pressed="false" aria-label="Filtrar produções lançadas">Lançados</button>
-                <button class="filter-btn" data-filter="producao" aria-pressed="false" aria-label="Filtrar produções em produção">Em Produção</button>
-                <button class="filter-btn" data-filter="patrimonio" aria-pressed="false" aria-label="Filtrar produções de patrimônio"><i class="ki-filled ki-bank" aria-hidden="true"></i> Patrimônio
+            <div aria-label="Filtros de categoria" class="filters__buttons" role="group">
+                <button aria-label="Mostrar todas as produções" aria-pressed="true" class="filter-btn active"
+                        data-filter="all">Todos
                 </button>
-                <button class="filter-btn" data-filter="musica" aria-pressed="false" aria-label="Filtrar produções musicais"><i class="ki-filled ki-note-2" aria-hidden="true"></i> Música</button>
-                <button class="filter-btn" data-filter="ambiente" aria-pressed="false" aria-label="Filtrar produções ambientais"><i class="ki-filled ki-tree" aria-hidden="true"></i> Ambiente</button>
+                <button aria-label="Filtrar produções lançadas" aria-pressed="false" class="filter-btn"
+                        data-filter="lancado">Lançados
+                </button>
+                <button aria-label="Filtrar produções em produção" aria-pressed="false" class="filter-btn"
+                        data-filter="producao">Em Produção
+                </button>
+                <button aria-label="Filtrar produções de patrimônio" aria-pressed="false" class="filter-btn"
+                        data-filter="patrimonio"><i aria-hidden="true"
+                                                                        class="ki-filled ki-bank"></i> Patrimônio
+                </button>
+                <button aria-label="Filtrar produções musicais" aria-pressed="false" class="filter-btn"
+                        data-filter="musica"><i aria-hidden="true" class="ki-filled ki-note-2"></i>
+                    Música
+                </button>
+                <button aria-label="Filtrar produções ambientais" aria-pressed="false" class="filter-btn"
+                        data-filter="ambiente"><i aria-hidden="true" class="ki-filled ki-tree"></i>
+                    Ambiente
+                </button>
             </div>
         </div>
 
         <!-- Grid de Filmes -->
-        <div class="filmes-grid" id="filmes-grid" role="region" aria-label="Lista de produções audiovisuais" aria-live="polite">
+        <div aria-label="Lista de produções audiovisuais" aria-live="polite" class="filmes-grid" id="filmes-grid"
+             role="region">
             <!-- Será preenchido via JavaScript -->
         </div>
     </div>
@@ -374,9 +400,9 @@
                 <div class="podio-grid">
                     <!-- 2º Lugar -->
                     <div class="podio-card podio-card--silver" data-aos="zoom-in" data-aos-delay="700"
+                         data-position="2º"
                          data-producer="Flavio Francisco Ramos Pereira"
-                         data-project="Os Cascatinhas"
-                         data-position="2º">
+                         data-project="Os Cascatinhas">
                         <div class="podio-medal">
                             <i class="ki-filled ki-medal-star"></i>
                             <span class="podio-position">2º</span>
@@ -390,14 +416,14 @@
                             <span class="score-badge score-badge--pnab">PNAB 96</span>
                         </div>
                         <div class="podio-share">
-                            <button class="share-btn share-btn--twitter" aria-label="Compartilhar no Twitter">
-                                <i class="ki-filled ki-twitter" aria-hidden="true"></i>
+                            <button aria-label="Compartilhar no Twitter" class="share-btn share-btn--twitter">
+                                <i aria-hidden="true" class="ki-filled ki-twitter"></i>
                             </button>
-                            <button class="share-btn share-btn--facebook" aria-label="Compartilhar no Facebook">
-                                <i class="ki-filled ki-facebook" aria-hidden="true"></i>
+                            <button aria-label="Compartilhar no Facebook" class="share-btn share-btn--facebook">
+                                <i aria-hidden="true" class="ki-filled ki-facebook"></i>
                             </button>
-                            <button class="share-btn share-btn--whatsapp" aria-label="Compartilhar no WhatsApp">
-                                <i class="ki-filled ki-whatsapp" aria-hidden="true"></i>
+                            <button aria-label="Compartilhar no WhatsApp" class="share-btn share-btn--whatsapp">
+                                <i aria-hidden="true" class="ki-filled ki-whatsapp"></i>
                             </button>
                         </div>
                     </div>
@@ -513,15 +539,15 @@
 <div class="lightbox" id="lightbox-modal">
     <div class="lightbox__overlay"></div>
     <div class="lightbox__content">
-        <button class="lightbox__close" aria-label="Fechar lightbox">&times;</button>
-        <button class="lightbox__prev" aria-label="Imagem anterior">
+        <button aria-label="Fechar lightbox" class="lightbox__close">&times;</button>
+        <button aria-label="Imagem anterior" class="lightbox__prev">
             <i class="ki-filled ki-left"></i>
         </button>
-        <button class="lightbox__next" aria-label="Próxima imagem">
+        <button aria-label="Próxima imagem" class="lightbox__next">
             <i class="ki-filled ki-right"></i>
         </button>
         <div class="lightbox__image-container">
-            <img id="lightbox-image" src="" alt="">
+            <img alt="" id="lightbox-image" src="">
             <div class="lightbox__caption">
                 <h3 id="lightbox-title"></h3>
                 <p id="lightbox-description"></p>
