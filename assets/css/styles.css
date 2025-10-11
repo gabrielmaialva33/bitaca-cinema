@@ -2375,6 +2375,21 @@ ul {
         margin-right: 0;
         text-align: left;
     }
+
+    /* Alinhar conteúdo do card à esquerda em mobile */
+    .timeline__card {
+        text-align: left;
+    }
+
+    .timeline__icon,
+    .timeline__title,
+    .timeline__subtitle {
+        text-align: left;
+    }
+
+    .timeline__stats {
+        justify-content: flex-start;
+    }
 }
 
 /* Tablet pequeno (481px - 768px) */
