@@ -354,7 +354,6 @@ class ParticleHeroGPGPU {
                 uniform float uSize;
                 uniform float uTime;
 
-                attribute vec2 uv;
                 attribute vec3 color;
                 attribute float size;
 
