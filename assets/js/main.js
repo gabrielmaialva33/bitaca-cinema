@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initLightbox();
     initEixosCards();
     initPodioShare();
+    initPodioConfetti();
     initCharts();
     animateCounters();
 });
@@ -371,6 +372,65 @@ function initPodioShare() {
             }
         });
     });
+}
+
+// ===== ANIMAÇÃO DE CONFETTI NO PÓDIO =====
+function initPodioConfetti() {
+    const podioSection = document.querySelector('.produtores-destaque-section');
+    if (!podioSection) return;
+
+    // Criar confetti quando a seção se torna visível
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                createConfetti(podioSection);
+                observer.unobserve(entry.target); // Executar apenas uma vez
+            }
+        });
+    }, {
+        threshold: 0.3 // Ativar quando 30% da seção estiver visível
+    });
+
+    observer.observe(podioSection);
+}
+
+function createConfetti(container) {
+    const colors = ['#FFD700', '#C0C0C0', '#CD7F32', '#FF6B35', '#2D5016', '#FFB700'];
+    const confettiCount = 50;
+
+    for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+
+        // Posição inicial aleatória
+        const startX = Math.random() * 100;
+        const startDelay = Math.random() * 0.5;
+        const duration = 2 + Math.random() * 2;
+        const size = 8 + Math.random() * 8;
+        const rotation = Math.random() * 360;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        confetti.style.cssText = `
+            position: absolute;
+            top: -20px;
+            left: ${startX}%;
+            width: ${size}px;
+            height: ${size}px;
+            background: ${color};
+            opacity: 0.9;
+            transform: rotate(${rotation}deg);
+            animation: confettiFall ${duration}s ease-out ${startDelay}s forwards;
+            pointer-events: none;
+            z-index: 1;
+        `;
+
+        container.appendChild(confetti);
+
+        // Remover confetti após animação
+        setTimeout(() => {
+            confetti.remove();
+        }, (duration + startDelay) * 1000 + 100);
+    }
 }
 
 // ===== BUSCA =====
