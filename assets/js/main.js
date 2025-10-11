@@ -240,7 +240,7 @@ function createFilmeCard(filme) {
     </div>
     <div class="filme-card__body">
       <h3 class="filme-card__title">${filme.titulo}</h3>
-      <p class="filme-card__diretor">Dir: ${filme.diretor}</p>
+      <p class="filme-card__diretor"><i class="ki-filled ki-profile-circle"></i> Dir: ${filme.diretor}</p>
       <div class="filme-card__badges">
         ${statusBadge}
         ${pontuacaoBadges}

@@ -173,14 +173,20 @@ ul {
     top: 0;
     left: 0;
     width: 100%;
-    background: var(--branco);
-    box-shadow: var(--shadow-sm);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 16px rgba(196, 30, 58, 0.08);
     z-index: 1000;
-    transition: var(--transition);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 1px solid rgba(196, 30, 58, 0.1);
 }
 
 .header.scroll {
-    box-shadow: var(--shadow-md);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 4px 24px rgba(196, 30, 58, 0.12),
+                0 2px 8px rgba(139, 69, 19, 0.08);
+    border-bottom: 1px solid rgba(196, 30, 58, 0.15);
 }
 
 .nav {
@@ -884,63 +890,174 @@ ul {
 
 .eixos-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
     margin-bottom: 4rem;
 }
 
 .eixo-card {
     background: var(--branco);
-    border-radius: 20px;
-    padding: 2rem;
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
     text-align: center;
-    box-shadow: var(--shadow-md);
-    border-top: 5px solid;
-    transition: var(--transition);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08),
+                0 2px 8px rgba(0, 0, 0, 0.06);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+/* Gradiente de fundo animado */
+.eixo-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.eixo-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: linear-gradient(135deg, transparent 0%, currentColor 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
 }
 
 .eixo-card--patrimonio {
-    border-top-color: var(--verde-folha);
+    color: var(--verde-folha);
+    border-top: 6px solid var(--verde-folha);
+}
+
+.eixo-card--patrimonio::after {
+    background: linear-gradient(135deg, transparent 0%, rgba(45, 80, 22, 0.05) 100%);
 }
 
 .eixo-card--musica {
-    border-top-color: var(--laranja-urbano);
+    color: var(--laranja-urbano);
+    border-top: 6px solid var(--laranja-urbano);
+}
+
+.eixo-card--musica::after {
+    background: linear-gradient(135deg, transparent 0%, rgba(255, 107, 53, 0.05) 100%);
 }
 
 .eixo-card--ambiente {
-    border-top-color: var(--marrom-terra);
+    color: var(--marrom-terra);
+    border-top: 6px solid var(--marrom-terra);
+}
+
+.eixo-card--ambiente::after {
+    background: linear-gradient(135deg, transparent 0%, rgba(139, 69, 19, 0.05) 100%);
 }
 
 .eixo-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15),
+                0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
+.eixo-card:hover::before {
+    opacity: 1;
+}
+
+.eixo-card:hover::after {
+    opacity: 1;
+}
+
+/* Círculo decorativo de fundo */
 .eixo-card__icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
+    font-size: 5rem;
+    margin: 0 auto 1.5rem;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.eixo-card--patrimonio .eixo-card__icon {
+    background: linear-gradient(135deg, rgba(45, 80, 22, 0.1) 0%, rgba(45, 80, 22, 0.2) 100%);
+    color: var(--verde-folha);
+    box-shadow: 0 8px 24px rgba(45, 80, 22, 0.2);
+}
+
+.eixo-card--musica .eixo-card__icon {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0.2) 100%);
+    color: var(--laranja-urbano);
+    box-shadow: 0 8px 24px rgba(255, 107, 53, 0.2);
+}
+
+.eixo-card--ambiente .eixo-card__icon {
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.1) 0%, rgba(139, 69, 19, 0.2) 100%);
+    color: var(--marrom-terra);
+    box-shadow: 0 8px 24px rgba(139, 69, 19, 0.2);
+}
+
+.eixo-card:hover .eixo-card__icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 12px 32px currentColor;
 }
 
 .eixo-card__title {
     font-family: var(--font-bold);
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 700;
     color: var(--vermelho-bitaca);
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.eixo-card:hover .eixo-card__title {
+    color: currentColor;
 }
 
 .eixo-card__percentage {
     display: block;
     font-family: var(--font-title);
-    font-size: 3rem;
-    color: var(--laranja-urbano);
-    margin-bottom: 1rem;
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, currentColor 0%, var(--amarelo-quente) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s ease;
+}
+
+.eixo-card:hover .eixo-card__percentage {
+    transform: scale(1.1);
+    letter-spacing: 2px;
 }
 
 .eixo-card__description {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--marrom-terra);
     margin-bottom: 1.5rem;
-    line-height: 1.5;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.eixo-card:hover .eixo-card__description {
+    color: var(--preto);
 }
 
 .eixo-card__toggle {
@@ -958,73 +1075,276 @@ ul {
     color: var(--branco);
 }
 
-.produtores-destaque {
-    background: var(--bege-acolhedor);
-    border-radius: 20px;
-    padding: 3rem;
+/* ===== PRODUTORES EM DESTAQUE ===== */
+.produtores-destaque-section {
+    background: linear-gradient(135deg, #FFF3CD 0%, #FFE8B3 100%);
+    border-radius: 24px;
+    padding: 3.5rem 2.5rem;
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(255, 183, 0, 0.2),
+                0 4px 16px rgba(196, 30, 58, 0.1);
 }
 
-.produtores-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+.produtores-destaque-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+        var(--vermelho-bitaca) 0%,
+        var(--amarelo-quente) 50%,
+        var(--verde-folha) 100%);
 }
 
-.produtor-card {
-    background: var(--branco);
-    border-radius: 15px;
-    padding: 2rem;
+.produtores-destaque-title {
+    font-family: var(--font-title);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    color: var(--vermelho-bitaca);
     text-align: center;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition);
+    margin-bottom: 0.75rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.produtor-card:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-md);
+.produtores-destaque-subtitle {
+    text-align: center;
+    color: #856404;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.produtor-avatar {
+.podio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto 2.5rem;
+    align-items: end;
+}
+
+.podio-card {
+    background: var(--branco);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid;
+}
+
+.podio-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.02) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.podio-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.podio-card:hover::before {
+    opacity: 1;
+}
+
+/* Medalhas e Posições */
+.podio-medal {
     width: 80px;
     height: 80px;
-    margin: 0 auto 1rem;
-    background: var(--vermelho-bitaca);
+    margin: -3rem auto 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 2.5rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.podio-medal i {
+    position: relative;
+    z-index: 2;
+}
+
+.podio-position {
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    background: var(--preto);
     color: var(--branco);
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-title);
-    font-size: 2.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    border: 3px solid var(--branco);
 }
 
-.produtor-nome {
-    font-family: var(--font-bold);
-    font-size: 1.1rem;
+/* Pódio Ouro - 1º Lugar (Maior e central) */
+.podio-card--gold {
+    border-top-color: #FFD700;
+    order: 2;
+}
+
+.podio-card--gold .podio-medal {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
     color: var(--preto);
-    margin-bottom: 1rem;
+    width: 100px;
+    height: 100px;
+    font-size: 3rem;
+    margin-top: -4rem;
+    animation: pulse 2s ease-in-out infinite;
 }
 
-.produtor-badges {
+.podio-card--gold .podio-medal--champion {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5),
+                0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Pódio Prata - 2º Lugar */
+.podio-card--silver {
+    border-top-color: #C0C0C0;
+    order: 1;
+}
+
+.podio-card--silver .podio-medal {
+    background: linear-gradient(135deg, #E8E8E8 0%, #C0C0C0 100%);
+    color: var(--preto);
+}
+
+/* Pódio Bronze - 3º Lugar */
+.podio-card--bronze {
+    border-top-color: #CD7F32;
+    order: 3;
+}
+
+.podio-card--bronze .podio-medal {
+    background: linear-gradient(135deg, #CD7F32 0%, #B5651D 100%);
+    color: var(--branco);
+}
+
+/* Informações do Produtor */
+.podio-producer h4 {
+    font-family: var(--font-bold);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--vermelho-bitaca);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+}
+
+.podio-project {
+    font-family: var(--font-script);
+    font-size: 1.05rem;
+    color: var(--verde-folha);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+/* Badges de Pontuação */
+.podio-scores {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    gap: 0.75rem;
     flex-wrap: wrap;
+    margin-top: 1.5rem;
 }
 
-.produtor-projeto {
-    font-size: 0.9rem;
-    color: var(--marrom-terra);
-    font-style: italic;
+.score-badge {
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.score-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.score-badge--lpg {
+    background: linear-gradient(135deg, var(--vermelho-bitaca) 0%, #9B1B30 100%);
+    color: var(--branco);
+}
+
+.score-badge--pnab {
+    background: linear-gradient(135deg, var(--verde-folha) 0%, #1a3d0d 100%);
+    color: var(--branco);
+}
+
+/* Footer da Seção */
+.produtores-destaque-footer {
+    text-align: center;
+    color: #856404;
+    font-size: 0.95rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px dashed rgba(133, 100, 4, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.produtores-destaque-footer i {
+    color: var(--verde-folha);
+    font-size: 1.2rem;
 }
 
 /* ===== FOOTER ===== */
 .footer {
-    background: var(--gradient-footer);
+    background: linear-gradient(180deg, #1a1414 0%, #0f0a0a 100%);
     color: var(--bege-acolhedor);
-    padding: 4rem 0 2rem;
+    padding: 5rem 0 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--vermelho-bitaca) 20%,
+        var(--amarelo-quente) 50%,
+        var(--verde-folha) 80%,
+        transparent 100%);
+    opacity: 0.6;
 }
 
 .footer__content {
@@ -1462,6 +1782,22 @@ ul {
 
     .galeria-overlay {
         padding: 1rem;
+    }
+
+    /* Produtores em Destaque responsivo em tablets */
+    .podio-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .podio-card--gold,
+    .podio-card--silver,
+    .podio-card--bronze {
+        order: 0;
+    }
+
+    .produtores-destaque-section {
+        padding: 3rem 1.5rem;
     }
 }
 

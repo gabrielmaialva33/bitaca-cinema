@@ -178,7 +178,8 @@
                 <img alt="Arte Urbana"
                      crossorigin="anonymous"
                      loading="lazy"
-                     src="https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?w=800&q=85&fm=jpg&fit=crop">
+                     src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&q=85&fm=jpg&fit=crop"
+                     onerror="this.src='https://images.unsplash.com/photo-1569163139394-de4798aa62b6?w=800&q=85&fm=jpg&fit=crop'">
                 <div class="galeria-overlay">
                     <h3>Arte & Grafite</h3>
                     <p>Expressão visual local</p>
@@ -224,7 +225,7 @@
                 <button class="filter-btn" data-filter="producao">Em Produção</button>
                 <button class="filter-btn" data-filter="patrimonio"><i class="ki-filled ki-bank"></i> Patrimônio
                 </button>
-                <button class="filter-btn" data-filter="musica"><i class="ki-filled ki-music"></i> Música</button>
+                <button class="filter-btn" data-filter="musica"><i class="ki-filled ki-note-2"></i> Música</button>
                 <button class="filter-btn" data-filter="ambiente"><i class="ki-filled ki-tree"></i> Ambiente</button>
             </div>
         </div>
@@ -342,7 +343,7 @@
                 </div>
 
                 <div class="eixo-card eixo-card--musica" data-aos="fade-up" data-aos-delay="400">
-                    <div class="eixo-card__icon"><i class="ki-filled ki-music"></i></div>
+                    <div class="eixo-card__icon"><i class="ki-filled ki-note-2"></i></div>
                     <h4 class="eixo-card__title">Cultura Musical</h4>
                     <span class="eixo-card__percentage">8</span>
                     <p class="eixo-card__description">
@@ -361,23 +362,68 @@
             </div>
 
             <!-- Produtores em Destaque -->
-            <div class="alert-info" data-aos="fade-up" data-aos-delay="600"
-                 style="background: linear-gradient(135deg, #FFF3CD 0%, #FFE8B3 100%); border-left: 4px solid #FFB700; padding: 2.5rem; border-radius: 15px; margin-top: 3rem; text-align: center;">
-                <h3 style="color: #C41E3A; font-family: 'Staatliches', sans-serif; font-size: 1.8rem; margin-bottom: 1rem;">
-                    <i class="ki-filled ki-cup"></i> Produtores em Destaque</h3>
-                <div style="max-width: 700px; margin: 0 auto;">
-                    <p style="color: #856404; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
-                        <strong>1º Lugar:</strong> Margarida Chaves de Oliveira Scuoteguazza - "Ponteia Viola" (238 pts
-                        LPG, 98 pts PNAB)<br>
-                        <strong>2º Lugar:</strong> Flavio Francisco Ramos Pereira - "Os Cascatinhas" (236 pts LPG, 96
-                        pts PNAB)<br>
-                        <strong>3º Lugar:</strong> Bruna Maximovitz Kadoo Polississo - "Reconstruction" (234 pts LPG, 94
-                        pts PNAB)
-                    </p>
-                    <p style="color: #856404; font-size: 0.95rem; margin: 0;">
-                        <em>Dados oficiais: Lei Paulo Gustavo - Edital 03/2024 | PNAB - Edital 005/2024</em>
-                    </p>
+            <div class="produtores-destaque-section" data-aos="fade-up" data-aos-delay="600">
+                <h3 class="produtores-destaque-title">
+                    <i class="ki-filled ki-cup"></i> Produtores em Destaque
+                </h3>
+                <p class="produtores-destaque-subtitle">
+                    TOP 3 - Maiores pontuações combinadas LPG + PNAB
+                </p>
+
+                <div class="podio-grid">
+                    <!-- 2º Lugar -->
+                    <div class="podio-card podio-card--silver" data-aos="zoom-in" data-aos-delay="700">
+                        <div class="podio-medal">
+                            <i class="ki-filled ki-medal-star"></i>
+                            <span class="podio-position">2º</span>
+                        </div>
+                        <div class="podio-producer">
+                            <h4>Flavio Francisco Ramos Pereira</h4>
+                            <p class="podio-project">"Os Cascatinhas"</p>
+                        </div>
+                        <div class="podio-scores">
+                            <span class="score-badge score-badge--lpg">LPG 236</span>
+                            <span class="score-badge score-badge--pnab">PNAB 96</span>
+                        </div>
+                    </div>
+
+                    <!-- 1º Lugar -->
+                    <div class="podio-card podio-card--gold" data-aos="zoom-in" data-aos-delay="650">
+                        <div class="podio-medal podio-medal--champion">
+                            <i class="ki-filled ki-cup"></i>
+                            <span class="podio-position">1º</span>
+                        </div>
+                        <div class="podio-producer">
+                            <h4>Margarida Chaves de Oliveira Scuoteguazza</h4>
+                            <p class="podio-project">"Ponteia Viola"</p>
+                        </div>
+                        <div class="podio-scores">
+                            <span class="score-badge score-badge--lpg">LPG 238</span>
+                            <span class="score-badge score-badge--pnab">PNAB 98</span>
+                        </div>
+                    </div>
+
+                    <!-- 3º Lugar -->
+                    <div class="podio-card podio-card--bronze" data-aos="zoom-in" data-aos-delay="750">
+                        <div class="podio-medal">
+                            <i class="ki-filled ki-award"></i>
+                            <span class="podio-position">3º</span>
+                        </div>
+                        <div class="podio-producer">
+                            <h4>Bruna Maximovitz Kadoo Polississo</h4>
+                            <p class="podio-project">"Reconstruction"</p>
+                        </div>
+                        <div class="podio-scores">
+                            <span class="score-badge score-badge--lpg">LPG 234</span>
+                            <span class="score-badge score-badge--pnab">PNAB 94</span>
+                        </div>
+                    </div>
                 </div>
+
+                <p class="produtores-destaque-footer">
+                    <i class="ki-filled ki-shield-tick"></i>
+                    <em>Dados oficiais: Lei Paulo Gustavo - Edital 03/2024 | PNAB - Edital 005/2024</em>
+                </p>
             </div>
         </div>
     </div>
