@@ -51,17 +51,17 @@
             </svg>
         </a>
 
-        <div class="nav__menu" id="nav-menu">
+        <div class="nav__menu" id="nav-menu" role="navigation" aria-label="Menu principal">
             <ul class="nav__list">
-                <li class="nav__item"><a class="nav__link" href="#home">Início</a></li>
-                <li class="nav__item"><a class="nav__link" href="#catalogo">Catálogo</a></li>
-                <li class="nav__item"><a class="nav__link" href="#leis">Sobre as Leis</a></li>
-                <li class="nav__item"><a class="nav__link" href="#analise">Análise</a></li>
-                <li class="nav__item"><a class="nav__link" href="#contato">Contato</a></li>
+                <li class="nav__item"><a class="nav__link" href="#home" aria-label="Ir para página inicial">Início</a></li>
+                <li class="nav__item"><a class="nav__link" href="#catalogo" aria-label="Ver catálogo de produções">Catálogo</a></li>
+                <li class="nav__item"><a class="nav__link" href="#leis" aria-label="Saiba mais sobre as leis de fomento">Sobre as Leis</a></li>
+                <li class="nav__item"><a class="nav__link" href="#analise" aria-label="Ver análise cultural">Análise</a></li>
+                <li class="nav__item"><a class="nav__link" href="#contato" aria-label="Entrar em contato">Contato</a></li>
             </ul>
         </div>
 
-        <div class="nav__toggle" id="nav-toggle">
+        <div class="nav__toggle" id="nav-toggle" role="button" aria-label="Abrir menu de navegação" aria-expanded="false" tabindex="0">
             <span></span>
             <span></span>
             <span></span>
@@ -92,15 +92,15 @@
 
             <div class="hero__stats">
                 <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
-                    <span class="stat-number">23</span>
+                    <span class="stat-number" data-count="23">0</span>
                     <span class="stat-label">Produções</span>
                 </div>
                 <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
-                    <span class="stat-number">3</span>
+                    <span class="stat-number" data-count="3">0</span>
                     <span class="stat-label">Eixos Temáticos</span>
                 </div>
                 <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
-                    <span class="stat-number">2025</span>
+                    <span class="stat-number" data-count="2025">0</span>
                     <span class="stat-label">Estreias</span>
                 </div>
             </div>
@@ -115,12 +115,12 @@
             </div>
 
             <!-- Redes Sociais -->
-            <div class="social-links" data-aos="fade-up" data-aos-delay="400">
-                <a class="social-link" href="https://www.instagram.com/abitacacb/" target="_blank">
-                    <i class="ki-filled ki-instagram"></i>
+            <div class="social-links" data-aos="fade-up" data-aos-delay="400" role="navigation" aria-label="Redes sociais">
+                <a class="social-link" href="https://www.instagram.com/abitacacb/" target="_blank" rel="noopener noreferrer" aria-label="Visite nosso Instagram">
+                    <i class="ki-filled ki-instagram" aria-hidden="true"></i>
                 </a>
-                <a class="social-link" href="https://www.facebook.com/abitacacb/" target="_blank">
-                    <i class="ki-filled ki-facebook"></i>
+                <a class="social-link" href="https://www.facebook.com/abitacacb/" target="_blank" rel="noopener noreferrer" aria-label="Visite nosso Facebook">
+                    <i class="ki-filled ki-facebook" aria-hidden="true"></i>
                 </a>
             </div>
         </div>
@@ -214,19 +214,20 @@
         </div>
 
         <!-- Filtros -->
-        <div class="filters" data-aos="fade-up" data-aos-delay="200">
+        <div class="filters" data-aos="fade-up" data-aos-delay="200" role="search">
             <div class="filters__search">
-                <input class="search-input" id="search-input" placeholder="Buscar por título ou diretor..." type="text">
+                <label for="search-input" class="visually-hidden">Buscar produções</label>
+                <input class="search-input" id="search-input" placeholder="Buscar por título ou diretor..." type="text" aria-label="Buscar por título ou diretor">
             </div>
 
-            <div class="filters__buttons">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="lancado">Lançados</button>
-                <button class="filter-btn" data-filter="producao">Em Produção</button>
-                <button class="filter-btn" data-filter="patrimonio"><i class="ki-filled ki-bank"></i> Patrimônio
+            <div class="filters__buttons" role="group" aria-label="Filtros de categoria">
+                <button class="filter-btn active" data-filter="all" aria-pressed="true" aria-label="Mostrar todas as produções">Todos</button>
+                <button class="filter-btn" data-filter="lancado" aria-pressed="false" aria-label="Filtrar produções lançadas">Lançados</button>
+                <button class="filter-btn" data-filter="producao" aria-pressed="false" aria-label="Filtrar produções em produção">Em Produção</button>
+                <button class="filter-btn" data-filter="patrimonio" aria-pressed="false" aria-label="Filtrar produções de patrimônio"><i class="ki-filled ki-bank" aria-hidden="true"></i> Patrimônio
                 </button>
-                <button class="filter-btn" data-filter="musica"><i class="ki-filled ki-note-2"></i> Música</button>
-                <button class="filter-btn" data-filter="ambiente"><i class="ki-filled ki-tree"></i> Ambiente</button>
+                <button class="filter-btn" data-filter="musica" aria-pressed="false" aria-label="Filtrar produções musicais"><i class="ki-filled ki-note-2" aria-hidden="true"></i> Música</button>
+                <button class="filter-btn" data-filter="ambiente" aria-pressed="false" aria-label="Filtrar produções ambientais"><i class="ki-filled ki-tree" aria-hidden="true"></i> Ambiente</button>
             </div>
         </div>
 
@@ -490,6 +491,30 @@
         <button class="modal__close">&times;</button>
         <div id="modal-body">
             <!-- Conteúdo será injetado via JS -->
+        </div>
+    </div>
+</div>
+
+<!-- Lightbox Modal para Galeria -->
+<div class="lightbox" id="lightbox-modal">
+    <div class="lightbox__overlay"></div>
+    <div class="lightbox__content">
+        <button class="lightbox__close" aria-label="Fechar lightbox">&times;</button>
+        <button class="lightbox__prev" aria-label="Imagem anterior">
+            <i class="ki-filled ki-left"></i>
+        </button>
+        <button class="lightbox__next" aria-label="Próxima imagem">
+            <i class="ki-filled ki-right"></i>
+        </button>
+        <div class="lightbox__image-container">
+            <img id="lightbox-image" src="" alt="">
+            <div class="lightbox__caption">
+                <h3 id="lightbox-title"></h3>
+                <p id="lightbox-description"></p>
+            </div>
+        </div>
+        <div class="lightbox__counter">
+            <span id="lightbox-current">1</span> / <span id="lightbox-total">4</span>
         </div>
     </div>
 </div>

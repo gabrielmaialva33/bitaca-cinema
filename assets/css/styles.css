@@ -1492,6 +1492,207 @@ ul {
     transform: rotate(90deg);
 }
 
+/* ===== LIGHTBOX ===== */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.95);
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox__overlay {
+    position: absolute;
+    inset: 0;
+    cursor: zoom-out;
+}
+
+.lightbox__content {
+    position: relative;
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    animation: lightboxFadeIn 0.3s ease-out;
+}
+
+@keyframes lightboxFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.lightbox__image-container {
+    position: relative;
+    max-width: 100%;
+    max-height: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.lightbox__image-container img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox__caption {
+    text-align: center;
+    color: var(--branco);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    max-width: 600px;
+}
+
+.lightbox__caption h3 {
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: var(--amarelo-quente);
+    margin-bottom: 0.5rem;
+}
+
+.lightbox__caption p {
+    font-size: 1rem;
+    color: var(--bege-acolhedor);
+    line-height: 1.4;
+}
+
+.lightbox__close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--vermelho-bitaca);
+    color: var(--branco);
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    z-index: 10;
+    cursor: pointer;
+    border: 3px solid var(--branco);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.lightbox__close:hover {
+    background: var(--marrom-terra);
+    transform: rotate(90deg) scale(1.1);
+}
+
+.lightbox__prev,
+.lightbox__next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: var(--branco);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    z-index: 10;
+}
+
+.lightbox__prev {
+    left: 2rem;
+}
+
+.lightbox__next {
+    right: 2rem;
+}
+
+.lightbox__prev:hover,
+.lightbox__next:hover {
+    background: var(--vermelho-bitaca);
+    border-color: var(--vermelho-bitaca);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox__prev:active,
+.lightbox__next:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.lightbox__counter {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    color: var(--branco);
+    font-family: var(--font-bold);
+    font-size: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+    .lightbox__prev,
+    .lightbox__next {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .lightbox__prev {
+        left: 1rem;
+    }
+
+    .lightbox__next {
+        right: 1rem;
+    }
+
+    .lightbox__close {
+        top: 1rem;
+        right: 1rem;
+        width: 45px;
+        height: 45px;
+    }
+
+    .lightbox__caption {
+        padding: 0.75rem 1rem;
+    }
+
+    .lightbox__caption h3 {
+        font-size: 1.3rem;
+    }
+
+    .lightbox__caption p {
+        font-size: 0.9rem;
+    }
+}
+
 /* ===== SCROLL TO TOP ===== */
 .scroll-top {
     position: fixed;
