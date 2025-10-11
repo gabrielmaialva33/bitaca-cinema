@@ -406,10 +406,10 @@ function initPodioShare() {
 
             // Montar mensagem de compartilhamento
             const message = `🏆 ${position} Lugar - Bitaca Cinema!\n\n` +
-                          `Produtor: ${producer}\n` +
-                          `Projeto: "${project}"\n\n` +
-                          `Confira o catálogo completo de produções audiovisuais de Capão Bonito! 🎬\n` +
-                          `#BitacaCinema #CapãoBonito #LeiPauloGustavo #PNAB`;
+                `Produtor: ${producer}\n` +
+                `Projeto: "${project}"\n\n` +
+                `Confira o catálogo completo de produções audiovisuais de Capão Bonito! 🎬\n` +
+                `#BitacaCinema #CapãoBonito #LeiPauloGustavo #PNAB`;
 
             const url = window.location.href;
             const encodedMessage = encodeURIComponent(message);

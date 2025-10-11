@@ -228,13 +228,14 @@
             <div class="filters__top">
                 <div class="filters__search">
                     <label class="visually-hidden" for="search-input">Buscar produções</label>
-                    <input aria-label="Buscar por título ou diretor" class="search-input" id="search-input" placeholder="Buscar por título ou diretor..."
+                    <input aria-label="Buscar por título ou diretor" class="search-input" id="search-input"
+                           placeholder="Buscar por título ou diretor..."
                            type="text">
                 </div>
 
                 <div class="filters__sort">
-                    <label for="sort-select" class="sort-label"><i class="ki-filled ki-sort"></i> Ordenar por:</label>
-                    <select id="sort-select" class="sort-select" aria-label="Ordenar produções">
+                    <label class="sort-label" for="sort-select"><i class="ki-filled ki-sort"></i> Ordenar por:</label>
+                    <select aria-label="Ordenar produções" class="sort-select" id="sort-select">
                         <option value="pontuacao">Maior Pontuação</option>
                         <option value="alfabetica">A-Z (Alfabética)</option>
                         <option value="recentes">ID (Ordem Original)</option>
@@ -254,7 +255,7 @@
                 </button>
                 <button aria-label="Filtrar produções de patrimônio" aria-pressed="false" class="filter-btn"
                         data-filter="patrimonio"><i aria-hidden="true"
-                                                                        class="ki-filled ki-bank"></i> Patrimônio
+                                                    class="ki-filled ki-bank"></i> Patrimônio
                 </button>
                 <button aria-label="Filtrar produções musicais" aria-pressed="false" class="filter-btn"
                         data-filter="musica"><i aria-hidden="true" class="ki-filled ki-note-2"></i>
@@ -274,8 +275,9 @@
         </div>
 
         <!-- Botão Carregar Mais -->
-        <div class="load-more-container" id="load-more-container" style="text-align: center; margin-top: 3rem; display: none;">
-            <button class="btn btn-outline load-more-btn" id="load-more-btn" aria-label="Carregar mais produções">
+        <div class="load-more-container" id="load-more-container"
+             style="text-align: center; margin-top: 3rem; display: none;">
+            <button aria-label="Carregar mais produções" class="btn btn-outline load-more-btn" id="load-more-btn">
                 <i class="ki-filled ki-arrows-circle"></i> Carregar Mais
             </button>
             <p class="load-more-info" style="margin-top: 1rem; color: var(--marrom-terra); font-size: 0.9rem;">
@@ -451,9 +453,9 @@
 
                     <!-- 1º Lugar -->
                     <div class="podio-card podio-card--gold" data-aos="zoom-in" data-aos-delay="650"
+                         data-position="1º"
                          data-producer="Margarida Chaves de Oliveira Scuoteguazza"
-                         data-project="Ponteia Viola"
-                         data-position="1º">
+                         data-project="Ponteia Viola">
                         <div class="podio-medal podio-medal--champion">
                             <i class="ki-filled ki-cup"></i>
                             <span class="podio-position">1º</span>
@@ -467,23 +469,23 @@
                             <span class="score-badge score-badge--pnab">PNAB 98</span>
                         </div>
                         <div class="podio-share">
-                            <button class="share-btn share-btn--twitter" aria-label="Compartilhar no Twitter">
-                                <i class="ki-filled ki-twitter" aria-hidden="true"></i>
+                            <button aria-label="Compartilhar no Twitter" class="share-btn share-btn--twitter">
+                                <i aria-hidden="true" class="ki-filled ki-twitter"></i>
                             </button>
-                            <button class="share-btn share-btn--facebook" aria-label="Compartilhar no Facebook">
-                                <i class="ki-filled ki-facebook" aria-hidden="true"></i>
+                            <button aria-label="Compartilhar no Facebook" class="share-btn share-btn--facebook">
+                                <i aria-hidden="true" class="ki-filled ki-facebook"></i>
                             </button>
-                            <button class="share-btn share-btn--whatsapp" aria-label="Compartilhar no WhatsApp">
-                                <i class="ki-filled ki-whatsapp" aria-hidden="true"></i>
+                            <button aria-label="Compartilhar no WhatsApp" class="share-btn share-btn--whatsapp">
+                                <i aria-hidden="true" class="ki-filled ki-whatsapp"></i>
                             </button>
                         </div>
                     </div>
 
                     <!-- 3º Lugar -->
                     <div class="podio-card podio-card--bronze" data-aos="zoom-in" data-aos-delay="750"
+                         data-position="3º"
                          data-producer="Bruna Maximovitz Kadoo Polississo"
-                         data-project="Reconstruction"
-                         data-position="3º">
+                         data-project="Reconstruction">
                         <div class="podio-medal">
                             <i class="ki-filled ki-award"></i>
                             <span class="podio-position">3º</span>
@@ -497,14 +499,14 @@
                             <span class="score-badge score-badge--pnab">PNAB 94</span>
                         </div>
                         <div class="podio-share">
-                            <button class="share-btn share-btn--twitter" aria-label="Compartilhar no Twitter">
-                                <i class="ki-filled ki-twitter" aria-hidden="true"></i>
+                            <button aria-label="Compartilhar no Twitter" class="share-btn share-btn--twitter">
+                                <i aria-hidden="true" class="ki-filled ki-twitter"></i>
                             </button>
-                            <button class="share-btn share-btn--facebook" aria-label="Compartilhar no Facebook">
-                                <i class="ki-filled ki-facebook" aria-hidden="true"></i>
+                            <button aria-label="Compartilhar no Facebook" class="share-btn share-btn--facebook">
+                                <i aria-hidden="true" class="ki-filled ki-facebook"></i>
                             </button>
-                            <button class="share-btn share-btn--whatsapp" aria-label="Compartilhar no WhatsApp">
-                                <i class="ki-filled ki-whatsapp" aria-hidden="true"></i>
+                            <button aria-label="Compartilhar no WhatsApp" class="share-btn share-btn--whatsapp">
+                                <i aria-hidden="true" class="ki-filled ki-whatsapp"></i>
                             </button>
                         </div>
                     </div>
@@ -620,7 +622,7 @@
 <script src="assets/js/main.js"></script>
 
 <!-- Three.js Particle Hero (ES Module) -->
-<script type="module" src="assets/js/particle-hero.js"></script>
+<script src="assets/js/particle-hero.js" type="module"></script>
 
 <!-- KeenIcons já inicializado via CSS -->
 </body>

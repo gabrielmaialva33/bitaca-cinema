@@ -127,9 +127,9 @@ class ParticleHero {
         const geometry = new THREE.PlaneGeometry(100, 100);
         const material = new THREE.ShaderMaterial({
             uniforms: {
-                uTime: { value: 0 },
-                uColor1: { value: new THREE.Color(0x0A0A0A) },
-                uColor2: { value: new THREE.Color(0x1a1a1a) },
+                uTime: {value: 0},
+                uColor1: {value: new THREE.Color(0x0A0A0A)},
+                uColor2: {value: new THREE.Color(0x1a1a1a)},
             },
             vertexShader: `
                 varying vec2 vUv;
@@ -166,14 +166,14 @@ class ParticleHero {
             this.touchActive = true;
             this.updateMousePosition(e.touches[0]);
             this.createExplosion(e.touches[0]);
-        }, { passive: false });
+        }, {passive: false});
 
         canvas.addEventListener('touchmove', (e) => {
             e.preventDefault();
             if (this.touchActive) {
                 this.updateMousePosition(e.touches[0]);
             }
-        }, { passive: false });
+        }, {passive: false});
 
         canvas.addEventListener('touchend', () => {
             this.touchActive = false;
