@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+nginx/logs/
+
+# Docker
+docker-compose.override.yml
+
+# Tests
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Backups
+backup-env-*
+
+# SSL Certificates
+nginx/ssl/*.pem
+nginx/ssl/*.key
+nginx/ssl/*.crt
+
+# Sensitive files
+deploy-docker.sh
+*.pem
+*.key
