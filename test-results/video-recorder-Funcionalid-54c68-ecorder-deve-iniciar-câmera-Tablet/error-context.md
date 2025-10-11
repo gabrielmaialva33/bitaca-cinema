@@ -1,0 +1,598 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link [ref=e4] [cursor=pointer]:
+        - /url: "#home"
+        - img [ref=e5]:
+          - generic [ref=e11]: BITACA
+          - generic [ref=e12]: Cinema
+      - navigation "Menu principal" [ref=e13]:
+        - list [ref=e14]:
+          - listitem [ref=e15]:
+            - link "Ir para página inicial" [ref=e16] [cursor=pointer]:
+              - /url: "#home"
+              - text: Início
+          - listitem [ref=e17]:
+            - link "Ver catálogo de produções" [ref=e18] [cursor=pointer]:
+              - /url: "#catalogo"
+              - text: Catálogo
+          - listitem [ref=e19]:
+            - link "Saiba mais sobre as leis de fomento" [ref=e20] [cursor=pointer]:
+              - /url: "#leis"
+              - text: Sobre as Leis
+          - listitem [ref=e21]:
+            - link "Ver análise cultural" [ref=e22] [cursor=pointer]:
+              - /url: "#analise"
+              - text: Análise
+          - listitem [ref=e23]:
+            - link "Entrar em contato" [ref=e24] [cursor=pointer]:
+              - /url: "#contato"
+              - text: Contato
+  - generic [ref=e28]:
+    - generic [ref=e29]:
+      - heading "  BITACA CINEMA" [level=1] [ref=e30]:
+        - generic [ref=e31]:  
+        - text: BITACA CINEMA
+      - paragraph [ref=e32]: Underground | Visceral | Democrático
+    - paragraph [ref=e33]: Cinema de Capão Bonito - Produções Audiovisuais Fomentadas pelas Leis Paulo Gustavo e Aldir Blanc
+    - generic [ref=e34]:
+      - generic [ref=e35]:
+        - generic [ref=e36]: "23"
+        - generic [ref=e37]: Produções
+      - generic [ref=e38]:
+        - generic [ref=e39]: "3"
+        - generic [ref=e40]: Eixos Temáticos
+      - generic [ref=e41]:
+        - generic [ref=e42]: "2025"
+        - generic [ref=e43]: Estreias
+    - generic [ref=e44]:
+      - link "Explorar Catálogo" [ref=e45] [cursor=pointer]:
+        - /url: "#catalogo"
+        - text: Explorar Catálogo
+      - link "  Galeria Bitaca" [ref=e46] [cursor=pointer]:
+        - /url: "#galeria"
+        - generic [ref=e47]:  
+        - text: Galeria Bitaca
+    - navigation "Redes sociais" [ref=e48]:
+      - link "Visite nosso Instagram" [ref=e49] [cursor=pointer]:
+        - /url: https://www.instagram.com/abitacacb/
+        - generic [ref=e50]:  
+      - link "Visite nosso Facebook" [ref=e51] [cursor=pointer]:
+        - /url: https://www.facebook.com/abitacacb/
+        - generic [ref=e52]:  
+  - generic [ref=e54]:
+    - heading "Galeria Bitaca Café Bar" [level=2] [ref=e55]: Galeria Bitaca Café Bar
+    - paragraph [ref=e56]: O espaço cultural que abriga o cinema de Capão Bonito
+    - generic [ref=e57]:
+      - generic [ref=e58] [cursor=pointer]:
+        - img "Bitaca Café Bar - Fachada" [ref=e59]
+        - generic [ref=e60]:
+          - heading "Bitaca Café Bar" [level=3] [ref=e61]
+          - paragraph [ref=e62]: Fachada com casinha pintada
+      - generic [ref=e63] [cursor=pointer]:
+        - img "Shows e Eventos" [ref=e64]
+        - generic [ref=e65]:
+          - heading "Shows Ao Vivo" [level=3] [ref=e66]
+          - paragraph [ref=e67]: Música alternativa e underground
+      - generic [ref=e68] [cursor=pointer]:
+        - img "Ambiente do Bar" [ref=e69]
+        - generic [ref=e70]:
+          - heading "Ambiente Interno" [level=3] [ref=e71]
+          - paragraph [ref=e72]: Espaço cultural alternativo
+      - generic [ref=e73] [cursor=pointer]:
+        - img "Arte Urbana" [ref=e74]
+        - generic [ref=e75]:
+          - heading "Arte & Grafite" [level=3] [ref=e76]
+          - paragraph [ref=e77]: Expressão visual local
+    - paragraph [ref=e78]:
+      - strong [ref=e79]: "Fotos:"
+      - text: Siga
+      - link "@abitacacb" [ref=e80] [cursor=pointer]:
+        - /url: https://www.instagram.com/abitacacb/
+      - text: no Instagram para ver mais do Bitaca!
+  - generic [ref=e82]:
+    - heading "Catálogo de Produções" [level=2] [ref=e83]
+    - paragraph [ref=e84]: 23 produções audiovisuais aprovadas pela Lei Paulo Gustavo
+    - paragraph [ref=e86]:
+      - strong [ref=e87]: "Em Produção:"
+      - text: Todos os projetos estão em fase de produção, com previsão de lançamento para 2025. Acompanhe as atualizações na
+      - link "Secretaria de Cultura" [ref=e88] [cursor=pointer]:
+        - /url: https://capaobonito.sp.gov.br/lei-paulo-gustavo/
+    - search [ref=e89]:
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - generic [ref=e92]: Buscar produções
+          - textbox "Buscar por título ou diretor" [ref=e93]:
+            - /placeholder: Buscar por título ou diretor...
+        - generic [ref=e94]:
+          - generic [ref=e95]:
+            - generic [ref=e96]:  
+            - text: "Ordenar por:"
+          - combobox "Ordenar produções" [ref=e97] [cursor=pointer]:
+            - option "Maior Pontuação" [selected]
+            - option "A-Z (Alfabética)"
+            - option "ID (Ordem Original)"
+      - group "Filtros de categoria" [ref=e98]:
+        - button "Mostrar todas as produções" [pressed] [ref=e99] [cursor=pointer]: Todos
+        - button "Filtrar produções lançadas" [ref=e100] [cursor=pointer]: Lançados
+        - button "Filtrar produções em produção" [ref=e101] [cursor=pointer]: Em Produção
+        - button "Filtrar produções de patrimônio" [ref=e102] [cursor=pointer]:
+          - generic [ref=e103]:  
+          - text: Patrimônio
+        - button "Filtrar produções musicais" [ref=e104] [cursor=pointer]:
+          - generic [ref=e105]:  
+          - text: Música
+        - button "Filtrar produções ambientais" [ref=e106] [cursor=pointer]:
+          - generic [ref=e107]:  
+          - text: Ambiente
+    - region "Lista de produções audiovisuais" [ref=e108]:
+      - generic [ref=e109] [cursor=pointer]:
+        - generic [ref=e111]:
+          - generic [ref=e112]:  
+          - text: TOP 1
+        - generic [ref=e113]:
+          - heading "Ponteia Viola" [level=3] [ref=e114]
+          - paragraph [ref=e115]:
+            - text: 👤
+            - generic [ref=e116]:  
+            - text: "Dir: Margarida Chaves de Oliveira Scuoteguazza"
+          - generic [ref=e117]:
+            - generic [ref=e118]:
+              - generic [ref=e119]:  
+              - text: 15-20 min
+            - generic [ref=e120]:
+              - generic [ref=e121]:  
+              - text: Documentário
+          - generic [ref=e122]:
+            - generic [ref=e123]:
+              - generic [ref=e124]: 
+              - text: Em Produção
+            - generic [ref=e125]: LPG 238
+            - generic [ref=e126]: PNAB 98
+          - paragraph [ref=e127]: Documentário sobre a tradição da viola caipira em Capão Bonito, explorando técnicas de ponteio e a memória musical da cultura caipira local.
+        - text: Ver Detalhes
+      - generic [ref=e128] [cursor=pointer]:
+        - generic [ref=e130]:
+          - generic [ref=e131]:  
+          - text: TOP 2
+        - generic [ref=e132]:
+          - heading "Os Cascatinhas" [level=3] [ref=e133]
+          - paragraph [ref=e134]:
+            - text: 👤
+            - generic [ref=e135]:  
+            - text: "Dir: Flavio Francisco Ramos Pereira"
+          - generic [ref=e136]:
+            - generic [ref=e137]:
+              - generic [ref=e138]:  
+              - text: 15-20 min
+            - generic [ref=e139]:
+              - generic [ref=e140]:  
+              - text: Documentário
+          - generic [ref=e141]:
+            - generic [ref=e142]:
+              - generic [ref=e143]: 
+              - text: Em Produção
+            - generic [ref=e144]: LPG 236
+            - generic [ref=e145]: PNAB 96
+          - paragraph [ref=e146]: Registro da música sertaneja de raiz em Capão Bonito, explorando a tradição das duplas caipiras e a identidade musical do interior paulista.
+        - text: Ver Detalhes
+      - generic [ref=e147] [cursor=pointer]:
+        - generic [ref=e149]:
+          - generic [ref=e150]:  
+          - text: TOP 3
+        - generic [ref=e151]:
+          - heading "Reconstruction" [level=3] [ref=e152]
+          - paragraph [ref=e153]:
+            - text: 👤
+            - generic [ref=e154]:  
+            - text: "Dir: Bruna Maximovitz Kadoo Polississo"
+          - generic [ref=e155]:
+            - generic [ref=e156]:
+              - generic [ref=e157]:  
+              - text: 12-15 min
+            - generic [ref=e158]:
+              - generic [ref=e159]:  
+              - text: Curta-metragem
+          - generic [ref=e160]:
+            - generic [ref=e161]:
+              - generic [ref=e162]: 
+              - text: Em Produção
+            - generic [ref=e163]: LPG 234
+            - generic [ref=e164]: PNAB 94
+          - paragraph [ref=e165]: Narrativa sobre reconstrução e memória em Capão Bonito, explorando transformações urbanas e preservação da identidade local.
+        - text: Ver Detalhes
+      - generic [ref=e166] [cursor=pointer]:
+        - generic [ref=e168]:
+          - heading "A Crônica" [level=3] [ref=e169]
+          - paragraph [ref=e170]:
+            - text: 👤
+            - generic [ref=e171]:  
+            - text: "Dir: Micaelen de Oliveira Silva"
+          - generic [ref=e172]:
+            - generic [ref=e173]:
+              - generic [ref=e174]:  
+              - text: 12-15 min
+            - generic [ref=e175]:
+              - generic [ref=e176]:  
+              - text: Curta-metragem
+          - generic [ref=e177]:
+            - generic [ref=e178]:
+              - generic [ref=e179]: 
+              - text: Em Produção
+            - generic [ref=e180]: LPG 234
+            - generic [ref=e181]: PNAB 94
+          - paragraph [ref=e182]: Obra inspirada no gênero literário da crônica, retratando o cotidiano e as histórias do dia a dia em Capão Bonito.
+        - text: Ver Detalhes
+      - generic [ref=e183] [cursor=pointer]:
+        - generic [ref=e185]:
+          - heading "Grupo Êre" [level=3] [ref=e186]
+          - paragraph [ref=e187]:
+            - text: 👤
+            - generic [ref=e188]:  
+            - text: "Dir: Luan Augusto da Costa Oliveira"
+          - generic [ref=e189]:
+            - generic [ref=e190]:
+              - generic [ref=e191]:  
+              - text: 10-15 min
+            - generic [ref=e192]:
+              - generic [ref=e193]:  
+              - text: Documentário Musical
+          - generic [ref=e194]:
+            - generic [ref=e195]:
+              - generic [ref=e196]: 
+              - text: Em Produção
+            - generic [ref=e197]: LPG 232
+            - generic [ref=e198]: PNAB 92
+          - paragraph [ref=e199]: Documentário sobre o Grupo Êre, explorando suas raízes culturais e contribuições para a cena musical de Capão Bonito.
+        - text: Ver Detalhes
+      - generic [ref=e200] [cursor=pointer]:
+        - generic [ref=e202]:
+          - 'heading "Pelas Ruas de Capão: Skate e Espaços Públicos" [level=3] [ref=e203]'
+          - paragraph [ref=e204]:
+            - text: 👤
+            - generic [ref=e205]:  
+            - text: "Dir: Valdir dos Reis Junior"
+          - generic [ref=e206]:
+            - generic [ref=e207]:
+              - generic [ref=e208]:  
+              - text: 15-20 min
+            - generic [ref=e209]:
+              - generic [ref=e210]:  
+              - text: Documentário
+          - generic [ref=e211]:
+            - generic [ref=e212]:
+              - generic [ref=e213]: 
+              - text: Em Produção
+            - generic [ref=e214]: LPG 230
+            - generic [ref=e215]: PNAB 90
+          - paragraph [ref=e216]: Documentário sobre a cultura do skate em Capão Bonito, explorando a relação dos jovens com o espaço urbano e as práticas esportivas.
+        - text: Ver Detalhes
+      - generic [ref=e217] [cursor=pointer]:
+        - generic [ref=e219]:  
+        - generic [ref=e220]:
+          - heading "Animação Memórias Vivas" [level=3] [ref=e221]
+          - paragraph [ref=e222]:
+            - text: 👤
+            - generic [ref=e223]:  
+            - text: "Dir: Jose Luiz Rodrigues"
+          - generic [ref=e224]:
+            - generic [ref=e225]:
+              - generic [ref=e226]:  
+              - text: 8-12 min
+            - generic [ref=e227]:
+              - generic [ref=e228]:  
+              - text: Animação
+          - generic [ref=e229]:
+            - generic [ref=e230]:
+              - generic [ref=e231]: 
+              - text: Em Produção
+            - generic [ref=e232]: LPG 228
+            - generic [ref=e233]: PNAB 88
+          - paragraph [ref=e234]: Animação que dá vida às memórias e histórias tradicionais de Capão Bonito, preservando o patrimônio cultural através da arte visual.
+        - text: Ver Detalhes
+      - generic [ref=e235] [cursor=pointer]:
+        - generic [ref=e237]:
+          - heading "Amarelo, Vermelho, Azul" [level=3] [ref=e238]
+          - paragraph [ref=e239]:
+            - text: 👤
+            - generic [ref=e240]:  
+            - text: "Dir: Lucas Brener Andrade de Oliveira"
+          - generic [ref=e241]:
+            - generic [ref=e242]:
+              - generic [ref=e243]:  
+              - text: 10-15 min
+            - generic [ref=e244]:
+              - generic [ref=e245]:  
+              - text: Curta-metragem
+          - generic [ref=e246]:
+            - generic [ref=e247]:
+              - generic [ref=e248]: 
+              - text: Em Produção
+            - generic [ref=e249]: LPG 226
+            - generic [ref=e250]: PNAB 86
+          - paragraph [ref=e251]: Obra experimental que explora cores, natureza e percepções visuais da paisagem de Capão Bonito.
+        - text: Ver Detalhes
+      - generic [ref=e252] [cursor=pointer]:
+        - generic [ref=e254]:
+          - heading "Versos Vivos de Nossa Cidade" [level=3] [ref=e255]
+          - paragraph [ref=e256]:
+            - text: 👤
+            - generic [ref=e257]:  
+            - text: "Dir: Agatha Fabiane Santiago da Paixão"
+          - generic [ref=e258]:
+            - generic [ref=e259]:
+              - generic [ref=e260]:  
+              - text: 8-12 min
+            - generic [ref=e261]:
+              - generic [ref=e262]:  
+              - text: Curta Poético
+          - generic [ref=e263]:
+            - generic [ref=e264]:
+              - generic [ref=e265]: 
+              - text: Em Produção
+            - generic [ref=e266]: LPG 224
+            - generic [ref=e267]: PNAB 84
+          - paragraph [ref=e268]: Curta-metragem poético que transforma versos e poesias locais em narrativa visual sobre a cidade.
+        - text: Ver Detalhes
+    - generic [ref=e269]:
+      - button "Carregar mais produções" [ref=e270] [cursor=pointer]:
+        - generic [ref=e271]: 
+        - text: Carregar Mais
+      - paragraph [ref=e272]: Mostrando 9 de 23 produções
+  - generic [ref=e274]:
+    - heading "Sobre as Leis de Fomento" [level=2] [ref=e275]
+    - generic [ref=e276]:
+      - generic [ref=e278]:
+        - heading "Lei Paulo Gustavo" [level=3] [ref=e280]
+        - paragraph [ref=e281]: Lei Complementar nº 195/2022
+        - generic [ref=e282]:
+          - generic [ref=e283]:
+            - generic [ref=e284]: R$ 64.000
+            - text: Edital 03 Audiovisual
+          - generic [ref=e285]:
+            - generic [ref=e286]: R$ 75.000
+            - text: Edital 04 Demais Áreas
+        - paragraph [ref=e287]:
+          - text: Maior investimento direto no setor cultural da história do Brasil. Criada em resposta aos impactos da pandemia, homenageia o ator Paulo Gustavo.
+          - strong [ref=e288]: "Editais em Capão Bonito:"
+          - text: Edital 03/2024 (Audiovisual) e Edital 04/2024 (Demais Áreas Culturais). Resultados aguardando divulgação oficial.
+        - link "Saiba Mais" [ref=e289] [cursor=pointer]:
+          - /url: https://capaobonito.sp.gov.br/lei-paulo-gustavo/
+      - generic [ref=e292]:
+        - heading "Política Nacional Aldir Blanc" [level=3] [ref=e294]
+        - paragraph [ref=e295]: Lei nº 14.399/2022
+        - generic [ref=e296]:
+          - generic [ref=e297]:
+            - generic [ref=e298]: "2024"
+            - text: Edital 005/2024
+          - generic [ref=e299]:
+            - generic [ref=e301]: 
+            - text: Em Análise
+        - paragraph [ref=e302]:
+          - text: Fomento contínuo por 5 anos (2023-2027). Política estruturante que garante investimento sustentável na cultura, homenageando o compositor Aldir Blanc.
+          - strong [ref=e303]: "Edital em Capão Bonito:"
+          - text: Chamamento Público 005/2024 para fomento à cultura. Resultados em processo de análise.
+        - link "Saiba Mais" [ref=e304] [cursor=pointer]:
+          - /url: https://capaobonito.sp.gov.br/lei-aldir-blanc/
+  - generic [ref=e306]:
+    - heading "Análise Cultural" [level=2] [ref=e307]
+    - paragraph [ref=e308]: Mapeamento dos eixos temáticos e perfil das produções
+    - generic [ref=e309]:
+      - generic [ref=e310]:
+        - heading "Eixos Temáticos das Produções" [level=3] [ref=e311]
+        - paragraph [ref=e312]:
+          - text: "As produções audiovisuais de Capão Bonito abrangem três eixos principais:"
+          - strong [ref=e313]: Patrimônio & Memória
+          - text: ","
+          - strong [ref=e314]: Cultura Musical
+          - text: e
+          - strong [ref=e315]: Meio Ambiente
+          - text: . O detalhamento estatístico será disponibilizado após divulgação oficial dos resultados.
+      - generic [ref=e316]:
+        - generic [ref=e317] [cursor=pointer]:
+          - generic [ref=e319]:  
+          - heading "Patrimônio & Memória" [level=4] [ref=e320]
+          - generic [ref=e321]: "9"
+          - paragraph [ref=e322]: Projetos focados em preservação histórica, gastronomia e memória cultural
+        - generic [ref=e323] [cursor=pointer]:
+          - generic [ref=e325]:  
+          - heading "Cultura Musical" [level=4] [ref=e326]
+          - generic [ref=e327]: "8"
+          - paragraph [ref=e328]: Do sertanejo de raiz ao hip hop - diversidade da cena musical local
+        - generic [ref=e329] [cursor=pointer]:
+          - generic [ref=e331]:  
+          - heading "Meio Ambiente & Urbano" [level=4] [ref=e332]
+          - generic [ref=e333]: "7"
+          - paragraph [ref=e334]: Natureza, preservação, espaço urbano e sustentabilidade
+      - generic [ref=e335]:
+        - heading "  Produtores em Destaque" [level=3] [ref=e336]:
+          - generic [ref=e337]:  
+          - text: Produtores em Destaque
+        - paragraph [ref=e338]: TOP 3 - Maiores pontuações combinadas LPG + PNAB
+        - generic [ref=e339]:
+          - generic [ref=e340]:
+            - generic [ref=e341]:
+              - generic [ref=e342]:  
+              - generic [ref=e343]: 2º
+            - generic [ref=e344]:
+              - heading "Flavio Francisco Ramos Pereira" [level=4] [ref=e345]
+              - paragraph [ref=e346]: "\"Os Cascatinhas\""
+            - generic [ref=e347]:
+              - generic [ref=e348]: LPG 236
+              - generic [ref=e349]: PNAB 96
+            - generic [ref=e350]:
+              - button "Compartilhar no Twitter" [ref=e351] [cursor=pointer]:
+                - generic [ref=e352]:  
+              - button "Compartilhar no Facebook" [ref=e353] [cursor=pointer]:
+                - generic [ref=e354]:  
+              - button "Compartilhar no WhatsApp" [ref=e355] [cursor=pointer]:
+                - generic [ref=e356]:  
+          - generic [ref=e357]:
+            - generic [ref=e358]:
+              - generic [ref=e359]:  
+              - generic [ref=e360]: 1º
+            - generic [ref=e361]:
+              - heading "Margarida Chaves de Oliveira Scuoteguazza" [level=4] [ref=e362]
+              - paragraph [ref=e363]: "\"Ponteia Viola\""
+            - generic [ref=e364]:
+              - generic [ref=e365]: LPG 238
+              - generic [ref=e366]: PNAB 98
+            - generic [ref=e367]:
+              - button "Compartilhar no Twitter" [ref=e368] [cursor=pointer]:
+                - generic [ref=e369]:  
+              - button "Compartilhar no Facebook" [ref=e370] [cursor=pointer]:
+                - generic [ref=e371]:  
+              - button "Compartilhar no WhatsApp" [ref=e372] [cursor=pointer]:
+                - generic [ref=e373]:  
+          - generic [ref=e374]:
+            - generic [ref=e375]:
+              - generic [ref=e376]:  
+              - generic [ref=e377]: 3º
+            - generic [ref=e378]:
+              - heading "Bruna Maximovitz Kadoo Polississo" [level=4] [ref=e379]
+              - paragraph [ref=e380]: "\"Reconstruction\""
+            - generic [ref=e381]:
+              - generic [ref=e382]: LPG 234
+              - generic [ref=e383]: PNAB 94
+            - generic [ref=e384]:
+              - button "Compartilhar no Twitter" [ref=e385] [cursor=pointer]:
+                - generic [ref=e386]:  
+              - button "Compartilhar no Facebook" [ref=e387] [cursor=pointer]:
+                - generic [ref=e388]:  
+              - button "Compartilhar no WhatsApp" [ref=e389] [cursor=pointer]:
+                - generic [ref=e390]:  
+        - paragraph [ref=e391]:
+          - generic [ref=e392]:  
+          - emphasis [ref=e393]: "Dados oficiais: Lei Paulo Gustavo - Edital 03/2024 | PNAB - Edital 005/2024"
+  - generic [ref=e395]:
+    - heading "Grave Seu Depoimento" [level=2] [ref=e396]: Grave Seu Depoimento
+    - paragraph [ref=e397]: Produtores e artistas, compartilhem suas experiências sobre o projeto
+    - generic [ref=e398]:
+      - generic [ref=e399]:
+        - generic [ref=e400]: 🎥
+        - heading "Vídeo em Tempo Real" [level=3] [ref=e401]
+        - paragraph [ref=e402]: Use sua câmera para gravar um depoimento rápido (até 60 segundos) sobre sua produção audiovisual.
+        - button "Iniciar Gravação" [ref=e403] [cursor=pointer]: Iniciar Gravação
+      - generic [ref=e404]:
+        - heading "  Como funciona?" [level=4] [ref=e405]:
+          - generic [ref=e406]:  
+          - text: Como funciona?
+        - list [ref=e407]:
+          - listitem [ref=e408]: ✅ Clique em "Iniciar Gravação"
+          - listitem [ref=e409]: 🎬 Permita acesso à câmera e microfone
+          - listitem [ref=e410]: 🔴 Grave seu depoimento (máx 60s)
+          - listitem [ref=e411]: 💾 Baixe o vídeo automaticamente
+        - paragraph [ref=e412]:
+          - generic [ref=e413]:  
+          - strong [ref=e414]: "Privacidade:"
+          - text: O vídeo é gravado localmente no seu dispositivo. Nada é enviado para servidores externos.
+  - generic [ref=e417]:
+    - button "Fechar" [ref=e418] [cursor=pointer]:
+      - generic [ref=e419]: 
+    - generic [ref=e420]:
+      - heading "Gravador de Depoimentos" [level=3] [ref=e421]: Gravador de Depoimentos
+      - paragraph
+    - generic [ref=e422]:
+      - paragraph [ref=e424]: Clique no botão abaixo para iniciar a câmera
+      - button "Iniciar Câmera" [ref=e425] [cursor=pointer]: Iniciar Câmera
+    - text:   
+    - generic [ref=e426]:
+      - generic [ref=e427]: ⚠️
+      - paragraph [ref=e428]: Erro ao acessar câmera/microfone.
+      - paragraph [ref=e429]:
+        - strong [ref=e430]: "Como permitir:"
+      - list [ref=e431]:
+        - listitem [ref=e432]: Clique no ícone de cadeado/câmera na barra de endereço
+        - listitem [ref=e433]: Selecione "Sempre permitir" para câmera e microfone
+        - listitem [ref=e434]: Recarregue a página
+  - contentinfo [ref=e435]:
+    - generic [ref=e436]:
+      - generic [ref=e437]:
+        - generic [ref=e438]:
+          - img [ref=e440]:
+            - generic [ref=e442]: BITACA
+            - generic [ref=e443]: Cinema
+          - paragraph [ref=e444]:
+            - text: "\"Preservando a memória,"
+            - text: celebrando a cultura"
+        - generic [ref=e445]:
+          - heading "Links" [level=4] [ref=e446]
+          - list [ref=e447]:
+            - listitem [ref=e448]:
+              - link "Catálogo" [ref=e449] [cursor=pointer]:
+                - /url: "#catalogo"
+            - listitem [ref=e450]:
+              - link "Sobre as Leis" [ref=e451] [cursor=pointer]:
+                - /url: "#leis"
+            - listitem [ref=e452]:
+              - link "Análise Cultural" [ref=e453] [cursor=pointer]:
+                - /url: "#analise"
+            - listitem [ref=e454]:
+              - link "Documentação" [ref=e455] [cursor=pointer]:
+                - /url: README.md
+        - generic [ref=e456]:
+          - heading "Contato" [level=4] [ref=e457]
+          - list [ref=e458]:
+            - listitem [ref=e459]:
+              - generic [ref=e460]:  
+              - text: cultura@capaobonito.sp.gov.br
+            - listitem [ref=e461]:
+              - generic [ref=e462]:  
+              - text: (15) 3542-3553
+            - listitem [ref=e463]:
+              - generic [ref=e464]:  
+              - text: Capão Bonito/SP
+            - listitem [ref=e465]:
+              - generic [ref=e466]:  
+              - text: Renato Heber de Almeida
+      - generic [ref=e467]:
+        - generic [ref=e468]:
+          - generic [ref=e469]: Lei Paulo Gustavo
+          - generic [ref=e470]: PNAB
+        - paragraph [ref=e471]: "© 2025 Bitaca Cinema | Última atualização: Outubro 2025"
+  - text:  
+  - button "Voltar ao topo" [ref=e472] [cursor=pointer]:
+    - generic [ref=e473]: 
+  - generic [ref=e474]:
+    - button "Abrir assistente Bitaca AI" [ref=e475] [cursor=pointer]:
+      - img [ref=e476]
+    - generic [ref=e478]:
+      - generic [ref=e479]:
+        - generic [ref=e480]: 🎬
+        - generic [ref=e481]:
+          - heading "Bitaca AI" [level=4] [ref=e482]
+          - paragraph [ref=e483]: Online
+        - generic [ref=e485]:
+          - button "" [ref=e486] [cursor=pointer]:
+            - generic [ref=e487]: 
+          - button "×" [ref=e488] [cursor=pointer]
+      - generic [ref=e490]:
+        - generic [ref=e491]: 🎬
+        - generic [ref=e492]:
+          - generic [ref=e493]:
+            - text: Olá! 👋 Sou o assistente do
+            - strong [ref=e494]: Bitaca Cinema
+            - text: .
+            - text: "Posso te ajudar a:"
+            - list [ref=e495]:
+              - listitem [ref=e496]: 🔍 Encontrar produções
+              - listitem [ref=e497]: 💡 Recomendar filmes
+              - listitem [ref=e498]: 📚 Explicar as leis de fomento
+              - listitem [ref=e499]: 🏛️ Informações sobre o Bitaca
+          - generic [ref=e500]: 17:24
+      - generic [ref=e501]:
+        - button "🎵 Produções Musicais" [ref=e502] [cursor=pointer]
+        - button "📖 Lei Paulo Gustavo" [ref=e503] [cursor=pointer]
+        - button "🏛️ Patrimônio" [ref=e504] [cursor=pointer]
+      - generic [ref=e505]:
+        - generic [ref=e506]:
+          - textbox "Digite sua mensagem..." [active] [ref=e507]
+          - button [disabled] [ref=e508]
+        - generic [ref=e510]:
+          - text: Powered by
+          - strong [ref=e511]: NVIDIA NIM
+          - text: 🚀
+```
