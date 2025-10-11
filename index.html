@@ -134,9 +134,9 @@
             </div>
         </div>
 
-        <!-- Three.js 3D Scene -->
-        <div class="hero__three-scene">
-            <canvas id="three-canvas"></canvas>
+        <!-- Three.js Particle System (Mobile-Optimized) -->
+        <div class="hero__particle-scene">
+            <canvas id="particle-canvas"></canvas>
         </div>
     </div>
 </section>
@@ -616,10 +616,11 @@
 <!-- Scripts -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/main.js"></script>
-<script src="assets/js/three-effects.js"></script>
+
+<!-- Three.js Particle Hero (ES Module) -->
+<script type="module" src="assets/js/particle-hero.js"></script>
 
 <!-- KeenIcons já inicializado via CSS -->
 </body>

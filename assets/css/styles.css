@@ -433,25 +433,64 @@ ul {
     flex-wrap: wrap;
 }
 
-/* Three.js 3D Scene */
-.hero__three-scene {
+/* Three.js Particle System (Mobile-First) */
+.hero__particle-scene {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
-    right: 0;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 5%;
+    left: 0;
+    pointer-events: auto;
+    z-index: 1;
 }
 
-#three-canvas {
-    width: 600px;
-    height: 600px;
-    max-width: 50vw;
-    max-height: 50vh;
+#particle-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    touch-action: none; /* Importante para touch events */
+}
+
+.particle-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(196, 30, 58, 0.9);
+    color: var(--branco);
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    font-family: var(--font-bold);
+    font-size: 0.85rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    animation: pulseHint 2s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes pulseHint {
+    0%, 100% {
+        opacity: 0.7;
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.05);
+    }
+}
+
+/* Mobile: Hero content precisa estar acima do canvas */
+.hero__content {
+    position: relative;
+    z-index: 5;
+}
+
+/* Desktop: ocultar hint */
+@media (min-width: 768px) {
+    .particle-hint {
+        display: none;
+    }
 }
 
 @keyframes float {
@@ -739,7 +778,7 @@ ul {
 
 /* Indicador "Ver Mais" no hover */
 .filme-card::after {
-    content: '👁️ Ver Detalhes';
+    content: 'Ver Detalhes';
     position: absolute;
     bottom: 1rem;
     right: 1.5rem;
