@@ -5,7 +5,6 @@
 
 // ===== INICIALIZAÇÃO =====
 document.addEventListener('DOMContentLoaded', function () {
-    initAOS();
     initNavigation();
     initScrollEffects();
     initFilmesGrid();
@@ -20,18 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initCharts();
     animateCounters();
 });
-
-// ===== AOS ANIMATION =====
-function initAOS() {
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true,
-            offset: 100
-        });
-    }
-}
 
 // ===== NAVEGAÇÃO =====
 function initNavigation() {
