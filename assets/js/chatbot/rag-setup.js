@@ -9,8 +9,8 @@
  */
 class EmbeddingGenerator {
   constructor(apiKey) {
-    this.apiKey = apiKey;
-    this.baseURL = 'https://integrate.api.nvidia.com/v1';
+    this.apiKey = apiKey; // Não é mais necessário, backend tem a key
+    this.baseURL = 'https://api.abitaca.com.br/api';
     this.embeddingModel = 'nvidia/nv-embedqa-e5-v5'; // 1024 dimensions
   }
 
@@ -24,7 +24,6 @@ class EmbeddingGenerator {
       const response = await fetch(`${this.baseURL}/embeddings`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({

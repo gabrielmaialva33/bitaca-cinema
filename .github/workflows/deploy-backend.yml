@@ -1,4 +1,4 @@
-name: Deploy Backend to cinewinx
+name: Deploy to cinewinx (Backend + Frontend)
 
 on:
   push:
@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - 'backend/**'
+      - 'assets/**'
+      - 'index.html'
+      - '*.html'
   workflow_dispatch: # Permite executar manualmente
 
 env:
@@ -37,7 +40,7 @@ jobs:
         run: |
           ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "mkdir -p ${{ env.DEPLOY_DIR }}/{nginx/conf.d,nginx/logs,nginx/ssl,logs}"
 
-      - name: Copy files to server
+      - name: Copy backend files to server
         run: |
           cd backend
           rsync -avz --delete \
@@ -47,7 +50,22 @@ jobs:
             --exclude '*.pyc' \
             --exclude 'logs/' \
             --exclude '.github/' \
+            --exclude 'www/' \
             ./ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/
+
+      - name: Copy frontend files to server
+        run: |
+          # Create www directory
+          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "mkdir -p ${{ env.DEPLOY_DIR }}/www"
+
+          # Copy HTML files
+          rsync -avz *.html ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/www/
+
+          # Copy assets directory
+          rsync -avz assets/ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/www/assets/
+
+          # Copy robots and sitemap
+          rsync -avz robots.txt sitemap.xml ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/www/ || true
 
       - name: Configure environment
         run: |

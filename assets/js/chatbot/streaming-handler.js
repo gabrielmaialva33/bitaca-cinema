@@ -9,8 +9,8 @@
  */
 class StreamingHandler {
   constructor(apiKey) {
-    this.apiKey = apiKey;
-    this.baseURL = 'https://integrate.api.nvidia.com/v1';
+    this.apiKey = apiKey; // Não é mais necessário, backend tem a key
+    this.baseURL = 'https://api.abitaca.com.br/api';
     this.model = 'qwen/qwen3-next-80b-a3b-thinking'; // Modelo de raciocínio
   }
 
@@ -31,7 +31,6 @@ class StreamingHandler {
       const response = await fetch(`${this.baseURL}/chat/completions`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -112,7 +111,6 @@ class StreamingHandler {
       const response = await fetch(`${this.baseURL}/chat/completions`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({

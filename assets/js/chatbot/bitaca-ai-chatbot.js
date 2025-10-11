@@ -222,7 +222,6 @@ ${i + 1}. **${prod.titulo}**
       const response = await fetch(`${this.streamingHandler.baseURL}/embeddings`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
