@@ -2331,6 +2331,7 @@ ul {
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x proximity;
         padding-bottom: 0.5rem;
+        padding-right: 1rem; /* Padding extra para último botão não ficar cortado */
     }
 
     .filter-btn {
