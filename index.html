@@ -514,6 +514,150 @@
     </div>
 </section>
 
+<!-- Depoimentos Section -->
+<section class="depoimentos section" id="depoimentos">
+    <div class="container">
+        <h2 class="section__title">
+            <i class="ki-filled ki-video"></i> Grave Seu Depoimento
+        </h2>
+        <p class="section__subtitle">
+            Produtores e artistas, compartilhem suas experiências sobre o projeto
+        </p>
+
+        <div class="depoimentos-content">
+            <div class="depoimentos-card">
+                <div class="depoimentos-card__icon">🎥</div>
+                <h3 class="depoimentos-card__title">Vídeo em Tempo Real</h3>
+                <p class="depoimentos-card__description">
+                    Use sua câmera para gravar um depoimento rápido (até 60 segundos) sobre sua produção audiovisual.
+                </p>
+                <button class="btn btn-primary" data-action="open-recorder">
+                    <i class="ki-filled ki-video"></i> Iniciar Gravação
+                </button>
+            </div>
+
+            <div class="depoimentos-info">
+                <h4><i class="ki-filled ki-information-3"></i> Como funciona?</h4>
+                <ul>
+                    <li>✅ Clique em "Iniciar Gravação"</li>
+                    <li>🎬 Permita acesso à câmera e microfone</li>
+                    <li>🔴 Grave seu depoimento (máx 60s)</li>
+                    <li>💾 Baixe o vídeo automaticamente</li>
+                </ul>
+                <p class="depoimentos-privacy">
+                    <i class="ki-filled ki-shield-tick"></i>
+                    <strong>Privacidade:</strong> O vídeo é gravado localmente no seu dispositivo.
+                    Nada é enviado para servidores externos.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Video Recorder Modal -->
+<div class="recorder-modal" id="recorder-modal">
+    <div class="recorder-modal__overlay"></div>
+    <div class="recorder-modal__content">
+        <button class="recorder-modal__close" data-action="close-recorder" aria-label="Fechar">
+            <i class="ki-filled ki-cross"></i>
+        </button>
+
+        <div class="recorder-header">
+            <h3 class="recorder-title">
+                <i class="ki-filled ki-video"></i> Gravador de Depoimentos
+            </h3>
+            <p class="recorder-subtitle" id="recording-status">Clique para iniciar</p>
+        </div>
+
+        <!-- Initial State -->
+        <div class="recorder-body" data-state="initial">
+            <div class="recorder-placeholder">
+                <i class="ki-filled ki-video" style="font-size: 4rem; color: var(--vermelho-bitaca);"></i>
+                <p>Clique no botão abaixo para iniciar a câmera</p>
+            </div>
+            <button class="btn btn-primary btn-large" id="btn-start-camera">
+                <i class="ki-filled ki-video"></i> Iniciar Câmera
+            </button>
+        </div>
+
+        <!-- Loading State -->
+        <div class="recorder-body" data-state="loading" style="display: none;">
+            <div class="recorder-loader">
+                <div class="spinner"></div>
+                <p>Iniciando câmera...</p>
+            </div>
+        </div>
+
+        <!-- Ready / Recording State -->
+        <div class="recorder-body" data-state="ready" style="display: none;" data-display="block">
+            <div class="video-container">
+                <video id="camera-preview" autoplay playsinline muted></video>
+                <div class="recording-indicator" style="display: none;">
+                    <span class="rec-dot"></span>
+                    <span class="rec-text">REC</span>
+                </div>
+                <div class="recording-timer" id="recording-timer">00:00</div>
+            </div>
+            <div class="recorder-controls">
+                <button class="btn btn-danger btn-circle" id="btn-record" title="Gravar">
+                    <i class="ki-filled ki-record-circle"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Recording State (shown when recording) -->
+        <div data-state="recording" style="display: none;">
+            <div class="video-container">
+                <video id="camera-preview-rec" autoplay playsinline muted></video>
+                <div class="recording-indicator">
+                    <span class="rec-dot"></span>
+                    <span class="rec-text">REC</span>
+                </div>
+            </div>
+            <div class="recorder-controls">
+                <button class="btn btn-danger btn-circle" id="btn-stop" title="Parar">
+                    <i class="ki-filled ki-stop"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Processing State -->
+        <div class="recorder-body" data-state="processing" style="display: none;">
+            <div class="recorder-loader">
+                <div class="spinner"></div>
+                <p>Processando vídeo...</p>
+            </div>
+        </div>
+
+        <!-- Preview State -->
+        <div class="recorder-body" data-state="preview" style="display: none;">
+            <div class="video-container">
+                <video id="recorded-preview" controls playsinline></video>
+            </div>
+            <div class="recorder-controls">
+                <button class="btn btn-secondary" id="btn-retry">
+                    <i class="ki-filled ki-arrows-circle"></i> Regravar
+                </button>
+                <button class="btn btn-primary" id="btn-download">
+                    <i class="ki-filled ki-file-down"></i> Baixar Vídeo
+                </button>
+            </div>
+        </div>
+
+        <!-- Permission Error -->
+        <div class="permission-error" id="permission-error" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <p>Para gravar depoimentos, você precisa permitir acesso à câmera e microfone.</p>
+            <p><strong>Como permitir:</strong></p>
+            <ol>
+                <li>Clique no ícone de cadeado/câmera na barra de endereço</li>
+                <li>Selecione "Sempre permitir" para câmera e microfone</li>
+                <li>Recarregue a página</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
 <!-- Footer -->
 <footer class="footer" id="contato">
     <div class="footer__container container">
