@@ -63,8 +63,8 @@ class ParticleHero {
         // Event listeners
         this.setupEventListeners();
 
-        // Start animation
-        this.animate();
+        // Start animation (setAnimationLoop é o padrão moderno)
+        this.renderer.setAnimationLoop(() => this.animate());
     }
 
     createParticleSystem() {
@@ -243,8 +243,6 @@ class ParticleHero {
     }
 
     animate() {
-        requestAnimationFrame(() => this.animate());
-
         // Smooth mouse lerp
         this.mouse.lerp(this.targetMouse, 0.1);
 
@@ -318,16 +316,29 @@ class ParticleHero {
     }
 
     dispose() {
+        // Stop animation loop
+        this.renderer.setAnimationLoop(null);
+
+        // Dispose particles
         if (this.particles) {
             this.particles.geometry.dispose();
             this.particles.material.dispose();
+            this.scene.remove(this.particles);
         }
 
+        // Dispose explosion particles
         this.explosionParticles.forEach(particle => {
             particle.geometry.dispose();
             particle.material.dispose();
+            this.scene.remove(particle);
         });
 
+        // Dispose background shader
+        if (this.backgroundShader) {
+            this.backgroundShader.dispose();
+        }
+
+        // Dispose renderer
         this.renderer.dispose();
     }
 }
