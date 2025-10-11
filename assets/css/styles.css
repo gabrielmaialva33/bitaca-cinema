@@ -1395,6 +1395,23 @@ ul {
     font-size: 1.2rem;
 }
 
+/* Animação de Confetti */
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(600px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.confetti {
+    position: absolute;
+    border-radius: 50%;
+}
+
 /* Tooltips */
 .tooltip-container {
     position: relative;
