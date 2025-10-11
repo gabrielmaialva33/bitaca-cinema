@@ -19,7 +19,7 @@
   "license": "MIT",
   "homepage": "https://gabrielmaialva33.github.io/bitaca-cinema/",
   "devDependencies": {
-    "@playwright/test": "^1.40.0",
-    "jest": "^29.7.0"
+    "@playwright/test": "^1.56.0",
+    "jest": "^30.2.0"
   }
 }
