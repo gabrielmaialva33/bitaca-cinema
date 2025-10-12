@@ -13,7 +13,12 @@
 
     // UI Elements
     let modal, video, previewVideo, btnStart, btnRecord, btnStop,
-        btnDownload, btnRetry, timer, status, permissionError;
+        btnDownload, btnRetry, btnUpload, timer, status, permissionError;
+
+    // Backend API URL
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:3000'
+        : 'https://api.abitaca.com.br';
 
     /**
      * Inicializa UI
@@ -34,6 +39,7 @@
         btnStop = document.getElementById('btn-stop');
         btnDownload = document.getElementById('btn-download');
         btnRetry = document.getElementById('btn-retry');
+        btnUpload = document.getElementById('btn-upload');
         timer = document.getElementById('recording-timer');
         status = document.getElementById('recording-status');
         permissionError = document.getElementById('permission-error');
@@ -51,6 +57,7 @@
         if (btnRecord) btnRecord.addEventListener('click', startRecording);
         if (btnStop) btnStop.addEventListener('click', stopRecording);
         if (btnDownload) btnDownload.addEventListener('click', downloadVideo);
+        if (btnUpload) btnUpload.addEventListener('click', uploadVideo);
         if (btnRetry) btnRetry.addEventListener('click', retryRecording);
 
         // Close modal on overlay click
