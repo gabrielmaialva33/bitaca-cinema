@@ -3,6 +3,9 @@
 // Conecta o chatbot com a interface do usuário
 // ===============================================
 
+// Import Firebase Analytics
+import { analytics_events } from '../firebase-config.js';
+
 (function () {
     'use strict';
 
@@ -163,6 +166,9 @@
             if (badge) {
                 badge.style.display = 'none';
             }
+
+            // Track chatbot opened
+            analytics_events.chatbot_opened();
         }
     }
 
@@ -221,6 +227,9 @@
 
         // Add user message to UI
         appendMessage(message, 'user');
+
+        // Track message sent
+        analytics_events.chatbot_message_sent(message.length);
 
         // Hide suggestions
         const suggestions = document.querySelector('.quick-suggestions');
@@ -463,10 +472,16 @@
      * Global function to scroll to production
      */
     window.scrollToProduction = function (id) {
+        // Track production card clicked
+        const element = document.querySelector(`[data-id="${id}"]`);
+        if (element) {
+            const title = element.querySelector('.filme-card__title')?.textContent || 'Unknown';
+            analytics_events.production_card_clicked(id, title);
+        }
+
         closeChat();
 
         setTimeout(() => {
-            const element = document.querySelector(`[data-id="${id}"]`);
             if (element) {
                 element.scrollIntoView({behavior: 'smooth', block: 'center'});
 
