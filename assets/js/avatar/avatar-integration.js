@@ -16,6 +16,7 @@ class AvatarChatbotIntegration {
         this.avatarContainer = null;
         this.isAvatarEnabled = false;
         this.avatarToggleButton = null;
+        this.uiCreated = false;
 
         console.log('🤖 Initializing Avatar-Chatbot Integration...');
     }
@@ -24,16 +25,32 @@ class AvatarChatbotIntegration {
      * Initialize and inject avatar into chatbot UI
      */
     init() {
-        // Create avatar container in chatbot
-        this.createAvatarUI();
-
-        // Add toggle button
-        this.createToggleButton();
-
-        // Hook into chatbot message events
+        // Hook into chatbot message events first
         this.hookChatbotEvents();
 
+        // Wait for chatbot to open before creating UI
+        this.waitForChatbotOpen();
+
         console.log('✅ Avatar-Chatbot integration ready!');
+    }
+
+    /**
+     * Wait for chatbot to open and create UI
+     */
+    waitForChatbotOpen() {
+        const checkInterval = setInterval(() => {
+            const container = document.getElementById('chatbot-container');
+            if (container && container.classList.contains('active') && !this.uiCreated) {
+                clearInterval(checkInterval);
+                this.createAvatarUI();
+                this.createToggleButton();
+                this.uiCreated = true;
+                console.log('✅ Avatar UI created after chatbot opened');
+            }
+        }, 100);
+
+        // Cleanup after 30 seconds
+        setTimeout(() => clearInterval(checkInterval), 30000);
     }
 
     /**
