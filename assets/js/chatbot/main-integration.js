@@ -8,7 +8,7 @@
 
     // Configuração
     const CONFIG = {
-        API_KEY: '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',
+        API_KEY: '', // Não é mais necessário - backend gerencia a API key
         AUTO_OPEN_DELAY: 3000, // Abrir automaticamente após 3s (primeiro acesso)
         WELCOME_SHOWN_KEY: 'bitaca_chatbot_welcome_shown'
     };
