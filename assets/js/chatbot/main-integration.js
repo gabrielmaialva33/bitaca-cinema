@@ -278,17 +278,17 @@
     function addWelcomeMessage() {
         const welcomeHTML = `
       <div class="chatbot-message bot-message">
-        <div class="message-avatar">🎬</div>
+        <div class="message-avatar">
+          <img src="https://avatar.iran.liara.run/username?username=Bitaca+Cinema" alt="Bitaca Bot" class="avatar-img" />
+        </div>
         <div class="message-content">
           <div class="message-bubble">
-            Olá! 👋 Sou o assistente do <strong>Bitaca Cinema</strong>.<br><br>
-            Posso te ajudar a:
-            <ul style="margin: 10px 0 0 0; padding-left: 20px; line-height: 1.8;">
-              <li>🔍 Encontrar produções</li>
-              <li>💡 Recomendar filmes</li>
-              <li>📚 Explicar as leis de fomento</li>
-              <li>🏛️ Informações sobre o Bitaca</li>
-            </ul>
+            Olá! Sou o assistente do <strong>Bitaca Cinema</strong>.<br><br>
+            Posso te ajudar a:<br>
+            Encontrar produções<br>
+            Recomendar filmes<br>
+            Explicar as leis de fomento<br>
+            Informações sobre o Bitaca
           </div>
           <div class="message-timestamp">${getCurrentTime()}</div>
         </div>
@@ -308,10 +308,16 @@
         const messages = document.getElementById('chatbot-messages');
         if (!messages) return;
 
+        const avatarUrl = role === 'user'
+            ? 'https://avatar.iran.liara.run/public/boy'
+            : 'https://avatar.iran.liara.run/username?username=Bitaca+Cinema';
+
         const messageEl = document.createElement('div');
         messageEl.className = `chatbot-message ${role}-message`;
         messageEl.innerHTML = `
-      <div class="message-avatar">${role === 'user' ? '👤' : '🎬'}</div>
+      <div class="message-avatar">
+        <img src="${avatarUrl}" alt="${role === 'user' ? 'User' : 'Bot'}" class="avatar-img" />
+      </div>
       <div class="message-content">
         <div class="message-bubble">${escapeHtml(text)}</div>
         <div class="message-timestamp">${getCurrentTime()}</div>
@@ -334,7 +340,9 @@
             currentBotMessage = document.createElement('div');
             currentBotMessage.className = 'chatbot-message bot-message';
             currentBotMessage.innerHTML = `
-        <div class="message-avatar">🎬</div>
+        <div class="message-avatar">
+          <img src="https://avatar.iran.liara.run/username?username=Bitaca+Cinema" alt="Bot" class="avatar-img" />
+        </div>
         <div class="message-content">
           <div class="message-bubble"></div>
           <div class="message-timestamp">${getCurrentTime()}</div>
@@ -360,14 +368,17 @@
         if (!messages) return;
 
         productions.forEach(prod => {
+            const directorAvatar = `https://avatar.iran.liara.run/username?username=${encodeURIComponent(prod.metadata.diretor)}`;
+
             const cardEl = document.createElement('div');
             cardEl.className = 'production-card';
             cardEl.innerHTML = `
         <div class="production-card-header">
-          <div class="production-card-icon">${getIconForTema(prod.metadata.tema)}</div>
+          <img src="${directorAvatar}" alt="${escapeHtml(prod.metadata.diretor)}" class="director-avatar" />
           <div>
             <h5 class="production-card-title">${escapeHtml(prod.titulo)}</h5>
             <p class="production-card-director">Por ${escapeHtml(prod.metadata.diretor)}</p>
+            <span class="production-card-theme">${getThemeLabel(prod.metadata.tema)}</span>
           </div>
         </div>
         <div class="production-card-body">
@@ -427,16 +438,16 @@
     }
 
     /**
-     * Get icon for tema
+     * Get theme label
      */
-    function getIconForTema(tema) {
-        const icons = {
-            'patrimonio': '🏛️',
-            'musica': '🎵',
-            'ambiente': '🌿',
-            'default': '🎬'
+    function getThemeLabel(tema) {
+        const labels = {
+            'patrimonio': 'Patrimônio',
+            'musica': 'Música',
+            'ambiente': 'Ambiente',
+            'default': 'Cinema'
         };
-        return icons[tema.toLowerCase()] || icons.default;
+        return labels[tema.toLowerCase()] || labels.default;
     }
 
     /**
