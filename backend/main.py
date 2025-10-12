@@ -42,6 +42,14 @@ except ImportError as e:
     print(f"⚠️  R2 not available: {e}")
     R2_ENABLED = False
 
+# AGI Multi-Agent System
+try:
+    from agents.agent_manager import AgentManager
+    AGI_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️  AGI system not available: {e}")
+    AGI_AVAILABLE = False
+
 # Configuration
 NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY")
 NVIDIA_API_URL = os.getenv("NVIDIA_API_URL", "https://integrate.api.nvidia.com/v1")
