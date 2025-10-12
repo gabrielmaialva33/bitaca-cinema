@@ -255,8 +255,9 @@ import { analytics_events } from '../firebase-config.js';
                     // Finalize bot message
                     currentBotMessage = null;
 
-                    // Add production cards if found
+                    // Track RAG search if productions were found
                     if (productions && productions.length > 0) {
+                        analytics_events.chatbot_rag_search(message, productions.length);
                         appendProductionCards(productions);
                     }
 

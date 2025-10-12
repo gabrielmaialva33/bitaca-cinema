@@ -26,10 +26,26 @@ def get_mongo_client() -> MongoClient:
 
     if _client is None:
         try:
-            _client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=5000)
+            # Use certifi for SSL certificate verification
+            import certifi
+            _client = MongoClient(
+                MONGODB_URI,
+                serverSelectionTimeoutMS=5000,
+                tlsCAFile=certifi.where()
+            )
             # Test connection
             _client.admin.command('ping')
             print("✅ MongoDB connected successfully")
+        except ImportError:
+            # Fallback without certifi
+            print("⚠️  certifi not found, using default SSL settings")
+            try:
+                _client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=5000)
+                _client.admin.command('ping')
+                print("✅ MongoDB connected successfully")
+            except ConnectionFailure as e:
+                print(f"❌ MongoDB connection failed: {e}")
+                raise
         except ConnectionFailure as e:
             print(f"❌ MongoDB connection failed: {e}")
             raise
