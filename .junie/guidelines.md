@@ -111,8 +111,14 @@ The chatbot uses vector embeddings for semantic search over production data.
   {
     "id": 1,
     "titulo": "Production Title",
-    "embedding": [0.123, -0.456, ...],
-    "metadata": { ... }
+    "embedding": [
+      0.123,
+      -0.456,
+      ...
+    ],
+    "metadata": {
+      ...
+    }
   }
 ]
 ```
@@ -185,23 +191,23 @@ const filmesData = global.window.filmesData;
 
 // Test function
 function test(description, assertion) {
-  try {
-    if (assertion()) {
-      console.log(`✅ PASS: ${description}`);
-      passed++;
-    } else {
-      console.log(`❌ FAIL: ${description}`);
-      failed++;
+    try {
+        if (assertion()) {
+            console.log(`✅ PASS: ${description}`);
+            passed++;
+        } else {
+            console.log(`❌ FAIL: ${description}`);
+            failed++;
+        }
+    } catch (error) {
+        console.log(`❌ FAIL: ${description} - ${error.message}`);
+        failed++;
     }
-  } catch (error) {
-    console.log(`❌ FAIL: ${description} - ${error.message}`);
-    failed++;
-  }
 }
 
 // Write tests
 test('Your test description', () => {
-  return /* boolean condition */;
+    return /* boolean condition */;
 });
 ```
 
@@ -276,19 +282,19 @@ All production data is stored in the `filmesData` array:
 
 ```javascript
 const filmesData = [
-  {
-    id: 1,
-    titulo: 'Production Title',
-    diretor: 'Director Name',
-    duracao: '15-20 min',
-    genero: 'Documentary',
-    status: 'producao',  // lancado, producao, pre-producao, pos-producao
-    tema: 'musica',      // musica, patrimonio, identidade
-    pontuacaoLPG: 238,
-    pontuacaoPNAB: 98,
-    sinopse: 'Description...',
-    estreia: '2025'
-  }
+    {
+        id: 1,
+        titulo: 'Production Title',
+        diretor: 'Director Name',
+        duracao: '15-20 min',
+        genero: 'Documentary',
+        status: 'producao',  // lancado, producao, pre-producao, pos-producao
+        tema: 'musica',      // musica, patrimonio, identidade
+        pontuacaoLPG: 238,
+        pontuacaoPNAB: 98,
+        sinopse: 'Description...',
+        estreia: '2025'
+    }
 ];
 ```
 
@@ -332,32 +338,33 @@ const filmesData = [
 
 ```javascript
 try {
-  const response = await fetch(apiEndpoint, options);
-  if (!response.ok) {
-    throw new Error(`API Error: ${response.status}`);
-  }
-  // Process response
+    const response = await fetch(apiEndpoint, options);
+    if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`);
+    }
+    // Process response
 } catch (error) {
-  console.error('API call failed:', error);
-  // Graceful degradation
+    console.error('API call failed:', error);
+    // Graceful degradation
 }
 ```
 
 **Streaming Pattern:**
 
 ```javascript
-async *streamResponse(messages) {
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder('utf-8');
-  
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    
-    const chunk = decoder.decode(value);
-    // Process chunk
-    yield token;
-  }
+async * streamResponse(messages)
+{
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder('utf-8');
+
+    while (true) {
+        const {done, value} = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value);
+        // Process chunk
+        yield token;
+    }
 }
 ```
 
@@ -366,11 +373,20 @@ async *streamResponse(messages) {
 **Methodology:** Component-based with BEM-like naming
 
 ```css
-.chatbot-container { }
-.chatbot-header { }
-.chatbot-header__title { }
-.chatbot-messages { }
-.chatbot-input-area { }
+.chatbot-container {
+}
+
+.chatbot-header {
+}
+
+.chatbot-header__title {
+}
+
+.chatbot-messages {
+}
+
+.chatbot-input-area {
+}
 ```
 
 **Key CSS Files:**
@@ -388,10 +404,11 @@ async *streamResponse(messages) {
 Example:
 
 ```html
-<button 
-  class="chatbot-fab" 
-  id="chatbot-fab" 
-  aria-label="Abrir assistente Bitaca AI">
+
+<button
+        class="chatbot-fab"
+        id="chatbot-fab"
+        aria-label="Abrir assistente Bitaca AI">
 ```
 
 ---
