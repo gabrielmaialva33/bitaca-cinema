@@ -17,3 +17,6 @@ slowapi>=0.1.9
 
 # Monitoring
 prometheus-fastapi-instrumentator>=7.0.0
+
+# MongoDB
+pymongo[srv]>=4.6.0
