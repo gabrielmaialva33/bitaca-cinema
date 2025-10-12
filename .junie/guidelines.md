@@ -253,18 +253,18 @@ For complex features (like the chatbot), ES6 classes are used:
 
 ```javascript
 class BitacaAIChatbot {
-  constructor(apiKey) {
-    this.apiKey = apiKey;
-    this.conversationHistory = [];
-  }
-  
-  async initialize() {
-    // Setup logic
-  }
-  
-  async sendMessage(message) {
-    // Message handling
-  }
+    constructor(apiKey) {
+        this.apiKey = apiKey;
+        this.conversationHistory = [];
+    }
+
+    async initialize() {
+        // Setup logic
+    }
+
+    async sendMessage(message) {
+        // Message handling
+    }
 }
 ```
 

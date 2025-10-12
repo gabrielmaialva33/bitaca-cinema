@@ -1,21 +1,21 @@
 // Quick test script for chatbot RAG functionality
-const { chromium } = require('playwright');
+const {chromium} = require('playwright');
 
 (async () => {
     console.log('🎬 Testing Bitaca Cinema Chatbot RAG...\n');
 
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({headless: true});
     const page = await browser.newPage();
 
     try {
         // 1. Navigate to production site
         console.log('📍 Opening https://www.abitaca.com.br...');
-        await page.goto('https://www.abitaca.com.br', { waitUntil: 'networkidle' });
+        await page.goto('https://www.abitaca.com.br', {waitUntil: 'networkidle'});
         console.log('✅ Page loaded');
 
         // 2. Check if chatbot FAB is visible
         const fab = await page.locator('#chatbot-fab');
-        await fab.waitFor({ state: 'visible', timeout: 5000 });
+        await fab.waitFor({state: 'visible', timeout: 5000});
         console.log('✅ Chatbot FAB visible');
 
         // 3. Open chatbot
@@ -63,7 +63,7 @@ const { chromium } = require('playwright');
 
     } catch (error) {
         console.error('❌ Test failed:', error.message);
-        await page.screenshot({ path: 'test-error.png', fullPage: false });
+        await page.screenshot({path: 'test-error.png', fullPage: false});
         console.log('📸 Screenshot saved: test-error.png');
     } finally {
         await browser.close();

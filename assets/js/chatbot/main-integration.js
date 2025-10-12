@@ -4,7 +4,7 @@
 // ===============================================
 
 // Import Firebase Analytics
-import { analytics_events } from '../firebase-config.js';
+import {analytics_events} from '../firebase-config.js';
 
 (function () {
     'use strict';
