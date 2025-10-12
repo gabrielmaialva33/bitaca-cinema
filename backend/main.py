@@ -90,6 +90,22 @@ class HealthResponse(BaseModel):
     uptime: float
 
 
+class AGIChatRequest(BaseModel):
+    query: str = Field(..., description="User query text")
+    intent: Optional[str] = Field(None, description="Detected intent (CHAT, SEARCH, RECOMMEND, INFO)")
+    context: Optional[Dict[str, Any]] = Field(None, description="Additional context")
+
+
+class AGIChatResponse(BaseModel):
+    response: str
+    agent: str
+    metadata: Dict[str, Any]
+
+
+class AGIRecommendRequest(BaseModel):
+    production_title: str = Field(..., description="Production title for recommendations")
+
+
 # Rate limiting store (simple in-memory)
 rate_limit_store: Dict[str, List[float]] = {}
 
@@ -119,6 +135,8 @@ def check_rate_limit(client_ip: str) -> bool:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan events"""
+    global agent_manager, embeddings_data
+
     print("🚀 Starting Bitaca Cinema API...")
     print(f"📡 NVIDIA Model: {NVIDIA_MODEL}")
     print(f"🔑 API Key: {NVIDIA_API_KEY[:20]}...")
@@ -132,6 +150,30 @@ async def lifespan(app: FastAPI):
             print("✅ MongoDB initialized successfully")
         except Exception as e:
             print(f"⚠️  MongoDB initialization failed: {e}")
+
+    # Initialize AGI Multi-Agent System
+    if AGI_AVAILABLE:
+        try:
+            # Load embeddings data
+            embeddings_path = "../assets/data/embeddings.json"
+            if os.path.exists(embeddings_path):
+                with open(embeddings_path, 'r', encoding='utf-8') as f:
+                    embeddings_data = json.load(f)
+                print(f"✅ Loaded {len(embeddings_data)} embeddings")
+            else:
+                print(f"⚠️  Embeddings file not found: {embeddings_path}")
+                embeddings_data = []
+
+            # Initialize AgentManager
+            agent_manager = AgentManager(
+                nvidia_api_key=NVIDIA_API_KEY,
+                embeddings_data=embeddings_data
+            )
+            print("✅ AGI Multi-Agent System initialized")
+            print(f"   🤖 Agents: CinemaAgent, CulturalAgent, DiscoveryAgent")
+        except Exception as e:
+            print(f"⚠️  AGI initialization failed: {e}")
+            agent_manager = None
 
     yield
 
