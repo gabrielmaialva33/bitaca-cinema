@@ -6,6 +6,9 @@
 // Import Firebase Analytics
 import {analytics_events} from '../firebase-config.js';
 
+// Import Avatar Integration
+import AvatarChatbotIntegration from '../avatar/avatar-integration.js';
+
 (function () {
     'use strict';
 
@@ -18,6 +21,7 @@ import {analytics_events} from '../firebase-config.js';
 
     // Estado global
     let chatbot = null;
+    let avatarIntegration = null;
     let currentBotMessage = null;
     let isProcessing = false;
 
@@ -35,6 +39,16 @@ import {analytics_events} from '../firebase-config.js';
         } catch (error) {
             console.error('❌ Failed to initialize chatbot:', error);
             return;
+        }
+
+        // Inicializar Avatar Integration
+        try {
+            avatarIntegration = new AvatarChatbotIntegration(chatbot);
+            avatarIntegration.init();
+            console.log('✅ Avatar integration ready');
+        } catch (error) {
+            console.warn('⚠️ Avatar integration failed (non-critical):', error);
+            // Continue without avatar if it fails
         }
 
         // Setup UI
