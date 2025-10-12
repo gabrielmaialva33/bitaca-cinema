@@ -13,7 +13,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # MongoDB Configuration
-MONGODB_URI = os.getenv("MONGODB_URI", "mongodb+srv://abitaca:JtnoN1lnNaj5foOl@abitaca.sgfb7dm.mongodb.net/?retryWrites=true&w=majority&appName=abitaca")
+MONGODB_URI = os.getenv("MONGODB_URI")
+if not MONGODB_URI:
+    raise ValueError("MONGODB_URI environment variable is required")
 DATABASE_NAME = "bitaca_cinema"
 
 # Global MongoDB client
