@@ -122,7 +122,7 @@ class StreamingHandler {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    model: this.model,
+                    model: model,
                     messages: messages,
                     temperature: temperature,
                     max_tokens: max_tokens,

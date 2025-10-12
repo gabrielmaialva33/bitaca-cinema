@@ -58,6 +58,7 @@ class Message(BaseModel):
 
 class ChatCompletionRequest(BaseModel):
     messages: List[Message] = Field(..., description="Conversation messages")
+    model: Optional[str] = Field(None, description="NVIDIA NIM model to use (overrides default)")
     temperature: float = Field(0.7, ge=0.0, le=2.0)
     max_tokens: int = Field(500, ge=1, le=4096)
     top_p: float = Field(0.9, ge=0.0, le=1.0)
@@ -187,8 +188,13 @@ async def chat_completions(request: ChatCompletionRequest, req: Request):
     # Prepare request for NVIDIA API
     messages_dict = [msg.dict() for msg in request.messages]
 
+    # Use model from request or fallback to environment default
+    selected_model = request.model if request.model else NVIDIA_MODEL
+
+    print(f"🎯 Using model: {selected_model}")
+
     payload = {
-        "model": NVIDIA_MODEL,
+        "model": selected_model,
         "messages": messages_dict,
         "temperature": request.temperature,
         "max_tokens": request.max_tokens,
