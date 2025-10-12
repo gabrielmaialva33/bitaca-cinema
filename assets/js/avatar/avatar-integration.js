@@ -41,7 +41,7 @@ class AvatarChatbotIntegration {
      */
     createAvatarUI() {
         // Find chatbot container
-        const chatbotWidget = document.querySelector('.bitaca-chatbot-widget');
+        const chatbotWidget = document.querySelector('#bitaca-chatbot');
         if (!chatbotWidget) {
             console.error('❌ Chatbot widget not found');
             return;
@@ -77,7 +77,7 @@ class AvatarChatbotIntegration {
         this.avatarContainer.appendChild(loadingIndicator);
 
         // Insert avatar container at the top of chatbot messages area
-        const chatbotBody = chatbotWidget.querySelector('.bitaca-chatbot-body');
+        const chatbotBody = chatbotWidget.querySelector('#chatbot-container');
         if (chatbotBody) {
             chatbotBody.insertBefore(this.avatarContainer, chatbotBody.firstChild);
         }
