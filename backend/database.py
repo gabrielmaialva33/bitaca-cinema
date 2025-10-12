@@ -14,9 +14,10 @@ load_dotenv()
 
 # MongoDB Configuration
 MONGODB_URI = os.getenv("MONGODB_URI")
-if not MONGODB_URI:
-    raise ValueError("MONGODB_URI environment variable is required")
 DATABASE_NAME = "bitaca_cinema"
+
+# MongoDB is optional - AGI system can work without it
+MONGODB_ENABLED = bool(MONGODB_URI)
 
 # Global MongoDB client
 _client: Optional[MongoClient] = None
@@ -25,6 +26,9 @@ _client: Optional[MongoClient] = None
 def get_mongo_client() -> MongoClient:
     """Get or create MongoDB client"""
     global _client
+
+    if not MONGODB_ENABLED:
+        raise ValueError("MongoDB is not configured. Set MONGODB_URI environment variable.")
 
     if _client is None:
         try:
