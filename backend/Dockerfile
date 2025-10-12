@@ -35,6 +35,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY main.py .
+COPY database.py .
+COPY r2_storage.py .
+COPY agents/ ./agents/
 COPY .env.example .env
 
 # Change ownership to app user
