@@ -1,6 +1,9 @@
 # Agno Framework
 agno>=2.0.0
 
+# Data processing for RAG
+numpy>=1.24.0
+
 # FastAPI e dependências
 fastapi>=0.115.0
 uvicorn[standard]>=0.32.0

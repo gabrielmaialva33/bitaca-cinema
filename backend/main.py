@@ -154,15 +154,23 @@ async def lifespan(app: FastAPI):
     # Initialize AGI Multi-Agent System
     if AGI_AVAILABLE:
         try:
-            # Load embeddings data
-            embeddings_path = "../assets/data/embeddings.json"
-            if os.path.exists(embeddings_path):
-                with open(embeddings_path, 'r', encoding='utf-8') as f:
-                    embeddings_data = json.load(f)
-                print(f"✅ Loaded {len(embeddings_data)} embeddings")
-            else:
-                print(f"⚠️  Embeddings file not found: {embeddings_path}")
-                embeddings_data = []
+            # Load embeddings data - try multiple paths
+            embeddings_paths = [
+                "embeddings.json",  # VPS path (same directory)
+                "../assets/data/embeddings.json",  # Local development path
+                "/opt/bitaca-cinema/embeddings.json"  # Absolute VPS path
+            ]
+
+            embeddings_data = []
+            for embeddings_path in embeddings_paths:
+                if os.path.exists(embeddings_path):
+                    with open(embeddings_path, 'r', encoding='utf-8') as f:
+                        embeddings_data = json.load(f)
+                    print(f"✅ Loaded {len(embeddings_data)} embeddings from {embeddings_path}")
+                    break
+
+            if not embeddings_data:
+                print(f"⚠️  Embeddings file not found in any of: {embeddings_paths}")
 
             # Initialize AgentManager
             agent_manager = AgentManager(
