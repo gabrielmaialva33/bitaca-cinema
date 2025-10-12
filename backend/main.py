@@ -44,6 +44,7 @@ class ChatCompletionRequest(BaseModel):
 class EmbeddingRequest(BaseModel):
     input: str = Field(..., description="Text to embed")
     model: str = Field("nvidia/nv-embedqa-e5-v5", description="Embedding model")
+    input_type: str = Field("passage", description="Input type: query or passage")
 
 
 class HealthResponse(BaseModel):
@@ -237,6 +238,7 @@ async def generate_embeddings(request: EmbeddingRequest, req: Request):
     payload = {
         "model": request.model,
         "input": request.input,
+        "input_type": request.input_type,
         "encoding_format": "float",
     }
 
