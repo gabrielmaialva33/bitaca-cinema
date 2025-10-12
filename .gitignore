@@ -22,3 +22,4 @@ package-lock.json
 test-results
 tests/report
 backend/.env
+playwright-report
