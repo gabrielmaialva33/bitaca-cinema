@@ -88,7 +88,7 @@ class AvatarChatbotIntegration {
      */
     createToggleButton() {
         // Find chatbot header
-        const chatbotHeader = document.querySelector('.bitaca-chatbot-header');
+        const chatbotHeader = document.querySelector('.chatbot-header');
         if (!chatbotHeader) {
             console.error('❌ Chatbot header not found');
             return;
@@ -125,7 +125,7 @@ class AvatarChatbotIntegration {
         });
 
         // Add button to header
-        const headerActions = chatbotHeader.querySelector('.bitaca-chatbot-actions');
+        const headerActions = chatbotHeader.querySelector('.chatbot-header-actions');
         if (headerActions) {
             headerActions.appendChild(this.avatarToggleButton);
         }
