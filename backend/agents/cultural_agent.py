@@ -14,7 +14,7 @@ class CulturalAgent:
     Expert in Lei Paulo Gustavo, PNAB, and cultural funding
     """
 
-    def __init__(self, nvidia_api_key: str, model_id: str = "qwen/qwen3-next-80b-a3b-thinking"):
+    def __init__(self, nvidia_api_key: str, model_id: str = "meta/llama-3.3-70b-instruct"):
         self.nvidia_api_key = nvidia_api_key
         self.model_id = model_id
 
