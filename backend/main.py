@@ -6,6 +6,7 @@ Powered by Agno + FastAPI + NVIDIA NIM
 import asyncio
 import json
 import os
+import tempfile
 from contextlib import asynccontextmanager
 from datetime import datetime
 from typing import List, Dict, Any, Optional
@@ -14,7 +15,7 @@ import httpx
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse, JSONResponse
+from fastapi.responses import StreamingResponse, JSONResponse, FileResponse
 from pydantic import BaseModel, Field
 
 # Load environment variables
@@ -107,6 +108,12 @@ class AGIChatResponse(BaseModel):
 
 class AGIRecommendRequest(BaseModel):
     production_title: str = Field(..., description="Production title for recommendations")
+
+
+class TTSRequest(BaseModel):
+    text: str = Field(..., description="Text to convert to speech")
+    voice: str = Field("pt-BR", description="Voice language code (e.g., pt-BR, en-US)")
+    format: str = Field("audio/wav", description="Audio format")
 
 
 # Rate limiting store (simple in-memory)
@@ -594,6 +601,74 @@ async def agi_health():
             "available": False,
             "error": str(e)
         })
+
+
+@app.post("/api/tts")
+async def text_to_speech(request: TTSRequest, req: Request):
+    """
+    Text-to-Speech Endpoint
+    Converts text to speech audio using Edge TTS (Microsoft)
+    Returns WAV audio file
+    """
+    # Rate limiting
+    client_ip = req.client.host
+    if not check_rate_limit(client_ip):
+        raise HTTPException(
+            status_code=429,
+            detail="Rate limit exceeded. Try again in 1 minute."
+        )
+
+    try:
+        import edge_tts
+
+        # Map voice codes to Edge TTS voices
+        voice_map = {
+            "pt-BR": "pt-BR-FranciscaNeural",  # Brazilian Portuguese - Female
+            "pt-BR-male": "pt-BR-AntonioNeural",  # Brazilian Portuguese - Male
+            "en-US": "en-US-JennyNeural",  # English US - Female
+            "en-US-male": "en-US-GuyNeural",  # English US - Male
+            "es-ES": "es-ES-ElviraNeural",  # Spanish - Female
+        }
+
+        # Get voice from map, default to pt-BR
+        selected_voice = voice_map.get(request.voice, voice_map["pt-BR"])
+
+        print(f"🎤 TTS Request: {len(request.text)} chars, voice: {selected_voice}")
+
+        # Create temporary file for audio
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp_file:
+            temp_path = temp_file.name
+
+        # Generate speech using Edge TTS
+        communicate = edge_tts.Communicate(request.text, selected_voice)
+        await communicate.save(temp_path)
+
+        print(f"✅ TTS generated: {temp_path}")
+
+        # Return audio file
+        return FileResponse(
+            temp_path,
+            media_type="audio/wav",
+            headers={
+                "Content-Disposition": "inline; filename=speech.wav",
+                "Cache-Control": "no-cache"
+            },
+            background=None  # Don't delete file automatically
+        )
+
+    except ImportError:
+        print("❌ edge-tts not installed")
+        raise HTTPException(
+            status_code=503,
+            detail="TTS service not available. Install edge-tts: pip install edge-tts"
+        )
+
+    except Exception as e:
+        print(f"❌ TTS error: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"TTS generation failed: {str(e)}"
+        )
 
 
 @app.exception_handler(Exception)
