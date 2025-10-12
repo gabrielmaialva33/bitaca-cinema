@@ -15,22 +15,24 @@ class StreamingHandler {
         this.baseURL = isLocalhost
             ? 'http://localhost:3000/api'
             : 'https://api.abitaca.com.br/api';
-        this.model = 'qwen/qwen3-next-80b-a3b-thinking'; // Modelo de raciocínio
+        this.defaultModel = 'meta/llama-3.3-70b-instruct'; // Modelo padrão
         console.log(`StreamingHandler initialized with baseURL: ${this.baseURL}`);
     }
 
     /**
      * Faz streaming de resposta da API
      * @param {Array} messages - Array de mensagens do chat
-     * @param {Object} options - Opções adicionais (temperature, max_tokens, etc)
+     * @param {Object} modelConfig - Configuração do modelo (model, temperature, max_tokens) ou opções antigas
      * @returns {AsyncGenerator<string>} - Generator que emite tokens
      */
-    async* streamResponse(messages, options = {}) {
+    async* streamResponse(messages, modelConfig = {}) {
+        // Suporta tanto modelConfig do router quanto options antigas
         const {
-            temperature = 0.7,
-            max_tokens = 500,
+            model = modelConfig.model || this.defaultModel,
+            temperature = modelConfig.temperature || 0.7,
+            max_tokens = modelConfig.max_tokens || 500,
             top_p = 0.9
-        } = options;
+        } = modelConfig;
 
         try {
             const response = await fetch(`${this.baseURL}/chat/completions`, {
@@ -39,7 +41,7 @@ class StreamingHandler {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    model: this.model,
+                    model: model,
                     messages: messages,
                     temperature: temperature,
                     max_tokens: max_tokens,
@@ -103,14 +105,15 @@ class StreamingHandler {
     /**
      * Faz requisição não-streaming (para casos específicos)
      * @param {Array} messages - Array de mensagens
-     * @param {Object} options - Opções
+     * @param {Object} modelConfig - Configuração do modelo ou opções
      * @returns {Promise<string>} - Resposta completa
      */
-    async generateResponse(messages, options = {}) {
+    async generateResponse(messages, modelConfig = {}) {
         const {
-            temperature = 0.7,
-            max_tokens = 500
-        } = options;
+            model = modelConfig.model || this.defaultModel,
+            temperature = modelConfig.temperature || 0.7,
+            max_tokens = modelConfig.max_tokens || 500
+        } = modelConfig;
 
         try {
             const response = await fetch(`${this.baseURL}/chat/completions`, {
