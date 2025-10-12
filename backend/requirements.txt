@@ -1,5 +1,6 @@
 # Agno Framework
 agno>=2.0.0
+openai>=2.0.0
 
 # Data processing for RAG
 numpy>=1.24.0
