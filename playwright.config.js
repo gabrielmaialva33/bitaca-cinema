@@ -11,10 +11,13 @@ module.exports = defineConfig({
 
     use: {
         baseURL: process.env.TEST_ENV === 'production'
-            ? 'https://gabrielmaialva33.github.io/bitaca-cinema/'
+            ? 'https://www.abitaca.com.br'
             : 'http://localhost:8000',
         trace: 'on-first-retry',
-        screenshot: 'only-on-failure',
+        screenshot: {
+            mode: 'only-on-failure',
+            fullPage: false
+        },
         video: 'retain-on-failure',
     },
 
