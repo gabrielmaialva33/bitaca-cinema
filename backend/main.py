@@ -3,19 +3,19 @@ Bitaca Cinema - Chatbot Backend API
 Powered by Agno + FastAPI + NVIDIA NIM
 """
 
-import os
-import json
 import asyncio
+import json
+import os
+from contextlib import asynccontextmanager
 from datetime import datetime
 from typing import List, Dict, Any, Optional
-from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import StreamingResponse, JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
-from dotenv import load_dotenv
 import httpx
+from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse, JSONResponse
+from pydantic import BaseModel, Field
 
 # Load environment variables
 load_dotenv()
@@ -26,6 +26,7 @@ try:
         get_mongo_client, close_mongo_connection, init_indexes,
         ConversationDB, AnalyticsDB, EmbeddingsCacheDB
     )
+
     MONGODB_AVAILABLE = True
 except ImportError as e:
     print(f"⚠️  MongoDB not available: {e}")
@@ -37,6 +38,7 @@ try:
         generate_presigned_upload_url, list_videos,
         delete_video, R2_AVAILABLE
     )
+
     R2_ENABLED = R2_AVAILABLE
 except ImportError as e:
     print(f"⚠️  R2 not available: {e}")
@@ -45,6 +47,7 @@ except ImportError as e:
 # AGI Multi-Agent System
 try:
     from agents.agent_manager import AgentManager
+
     AGI_AVAILABLE = True
 except ImportError as e:
     print(f"⚠️  AGI system not available: {e}")
@@ -275,10 +278,10 @@ async def chat_completions(request: ChatCompletionRequest, req: Request):
             async with httpx.AsyncClient(timeout=120.0) as client:
                 try:
                     async with client.stream(
-                        "POST",
-                        f"{NVIDIA_API_URL}/chat/completions",
-                        headers=headers,
-                        json=payload,
+                            "POST",
+                            f"{NVIDIA_API_URL}/chat/completions",
+                            headers=headers,
+                            json=payload,
                     ) as response:
                         if response.status_code != 200:
                             error_text = await response.aread()

@@ -3,9 +3,10 @@ Bitaca Cinema - Cultural Agent
 Specialized agent for cultural laws and public policies
 """
 
+from typing import Dict, Any
+
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
-from typing import Dict, Any
 
 
 class CulturalAgent:

@@ -4,6 +4,7 @@ Integrates with existing embeddings system
 """
 
 from typing import Optional
+
 import httpx
 import numpy as np
 

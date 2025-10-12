@@ -3,10 +3,10 @@ Bitaca Cinema - Cinema Agent
 Specialized agent for audiovisual productions knowledge
 """
 
+from typing import Dict, Any
+
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
-from typing import Dict, Any
-import os
 
 
 class CinemaAgent:

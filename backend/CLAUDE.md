@@ -4,23 +4,28 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Bitaca Cinema is a FastAPI-based chatbot backend for a cultural cinema project in Capão Bonito/SP, Brazil. It uses NVIDIA NIM for LLM capabilities and implements a multi-agent AI system (Agno framework) for specialized responses about cinema productions and Brazilian cultural laws.
+Bitaca Cinema is a FastAPI-based chatbot backend for a cultural cinema project in Capão Bonito/SP, Brazil. It uses
+NVIDIA NIM for LLM capabilities and implements a multi-agent AI system (Agno framework) for specialized responses about
+cinema productions and Brazilian cultural laws.
 
 ## Key Architecture Components
 
 ### Multi-Agent System (AGI)
+
 - **AgentManager** (`agents/agent_manager.py`): Orchestrates three specialized agents
-  - **CinemaAgent**: Handles production details, directors, themes
-  - **CulturalAgent**: Expertise in Brazilian cultural laws (Paulo Gustavo, Aldir Blanc, PNAB)
-  - **DiscoveryAgent**: RAG-based semantic search and recommendations using embeddings
+    - **CinemaAgent**: Handles production details, directors, themes
+    - **CulturalAgent**: Expertise in Brazilian cultural laws (Paulo Gustavo, Aldir Blanc, PNAB)
+    - **DiscoveryAgent**: RAG-based semantic search and recommendations using embeddings
 
 ### Core Services
+
 - **FastAPI Application** (`main.py`): Main API server with SSE streaming support
 - **MongoDB Integration** (`database.py`): Optional persistence for conversations and analytics
 - **R2 Storage** (`r2_storage.py`): Cloudflare R2 for video storage with presigned URLs
 - **Rate Limiting**: Dual-layer protection (Nginx + FastAPI) - 60 req/min per IP
 
 ### Deployment Architecture
+
 ```
 Cloudflare → Nginx (Docker) → FastAPI (4 workers) → NVIDIA NIM API
 ```
@@ -28,6 +33,7 @@ Cloudflare → Nginx (Docker) → FastAPI (4 workers) → NVIDIA NIM API
 ## Common Development Commands
 
 ### Local Development
+
 ```bash
 # Setup virtual environment
 python3.12 -m venv venv
@@ -44,6 +50,7 @@ uvicorn main:app --host 0.0.0.0 --port 3000 --workers 4
 ```
 
 ### Docker Operations
+
 ```bash
 # Build and start containers
 make build && make up
@@ -63,6 +70,7 @@ make clean
 ```
 
 ### Deployment
+
 ```bash
 # Deploy to production (requires SSH key setup)
 make deploy-ci
@@ -82,6 +90,7 @@ make health-remote   # Health check
 ```
 
 ### Testing API Endpoints
+
 ```bash
 # Health check
 curl http://localhost:3000/health
@@ -103,6 +112,7 @@ make test-remote
 ## Environment Configuration
 
 Required environment variables (see `.env.example`):
+
 - `NVIDIA_API_KEY`: NVIDIA NIM API key (required)
 - `NVIDIA_MODEL`: Default LLM model (qwen/qwen3-next-80b-a3b-thinking)
 - `MONGODB_URI`: MongoDB connection string (optional)
@@ -113,17 +123,20 @@ Required environment variables (see `.env.example`):
 ## API Endpoints
 
 ### Core Endpoints
+
 - `GET /health` - Health check with system info
 - `POST /api/chat/completions` - NVIDIA NIM chat proxy with SSE streaming
 - `POST /api/embeddings` - Generate text embeddings with caching
 
 ### AGI System Endpoints
+
 - `POST /api/agi/chat` - Multi-agent chat with intent routing
 - `POST /api/agi/recommend` - Get similar production recommendations
 - `GET /api/agi/info` - System capabilities and agent info
 - `GET /api/agi/health` - Agent system health check
 
 ### Storage Endpoints (R2)
+
 - `POST /api/upload/presigned-url` - Get presigned URL for video upload
 - `GET /api/videos` - List uploaded videos
 - `DELETE /api/videos/{file_key}` - Delete a video
@@ -151,7 +164,8 @@ backend/
 
 ## Key Technical Decisions
 
-1. **Multi-Agent Architecture**: Uses Agno framework for specialized knowledge domains - each agent has specific expertise and appropriate LLM model selection
+1. **Multi-Agent Architecture**: Uses Agno framework for specialized knowledge domains - each agent has specific
+   expertise and appropriate LLM model selection
 
 2. **Dual Rate Limiting**: Both Nginx (100 req/min global) and FastAPI (60 req/min per IP) for robust protection
 
@@ -159,7 +173,8 @@ backend/
 
 4. **SSE Streaming**: Real-time responses with proper buffering disabled for smooth streaming through proxies
 
-5. **Embeddings Cache**: Pre-computed embeddings for all cinema productions stored in `embeddings.json` for fast semantic search
+5. **Embeddings Cache**: Pre-computed embeddings for all cinema productions stored in `embeddings.json` for fast
+   semantic search
 
 6. **Docker Deployment**: Production runs in Docker with health checks, auto-restart, and proper logging
 

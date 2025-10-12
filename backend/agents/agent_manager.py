@@ -3,11 +3,11 @@ Bitaca Cinema - Agent Manager
 Orchestrates multi-agent system using Agno framework
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any
+
 from agents.cinema_agent import CinemaAgent
 from agents.cultural_agent import CulturalAgent
 from agents.discovery_agent import DiscoveryAgent
-import re
 
 
 class AgentManager:

@@ -3,9 +3,11 @@ Bitaca Cinema - Discovery Agent
 Specialized agent for search and recommendations using RAG
 """
 
+from typing import Dict, Any
+
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
-from typing import Dict, Any, List
+
 from agents.tools.rag_tool import RAGTool
 
 

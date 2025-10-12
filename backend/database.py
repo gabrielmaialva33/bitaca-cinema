@@ -6,9 +6,10 @@ Handles connection and collections for Bitaca Cinema
 import os
 from datetime import datetime
 from typing import Optional, Dict, Any
+
+from dotenv import load_dotenv
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
-from dotenv import load_dotenv
 
 load_dotenv()
 

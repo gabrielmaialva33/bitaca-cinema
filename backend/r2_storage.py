@@ -7,6 +7,7 @@ import os
 import uuid
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any
+
 import boto3
 from botocore.client import Config
 from botocore.exceptions import ClientError
@@ -53,10 +54,10 @@ def get_r2_client():
 
 
 def generate_presigned_upload_url(
-    file_extension: str = "webm",
-    content_type: str = "video/webm",
-    expires_in: int = 3600,
-    metadata: Optional[Dict[str, str]] = None
+        file_extension: str = "webm",
+        content_type: str = "video/webm",
+        expires_in: int = 3600,
+        metadata: Optional[Dict[str, str]] = None
 ) -> Dict[str, Any]:
     """
     Generate a presigned URL for direct browser upload to R2
