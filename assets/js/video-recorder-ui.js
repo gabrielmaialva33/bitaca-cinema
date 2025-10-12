@@ -220,6 +220,14 @@
             return;
         }
 
+        // Check file size (max 10MB for free tier)
+        const maxSize = 10 * 1024 * 1024; // 10MB
+        if (window._recordedBlob.size > maxSize) {
+            const sizeMB = (window._recordedBlob.size / 1024 / 1024).toFixed(2);
+            alert(`Vídeo muito grande (${sizeMB}MB).\n\nTamanho máximo: 10MB\n\nDica: Grave um vídeo mais curto (máx 60 segundos).`);
+            return;
+        }
+
         // Disable buttons during upload
         if (btnUpload) btnUpload.disabled = true;
         if (btnDownload) btnDownload.disabled = true;

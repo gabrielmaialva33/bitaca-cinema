@@ -95,7 +95,7 @@ def generate_presigned_upload_url(
             Fields=fields,
             Conditions=[
                 {"Content-Type": content_type},
-                ["content-length-range", 1, 100 * 1024 * 1024]  # Max 100MB
+                ["content-length-range", 1, 10 * 1024 * 1024]  # Max 10MB (free tier friendly)
             ],
             ExpiresIn=expires_in
         )
