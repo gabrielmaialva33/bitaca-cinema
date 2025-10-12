@@ -57,6 +57,10 @@ NVIDIA_MODEL = os.getenv("NVIDIA_MODEL", "qwen/qwen3-next-80b-a3b-thinking")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "").split(",")
 RATE_LIMIT_PER_MINUTE = int(os.getenv("RATE_LIMIT_PER_MINUTE", 60))
 
+# Global AGI manager (initialized on startup)
+agent_manager = None
+embeddings_data = []
+
 
 # Pydantic models
 class Message(BaseModel):
