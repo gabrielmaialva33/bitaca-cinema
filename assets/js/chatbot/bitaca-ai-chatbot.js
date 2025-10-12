@@ -5,7 +5,7 @@
 
 /**
  * Bitaca AI Chatbot Class
- * Controlador principal que integra RAG, streaming e detecção de intenção
+ * Controlador principal que integra RAG, streaming, detecção de intenção e multi-modelo
  */
 class BitacaAIChatbot {
     constructor(apiKey) {
@@ -15,6 +15,7 @@ class BitacaAIChatbot {
 
         // Componentes
         this.intentDetector = new IntentDetector(apiKey);
+        this.modelRouter = new ModelRouter(); // Router multi-modelo
         this.streamingHandler = new StreamingHandler(apiKey);
         this.ragSearch = null; // Será inicializado após carregar embeddings
 
@@ -79,7 +80,12 @@ class BitacaAIChatbot {
             const {intent, confidence} = await this.intentDetector.detectIntent(userMessage);
             console.log(`📍 Intent detected: ${intent} (confidence: ${confidence})`);
 
-            // 2. RAG: BUSCAR PRODUÇÕES RELEVANTES (se necessário)
+            // 2. DETECTAR COMPLEXIDADE E SELECIONAR MODELO
+            const complexity = this.modelRouter.detectComplexity(userMessage);
+            const modelConfig = this.modelRouter.selectModel(intent, complexity);
+            console.log(`🎯 Selected Model: ${modelConfig.model} (${modelConfig.description})`);
+
+            // 3. RAG: BUSCAR PRODUÇÕES RELEVANTES (se necessário)
             let relevantProductions = [];
 
             if (this.intentDetector.requiresRAG(intent) && this.ragSearch.embeddings.length > 0) {
@@ -94,10 +100,10 @@ class BitacaAIChatbot {
                 console.log(`✅ Found ${relevantProductions.length} relevant productions`);
             }
 
-            // 3. CONSTRUIR PROMPT COM CONTEXTO
+            // 4. CONSTRUIR PROMPT COM CONTEXTO
             const systemPrompt = this.buildSystemPrompt(intent, relevantProductions, userMessage);
 
-            // 4. ADICIONAR MENSAGEM DO USUÁRIO À HISTÓRIA
+            // 5. ADICIONAR MENSAGEM DO USUÁRIO À HISTÓRIA
             this.conversationHistory.push({
                 role: "user",
                 content: userMessage
@@ -106,16 +112,16 @@ class BitacaAIChatbot {
             // Limitar histórico
             this.trimHistory();
 
-            // 5. PREPARAR MENSAGENS PARA API
+            // 6. PREPARAR MENSAGENS PARA API
             const messages = [
                 {role: "system", content: systemPrompt},
                 ...this.conversationHistory
             ];
 
-            // 6. STREAMING DA RESPOSTA
+            // 7. STREAMING DA RESPOSTA COM MODELO SELECIONADO
             let fullResponse = '';
 
-            for await (const token of this.streamingHandler.streamResponse(messages)) {
+            for await (const token of this.streamingHandler.streamResponse(messages, modelConfig)) {
                 fullResponse += token;
 
                 // Callback para atualizar UI em tempo real
@@ -124,13 +130,13 @@ class BitacaAIChatbot {
                 }
             }
 
-            // 7. ADICIONAR RESPOSTA À HISTÓRIA
+            // 8. ADICIONAR RESPOSTA À HISTÓRIA
             this.conversationHistory.push({
                 role: "assistant",
                 content: fullResponse
             });
 
-            // 8. CALLBACK DE CONCLUSÃO
+            // 9. CALLBACK DE CONCLUSÃO
             if (onComplete) {
                 onComplete(fullResponse, relevantProductions);
             }
