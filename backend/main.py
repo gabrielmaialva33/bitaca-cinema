@@ -6,6 +6,7 @@ Powered by Agno + FastAPI + NVIDIA NIM
 import os
 import json
 import asyncio
+from datetime import datetime
 from typing import List, Dict, Any, Optional
 from contextlib import asynccontextmanager
 
@@ -29,6 +30,17 @@ try:
 except ImportError as e:
     print(f"⚠️  MongoDB not available: {e}")
     MONGODB_AVAILABLE = False
+
+# R2 Storage integration
+try:
+    from r2_storage import (
+        generate_presigned_upload_url, list_videos,
+        delete_video, R2_AVAILABLE
+    )
+    R2_ENABLED = R2_AVAILABLE
+except ImportError as e:
+    print(f"⚠️  R2 not available: {e}")
+    R2_ENABLED = False
 
 # Configuration
 NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY")
@@ -318,6 +330,88 @@ async def generate_embeddings(request: EmbeddingRequest, req: Request):
 
         except httpx.RequestError as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/upload/presigned-url")
+async def get_presigned_upload_url(req: Request):
+    """
+    Generate presigned URL for video upload to R2
+    """
+    if not R2_ENABLED:
+        raise HTTPException(
+            status_code=503,
+            detail="R2 storage not configured"
+        )
+
+    # Rate limiting
+    client_ip = req.client.host
+    if not check_rate_limit(client_ip):
+        raise HTTPException(
+            status_code=429,
+            detail="Rate limit exceeded. Try again in 1 minute."
+        )
+
+    try:
+        # Get request body
+        body = await req.json()
+        file_extension = body.get("file_extension", "webm")
+        content_type = body.get("content_type", "video/webm")
+        metadata = body.get("metadata", {})
+
+        # Add client IP to metadata
+        metadata["client_ip"] = client_ip
+        metadata["uploaded_at"] = datetime.utcnow().isoformat()
+
+        # Generate presigned URL
+        result = generate_presigned_upload_url(
+            file_extension=file_extension,
+            content_type=content_type,
+            metadata=metadata
+        )
+
+        return JSONResponse(content=result)
+
+    except Exception as e:
+        print(f"❌ Presigned URL error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/videos")
+async def get_videos(req: Request, limit: int = 100):
+    """
+    List uploaded videos from R2
+    """
+    if not R2_ENABLED:
+        raise HTTPException(
+            status_code=503,
+            detail="R2 storage not configured"
+        )
+
+    try:
+        videos = list_videos(max_keys=limit)
+        return JSONResponse(content={"videos": videos, "count": len(videos)})
+    except Exception as e:
+        print(f"❌ List videos error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.delete("/api/videos/{file_key:path}")
+async def delete_video_endpoint(file_key: str, req: Request):
+    """
+    Delete a video from R2
+    """
+    if not R2_ENABLED:
+        raise HTTPException(
+            status_code=503,
+            detail="R2 storage not configured"
+        )
+
+    try:
+        success = delete_video(file_key)
+        return JSONResponse(content={"success": success, "file_key": file_key})
+    except Exception as e:
+        print(f"❌ Delete video error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.exception_handler(Exception)
