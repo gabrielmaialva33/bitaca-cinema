@@ -20,3 +20,4 @@ prometheus-fastapi-instrumentator>=7.0.0
 
 # MongoDB
 pymongo[srv]>=4.6.0
+certifi>=2025.0.0
