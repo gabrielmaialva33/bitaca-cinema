@@ -19,6 +19,17 @@ import httpx
 # Load environment variables
 load_dotenv()
 
+# MongoDB integration
+try:
+    from database import (
+        get_mongo_client, close_mongo_connection, init_indexes,
+        ConversationDB, AnalyticsDB, EmbeddingsCacheDB
+    )
+    MONGODB_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️  MongoDB not available: {e}")
+    MONGODB_AVAILABLE = False
+
 # Configuration
 NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY")
 NVIDIA_API_URL = os.getenv("NVIDIA_API_URL", "https://integrate.api.nvidia.com/v1")
