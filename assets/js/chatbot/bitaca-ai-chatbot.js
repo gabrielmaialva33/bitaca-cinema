@@ -227,6 +227,7 @@ ${i + 1}. **${prod.titulo}**
                 body: JSON.stringify({
                     model: 'nvidia/nv-embedqa-e5-v5',
                     input: query,
+                    input_type: "query",
                     encoding_format: "float"
                 })
             });
