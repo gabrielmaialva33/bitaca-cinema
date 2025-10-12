@@ -98,8 +98,25 @@ async def lifespan(app: FastAPI):
     print(f"📡 NVIDIA Model: {NVIDIA_MODEL}")
     print(f"🔑 API Key: {NVIDIA_API_KEY[:20]}...")
     print(f"🌍 Allowed Origins: {ALLOWED_ORIGINS}")
+
+    # Initialize MongoDB
+    if MONGODB_AVAILABLE:
+        try:
+            get_mongo_client()
+            init_indexes()
+            print("✅ MongoDB initialized successfully")
+        except Exception as e:
+            print(f"⚠️  MongoDB initialization failed: {e}")
+
     yield
+
+    # Cleanup
     print("🛑 Shutting down Bitaca Cinema API...")
+    if MONGODB_AVAILABLE:
+        try:
+            close_mongo_connection()
+        except Exception as e:
+            print(f"⚠️  MongoDB cleanup error: {e}")
 
 
 # Create FastAPI app
