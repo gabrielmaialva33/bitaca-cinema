@@ -38,6 +38,7 @@ COPY main.py .
 COPY database.py .
 COPY r2_storage.py .
 COPY agents/ ./agents/
+COPY embeddings.json ./embeddings.json
 COPY .env.example .env
 
 # Change ownership to app user

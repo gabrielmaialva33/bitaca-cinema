@@ -47,8 +47,7 @@ class CulturalAgent:
                 "Provide context about cultural impact.",
                 "Be informative but accessible (2-3 paragraphs)."
             ],
-            markdown=True,
-            show_tool_calls=True
+            markdown=True
         )
 
     async def process_query(self, query: str, context: Dict[str, Any] = None) -> str:

@@ -55,8 +55,7 @@ class DiscoveryAgent:
                 "Be helpful and suggest exploration paths.",
                 "Maximum 3-4 paragraphs per response."
             ],
-            markdown=True,
-            show_tool_calls=True
+            markdown=True
         )
 
     async def process_query(self, query: str, search_enabled: bool = True) -> Dict[str, Any]:

@@ -40,8 +40,7 @@ class CinemaAgent:
                 "Be concise but informative (2-3 paragraphs maximum).",
                 "Use cultural references when appropriate."
             ],
-            markdown=True,
-            show_tool_calls=True
+            markdown=True
         )
 
     async def process_query(self, query: str, context: Dict[str, Any] = None) -> str:
