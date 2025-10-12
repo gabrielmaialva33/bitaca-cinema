@@ -253,7 +253,7 @@ async def chat_completions(request: ChatCompletionRequest, req: Request):
 @app.post("/api/embeddings")
 async def generate_embeddings(request: EmbeddingRequest, req: Request):
     """
-    Generate embeddings using NVIDIA API
+    Generate embeddings using NVIDIA API with MongoDB caching
     """
     # Rate limiting
     client_ip = req.client.host
@@ -262,6 +262,20 @@ async def generate_embeddings(request: EmbeddingRequest, req: Request):
             status_code=429,
             detail="Rate limit exceeded. Try again in 1 minute."
         )
+
+    # Check cache first (only for query type)
+    if MONGODB_AVAILABLE and request.input_type == "query":
+        try:
+            cached = EmbeddingsCacheDB.get_cached_embedding(request.input, request.model)
+            if cached:
+                print(f"✅ Cache hit for query: {request.input[:50]}...")
+                return JSONResponse(content={
+                    "data": [{"embedding": cached}],
+                    "model": request.model,
+                    "usage": {"total_tokens": 0}
+                })
+        except Exception as e:
+            print(f"⚠️  Cache lookup failed: {e}")
 
     payload = {
         "model": request.model,
@@ -289,7 +303,18 @@ async def generate_embeddings(request: EmbeddingRequest, req: Request):
                     detail=response.text
                 )
 
-            return JSONResponse(content=response.json())
+            result = response.json()
+
+            # Cache the embedding (only for query type)
+            if MONGODB_AVAILABLE and request.input_type == "query" and "data" in result:
+                try:
+                    embedding = result["data"][0]["embedding"]
+                    EmbeddingsCacheDB.cache_embedding(request.input, request.model, embedding)
+                    print(f"✅ Cached query: {request.input[:50]}...")
+                except Exception as e:
+                    print(f"⚠️  Cache write failed: {e}")
+
+            return JSONResponse(content=result)
 
         except httpx.RequestError as e:
             raise HTTPException(status_code=500, detail=str(e))
