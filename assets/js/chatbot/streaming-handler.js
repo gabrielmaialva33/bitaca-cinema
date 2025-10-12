@@ -10,8 +10,13 @@
 class StreamingHandler {
     constructor(apiKey) {
         this.apiKey = apiKey; // Não é mais necessário, backend tem a key
-        this.baseURL = 'https://api.abitaca.com.br/api';
+        // Auto-detect environment
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        this.baseURL = isLocalhost
+            ? 'http://localhost:3000/api'
+            : 'https://api.abitaca.com.br/api';
         this.model = 'qwen/qwen3-next-80b-a3b-thinking'; // Modelo de raciocínio
+        console.log(`StreamingHandler initialized with baseURL: ${this.baseURL}`);
     }
 
     /**
