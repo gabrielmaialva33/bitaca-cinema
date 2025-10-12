@@ -705,38 +705,3 @@
         padding: 0.5rem 0.875rem;
     }
 }
-
-/* Dark mode support (optional) */
-@media (prefers-color-scheme: dark) {
-    .chatbot-container {
-        background: #1a1a1a;
-        color: white;
-    }
-
-    .chatbot-messages {
-        background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
-    }
-
-    .message-bubble {
-        background: #2a2a2a;
-        color: white;
-    }
-
-    .production-card {
-        background: #2a2a2a;
-        border-color: #3a3a3a;
-        color: white;
-    }
-
-    .chatbot-input {
-        background: #2a2a2a;
-        border-color: #3a3a3a;
-        color: white;
-    }
-
-    .suggestion-chip {
-        background: #2a2a2a;
-        border-color: #3a3a3a;
-        color: var(--amarelo-quente);
-    }
-}

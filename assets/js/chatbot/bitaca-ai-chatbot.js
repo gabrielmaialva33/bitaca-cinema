@@ -213,13 +213,16 @@ ${i + 1}. **${prod.titulo}**
     }
 
     /**
-     * Gera embedding de uma query usando NVIDIA API
+     * Gera embedding de uma query usando backend API
      * @param {string} query - Texto da query
      * @returns {Promise<Array<number>>} - Embedding
      */
     async generateQueryEmbedding(query) {
         try {
-            const response = await fetch(`${this.streamingHandler.baseURL}/embeddings`, {
+            // Use o mesmo baseURL do streaming handler
+            const baseURL = this.streamingHandler.baseURL;
+
+            const response = await fetch(`${baseURL}/embeddings`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
