@@ -377,6 +377,7 @@
         if (btnRecord) btnRecord.disabled = state !== 'ready';
         if (btnStop) btnStop.disabled = state !== 'recording';
         if (btnDownload) btnDownload.disabled = state !== 'preview';
+        if (btnUpload) btnUpload.disabled = state !== 'preview';
         if (btnRetry) btnRetry.disabled = state !== 'preview';
     }
 
