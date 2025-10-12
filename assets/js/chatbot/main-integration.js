@@ -312,7 +312,7 @@ import {analytics_events} from '../firebase-config.js';
     }
 
     /**
-     * Append user/bot message
+     * Append user/bot message with markdown support
      */
     function appendMessage(text, role) {
         const messages = document.getElementById('chatbot-messages');
@@ -324,12 +324,18 @@ import {analytics_events} from '../firebase-config.js';
 
         const messageEl = document.createElement('div');
         messageEl.className = `chatbot-message ${role}-message`;
+
+        // Render markdown for bot messages, plain text for user
+        const content = role === 'bot' && typeof marked !== 'undefined'
+            ? marked.parse(text)
+            : escapeHtml(text);
+
         messageEl.innerHTML = `
       <div class="message-avatar">
         <img src="${avatarUrl}" alt="${role === 'user' ? 'User' : 'Bot'}" class="avatar-img" />
       </div>
       <div class="message-content">
-        <div class="message-bubble">${escapeHtml(text)}</div>
+        <div class="message-bubble">${content}</div>
         <div class="message-timestamp">${getCurrentTime()}</div>
       </div>
     `;
@@ -339,7 +345,7 @@ import {analytics_events} from '../firebase-config.js';
     }
 
     /**
-     * Update bot message (for streaming)
+     * Update bot message (for streaming) with markdown support
      */
     function updateBotMessage(text) {
         const messages = document.getElementById('chatbot-messages');
@@ -354,17 +360,22 @@ import {analytics_events} from '../firebase-config.js';
           <img src="https://avatar.iran.liara.run/username?username=Bitaca+Cinema" alt="Bot" class="avatar-img" />
         </div>
         <div class="message-content">
-          <div class="message-bubble"></div>
+          <div class="message-bubble streaming"></div>
           <div class="message-timestamp">${getCurrentTime()}</div>
         </div>
       `;
             messages.appendChild(currentBotMessage);
         }
 
-        // Update bubble content
+        // Update bubble content with markdown
         const bubble = currentBotMessage.querySelector('.message-bubble');
         if (bubble) {
-            bubble.textContent = text;
+            // Render markdown during streaming
+            if (typeof marked !== 'undefined') {
+                bubble.innerHTML = marked.parse(text);
+            } else {
+                bubble.textContent = text;
+            }
         }
 
         scrollToBottom();
