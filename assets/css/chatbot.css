@@ -12,6 +12,13 @@
     font-family: var(--font-body);
 }
 
+/* SVG icon styles */
+.chatbot-header-avatar svg,
+.message-avatar svg {
+    color: inherit;
+    stroke: currentColor;
+}
+
 /* Floating Action Button */
 .chatbot-fab {
     width: 64px;
@@ -271,6 +278,111 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     word-wrap: break-word;
     white-space: pre-wrap;
+}
+
+/* Markdown Support in Bubbles */
+.message-bubble h1,
+.message-bubble h2,
+.message-bubble h3 {
+    margin: 0.75rem 0 0.5rem 0;
+    line-height: 1.3;
+}
+
+.message-bubble h1 {
+    font-size: 1.3rem;
+}
+
+.message-bubble h2 {
+    font-size: 1.15rem;
+}
+
+.message-bubble h3 {
+    font-size: 1rem;
+}
+
+.message-bubble p {
+    margin: 0.5rem 0;
+}
+
+.message-bubble ul,
+.message-bubble ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.message-bubble li {
+    margin: 0.25rem 0;
+}
+
+.message-bubble code {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.message-bubble pre {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.75rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 0.75rem 0;
+}
+
+.message-bubble pre code {
+    background: none;
+    padding: 0;
+}
+
+.message-bubble strong {
+    font-weight: 700;
+}
+
+.message-bubble em {
+    font-style: italic;
+}
+
+.message-bubble a {
+    color: var(--vermelho-bitaca);
+    text-decoration: underline;
+}
+
+.message-bubble a:hover {
+    color: var(--laranja-urbano);
+}
+
+.message-bubble blockquote {
+    border-left: 4px solid var(--vermelho-bitaca);
+    padding-left: 1rem;
+    margin: 0.75rem 0;
+    color: var(--marrom-terra);
+    font-style: italic;
+}
+
+/* Syntax Highlight Dark Theme Integration */
+.message-bubble .hljs {
+    background: #1a1a1a !important;
+    color: #e6e6e6 !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
+    font-size: 0.9em !important;
+    line-height: 1.5 !important;
+    overflow-x: auto !important;
+}
+
+/* Smooth text reveal animation for streaming */
+.message-bubble.streaming {
+    animation: textShimmer 1s ease-in-out infinite;
+}
+
+@keyframes textShimmer {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.95;
+    }
 }
 
 .user-message {
