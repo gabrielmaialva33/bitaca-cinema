@@ -212,6 +212,107 @@
     }
 
     /**
+     * Upload vídeo para Cloudflare R2
+     */
+    async function uploadVideo() {
+        if (!window._recordedBlob) {
+            alert('Nenhum vídeo gravado para fazer upload.');
+            return;
+        }
+
+        // Disable buttons during upload
+        if (btnUpload) btnUpload.disabled = true;
+        if (btnDownload) btnDownload.disabled = true;
+        if (btnRetry) btnRetry.disabled = true;
+
+        setStatus('Preparando upload...');
+
+        try {
+            // Step 1: Get presigned URL from backend
+            setStatus('Conectando ao servidor...');
+
+            const presignedResponse = await fetch(`${API_URL}/api/upload/presigned-url`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    file_extension: 'webm',
+                    content_type: 'video/webm',
+                    metadata: {
+                        duration: Math.floor((Date.now() - recordingStartTime) / 1000),
+                        user_agent: navigator.userAgent
+                    }
+                })
+            });
+
+            if (!presignedResponse.ok) {
+                throw new Error(`Falha ao obter URL de upload: ${presignedResponse.status}`);
+            }
+
+            const uploadData = await presignedResponse.json();
+            console.log('Upload data:', uploadData);
+
+            // Step 2: Upload to R2 using presigned URL
+            setStatus('Enviando vídeo... 0%');
+
+            const formData = new FormData();
+
+            // Add all presigned fields
+            Object.keys(uploadData.fields).forEach(key => {
+                formData.append(key, uploadData.fields[key]);
+            });
+
+            // Add the video file
+            formData.append('file', window._recordedBlob, 'depoimento.webm');
+
+            // Upload with progress tracking
+            const xhr = new XMLHttpRequest();
+
+            xhr.upload.addEventListener('progress', (e) => {
+                if (e.lengthComputable) {
+                    const percentComplete = Math.round((e.loaded / e.total) * 100);
+                    setStatus(`Enviando vídeo... ${percentComplete}%`);
+                }
+            });
+
+            xhr.addEventListener('load', () => {
+                if (xhr.status === 204 || xhr.status === 200) {
+                    setStatus('✅ Vídeo salvo na nuvem!');
+                    console.log('Video uploaded successfully:', uploadData.public_url);
+
+                    // Show success message
+                    setTimeout(() => {
+                        alert(`Vídeo salvo com sucesso!\n\nVocê pode acessá-lo em:\n${uploadData.public_url}`);
+
+                        // Close modal after successful upload
+                        setTimeout(closeRecorder, 2000);
+                    }, 500);
+                } else {
+                    throw new Error(`Upload falhou: ${xhr.status} ${xhr.statusText}`);
+                }
+            });
+
+            xhr.addEventListener('error', () => {
+                throw new Error('Erro de rede durante o upload');
+            });
+
+            xhr.open('POST', uploadData.upload_url);
+            xhr.send(formData);
+
+        } catch (error) {
+            console.error('Upload error:', error);
+            setStatus('❌ Erro no upload');
+            alert(`Erro ao fazer upload do vídeo:\n${error.message}\n\nTente novamente ou baixe o vídeo localmente.`);
+
+            // Re-enable buttons
+            if (btnUpload) btnUpload.disabled = false;
+            if (btnDownload) btnDownload.disabled = false;
+            if (btnRetry) btnRetry.disabled = false;
+        }
+    }
+
+    /**
      * Tenta gravar novamente
      */
     function retryRecording() {
