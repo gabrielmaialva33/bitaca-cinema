@@ -474,6 +474,117 @@ async def delete_video_endpoint(file_key: str, req: Request):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post("/api/agi/chat")
+async def agi_chat(request: AGIChatRequest, req: Request):
+    """
+    AGI Multi-Agent Chat Endpoint
+    Routes query to appropriate specialized agent
+    """
+    if not AGI_AVAILABLE or agent_manager is None:
+        raise HTTPException(
+            status_code=503,
+            detail="AGI system not available"
+        )
+
+    # Rate limiting
+    client_ip = req.client.host
+    if not check_rate_limit(client_ip):
+        raise HTTPException(
+            status_code=429,
+            detail="Rate limit exceeded. Try again in 1 minute."
+        )
+
+    try:
+        result = await agent_manager.process_query(
+            query=request.query,
+            intent=request.intent,
+            context=request.context
+        )
+
+        return JSONResponse(content=result)
+
+    except Exception as e:
+        print(f"❌ AGI chat error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/agi/recommend")
+async def agi_recommend(request: AGIRecommendRequest, req: Request):
+    """
+    AGI Recommendation Endpoint
+    Get recommendations similar to a production
+    """
+    if not AGI_AVAILABLE or agent_manager is None:
+        raise HTTPException(
+            status_code=503,
+            detail="AGI system not available"
+        )
+
+    # Rate limiting
+    client_ip = req.client.host
+    if not check_rate_limit(client_ip):
+        raise HTTPException(
+            status_code=429,
+            detail="Rate limit exceeded. Try again in 1 minute."
+        )
+
+    try:
+        result = await agent_manager.recommend_similar(request.production_title)
+        return JSONResponse(content=result)
+
+    except Exception as e:
+        print(f"❌ AGI recommend error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/agi/info")
+async def agi_system_info():
+    """
+    Get AGI System Information
+    Returns details about agents and capabilities
+    """
+    if not AGI_AVAILABLE or agent_manager is None:
+        raise HTTPException(
+            status_code=503,
+            detail="AGI system not available"
+        )
+
+    try:
+        info = agent_manager.get_system_info()
+        return JSONResponse(content=info)
+
+    except Exception as e:
+        print(f"❌ AGI info error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/agi/health")
+async def agi_health():
+    """
+    AGI System Health Check
+    Check status of all agents
+    """
+    if not AGI_AVAILABLE or agent_manager is None:
+        return JSONResponse(content={
+            "available": False,
+            "reason": "AGI system not initialized"
+        })
+
+    try:
+        health = await agent_manager.health_check()
+        return JSONResponse(content={
+            "available": True,
+            "agents": health
+        })
+
+    except Exception as e:
+        print(f"❌ AGI health error: {e}")
+        return JSONResponse(content={
+            "available": False,
+            "error": str(e)
+        })
+
+
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     """Global exception handler"""
