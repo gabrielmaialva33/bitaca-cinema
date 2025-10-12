@@ -272,7 +272,7 @@ import {analytics_events} from '../firebase-config.js';
             console.error('Message error:', error);
 
             hideTypingIndicator();
-            appendMessage('Desculpe, tive um problema técnico. Tente novamente. 🔧', 'bot');
+            appendMessage('Desculpe, tive um problema técnico. Tente novamente.', 'bot');
 
             // Re-enable input
             isProcessing = false;
