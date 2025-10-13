@@ -6,12 +6,12 @@
 import D3Visualizations from './d3-visualizations.js';
 import {
     collection,
-    getFirestore,
     getDocs,
+    getFirestore,
+    limit,
     onSnapshot,
-    query,
     orderBy,
-    limit
+    query
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import {app} from '../firebase-config.js';
 
@@ -217,11 +217,11 @@ export class VotingStatsDashboard {
             // Load film votes
             const votesSnapshot = await getDocs(collection(db, 'filmVotes'));
             const filmRatings = [];
-            const themeDistribution = { patrimonio: 0, musica: 0, ambiente: 0 };
+            const themeDistribution = {patrimonio: 0, musica: 0, ambiente: 0};
 
             let totalVotes = 0;
             let sumRatings = 0;
-            let mostVoted = { count: 0, film: null };
+            let mostVoted = {count: 0, film: null};
 
             votesSnapshot.forEach(doc => {
                 const data = doc.data();
@@ -242,7 +242,7 @@ export class VotingStatsDashboard {
 
                     // Track most voted
                     if (data.count > mostVoted.count) {
-                        mostVoted = { count: data.count, film: film.titulo };
+                        mostVoted = {count: data.count, film: film.titulo};
                     }
 
                     // Count themes

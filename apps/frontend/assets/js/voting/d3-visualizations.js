@@ -53,7 +53,7 @@ export class D3Visualizations {
         // Clear existing chart
         d3.select(container).selectAll('*').remove();
 
-        const margin = { top: 40, right: 30, bottom: 100, left: 60 };
+        const margin = {top: 40, right: 30, bottom: 100, left: 60};
         const width = container.clientWidth - margin.left - margin.right;
         const height = 500 - margin.top - margin.bottom;
 
@@ -214,9 +214,9 @@ export class D3Visualizations {
 
         // Prepare data
         const pieData = [
-            { label: 'Patrimônio & Memória', value: data.patrimonio || 0, color: '#C41E3A' },
-            { label: 'Cultura Musical', value: data.musica || 0, color: '#2D5016' },
-            { label: 'Meio Ambiente & Urbano', value: data.ambiente || 0, color: '#8B4513' }
+            {label: 'Patrimônio & Memória', value: data.patrimonio || 0, color: '#C41E3A'},
+            {label: 'Cultura Musical', value: data.musica || 0, color: '#2D5016'},
+            {label: 'Meio Ambiente & Urbano', value: data.ambiente || 0, color: '#8B4513'}
         ];
 
         const pie = d3.pie()
@@ -279,7 +279,7 @@ export class D3Visualizations {
             .transition()
             .duration(1000)
             .attrTween('d', function (d) {
-                const interpolate = d3.interpolate({ startAngle: 0, endAngle: 0 }, d);
+                const interpolate = d3.interpolate({startAngle: 0, endAngle: 0}, d);
                 return function (t) {
                     return arc(interpolate(t));
                 };
@@ -347,7 +347,7 @@ export class D3Visualizations {
 
         d3.select(container).selectAll('*').remove();
 
-        const margin = { top: 40, right: 30, bottom: 50, left: 60 };
+        const margin = {top: 40, right: 30, bottom: 50, left: 60};
         const width = container.clientWidth - margin.left - margin.right;
         const height = 400 - margin.top - margin.bottom;
 

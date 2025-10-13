@@ -4,21 +4,26 @@ Experiência interativa 3D para explorar o universo cultural de Capão Bonito/SP
 
 ## Visão Geral
 
-Bitaca Play 3D é uma aplicação web imersiva construída com **Three.js** que transforma o catálogo de produções audiovisuais em uma experiência 3D navegável. Os usuários podem explorar 3 mundos temáticos, interagir com a avatar Derona (guia com IA), e descobrir produções de forma visual e interativa.
+Bitaca Play 3D é uma aplicação web imersiva construída com **Three.js** que transforma o catálogo de produções
+audiovisuais em uma experiência 3D navegável. Os usuários podem explorar 3 mundos temáticos, interagir com a avatar
+Derona (guia com IA), e descobrir produções de forma visual e interativa.
 
 ## Mundos Temáticos
 
 ### 1. **Patrimônio & Memória**
+
 - Ambiente estilo museu/galeria
 - 9 produções sobre história, gastronomia e memória cultural
 - Elementos interativos: pilares dourados, portais, cards 3D
 
 ### 2. **Música**
+
 - Ambiente de palco/show
 - 8 produções musicais (viola, choro, rock, hip-hop)
 - Elementos: instrumentos 3D, palco, luzes dinâmicas
 
 ### 3. **Meio Ambiente**
+
 - Ambiente natural/urbano
 - 7 produções sobre natureza e sustentabilidade
 - Elementos: floresta, cidade, ecossistema
@@ -71,12 +76,14 @@ play-3d/
 ## Controles
 
 ### Navegação
+
 - **W A S D** ou **Setas** - Mover câmera
 - **Mouse** - Olhar ao redor
 - **E** - Interagir com objetos
 - **ESC** - Abrir menu
 
 ### Interações
+
 - **Click nos portais** - Trocar de mundo
 - **Aproximar dos cards** - Ver detalhes da produção
 - **Botão "Chamar Derona"** - Abrir diálogo com IA

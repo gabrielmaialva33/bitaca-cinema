@@ -6,16 +6,16 @@
  */
 
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { DeronaAvatar } from './components/derona-avatar.js';
-import { PatrimonioWorld } from './scenes/patrimonio-world.js';
-import { MusicaWorld } from './scenes/musica-world.js';
-import { AmbienteWorld } from './scenes/ambiente-world.js';
-import { VirtualCinema } from './components/virtual-cinema.js';
-import { PostProcessingManager } from './post-processing.js';
-import { CinematicLighting, LightingPresets } from './cinematic-lighting.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {PointerLockControls} from 'three/addons/controls/PointerLockControls.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {DeronaAvatar} from './components/derona-avatar.js';
+import {PatrimonioWorld} from './scenes/patrimonio-world.js';
+import {MusicaWorld} from './scenes/musica-world.js';
+import {AmbienteWorld} from './scenes/ambiente-world.js';
+import {VirtualCinema} from './components/virtual-cinema.js';
+import {PostProcessingManager} from './post-processing.js';
+import {CinematicLighting, LightingPresets} from './cinematic-lighting.js';
 
 console.log('🎮 Bitaca Play 3D initializing...');
 

@@ -5,8 +5,6 @@
  * ========================================
  */
 
-import * as THREE from 'three';
-
 export class MusicaWorld {
     constructor(scene, camera) {
         this.scene = scene;

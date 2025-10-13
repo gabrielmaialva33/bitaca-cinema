@@ -16,7 +16,7 @@
  */
 
 import * as THREE from 'three';
-import { gsap } from 'gsap';
+import {gsap} from 'gsap';
 
 export class AudioVisualizer3D {
     constructor(scene, camera, options = {}) {
@@ -52,9 +52,9 @@ export class AudioVisualizer3D {
         this.currentSource = null;
 
         // Frequency bands
-        this.bassRange = { start: 0, end: 0 };
-        this.midRange = { start: 0, end: 0 };
-        this.trebleRange = { start: 0, end: 0 };
+        this.bassRange = {start: 0, end: 0};
+        this.midRange = {start: 0, end: 0};
+        this.trebleRange = {start: 0, end: 0};
 
         // Visualization objects
         this.visualizerGroup = null;
@@ -208,13 +208,13 @@ export class AudioVisualizer3D {
         // Shader material for dynamic colors
         const material = new THREE.ShaderMaterial({
             uniforms: {
-                time: { value: 0 },
-                bassIntensity: { value: 0 },
-                midIntensity: { value: 0 },
-                trebleIntensity: { value: 0 },
-                colorBass: { value: new THREE.Color(0xFF3355) }, // Red/warm
-                colorMid: { value: new THREE.Color(0x55FF88) },  // Green/cool
-                colorTreble: { value: new THREE.Color(0x5588FF) } // Blue/bright
+                time: {value: 0},
+                bassIntensity: {value: 0},
+                midIntensity: {value: 0},
+                trebleIntensity: {value: 0},
+                colorBass: {value: new THREE.Color(0xFF3355)}, // Red/warm
+                colorMid: {value: new THREE.Color(0x55FF88)},  // Green/cool
+                colorTreble: {value: new THREE.Color(0x5588FF)} // Blue/bright
             },
             vertexShader: `
                 uniform float time;
@@ -352,11 +352,11 @@ export class AudioVisualizer3D {
 
         const material = new THREE.ShaderMaterial({
             uniforms: {
-                time: { value: 0 },
-                bassIntensity: { value: 0 },
-                midIntensity: { value: 0 },
-                trebleIntensity: { value: 0 },
-                pixelRatio: { value: Math.min(window.devicePixelRatio, 2) }
+                time: {value: 0},
+                bassIntensity: {value: 0},
+                midIntensity: {value: 0},
+                trebleIntensity: {value: 0},
+                pixelRatio: {value: Math.min(window.devicePixelRatio, 2)}
             },
             vertexShader: `
                 uniform float time;
@@ -526,7 +526,7 @@ export class AudioVisualizer3D {
      */
     async loadMicrophone() {
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const stream = await navigator.mediaDevices.getUserMedia({audio: true});
             await this.loadAudioSource(stream);
             console.log('🎤 Microphone connected');
             return true;

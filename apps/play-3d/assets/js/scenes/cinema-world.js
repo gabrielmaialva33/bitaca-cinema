@@ -5,8 +5,7 @@
  * ========================================
  */
 
-import * as THREE from 'three';
-import { VirtualCinema } from '../components/virtual-cinema.js';
+import {VirtualCinema} from '../components/virtual-cinema.js';
 
 export class CinemaWorld {
     constructor(scene, camera, renderer) {

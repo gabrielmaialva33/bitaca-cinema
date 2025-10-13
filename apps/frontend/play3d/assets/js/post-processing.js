@@ -6,13 +6,13 @@
  */
 
 import * as THREE from 'three';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
-import { SSAOPass } from 'three/addons/postprocessing/SSAOPass.js';
-import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
-import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
+import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
+import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
+import {SSAOPass} from 'three/addons/postprocessing/SSAOPass.js';
+import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
+import {ShaderPass} from 'three/addons/postprocessing/ShaderPass.js';
+import {FXAAShader} from 'three/addons/shaders/FXAAShader.js';
 
 /**
  * Quality presets for different performance tiers
@@ -148,9 +148,9 @@ const WORLD_CONFIGS = {
  */
 const FilmGrainShader = {
     uniforms: {
-        tDiffuse: { value: null },
-        time: { value: 0.0 },
-        intensity: { value: 0.2 }
+        tDiffuse: {value: null},
+        time: {value: 0.0},
+        intensity: {value: 0.2}
     },
     vertexShader: `
         varying vec2 vUv;
@@ -180,9 +180,9 @@ const FilmGrainShader = {
 
 const VignetteShader = {
     uniforms: {
-        tDiffuse: { value: null },
-        offset: { value: 0.5 },
-        darkness: { value: 0.5 }
+        tDiffuse: {value: null},
+        offset: {value: 0.5},
+        darkness: {value: 0.5}
     },
     vertexShader: `
         varying vec2 vUv;

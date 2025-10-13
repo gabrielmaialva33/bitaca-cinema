@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Bitaca Virtual Cinema - Demo</title>
 
     <style>
@@ -53,8 +53,14 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.05); }
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
         }
 
         .loading-text {
@@ -88,7 +94,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
             z-index: 100;
         }
 
@@ -185,273 +191,273 @@
     </style>
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Canvas -->
-    <canvas id="play3d-canvas"></canvas>
+<!-- Canvas -->
+<canvas id="play3d-canvas"></canvas>
 
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loading-logo">🎬</div>
-        <div class="loading-text" id="loading-text">Carregando Bitaca Virtual Cinema...</div>
-        <div class="loading-bar">
-            <div class="loading-progress" id="loading-progress"></div>
-        </div>
+<!-- Loading Screen -->
+<div id="loading-screen">
+    <div class="loading-logo">🎬</div>
+    <div class="loading-text" id="loading-text">Carregando Bitaca Virtual Cinema...</div>
+    <div class="loading-bar">
+        <div class="loading-progress" id="loading-progress"></div>
     </div>
+</div>
 
-    <!-- Top Bar -->
-    <div id="top-bar">
-        <div class="logo">🎬 BITACA VIRTUAL CINEMA</div>
-        <div class="top-controls">
-            <button class="btn" id="btn-show-menu">📋 Produções</button>
-            <button class="btn btn-secondary" id="btn-reset-camera">📷 Reset Camera</button>
-            <button class="btn btn-secondary" id="btn-toggle-stats">📊 Stats</button>
-        </div>
+<!-- Top Bar -->
+<div id="top-bar">
+    <div class="logo">🎬 BITACA VIRTUAL CINEMA</div>
+    <div class="top-controls">
+        <button class="btn" id="btn-show-menu">📋 Produções</button>
+        <button class="btn btn-secondary" id="btn-reset-camera">📷 Reset Camera</button>
+        <button class="btn btn-secondary" id="btn-toggle-stats">📊 Stats</button>
     </div>
+</div>
 
-    <!-- Info Panel -->
-    <div id="info-panel">
-        <h4>⌨️ Controles</h4>
-        <ul>
-            <li><kbd>Space</kbd> - Play/Pause</li>
-            <li><kbd>F</kbd> - Fullscreen</li>
-            <li><kbd>M</kbd> - Mute</li>
-            <li><kbd>←/→</kbd> - Seek ±10s</li>
-            <li><kbd>↑/↓</kbd> - Volume</li>
-            <li><kbd>Mouse</kbd> - Look Around</li>
-        </ul>
-    </div>
+<!-- Info Panel -->
+<div id="info-panel">
+    <h4>⌨️ Controles</h4>
+    <ul>
+        <li><kbd>Space</kbd> - Play/Pause</li>
+        <li><kbd>F</kbd> - Fullscreen</li>
+        <li><kbd>M</kbd> - Mute</li>
+        <li><kbd>←/→</kbd> - Seek ±10s</li>
+        <li><kbd>↑/↓</kbd> - Volume</li>
+        <li><kbd>Mouse</kbd> - Look Around</li>
+    </ul>
+</div>
 
-    <!-- Stats -->
-    <div id="stats" style="display: none;">
-        <div><span class="stat-label">FPS:</span> <span id="fps">0</span></div>
-        <div><span class="stat-label">Geometries:</span> <span id="geometries">0</span></div>
-        <div><span class="stat-label">Textures:</span> <span id="textures">0</span></div>
-        <div><span class="stat-label">Productions:</span> <span id="productions">0</span></div>
-    </div>
+<!-- Stats -->
+<div id="stats" style="display: none;">
+    <div><span class="stat-label">FPS:</span> <span id="fps">0</span></div>
+    <div><span class="stat-label">Geometries:</span> <span id="geometries">0</span></div>
+    <div><span class="stat-label">Textures:</span> <span id="textures">0</span></div>
+    <div><span class="stat-label">Productions:</span> <span id="productions">0</span></div>
+</div>
 
-    <!-- Import maps for Three.js -->
-    <script type="importmap">
+<!-- Import maps for Three.js -->
+<script type="importmap">
     {
         "imports": {
             "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
             "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
         }
     }
-    </script>
+</script>
 
-    <!-- Load production data -->
-    <script src="/frontend/assets/js/data.js"></script>
+<!-- Load production data -->
+<script src="/frontend/assets/js/data.js"></script>
 
-    <!-- Main script -->
-    <script type="module">
-        import * as THREE from 'three';
-        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-        import { VirtualCinema } from './assets/js/components/virtual-cinema.js';
+<!-- Main script -->
+<script type="module">
+    import * as THREE from 'three';
+    import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+    import {VirtualCinema} from './assets/js/components/virtual-cinema.js';
 
-        console.log('🚀 Starting Bitaca Virtual Cinema Demo...');
+    console.log('🚀 Starting Bitaca Virtual Cinema Demo...');
 
-        class CinemaDemo {
-            constructor() {
-                this.canvas = document.getElementById('play3d-canvas');
-                this.scene = null;
-                this.camera = null;
-                this.renderer = null;
-                this.controls = null;
-                this.clock = new THREE.Clock();
-                this.virtualCinema = null;
+    class CinemaDemo {
+        constructor() {
+            this.canvas = document.getElementById('play3d-canvas');
+            this.scene = null;
+            this.camera = null;
+            this.renderer = null;
+            this.controls = null;
+            this.clock = new THREE.Clock();
+            this.virtualCinema = null;
 
-                // Stats
-                this.frameCount = 0;
-                this.lastTime = Date.now();
-                this.fps = 0;
+            // Stats
+            this.frameCount = 0;
+            this.lastTime = Date.now();
+            this.fps = 0;
 
-                this.init();
-            }
-
-            async init() {
-                console.log('🎬 Initializing demo...');
-
-                // Setup Three.js
-                this.setupScene();
-                this.setupCamera();
-                this.setupRenderer();
-                this.setupControls();
-                this.setupLights();
-
-                // Load cinema
-                await this.loadCinema();
-
-                // Setup UI
-                this.setupUI();
-
-                // Window resize
-                window.addEventListener('resize', () => this.onWindowResize());
-
-                // Start animation
-                this.animate();
-
-                // Hide loading screen
-                this.hideLoadingScreen();
-
-                console.log('✅ Demo ready!');
-            }
-
-            setupScene() {
-                this.scene = new THREE.Scene();
-                this.scene.background = new THREE.Color(0x0A0A0A);
-                this.scene.fog = new THREE.Fog(0x0A0A0A, 50, 200);
-            }
-
-            setupCamera() {
-                this.camera = new THREE.PerspectiveCamera(
-                    75,
-                    window.innerWidth / window.innerHeight,
-                    0.1,
-                    1000
-                );
-                this.camera.position.set(0, 1.6, 4);
-            }
-
-            setupRenderer() {
-                this.renderer = new THREE.WebGLRenderer({
-                    canvas: this.canvas,
-                    antialias: true,
-                    alpha: false,
-                    powerPreference: 'high-performance'
-                });
-                this.renderer.setSize(window.innerWidth, window.innerHeight);
-                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-                this.renderer.shadowMap.enabled = true;
-                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-                this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-                this.renderer.toneMappingExposure = 1.2;
-            }
-
-            setupControls() {
-                this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-                this.controls.enableDamping = true;
-                this.controls.dampingFactor = 0.05;
-                this.controls.minDistance = 2;
-                this.controls.maxDistance = 20;
-                this.controls.target.set(0, 5, -10);
-            }
-
-            setupLights() {
-                // Ambient light
-                const ambient = new THREE.AmbientLight(0xffffff, 0.3);
-                this.scene.add(ambient);
-
-                // Directional light
-                const directional = new THREE.DirectionalLight(0xffffff, 0.5);
-                directional.position.set(10, 20, 10);
-                directional.castShadow = true;
-                this.scene.add(directional);
-            }
-
-            async loadCinema() {
-                console.log('🏗️ Building virtual cinema...');
-
-                this.updateLoadingProgress(30, 'Criando sala de cinema...');
-
-                this.virtualCinema = new VirtualCinema(
-                    this.scene,
-                    this.camera,
-                    this.renderer
-                );
-
-                this.updateLoadingProgress(60, 'Carregando produções...');
-
-                await this.virtualCinema.init();
-
-                this.updateLoadingProgress(100, 'Pronto!');
-
-                console.log('✅ Virtual cinema loaded!');
-            }
-
-            setupUI() {
-                // Show menu button
-                document.getElementById('btn-show-menu').addEventListener('click', () => {
-                    this.virtualCinema.showMenu();
-                });
-
-                // Reset camera button
-                document.getElementById('btn-reset-camera').addEventListener('click', () => {
-                    this.virtualCinema.setCameraPosition('cinema');
-                });
-
-                // Toggle stats button
-                document.getElementById('btn-toggle-stats').addEventListener('click', () => {
-                    const stats = document.getElementById('stats');
-                    stats.style.display = stats.style.display === 'none' ? 'block' : 'none';
-                });
-
-                // Update stats
-                setInterval(() => this.updateStats(), 1000);
-            }
-
-            updateLoadingProgress(percent, text) {
-                document.getElementById('loading-progress').style.width = `${percent}%`;
-                document.getElementById('loading-text').textContent = text;
-            }
-
-            hideLoadingScreen() {
-                setTimeout(() => {
-                    document.getElementById('loading-screen').classList.add('hidden');
-                }, 500);
-            }
-
-            updateStats() {
-                document.getElementById('fps').textContent = this.fps.toFixed(0);
-                document.getElementById('geometries').textContent =
-                    this.renderer.info.memory.geometries;
-                document.getElementById('textures').textContent =
-                    this.renderer.info.memory.textures;
-                document.getElementById('productions').textContent =
-                    this.virtualCinema ? this.virtualCinema.productions.length : 0;
-            }
-
-            onWindowResize() {
-                this.camera.aspect = window.innerWidth / window.innerHeight;
-                this.camera.updateProjectionMatrix();
-                this.renderer.setSize(window.innerWidth, window.innerHeight);
-            }
-
-            animate() {
-                requestAnimationFrame(() => this.animate());
-
-                const delta = this.clock.getDelta();
-
-                // Update controls
-                this.controls.update();
-
-                // Update cinema
-                if (this.virtualCinema) {
-                    this.virtualCinema.update(delta);
-                }
-
-                // Render
-                this.renderer.render(this.scene, this.camera);
-
-                // Calculate FPS
-                this.frameCount++;
-                const now = Date.now();
-                if (now - this.lastTime >= 1000) {
-                    this.fps = this.frameCount;
-                    this.frameCount = 0;
-                    this.lastTime = now;
-                }
-            }
+            this.init();
         }
 
-        // Start demo
-        window.addEventListener('DOMContentLoaded', () => {
-            const demo = new CinemaDemo();
-            window.cinemaDemo = demo; // For debugging
-        });
-    </script>
+        async init() {
+            console.log('🎬 Initializing demo...');
+
+            // Setup Three.js
+            this.setupScene();
+            this.setupCamera();
+            this.setupRenderer();
+            this.setupControls();
+            this.setupLights();
+
+            // Load cinema
+            await this.loadCinema();
+
+            // Setup UI
+            this.setupUI();
+
+            // Window resize
+            window.addEventListener('resize', () => this.onWindowResize());
+
+            // Start animation
+            this.animate();
+
+            // Hide loading screen
+            this.hideLoadingScreen();
+
+            console.log('✅ Demo ready!');
+        }
+
+        setupScene() {
+            this.scene = new THREE.Scene();
+            this.scene.background = new THREE.Color(0x0A0A0A);
+            this.scene.fog = new THREE.Fog(0x0A0A0A, 50, 200);
+        }
+
+        setupCamera() {
+            this.camera = new THREE.PerspectiveCamera(
+                75,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000
+            );
+            this.camera.position.set(0, 1.6, 4);
+        }
+
+        setupRenderer() {
+            this.renderer = new THREE.WebGLRenderer({
+                canvas: this.canvas,
+                antialias: true,
+                alpha: false,
+                powerPreference: 'high-performance'
+            });
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+            this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            this.renderer.shadowMap.enabled = true;
+            this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            this.renderer.toneMappingExposure = 1.2;
+        }
+
+        setupControls() {
+            this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+            this.controls.enableDamping = true;
+            this.controls.dampingFactor = 0.05;
+            this.controls.minDistance = 2;
+            this.controls.maxDistance = 20;
+            this.controls.target.set(0, 5, -10);
+        }
+
+        setupLights() {
+            // Ambient light
+            const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+            this.scene.add(ambient);
+
+            // Directional light
+            const directional = new THREE.DirectionalLight(0xffffff, 0.5);
+            directional.position.set(10, 20, 10);
+            directional.castShadow = true;
+            this.scene.add(directional);
+        }
+
+        async loadCinema() {
+            console.log('🏗️ Building virtual cinema...');
+
+            this.updateLoadingProgress(30, 'Criando sala de cinema...');
+
+            this.virtualCinema = new VirtualCinema(
+                this.scene,
+                this.camera,
+                this.renderer
+            );
+
+            this.updateLoadingProgress(60, 'Carregando produções...');
+
+            await this.virtualCinema.init();
+
+            this.updateLoadingProgress(100, 'Pronto!');
+
+            console.log('✅ Virtual cinema loaded!');
+        }
+
+        setupUI() {
+            // Show menu button
+            document.getElementById('btn-show-menu').addEventListener('click', () => {
+                this.virtualCinema.showMenu();
+            });
+
+            // Reset camera button
+            document.getElementById('btn-reset-camera').addEventListener('click', () => {
+                this.virtualCinema.setCameraPosition('cinema');
+            });
+
+            // Toggle stats button
+            document.getElementById('btn-toggle-stats').addEventListener('click', () => {
+                const stats = document.getElementById('stats');
+                stats.style.display = stats.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // Update stats
+            setInterval(() => this.updateStats(), 1000);
+        }
+
+        updateLoadingProgress(percent, text) {
+            document.getElementById('loading-progress').style.width = `${percent}%`;
+            document.getElementById('loading-text').textContent = text;
+        }
+
+        hideLoadingScreen() {
+            setTimeout(() => {
+                document.getElementById('loading-screen').classList.add('hidden');
+            }, 500);
+        }
+
+        updateStats() {
+            document.getElementById('fps').textContent = this.fps.toFixed(0);
+            document.getElementById('geometries').textContent =
+                this.renderer.info.memory.geometries;
+            document.getElementById('textures').textContent =
+                this.renderer.info.memory.textures;
+            document.getElementById('productions').textContent =
+                this.virtualCinema ? this.virtualCinema.productions.length : 0;
+        }
+
+        onWindowResize() {
+            this.camera.aspect = window.innerWidth / window.innerHeight;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        animate() {
+            requestAnimationFrame(() => this.animate());
+
+            const delta = this.clock.getDelta();
+
+            // Update controls
+            this.controls.update();
+
+            // Update cinema
+            if (this.virtualCinema) {
+                this.virtualCinema.update(delta);
+            }
+
+            // Render
+            this.renderer.render(this.scene, this.camera);
+
+            // Calculate FPS
+            this.frameCount++;
+            const now = Date.now();
+            if (now - this.lastTime >= 1000) {
+                this.fps = this.frameCount;
+                this.frameCount = 0;
+                this.lastTime = now;
+            }
+        }
+    }
+
+    // Start demo
+    window.addEventListener('DOMContentLoaded', () => {
+        const demo = new CinemaDemo();
+        window.cinemaDemo = demo; // For debugging
+    });
+</script>
 </body>
 </html>

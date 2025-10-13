@@ -11,7 +11,7 @@
  */
 
 import * as THREE from 'three';
-import { gsap } from 'gsap';
+import {gsap} from 'gsap';
 
 export class AnimezeyCatalog {
     constructor(scene, camera, renderer) {
@@ -247,7 +247,7 @@ export class AnimezeyCatalog {
         context.fillText(displayText, canvas.width / 2, canvas.height / 2);
 
         const texture = new THREE.CanvasTexture(canvas);
-        const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+        const spriteMaterial = new THREE.SpriteMaterial({map: texture});
         const sprite = new THREE.Sprite(spriteMaterial);
 
         return sprite;
@@ -632,7 +632,7 @@ export class AnimezeyCatalog {
 
     getMockProductions() {
         // Fallback mock data if API fails
-        return Array.from({ length: 24 }, (_, i) => ({
+        return Array.from({length: 24}, (_, i) => ({
             id: i + 1,
             title: `Produção ${i + 1}`,
             director: `Diretor ${i + 1}`,

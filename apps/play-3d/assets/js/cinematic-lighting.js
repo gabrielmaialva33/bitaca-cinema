@@ -6,8 +6,8 @@
  */
 
 import * as THREE from 'three';
-import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
-import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
+import {RGBELoader} from 'three/addons/loaders/RGBELoader.js';
+import {RectAreaLightUniformsLib} from 'three/addons/lights/RectAreaLightUniformsLib.js';
 
 // ========================================
 // CINEMATIC LIGHTING PRESETS
@@ -36,8 +36,8 @@ export const LightingPresets = {
             position: [-20, 15, -30]
         },
         accentLights: [
-            { color: 0xC41E3A, intensity: 1.5, position: [-10, 5, 0], distance: 30 },
-            { color: 0xC41E3A, intensity: 1.5, position: [10, 5, 0], distance: 30 }
+            {color: 0xC41E3A, intensity: 1.5, position: [-10, 5, 0], distance: 30},
+            {color: 0xC41E3A, intensity: 1.5, position: [10, 5, 0], distance: 30}
         ]
     },
     patrimonio: {
@@ -63,11 +63,11 @@ export const LightingPresets = {
             position: [-25, 20, -35]
         },
         areaLights: [
-            { color: 0xFFD700, intensity: 2.0, position: [0, 8, -15], width: 10, height: 6 }
+            {color: 0xFFD700, intensity: 2.0, position: [0, 8, -15], width: 10, height: 6}
         ],
         accentLights: [
-            { color: 0xFFD700, intensity: 2.0, position: [-8, 4, 5], distance: 25 },
-            { color: 0xDAA520, intensity: 1.8, position: [8, 4, 5], distance: 25 }
+            {color: 0xFFD700, intensity: 2.0, position: [-8, 4, 5], distance: 25},
+            {color: 0xDAA520, intensity: 1.8, position: [8, 4, 5], distance: 25}
         ]
     },
     musica: {
@@ -93,16 +93,16 @@ export const LightingPresets = {
             position: [-15, 25, -40]
         },
         areaLights: [
-            { color: 0xFF1493, intensity: 3.0, position: [0, 10, -20], width: 12, height: 8 },
-            { color: 0x8B00FF, intensity: 2.5, position: [0, 5, 20], width: 10, height: 6 }
+            {color: 0xFF1493, intensity: 3.0, position: [0, 10, -20], width: 12, height: 8},
+            {color: 0x8B00FF, intensity: 2.5, position: [0, 5, 20], width: 10, height: 6}
         ],
         accentLights: [
-            { color: 0xFF1493, intensity: 3.0, position: [-12, 6, 0], distance: 35 },
-            { color: 0x8B00FF, intensity: 2.8, position: [12, 6, 0], distance: 35 },
-            { color: 0x00FFFF, intensity: 2.5, position: [0, 8, -12], distance: 30 }
+            {color: 0xFF1493, intensity: 3.0, position: [-12, 6, 0], distance: 35},
+            {color: 0x8B00FF, intensity: 2.8, position: [12, 6, 0], distance: 35},
+            {color: 0x00FFFF, intensity: 2.5, position: [0, 8, -12], distance: 30}
         ],
         spotlights: [
-            { color: 0xFFFFFF, intensity: 4.0, position: [0, 15, 0], target: [0, 0, 0], angle: Math.PI / 6 }
+            {color: 0xFFFFFF, intensity: 4.0, position: [0, 15, 0], target: [0, 0, 0], angle: Math.PI / 6}
         ]
     },
     ambiente: {
@@ -128,12 +128,12 @@ export const LightingPresets = {
             position: [-22, 18, -32]
         },
         areaLights: [
-            { color: 0x87CEEB, intensity: 2.2, position: [0, 12, 0], width: 15, height: 10 }
+            {color: 0x87CEEB, intensity: 2.2, position: [0, 12, 0], width: 15, height: 10}
         ],
         accentLights: [
-            { color: 0x00FF7F, intensity: 2.2, position: [-10, 5, 8], distance: 28 },
-            { color: 0x32CD32, intensity: 2.0, position: [10, 5, 8], distance: 28 },
-            { color: 0x87CEEB, intensity: 1.8, position: [0, 8, -10], distance: 32 }
+            {color: 0x00FF7F, intensity: 2.2, position: [-10, 5, 8], distance: 28},
+            {color: 0x32CD32, intensity: 2.0, position: [10, 5, 8], distance: 28},
+            {color: 0x87CEEB, intensity: 1.8, position: [0, 8, -10], distance: 32}
         ]
     }
 };

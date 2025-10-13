@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+const {test, expect} = require('@playwright/test');
 
 /**
  * Bitaca Cinema - Voting System E2E Tests
@@ -11,25 +11,25 @@ const BASE_URL = process.env.TEST_ENV === 'production'
 
 test.describe('Voting System - Authentication Flow', () => {
 
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({page}) => {
         await page.goto(BASE_URL);
     });
 
-    test('should show login button in navigation', async ({ page }) => {
+    test('should show login button in navigation', async ({page}) => {
         // Wait for page load
         await page.waitForLoadState('networkidle');
 
         // Check for auth button
         const authBtn = page.locator('#auth-trigger-btn, .nav-voting-btn');
-        await expect(authBtn).toBeVisible({ timeout: 10000 });
+        await expect(authBtn).toBeVisible({timeout: 10000});
         await expect(authBtn).toContainText(/Entrar|Login/i);
     });
 
-    test('should add voting buttons to film cards', async ({ page }) => {
+    test('should add voting buttons to film cards', async ({page}) => {
         await page.waitForLoadState('networkidle');
 
         // Wait for film cards to render
-        await page.waitForSelector('.filme-card', { timeout: 10000 });
+        await page.waitForSelector('.filme-card', {timeout: 10000});
 
         // Check for vote buttons
         const voteButtons = page.locator('.filme-vote-btn');
@@ -43,11 +43,11 @@ test.describe('Voting System - Authentication Flow', () => {
         await expect(firstBtn).toContainText('Votar');
     });
 
-    test('should open auth modal when clicking vote without login', async ({ page }) => {
+    test('should open auth modal when clicking vote without login', async ({page}) => {
         await page.waitForLoadState('networkidle');
 
         // Wait for film cards
-        await page.waitForSelector('.filme-card', { timeout: 10000 });
+        await page.waitForSelector('.filme-card', {timeout: 10000});
 
         // Click first vote button
         const firstVoteBtn = page.locator('.filme-vote-btn').first();
@@ -55,20 +55,20 @@ test.describe('Voting System - Authentication Flow', () => {
 
         // Auth modal should open
         const authModal = page.locator('#auth-modal, .auth-modal');
-        await expect(authModal).toBeVisible({ timeout: 5000 });
+        await expect(authModal).toBeVisible({timeout: 5000});
 
         // Check modal content
         await expect(authModal).toContainText(/Entrar|Login|Autenticação/i);
     });
 
-    test('should have social login options', async ({ page }) => {
+    test('should have social login options', async ({page}) => {
         await page.waitForLoadState('networkidle');
 
         // Open auth modal
         const authBtn = page.locator('#auth-trigger-btn').first();
         await authBtn.click();
 
-        await page.waitForSelector('#auth-modal', { state: 'visible', timeout: 5000 });
+        await page.waitForSelector('#auth-modal', {state: 'visible', timeout: 5000});
 
         // Check for Google login button
         const googleBtn = page.locator('[data-provider="google"], .google-login-btn');
@@ -83,7 +83,7 @@ test.describe('Voting System - Authentication Flow', () => {
         }
     });
 
-    test('should close auth modal', async ({ page }) => {
+    test('should close auth modal', async ({page}) => {
         await page.waitForLoadState('networkidle');
 
         // Open auth modal
@@ -91,20 +91,20 @@ test.describe('Voting System - Authentication Flow', () => {
         await authBtn.click();
 
         const authModal = page.locator('#auth-modal');
-        await expect(authModal).toBeVisible({ timeout: 5000 });
+        await expect(authModal).toBeVisible({timeout: 5000});
 
         // Close modal
         const closeBtn = page.locator('#auth-modal .auth-modal__close, #auth-modal .modal__close');
         if (await closeBtn.count() > 0) {
             await closeBtn.click();
-            await expect(authModal).not.toBeVisible({ timeout: 3000 });
+            await expect(authModal).not.toBeVisible({timeout: 3000});
         }
     });
 });
 
 test.describe('Voting System - Quiz Flow', () => {
 
-    test('should show quiz requirement message', async ({ page }) => {
+    test('should show quiz requirement message', async ({page}) => {
         // Note: This test requires mock authentication
         // In real scenario, user would be authenticated first
 
@@ -116,7 +116,7 @@ test.describe('Voting System - Quiz Flow', () => {
         await expect(quizModal).toBeAttached();
     });
 
-    test('should have quiz questions about cultural laws', async ({ page }) => {
+    test('should have quiz questions about cultural laws', async ({page}) => {
         await page.goto(BASE_URL);
 
         // Quiz questions should be about Lei Paulo Gustavo and PNAB
@@ -130,7 +130,7 @@ test.describe('Voting System - Quiz Flow', () => {
 
 test.describe('Voting System - Film Voting UI', () => {
 
-    test('should render voting modal structure', async ({ page }) => {
+    test('should render voting modal structure', async ({page}) => {
         await page.goto(BASE_URL);
         await page.waitForLoadState('networkidle');
 
@@ -148,7 +148,7 @@ test.describe('Voting System - Film Voting UI', () => {
         await expect(filmsList).toBeAttached();
     });
 
-    test('should have star rating component', async ({ page }) => {
+    test('should have star rating component', async ({page}) => {
         await page.goto(BASE_URL);
 
         // Star rating should exist in code
@@ -156,7 +156,7 @@ test.describe('Voting System - Film Voting UI', () => {
         expect(content).toMatch(/star-rating|ki-star/i);
     });
 
-    test('should show voting statistics', async ({ page }) => {
+    test('should show voting statistics', async ({page}) => {
         await page.goto(BASE_URL);
         await page.waitForLoadState('networkidle');
 
@@ -173,7 +173,7 @@ test.describe('Voting System - Film Voting UI', () => {
 
 test.describe('Voting System - Statistics Dashboard', () => {
 
-    test('should have dashboard UI in DOM', async ({ page }) => {
+    test('should have dashboard UI in DOM', async ({page}) => {
         await page.goto(BASE_URL);
         await page.waitForLoadState('networkidle');
 
@@ -182,14 +182,14 @@ test.describe('Voting System - Statistics Dashboard', () => {
         await expect(dashboard).toBeAttached();
     });
 
-    test('should have visualization container', async ({ page }) => {
+    test('should have visualization container', async ({page}) => {
         await page.goto(BASE_URL);
 
         const vizContainer = page.locator('#d3-viz-container, .d3-viz-container');
         await expect(vizContainer).toBeAttached();
     });
 
-    test('should have stat cards', async ({ page }) => {
+    test('should have stat cards', async ({page}) => {
         await page.goto(BASE_URL);
 
         const statCards = page.locator('.stat-card, .stats-card');
@@ -198,7 +198,7 @@ test.describe('Voting System - Statistics Dashboard', () => {
         }
     });
 
-    test('should have dashboard tabs', async ({ page }) => {
+    test('should have dashboard tabs', async ({page}) => {
         await page.goto(BASE_URL);
 
         const tabs = page.locator('.tab-btn, .dashboard-tab');
@@ -210,7 +210,7 @@ test.describe('Voting System - Statistics Dashboard', () => {
 
 test.describe('Voting System - D3.js Visualizations', () => {
 
-    test('should load D3.js library', async ({ page }) => {
+    test('should load D3.js library', async ({page}) => {
         await page.goto(BASE_URL);
         await page.waitForLoadState('networkidle');
 
@@ -227,7 +227,7 @@ test.describe('Voting System - D3.js Visualizations', () => {
         expect(hasD3 || hasVizSystem).toBeTruthy();
     });
 
-    test('should have visualization panels', async ({ page }) => {
+    test('should have visualization panels', async ({page}) => {
         await page.goto(BASE_URL);
 
         const vizPanels = page.locator('.viz-panel, #viz-ratings, #viz-themes, #viz-timeline, #viz-network');
@@ -239,9 +239,9 @@ test.describe('Voting System - D3.js Visualizations', () => {
 
 test.describe('Voting System - Mobile Responsiveness', () => {
 
-    test('should be responsive on mobile', async ({ page }) => {
+    test('should be responsive on mobile', async ({page}) => {
         // Set mobile viewport
-        await page.setViewportSize({ width: 375, height: 667 });
+        await page.setViewportSize({width: 375, height: 667});
         await page.goto(BASE_URL);
         await page.waitForLoadState('networkidle');
 
@@ -259,8 +259,8 @@ test.describe('Voting System - Mobile Responsiveness', () => {
         }
     });
 
-    test('should show mobile-friendly auth button', async ({ page }) => {
-        await page.setViewportSize({ width: 375, height: 667 });
+    test('should show mobile-friendly auth button', async ({page}) => {
+        await page.setViewportSize({width: 375, height: 667});
         await page.goto(BASE_URL);
 
         const authBtn = page.locator('#auth-trigger-btn, .nav-voting-btn');
@@ -272,14 +272,14 @@ test.describe('Voting System - Mobile Responsiveness', () => {
 
 test.describe('Voting System - Performance', () => {
 
-    test('should load voting system within reasonable time', async ({ page }) => {
+    test('should load voting system within reasonable time', async ({page}) => {
         const startTime = Date.now();
 
         await page.goto(BASE_URL);
         await page.waitForLoadState('networkidle');
 
         // Wait for voting system initialization
-        await page.waitForSelector('.filme-vote-btn, #auth-trigger-btn', { timeout: 10000 });
+        await page.waitForSelector('.filme-vote-btn, #auth-trigger-btn', {timeout: 10000});
 
         const endTime = Date.now();
         const loadTime = endTime - startTime;
@@ -290,7 +290,7 @@ test.describe('Voting System - Performance', () => {
         console.log(`Voting system loaded in ${loadTime}ms`);
     });
 
-    test('should not have JavaScript errors', async ({ page }) => {
+    test('should not have JavaScript errors', async ({page}) => {
         const errors = [];
 
         page.on('console', msg => {
@@ -324,7 +324,7 @@ test.describe('Voting System - Performance', () => {
 
 test.describe('Voting System - Accessibility', () => {
 
-    test('should have proper ARIA labels', async ({ page }) => {
+    test('should have proper ARIA labels', async ({page}) => {
         await page.goto(BASE_URL);
         await page.waitForLoadState('networkidle');
 
@@ -340,7 +340,7 @@ test.describe('Voting System - Accessibility', () => {
         }
     });
 
-    test('should have keyboard navigation', async ({ page }) => {
+    test('should have keyboard navigation', async ({page}) => {
         await page.goto(BASE_URL);
         await page.waitForLoadState('networkidle');
 
@@ -357,7 +357,7 @@ test.describe('Voting System - Accessibility', () => {
         expect(focusedElement).toBeTruthy();
     });
 
-    test('should have semantic HTML for voting', async ({ page }) => {
+    test('should have semantic HTML for voting', async ({page}) => {
         await page.goto(BASE_URL);
 
         // Check for buttons (not divs with click handlers)
@@ -371,7 +371,7 @@ test.describe('Voting System - Accessibility', () => {
 
 test.describe('Voting System - Integration', () => {
 
-    test('should integrate with main film catalog', async ({ page }) => {
+    test('should integrate with main film catalog', async ({page}) => {
         await page.goto(BASE_URL);
         await page.waitForLoadState('networkidle');
 
@@ -388,7 +388,7 @@ test.describe('Voting System - Integration', () => {
         }
     });
 
-    test('should work with filtering system', async ({ page }) => {
+    test('should work with filtering system', async ({page}) => {
         await page.goto(BASE_URL);
         await page.waitForLoadState('networkidle');
 
@@ -410,7 +410,7 @@ test.describe('Voting System - Integration', () => {
         }
     });
 
-    test('should integrate with chatbot', async ({ page }) => {
+    test('should integrate with chatbot', async ({page}) => {
         await page.goto(BASE_URL);
         await page.waitForLoadState('networkidle');
 

@@ -417,8 +417,8 @@ export class VirtualCinema {
 
             // Wait for metadata
             await new Promise((resolve, reject) => {
-                this.videoElement.addEventListener('loadedmetadata', resolve, { once: true });
-                this.videoElement.addEventListener('error', reject, { once: true });
+                this.videoElement.addEventListener('loadedmetadata', resolve, {once: true});
+                this.videoElement.addEventListener('error', reject, {once: true});
             });
 
             // Connect audio

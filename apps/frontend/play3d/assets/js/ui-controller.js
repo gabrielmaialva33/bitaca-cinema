@@ -1698,7 +1698,7 @@ class BitacaUIController {
     }
 
     handleRadialAction(action) {
-        switch(action) {
+        switch (action) {
             case 'cinema':
                 this.toggleCinemaMode();
                 break;
@@ -1793,7 +1793,7 @@ class BitacaUIController {
     }
 
     handleKeyboard(e) {
-        switch(e.key.toLowerCase()) {
+        switch (e.key.toLowerCase()) {
             case 'f':
                 if (!e.target.matches('input, textarea')) {
                     this.toggleFullscreen();
@@ -1981,7 +1981,7 @@ class BitacaUIController {
         document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const action = e.currentTarget.dataset.action;
-                switch(action) {
+                switch (action) {
                     case 'jump':
                         this.showToast('Jump!', 'info');
                         break;

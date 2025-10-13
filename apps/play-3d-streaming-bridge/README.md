@@ -1,6 +1,7 @@
 # Bitaca Play 3D Streaming Bridge
 
-FastAPI bridge service connecting **stream-winx-api** (Telegram video streaming backend) to **play-3d** frontend (Three.js 3D cinema interface).
+FastAPI bridge service connecting **stream-winx-api** (Telegram video streaming backend) to **play-3d** frontend (
+Three.js 3D cinema interface).
 
 ## Features
 
@@ -55,6 +56,7 @@ nano .env
 ```
 
 **Key settings:**
+
 - `STREAM_API_URL` - URL of stream-winx-api (default: http://localhost:8000)
 - `PORT` - Bridge service port (default: 8001)
 - `CORS_ORIGINS` - Allowed origins for CORS
@@ -105,6 +107,7 @@ GET /health
 ```
 
 **Response:**
+
 ```json
 {
   "status": "healthy",
@@ -120,11 +123,13 @@ GET /api/productions
 ```
 
 **Query Parameters:**
+
 - `genre` - Filter by genre (e.g., "Documentário", "Videoclipe")
 - `search` - Search in title/director
 - `limit` - Maximum results (default: 24)
 
 **Response:**
+
 ```json
 {
   "total": 24,
@@ -162,14 +167,17 @@ GET /api/productions/{id}/stream
 ```
 
 **Headers:**
+
 - `Range: bytes=0-1023` - Optional for seeking/partial content
 
 **Response:**
+
 - Status: 200 (full content) or 206 (partial content)
 - Content-Type: video/mp4
 - Body: Video stream
 
 **Example with curl:**
+
 ```bash
 # Full video
 curl http://localhost:8001/api/productions/1/stream -o video.mp4
@@ -187,6 +195,7 @@ GET /api/productions/{id}/thumbnail
 ```
 
 **Response:**
+
 - Content-Type: image/jpeg
 - Body: JPEG image
 
@@ -197,6 +206,7 @@ POST /api/analytics/view
 ```
 
 **Request Body:**
+
 ```json
 {
   "production_id": 1,
@@ -207,6 +217,7 @@ POST /api/analytics/view
 ```
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -246,7 +257,7 @@ class BitacaAPIClient {
     async trackView(productionId, durationSeconds) {
         await fetch(`${this.streamBridgeURL}/api/analytics/view`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 production_id: productionId,
                 duration_seconds: durationSeconds
@@ -280,12 +291,12 @@ async function loadBitacaProductions() {
 
 The service includes metadata for **24 audiovisual productions** from Lei Paulo Gustavo:
 
-| ID | Title | Director | Genre | Score |
-|----|-------|----------|-------|-------|
-| 1 | Ponteia Viola | Margarida Scuoteguazza | Documentário Musical | 238 |
-| 2 | Os Cascatinhas | Flavio Ramos Pereira | Documentário Musical | 236 |
-| 3 | Reconstruction | Bruna Polississo | Audiovisual | 234 |
-| ... | ... | ... | ... | ... |
+| ID  | Title          | Director               | Genre                | Score |
+|-----|----------------|------------------------|----------------------|-------|
+| 1   | Ponteia Viola  | Margarida Scuoteguazza | Documentário Musical | 238   |
+| 2   | Os Cascatinhas | Flavio Ramos Pereira   | Documentário Musical | 236   |
+| 3   | Reconstruction | Bruna Polississo       | Audiovisual          | 234   |
+| ... | ...            | ...                    | ...                  | ...   |
 
 **Note:** `telegram_message_id` must be configured for each production to enable streaming.
 
@@ -466,6 +477,7 @@ Use `/health` endpoint for uptime monitoring:
 **Symptoms:** Health check shows `stream_api_status: "unavailable"`
 
 **Solutions:**
+
 1. Verify stream-winx-api is running: `curl http://localhost:8000/api/v1/health`
 2. Check `STREAM_API_URL` in `.env`
 3. Check firewall rules if running on different machines
@@ -475,6 +487,7 @@ Use `/health` endpoint for uptime monitoring:
 **Symptoms:** Browser console shows CORS policy errors
 
 **Solutions:**
+
 1. Add your frontend URL to `CORS_ORIGINS` in `.env`
 2. Restart bridge service after updating `.env`
 3. Check browser DevTools Network tab for exact error
@@ -484,6 +497,7 @@ Use `/health` endpoint for uptime monitoring:
 **Symptoms:** 503 error "Streaming not available"
 
 **Solutions:**
+
 1. Configure `telegram_message_id` in production catalog
 2. Verify Telegram message exists in stream-winx-api
 3. Check stream-winx-api logs for errors
@@ -493,6 +507,7 @@ Use `/health` endpoint for uptime monitoring:
 **Symptom:** Thumbnail endpoint returns 404
 
 **Solutions:**
+
 1. Configure `telegram_message_id` for the production
 2. Verify image exists in Telegram channel
 3. Check stream-winx-api `/api/v1/posts/images/{message_id}` endpoint
@@ -512,6 +527,7 @@ MIT License - See main project LICENSE file
 ## Contact
 
 Bitaca Cinema Team
+
 - Email: cultura@capaobonito.sp.gov.br
 - GitHub: abitaca/bitaca-cinema
 

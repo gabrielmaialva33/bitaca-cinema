@@ -5,50 +5,50 @@ Production-ready 3D virtual cinema room for streaming Bitaca productions via str
 ## Features
 
 - **Immersive 3D Cinema Room**
-  - Large 16:9 cinema screen with proper aspect ratio
-  - Multiple rows of cinema seating (6 rows × 10 seats)
-  - Acoustic dampening walls
-  - Cinema carpet floor
-  - Recessed ceiling lighting
+    - Large 16:9 cinema screen with proper aspect ratio
+    - Multiple rows of cinema seating (6 rows × 10 seats)
+    - Acoustic dampening walls
+    - Cinema carpet floor
+    - Recessed ceiling lighting
 
 - **Video Streaming**
-  - Direct integration with stream-winx-api (FastAPI + Telethon)
-  - Range request support for efficient streaming
-  - Automatic video texture mapping
-  - Hardware-accelerated playback
+    - Direct integration with stream-winx-api (FastAPI + Telethon)
+    - Range request support for efficient streaming
+    - Automatic video texture mapping
+    - Hardware-accelerated playback
 
 - **Spatial Audio**
-  - 3D positional audio attached to screen
-  - Audio follows screen position in 3D space
-  - Distance-based attenuation
-  - Directional sound cone
+    - 3D positional audio attached to screen
+    - Audio follows screen position in 3D space
+    - Distance-based attenuation
+    - Directional sound cone
 
 - **Cinematic Lighting**
-  - Ambient cinema lighting (dims during playback)
-  - Screen fill light (simulates screen glow)
-  - Ceiling spotlights for ambiance
-  - Aisle lights with red glow
+    - Ambient cinema lighting (dims during playback)
+    - Screen fill light (simulates screen glow)
+    - Ceiling spotlights for ambiance
+    - Aisle lights with red glow
 
 - **Multiple Viewing Modes**
-  - **Cinema**: Standard middle-row viewing (default)
-  - **VR**: Close-up VR-style experience
-  - **Close-up**: Detailed screen viewing
-  - **Back Row**: Traditional back-row perspective
+    - **Cinema**: Standard middle-row viewing (default)
+    - **VR**: Close-up VR-style experience
+    - **Close-up**: Detailed screen viewing
+    - **Back Row**: Traditional back-row perspective
 
 - **Full Video Controls**
-  - Play/Pause (Space key)
-  - Progress scrubbing
-  - Volume control
-  - Mute toggle (M key)
-  - Fullscreen (F key)
-  - Seek controls (Arrow keys: ±10s)
-  - Time display (current/duration)
+    - Play/Pause (Space key)
+    - Progress scrubbing
+    - Volume control
+    - Mute toggle (M key)
+    - Fullscreen (F key)
+    - Seek controls (Arrow keys: ±10s)
+    - Time display (current/duration)
 
 - **Production Catalog**
-  - Interactive menu with all 23 Bitaca productions
-  - Filter by theme (Patrimônio, Música, Ambiente)
-  - Beautiful card-based layout
-  - Click to load and play
+    - Interactive menu with all 23 Bitaca productions
+    - Filter by theme (Patrimônio, Música, Ambiente)
+    - Beautiful card-based layout
+    - Click to load and play
 
 ## Installation
 
@@ -151,15 +151,15 @@ videoTexture.magFilter = THREE.LinearFilter;
 
 ## Keyboard Shortcuts
 
-| Key | Action |
-|-----|--------|
-| `Space` | Play/Pause |
-| `F` | Fullscreen toggle |
-| `M` | Mute/Unmute |
-| `←` | Seek backward 10s |
-| `→` | Seek forward 10s |
-| `↑` | Volume up |
-| `↓` | Volume down |
+| Key     | Action            |
+|---------|-------------------|
+| `Space` | Play/Pause        |
+| `F`     | Fullscreen toggle |
+| `M`     | Mute/Unmute       |
+| `←`     | Seek backward 10s |
+| `→`     | Seek forward 10s  |
+| `↑`     | Volume up         |
+| `↓`     | Volume down       |
 
 ## Production Data Structure
 
@@ -308,12 +308,14 @@ videoTexture.generateMipmaps = false; // Not needed for video
 ## Browser Compatibility
 
 ### Supported Browsers
+
 - Chrome 90+
 - Firefox 88+
 - Safari 14+
 - Edge 90+
 
 ### Required Features
+
 - WebGL 2.0
 - HTML5 Video
 - Web Audio API
@@ -321,6 +323,7 @@ videoTexture.generateMipmaps = false; // Not needed for video
 - ES6 Modules
 
 ### Mobile Support
+
 - Touch-friendly controls
 - `playsinline` attribute for iOS
 - Responsive progress bar
@@ -398,59 +401,77 @@ new VirtualCinema(scene, camera, renderer)
 ### Methods
 
 #### `init(): Promise<VirtualCinema>`
+
 Initialize and build the cinema room.
 
 #### `loadProduction(production): Promise<void>`
+
 Load a production for playback.
 
 #### `play(): void`
+
 Start video playback.
 
 #### `pause(): void`
+
 Pause video playback.
 
 #### `togglePlayPause(): void`
+
 Toggle between play and pause.
 
 #### `seek(timeInSeconds): void`
+
 Seek to specific time.
 
 #### `setVolume(volume): void`
+
 Set volume (0-1).
 
 #### `toggleFullscreen(): void`
+
 Toggle fullscreen mode.
 
 #### `setCameraPosition(mode): void`
+
 Change viewing mode ('cinema', 'vr', 'closeup', 'back').
 
 #### `showMenu(): void`
+
 Display production selection menu.
 
 #### `hideMenu(): void`
+
 Hide production selection menu.
 
 #### `update(delta): void`
+
 Update loop (call every frame).
 
 #### `dispose(): void`
+
 Cleanup and remove cinema.
 
 ### Properties
 
 #### `videoElement: HTMLVideoElement`
+
 The underlying video element.
 
 #### `currentProduction: Object`
+
 Currently loaded production data.
 
 #### `isPlaying: boolean`
+
 Playback state.
 
 #### `productions: Array`
+
 Full catalog of productions.
 
 #### `viewingMode: string`
+
 Current viewing mode.
 
 ## Production Deployment
@@ -505,6 +526,7 @@ async getProductions() {
 Built for **Bitaca Cinema** - Celebrating Capão Bonito's audiovisual culture.
 
 **Technologies:**
+
 - Three.js (3D rendering)
 - stream-winx-api (Video streaming)
 - Telegram (Content delivery)
