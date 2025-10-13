@@ -52,6 +52,9 @@ class AgentManager:
         Returns:
             Dict with agent response and metadata
         """
+        # Start timing
+        start_time = time.time()
+
         print(f"\n🧠 AgentManager processing query: '{query[:50]}...'")
         print(f"📊 Intent: {intent}")
 
@@ -134,6 +137,20 @@ class AgentManager:
             Dict with 'primary' agent and additional routing info
         """
         query_lower = query.lower()
+
+        # Check RL recommendation first if enabled
+        if self.rl_feedback.enabled:
+            recommended_agent = self.rl_feedback.get_agent_recommendation(
+                query_intent=intent or 'GENERAL',
+                query=query
+            )
+            if recommended_agent:
+                print(f"[RL] Recommended agent: {recommended_agent}")
+                return {
+                    'primary': recommended_agent.lower(),
+                    'use_rag': recommended_agent == 'Discovery',
+                    'confidence': 'rl_recommendation'
+                }
 
         # Cultural law keywords
         cultural_keywords = [
