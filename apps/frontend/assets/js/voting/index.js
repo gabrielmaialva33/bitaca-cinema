@@ -215,3 +215,11 @@ export {
 
 // Make initVotingSystem available globally for main.js
 window.initVotingSystem = initVotingSystem;
+
+// Auto-initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVotingSystem);
+} else {
+    // DOM already loaded
+    initVotingSystem();
+}
