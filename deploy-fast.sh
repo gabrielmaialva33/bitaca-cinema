@@ -23,13 +23,9 @@ cp -rf apps/backend/agents .
 cp -f apps/backend/requirements.txt .
 cp -f apps/frontend/assets/data/embeddings.json .
 
-echo "📁 Preparing frontend files..."
-# Copy frontend to /var/www/bitaca-cinema for nginx
-sudo mkdir -p /var/www/bitaca-cinema
-sudo cp -rf apps/frontend/*.html /var/www/bitaca-cinema/
-sudo cp -rf apps/frontend/assets /var/www/bitaca-cinema/
-sudo cp -f apps/frontend/robots.txt /var/www/bitaca-cinema/ 2>/dev/null || true
-sudo cp -f apps/frontend/sitemap.xml /var/www/bitaca-cinema/ 2>/dev/null || true
+echo "📁 Frontend via GitHub Pages proxy (no files to copy)"
+# Frontend is proxied from https://gabrielmaialva33.github.io/bitaca-cinema/
+# No need to copy files - saves resources and auto-updates!
 
 echo "🔧 Updating nginx configs..."
 # Copy nginx configs to system nginx if they exist

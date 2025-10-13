@@ -52,13 +52,10 @@ jobs:
           # Copy embeddings.json from frontend to root
           cp -f apps/frontend/assets/data/embeddings.json .
 
-          # Copy frontend to /var/www/bitaca-cinema for system nginx
-          echo "📁 Preparing frontend files..."
-          sudo mkdir -p /var/www/bitaca-cinema
-          sudo cp -rf apps/frontend/*.html /var/www/bitaca-cinema/
-          sudo cp -rf apps/frontend/assets /var/www/bitaca-cinema/
-          sudo cp -f apps/frontend/robots.txt /var/www/bitaca-cinema/ 2>/dev/null || true
-          sudo cp -f apps/frontend/sitemap.xml /var/www/bitaca-cinema/ 2>/dev/null || true
+          # Frontend via GitHub Pages proxy (no files to copy)
+          echo "📁 Frontend proxied from GitHub Pages - no files to copy"
+          # www.abitaca.com.br proxies to https://gabrielmaialva33.github.io/bitaca-cinema/
+          # This saves VPS resources and auto-updates with GitHub Pages deployments!
 
           # Update nginx configs on system
           echo "🔧 Updating nginx configs..."
