@@ -404,8 +404,8 @@
     // Initialize Auth
     const auth = new AuthManager();
 
-    // Require authentication
-    auth.requireAuth();
+    // Require authentication (wait for Firebase to initialize)
+    await auth.requireAuth();
 
     // Make auth available globally
     window.bitacaAuth = auth;

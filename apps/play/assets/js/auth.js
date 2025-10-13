@@ -28,11 +28,6 @@ export class AuthManager {
 
             // Trigger all callbacks
             this.authStateCallbacks.forEach(callback => callback(user));
-
-            // Redirect if not logged in and not on login page
-            if (!user && !window.location.pathname.includes('login')) {
-                window.location.href = '/login.html';
-            }
         });
     }
 
@@ -122,12 +117,19 @@ export class AuthManager {
      * Require authentication
      * Redirects to login if not authenticated
      */
-    requireAuth() {
-        if (!this.isLoggedIn()) {
-            window.location.href = '/login.html';
-            return false;
-        }
-        return true;
+    async requireAuth() {
+        // Wait for auth to initialize
+        return new Promise((resolve) => {
+            const unsubscribe = onAuthStateChanged(this.auth, (user) => {
+                unsubscribe();
+                if (!user) {
+                    window.location.href = '/login.html';
+                    resolve(false);
+                } else {
+                    resolve(true);
+                }
+            });
+        });
     }
 }
 
