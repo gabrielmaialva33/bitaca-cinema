@@ -2481,3 +2481,58 @@ ul {
         gap: 2.5rem;
     }
 }
+
+/* ===== AUTH TOAST NOTIFICATIONS ===== */
+.auth-toast {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: var(--branco);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10000;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 400px;
+    border-left: 4px solid;
+}
+
+.auth-toast.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.auth-toast--success {
+    border-left-color: var(--verde-folha);
+    color: var(--verde-folha);
+}
+
+.auth-toast--error {
+    border-left-color: var(--vermelho-bitaca);
+    color: var(--vermelho-bitaca);
+}
+
+.auth-toast i {
+    font-size: 1.5rem;
+}
+
+.auth-toast span {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--preto);
+}
+
+@media (max-width: 768px) {
+    .auth-toast {
+        top: 1rem;
+        right: 1rem;
+        left: 1rem;
+        max-width: calc(100% - 2rem);
+    }
+}

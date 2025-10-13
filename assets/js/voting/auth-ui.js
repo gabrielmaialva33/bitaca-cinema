@@ -221,7 +221,12 @@ async function handleGoogleSignIn() {
         showSuccess('Login realizado com sucesso!');
         closeAuthModal();
     } catch (error) {
-        showError(getErrorMessage(error.code));
+        console.error('Google Sign-In Error:', error);
+        if (error.code === 'auth/configuration-not-found') {
+            showError('🔧 Sistema de autenticação em configuração. Por favor, aguarde alguns instantes e tente novamente.');
+        } else {
+            showError(getErrorMessage(error.code));
+        }
     } finally {
         showLoading(false);
     }
@@ -364,8 +369,25 @@ function hideError() {
 }
 
 function showSuccess(message) {
-    // Could use a toast notification here
-    console.log('Success:', message);
+    // Show success message in a toast-style notification
+    const toast = document.createElement('div');
+    toast.className = 'auth-toast auth-toast--success';
+    toast.innerHTML = `
+        <i class="ki-filled ki-check-circle"></i>
+        <span>${message}</span>
+    `;
+    document.body.appendChild(toast);
+
+    // Animate in
+    setTimeout(() => toast.classList.add('active'), 10);
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('active');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+
+    console.log('✅ Success:', message);
 }
 
 function showLoading(isLoading) {
@@ -383,18 +405,22 @@ function showLoading(isLoading) {
 // ===== ERROR MESSAGES =====
 function getErrorMessage(errorCode) {
     const errorMessages = {
-        'auth/invalid-email': 'E-mail inválido.',
-        'auth/user-disabled': 'Usuário desabilitado.',
-        'auth/user-not-found': 'Usuário não encontrado.',
-        'auth/wrong-password': 'Senha incorreta.',
-        'auth/email-already-in-use': 'E-mail já está em uso.',
-        'auth/weak-password': 'Senha muito fraca. Use no mínimo 6 caracteres.',
-        'auth/operation-not-allowed': 'Operação não permitida.',
-        'auth/popup-closed-by-user': 'Login cancelado pelo usuário.',
-        'auth/cancelled-popup-request': 'Login cancelado.',
+        'auth/invalid-email': '📧 E-mail inválido. Verifique o formato do e-mail.',
+        'auth/user-disabled': '🚫 Esta conta foi desabilitada. Entre em contato com o suporte.',
+        'auth/user-not-found': '👤 Usuário não encontrado. Crie uma conta primeiro.',
+        'auth/wrong-password': '🔑 Senha incorreta. Tente novamente.',
+        'auth/email-already-in-use': '✉️ E-mail já está em uso. Faça login ou use outro e-mail.',
+        'auth/weak-password': '🔐 Senha muito fraca. Use no mínimo 6 caracteres.',
+        'auth/operation-not-allowed': '⚠️ Operação não permitida. Entre em contato com o suporte.',
+        'auth/popup-closed-by-user': '❌ Login cancelado pelo usuário.',
+        'auth/cancelled-popup-request': '❌ Login cancelado.',
+        'auth/configuration-not-found': '🔧 Sistema de autenticação em configuração. Aguarde alguns instantes.',
+        'auth/invalid-credential': '🔑 Credenciais inválidas. Verifique seu e-mail e senha.',
+        'auth/network-request-failed': '📡 Erro de conexão. Verifique sua internet.',
+        'auth/too-many-requests': '⏱️ Muitas tentativas. Aguarde alguns minutos e tente novamente.',
     };
 
-    return errorMessages[errorCode] || 'Erro ao fazer login. Tente novamente.';
+    return errorMessages[errorCode] || '❌ Erro ao fazer login. Tente novamente.';
 }
 
 // ===== EXPORTS =====
