@@ -12,7 +12,7 @@ on:
 env:
   SERVER_HOST: 162.12.204.30
   SERVER_USER: root
-  DEPLOY_DIR: /opt/bitaca-cinema
+  DEPLOY_DIR: /root/bitaca-cinema
   DOMAIN: api.abitaca.com.br
 
 jobs:
@@ -50,6 +50,9 @@ jobs:
             --exclude '.github/' \
             --exclude 'www/' \
             apps/backend/ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/
+
+          # Copy embeddings.json from frontend assets to backend
+          rsync -avz apps/frontend/assets/data/embeddings.json ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/
 
           # Copy Dockerfile and docker-compose from root
           rsync -avz Dockerfile docker-compose.yml ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/
