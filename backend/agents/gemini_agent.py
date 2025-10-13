@@ -6,7 +6,11 @@ Specialized agent using Google Gemini for complex reasoning and search
 from typing import Dict, Any, Optional
 import asyncio
 
-from agents.gemini_integration import get_gemini_client, GeminiIntegration
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from gemini_integration import get_gemini_client, GeminiIntegration
 
 
 class GeminiAgent:
