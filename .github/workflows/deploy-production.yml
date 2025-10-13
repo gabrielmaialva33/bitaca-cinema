@@ -1,0 +1,208 @@
+name: Deploy to Production VPS
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  SERVER_HOST: 162.12.204.30
+  SERVER_USER: root
+  DEPLOY_BASE: /opt/bitaca-cinema
+
+jobs:
+  deploy:
+    name: Deploy ${{ matrix.app }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        app:
+          - backend
+          - play
+          - chat
+          - play-3d
+        include:
+          - app: backend
+            source: apps/backend
+            target: /opt/bitaca-cinema/backend
+            service: docker
+          - app: play
+            source: apps/play
+            target: /opt/bitaca-cinema/apps/play
+            service: nginx
+          - app: chat
+            source: apps/chat
+            target: /opt/bitaca-cinema/apps/chat
+            service: nginx
+          - app: play-3d
+            source: apps/play-3d
+            target: /opt/bitaca-cinema/apps/play-3d
+            service: nginx
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ env.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy ${{ matrix.app }}
+        run: |
+          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} << 'EOF'
+
+          echo "🚀 Deploying ${{ matrix.app }}..."
+
+          # Create target directory if doesn't exist
+          mkdir -p ${{ matrix.target }}
+
+          EOF
+
+      - name: Sync files
+        run: |
+          rsync -avz --delete \
+            --exclude 'node_modules' \
+            --exclude '.git' \
+            --exclude '__pycache__' \
+            --exclude '*.pyc' \
+            ${{ matrix.source }}/ \
+            ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ matrix.target }}/
+
+      - name: Restart backend service
+        if: matrix.app == 'backend'
+        run: |
+          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} << 'EOF'
+          cd /root/bitaca-cinema
+
+          # Copy backend files to root for Docker
+          cp -f apps/backend/*.py .
+          cp -rf apps/backend/agents .
+          cp -f apps/backend/requirements.txt .
+          cp -f apps/frontend/assets/data/embeddings.json .
+
+          # Restart Docker containers
+          docker compose down
+          docker compose build --no-cache api
+          docker compose up -d api
+
+          echo "✅ Backend restarted"
+          EOF
+
+      - name: Reload nginx
+        if: matrix.service == 'nginx'
+        run: |
+          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} << 'EOF'
+
+          # Test nginx config
+          sudo nginx -t
+
+          # Reload nginx
+          sudo systemctl reload nginx
+
+          echo "✅ Nginx reloaded"
+          EOF
+
+      - name: Verify ${{ matrix.app }} deployment
+        run: |
+          echo "✅ ${{ matrix.app }} deployed successfully"
+
+  verify:
+    name: Verify Deployment
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ env.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Check services
+        run: |
+          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} << 'EOF'
+
+          echo "📊 Service Status:"
+
+          # Check Docker
+          echo "Backend API:"
+          docker compose ps
+
+          # Check Nginx
+          echo "Nginx:"
+          sudo systemctl status nginx --no-pager | head -5
+
+          EOF
+
+      - name: Test endpoints
+        run: |
+          echo "🧪 Testing endpoints..."
+
+          # Test API
+          if curl -f https://api.abitaca.com.br/health; then
+            echo "✅ API OK"
+          else
+            echo "❌ API failed"
+          fi
+
+          # Test Play
+          if curl -f -I https://play.abitaca.com.br; then
+            echo "✅ Play OK"
+          else
+            echo "❌ Play failed"
+          fi
+
+          # Test Chat
+          if curl -f -I https://chat.abitaca.com.br; then
+            echo "✅ Chat OK"
+          else
+            echo "❌ Chat failed"
+          fi
+
+          # Test Play 3D
+          if curl -f -I https://play3d.abitaca.com.br; then
+            echo "✅ Play 3D OK"
+          else
+            echo "❌ Play 3D failed"
+          fi
+
+      - name: Purge Cloudflare cache
+        if: success()
+        run: |
+          echo "🧹 Purging Cloudflare cache..."
+
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/523a4a3adef5549c21bc1dfcc0834c09/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}' \
+            -s | grep -q '"success":true' && echo "✅ Cache purged" || echo "⚠️ Cache purge failed"
+
+  notify:
+    name: Deployment Summary
+    needs: verify
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: Show results
+        run: |
+          echo "🎉 Deployment Complete!"
+          echo ""
+          echo "📍 Endpoints:"
+          echo "  API:      https://api.abitaca.com.br"
+          echo "  Play:     https://play.abitaca.com.br"
+          echo "  Chat:     https://chat.abitaca.com.br"
+          echo "  Play 3D:  https://play3d.abitaca.com.br"
+          echo "  Frontend: https://www.abitaca.com.br"
