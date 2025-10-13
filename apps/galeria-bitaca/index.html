@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galeria Bitaca Café Bar - Espaço cultural alternativo em Capão Bonito/SP">
+    <title>Galeria Bitaca Café Bar | Capão Bonito/SP</title>
+
+    <!-- Kumbh Sans Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Keenicons -->
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Cores Bitaca */
+            --vermelho-bitaca: #C41E3A;
+            --verde-folha: #2D5016;
+            --laranja-terra: #D2691E;
+            --amarelo-sol: #FFB81C;
+            --preto: #1a1a1a;
+            --branco: #FEFEFE;
+            --cinza-escuro: #2a2a2a;
+            --cinza-medio: #3a3a3a;
+
+            /* Typography */
+            --font-regular: 'Kumbh Sans', sans-serif;
+            --font-bold: 'Kumbh Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-regular);
+            background: var(--preto);
+            color: var(--branco);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--vermelho-bitaca);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-bold);
+            font-size: 1.5rem;
+            color: var(--branco);
+            text-decoration: none;
+        }
+
+        .logo span:first-child {
+            color: var(--vermelho-bitaca);
+            font-weight: 900;
+        }
+
+        .nav__menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav__menu a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav__menu a:hover {
+            color: var(--vermelho-bitaca);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--preto) 0%, var(--cinza-escuro) 100%);
+            padding: 6rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(196, 30, 58, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(45, 80, 22, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero__content {
+            text-align: center;
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero__title {
+            font-family: var(--font-bold);
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero__title span {
+            color: var(--vermelho-bitaca);
+        }
+
+        .hero__subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--amarelo-sol);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero__description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Section */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section__title {
+            font-family: var(--font-bold);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--branco);
+        }
+
+        .section__subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--cinza-escuro);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid var(--cinza-medio);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--vermelho-bitaca);
+            transform: translateY(-5px);
+        }
+
+        .card__icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card__title {
+            font-family: var(--font-bold);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--vermelho-bitaca);
+        }
+
+        .card__description {
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery__item {
+            aspect-ratio: 1;
+            background: var(--cinza-medio);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery__item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--cinza-escuro);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 2px solid var(--vermelho-bitaca);
+        }
+
+        .footer__content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer__social {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .footer__social a {
+            color: var(--branco);
+            font-size: 2rem;
+            transition: color 0.3s;
+        }
+
+        .footer__social a:hover {
+            color: var(--vermelho-bitaca);
+        }
+
+        .footer__info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            opacity: 0.8;
+        }
+
+        .footer__info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--vermelho-bitaca);
+            color: var(--branco);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-family: var(--font-bold);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #9B1B30;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(196, 30, 58, 0.3);
+        }
+
+        .btn--secondary {
+            background: transparent;
+            border: 2px solid var(--vermelho-bitaca);
+        }
+
+        .btn--secondary:hover {
+            background: var(--vermelho-bitaca);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav__menu {
+                display: none;
+            }
+
+            .hero {
+                padding: 8rem 1rem 2rem;
+            }
+
+            .section {
+                padding: 4rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="/" class="logo">
+            <span>BITACA</span>
+            <span>Galeria</span>
+        </a>
+        <ul class="nav__menu">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#espaco">Espaço</a></li>
+            <li><a href="#eventos">Eventos</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="https://abitaca.com.br">Mostra Cinema</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero__content">
+            <h1 class="hero__title">
+                Galeria <span>BITACA</span><br>Café Bar
+            </h1>
+            <p class="hero__subtitle">Underground | Visceral | Democrático</p>
+            <p class="hero__description">
+                Espaço cultural alternativo no coração de Capão Bonito.
+                Café, bar, shows, arte e cinema independente.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#sobre" class="btn">Conheça o Espaço</a>
+                <a href="#eventos" class="btn btn--secondary">Ver Programação</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section id="sobre" class="section">
+        <h2 class="section__title">Sobre a Bitaca</h2>
+        <p class="section__subtitle">
+            Um espaço de resistência cultural e expressão artística alternativa
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card__icon">☕</div>
+                <h3 class="card__title">Café Bar</h3>
+                <p class="card__description">
+                    Drinks autorais, cafés especiais e petiscos em um ambiente acolhedor e alternativo.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card__icon">🎸</div>
+                <h3 class="card__title">Shows Ao Vivo</h3>
+                <p class="card__description">
+                    Palco para artistas locais e regionais. Música alternativa, underground e independente.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card__icon">🎬</div>
+                <h3 class="card__title">Cinema</h3>
+                <p class="card__description">
+                    Sessões de cinema independente e mostras audiovisuais. Apoio às produções locais.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card__icon">🎨</div>
+                <h3 class="card__title">Arte Urbana</h3>
+                <p class="card__description">
+                    Exposições de arte urbana, grafite e expressões visuais da cultura underground.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Espaço Section -->
+    <section id="espaco" class="section">
+        <h2 class="section__title">O Espaço</h2>
+        <p class="section__subtitle">
+            Um refúgio cultural no interior paulista
+        </p>
+
+        <div style="background: var(--cinza-escuro); padding: 2rem; border-radius: 12px; border: 2px solid var(--vermelho-bitaca);">
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                A Galeria Bitaca Café Bar nasceu da necessidade de criar um espaço alternativo em Capão Bonito,
+                onde artistas, músicos, cineastas e a comunidade pudessem se encontrar, criar e compartilhar cultura.
+                <br><br>
+                Com sua fachada pintada característica e ambiente acolhedor, a Bitaca se tornou referência
+                na cena cultural underground do interior paulista, promovendo shows, exposições,
+                sessões de cinema e debates culturais.
+            </p>
+        </div>
+    </section>
+
+    <!-- Eventos Section -->
+    <section id="eventos" class="section">
+        <h2 class="section__title">Eventos & Programação</h2>
+        <p class="section__subtitle">
+            Confira nossa agenda cultural
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3 class="card__title">🎤 Saraus & Poesia</h3>
+                <p class="card__description">
+                    Toda segunda-feira - Microfone aberto para poetas, músicos e artistas locais.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card__title">🎸 Sextas Underground</h3>
+                <p class="card__description">
+                    Shows de bandas independentes toda sexta-feira. Rock, punk, rap e música alternativa.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card__title">🎬 Cinema aos Sábados</h3>
+                <p class="card__description">
+                    Sessões de cinema independente e curtas locais. Entrada gratuita.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria Section -->
+    <section id="galeria" class="section">
+        <h2 class="section__title">Galeria de Fotos</h2>
+        <p class="section__subtitle">
+            Momentos marcantes da Bitaca
+        </p>
+
+        <div class="gallery">
+            <div class="gallery__item">
+                <div style="background: var(--cinza-medio); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                    🏠
+                </div>
+            </div>
+            <div class="gallery__item">
+                <div style="background: var(--cinza-medio); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                    🎸
+                </div>
+            </div>
+            <div class="gallery__item">
+                <div style="background: var(--cinza-medio); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                    🎨
+                </div>
+            </div>
+            <div class="gallery__item">
+                <div style="background: var(--cinza-medio); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                    ☕
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 2rem; opacity: 0.8;">
+            <strong>Fotos:</strong> Siga
+            <a href="https://www.instagram.com/abitacacb/" style="color: var(--vermelho-bitaca); text-decoration: none;">@abitacacb</a>
+            no Instagram para ver mais da Bitaca!
+        </p>
+    </section>
+
+    <!-- Contato Section -->
+    <section id="contato" class="section">
+        <h2 class="section__title">Contato & Localização</h2>
+        <p class="section__subtitle">
+            Venha nos visitar!
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card__icon">📍</div>
+                <h3 class="card__title">Endereço</h3>
+                <p class="card__description">
+                    Capão Bonito/SP<br>
+                    Interior Paulista
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card__icon">📧</div>
+                <h3 class="card__title">E-mail</h3>
+                <p class="card__description">
+                    cultura@capaobonito.sp.gov.br
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card__icon">📱</div>
+                <h3 class="card__title">Telefone</h3>
+                <p class="card__description">
+                    (15) 3542-3553<br>
+                    Renato Heber de Almeida
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__content">
+            <h3 style="font-family: var(--font-bold); font-size: 2rem; margin-bottom: 1rem;">
+                <span style="color: var(--vermelho-bitaca);">BITACA</span> Galeria
+            </h3>
+            <p style="opacity: 0.8; margin-bottom: 1rem;">
+                "Preservando a memória, celebrando a cultura"
+            </p>
+
+            <div class="footer__social">
+                <a href="https://www.instagram.com/abitacacb/" target="_blank" aria-label="Instagram">
+                    <i class="ti ti-brand-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/abitacacb/" target="_blank" aria-label="Facebook">
+                    <i class="ti ti-brand-facebook"></i>
+                </a>
+            </div>
+
+            <div class="footer__info">
+                <div class="footer__info-item">
+                    <i class="ti ti-mail"></i>
+                    <span>cultura@capaobonito.sp.gov.br</span>
+                </div>
+                <div class="footer__info-item">
+                    <i class="ti ti-phone"></i>
+                    <span>(15) 3542-3553</span>
+                </div>
+                <div class="footer__info-item">
+                    <i class="ti ti-map-pin"></i>
+                    <span>Capão Bonito/SP</span>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem; opacity: 0.6;">
+                © 2025 Bitaca Galeria | <a href="https://abitaca.com.br" style="color: var(--vermelho-bitaca); text-decoration: none;">Mostra de Cinema →</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
