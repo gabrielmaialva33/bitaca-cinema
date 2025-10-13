@@ -24,12 +24,12 @@ cp -f apps/backend/requirements.txt .
 cp -f apps/frontend/assets/data/embeddings.json .
 
 echo "📁 Preparing frontend files..."
-# Frontend files stay in /root/bitaca-cinema/www for nginx
-mkdir -p www
-cp -rf apps/frontend/*.html www/
-cp -rf apps/frontend/assets www/
-cp -f apps/frontend/robots.txt www/ 2>/dev/null || true
-cp -f apps/frontend/sitemap.xml www/ 2>/dev/null || true
+# Copy frontend to /var/www/bitaca-cinema for nginx
+sudo mkdir -p /var/www/bitaca-cinema
+sudo cp -rf apps/frontend/*.html /var/www/bitaca-cinema/
+sudo cp -rf apps/frontend/assets /var/www/bitaca-cinema/
+sudo cp -f apps/frontend/robots.txt /var/www/bitaca-cinema/ 2>/dev/null || true
+sudo cp -f apps/frontend/sitemap.xml /var/www/bitaca-cinema/ 2>/dev/null || true
 
 echo "🔧 Updating nginx configs..."
 # Copy nginx configs to system nginx if they exist

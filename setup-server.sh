@@ -68,11 +68,11 @@ cp -f apps/frontend/assets/data/embeddings.json .
 
 # Prepare frontend files
 echo "📦 Preparing frontend files..."
-mkdir -p www
-cp -rf apps/frontend/*.html www/
-cp -rf apps/frontend/assets www/
-cp -f apps/frontend/robots.txt www/ 2>/dev/null || true
-cp -f apps/frontend/sitemap.xml www/ 2>/dev/null || true
+mkdir -p /var/www/bitaca-cinema
+cp -rf apps/frontend/*.html /var/www/bitaca-cinema/
+cp -rf apps/frontend/assets /var/www/bitaca-cinema/
+cp -f apps/frontend/robots.txt /var/www/bitaca-cinema/ 2>/dev/null || true
+cp -f apps/frontend/sitemap.xml /var/www/bitaca-cinema/ 2>/dev/null || true
 
 # Create necessary directories
 echo "📂 Creating directories..."

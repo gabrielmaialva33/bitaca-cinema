@@ -52,13 +52,13 @@ jobs:
           # Copy embeddings.json from frontend to root
           cp -f apps/frontend/assets/data/embeddings.json .
 
-          # Prepare www directory for system nginx to serve from /root/bitaca-cinema/www
+          # Copy frontend to /var/www/bitaca-cinema for system nginx
           echo "📁 Preparing frontend files..."
-          mkdir -p www
-          cp -rf apps/frontend/*.html www/
-          cp -rf apps/frontend/assets www/
-          cp -f apps/frontend/robots.txt www/ 2>/dev/null || true
-          cp -f apps/frontend/sitemap.xml www/ 2>/dev/null || true
+          sudo mkdir -p /var/www/bitaca-cinema
+          sudo cp -rf apps/frontend/*.html /var/www/bitaca-cinema/
+          sudo cp -rf apps/frontend/assets /var/www/bitaca-cinema/
+          sudo cp -f apps/frontend/robots.txt /var/www/bitaca-cinema/ 2>/dev/null || true
+          sudo cp -f apps/frontend/sitemap.xml /var/www/bitaca-cinema/ 2>/dev/null || true
 
           # Update nginx configs on system
           echo "🔧 Updating nginx configs..."
