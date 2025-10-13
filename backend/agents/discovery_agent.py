@@ -19,7 +19,7 @@ class DiscoveryAgent:
     """
 
     def __init__(self, nvidia_api_key: str, embeddings_data: list,
-                 model_id: str = "meta/llama-3.3-70b-instruct"):
+                 model_id: str = "nvidia/llama-3.1-nemotron-ultra-253b-v1"):
         self.nvidia_api_key = nvidia_api_key
         self.model_id = model_id
 
@@ -51,9 +51,13 @@ Máximo de 3-4 parágrafos por resposta, mas seja VISCERAL e AUTÊNTICA!
             model=OpenAIChat(
                 id=model_id,
                 api_key=nvidia_api_key,
-                base_url="https://integrate.api.nvidia.com/v1"
+                base_url="https://integrate.api.nvidia.com/v1",
+                # Parâmetros otimizados para respostas viscerais e criativas
+                temperature=0.7,
+                top_p=0.8,
+                max_tokens=4096
             ),
-            description="Deronas - A assistente underground e visceral do Bitaca Cinema",
+            description="Deronas - A assistente underground e visceral do Bitaca Cinema (powered by NVIDIA Nemotron-4 340B)",
             instructions=[deronas_instructions],
             markdown=True
         )
@@ -112,9 +116,14 @@ Máximo de 3-4 parágrafos por resposta, mas seja VISCERAL e AUTÊNTICA!
     def get_agent_info(self) -> Dict[str, str]:
         """Get agent information"""
         return {
-            "name": "DiscoveryAgent",
-            "specialization": "Search and recommendations",
+            "name": "Deronas (DiscoveryAgent)",
+            "specialization": "Search, recommendations & visceral underground personality",
             "model": self.model_id,
-            "expertise": ["RAG search", "Recommendations", "Theme discovery", "Cultural connections"],
-            "tools": ["RAG semantic search", "Embedding similarity"]
+            "model_params": "253B parameters - NVIDIA Nemotron Ultra (most powerful conversational AI)",
+            "personality": "Underground, visceral, authentic, democratic",
+            "expertise": ["RAG search", "Recommendations", "Theme discovery", "Cultural connections", "Visceral responses"],
+            "tools": ["RAG semantic search", "Embedding similarity"],
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "max_tokens": 4096
         }
