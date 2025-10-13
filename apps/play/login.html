@@ -418,6 +418,33 @@
             });
         });
 
+        // Google login
+        document.getElementById('google-login-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('google-login-btn');
+            const originalHTML = btn.innerHTML;
+
+            btn.disabled = true;
+            btn.innerHTML = '<div class="spinner"></div><span>Entrando com Google...</span>';
+
+            const result = await auth.signInWithGoogle();
+
+            if (result.success) {
+                showSuccess('Login realizado com sucesso!');
+
+                // Check for redirect parameter
+                const urlParams = new URLSearchParams(window.location.search);
+                const redirect = urlParams.get('redirect');
+
+                setTimeout(() => {
+                    window.location.href = redirect || '/index.html';
+                }, 1000);
+            } else {
+                showError(result.error);
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
+            }
+        });
+
         // Login form
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -433,8 +460,13 @@
 
             if (result.success) {
                 showSuccess('Login realizado com sucesso!');
+
+                // Check for redirect parameter
+                const urlParams = new URLSearchParams(window.location.search);
+                const redirect = urlParams.get('redirect');
+
                 setTimeout(() => {
-                    window.location.href = '/index.html';
+                    window.location.href = redirect || '/index.html';
                 }, 1000);
             } else {
                 showError(result.error);
