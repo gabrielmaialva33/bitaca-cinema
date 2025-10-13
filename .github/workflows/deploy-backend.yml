@@ -34,42 +34,42 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ env.SERVER_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Create deploy directory structure
+      - name: Pull latest code and prepare files
         run: |
-          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "mkdir -p ${{ env.DEPLOY_DIR }}/{nginx/conf.d,nginx/logs,nginx/ssl,logs}"
+          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} << 'EOF'
+          cd ${{ env.DEPLOY_DIR }}
 
-      - name: Copy backend files to server
-        run: |
-          # Copy backend files from new structure to server's flat structure
-          rsync -avz --delete \
-            --exclude '.git' \
-            --exclude '.env' \
-            --exclude '__pycache__' \
-            --exclude '*.pyc' \
-            --exclude 'logs/' \
-            --exclude '.github/' \
-            --exclude 'www/' \
-            apps/backend/ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/
+          # Pull latest code from git
+          echo "📥 Pulling latest code..."
+          git pull origin main
 
-          # Copy embeddings.json from frontend assets to backend
-          rsync -avz apps/frontend/assets/data/embeddings.json ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/
+          # Copy backend files from apps/backend to root (for Docker compatibility)
+          echo "📁 Preparing backend files..."
+          cp -f apps/backend/*.py .
+          cp -rf apps/backend/agents .
+          cp -f apps/backend/requirements.txt .
 
-          # Copy Dockerfile and docker-compose from root
-          rsync -avz Dockerfile docker-compose.yml ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/
+          # Copy embeddings.json from frontend to root
+          cp -f apps/frontend/assets/data/embeddings.json .
 
-      - name: Copy frontend files to server
-        run: |
-          # Create www directory
-          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "mkdir -p ${{ env.DEPLOY_DIR }}/www"
+          # Copy Dockerfile and docker-compose from root (already in place after git pull)
 
-          # Copy HTML files
-          rsync -avz apps/frontend/*.html ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/www/
+          # Prepare www directory for nginx
+          echo "📁 Preparing frontend files..."
+          mkdir -p www
+          cp -rf apps/frontend/*.html www/
+          cp -rf apps/frontend/assets www/
+          cp -f apps/frontend/robots.txt www/ 2>/dev/null || true
+          cp -f apps/frontend/sitemap.xml www/ 2>/dev/null || true
 
-          # Copy assets directory
-          rsync -avz apps/frontend/assets/ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/www/assets/
+          # Create necessary directories
+          mkdir -p nginx/conf.d nginx/logs nginx/ssl logs
 
-          # Copy robots and sitemap
-          rsync -avz apps/frontend/robots.txt apps/frontend/sitemap.xml ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/www/ || true
+          # Copy nginx configs if they exist
+          cp -rf apps/backend/nginx/* nginx/ 2>/dev/null || true
+
+          echo "✅ Files prepared for deployment"
+          EOF
 
       - name: Configure environment
         run: |
@@ -89,24 +89,25 @@ jobs:
           ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} << 'EOF'
           cd ${{ env.DEPLOY_DIR }}
 
-          # Ensure we have the correct files in place
-          echo "Checking required files..."
-          ls -la main.py database.py requirements.txt Dockerfile docker-compose.yml embeddings.json | head -10
+          echo "🐳 Starting Docker deployment..."
 
           # Stop existing containers
           docker compose down
 
           # Build with no cache for fresh build
+          echo "🔨 Building containers..."
           docker compose build --no-cache
 
           # Start containers
+          echo "🚀 Starting containers..."
           docker compose up -d
 
           # Wait for containers to be healthy
-          echo "Waiting for containers to be ready..."
+          echo "⏳ Waiting for containers to be ready..."
           sleep 15
 
           # Show status
+          echo "📊 Container status:"
           docker compose ps
           EOF
 
