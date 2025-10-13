@@ -7,6 +7,8 @@ import {
     getAuth,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider,
     signOut,
     onAuthStateChanged
 } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
@@ -62,6 +64,21 @@ export class AuthManager {
             return {success: true, user: userCredential.user};
         } catch (error) {
             console.error('Sign up error:', error);
+            return {success: false, error: this.getErrorMessage(error.code)};
+        }
+    }
+
+    /**
+     * Sign in with Google
+     */
+    async signInWithGoogle() {
+        try {
+            const provider = new GoogleAuthProvider();
+            const userCredential = await signInWithPopup(this.auth, provider);
+            console.log('Signed in with Google:', userCredential.user.email);
+            return {success: true, user: userCredential.user};
+        } catch (error) {
+            console.error('Google sign in error:', error);
             return {success: false, error: this.getErrorMessage(error.code)};
         }
     }
