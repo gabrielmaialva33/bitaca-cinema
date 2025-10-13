@@ -1,6 +1,7 @@
 /**
  * AnimeZeY API Client
- * Real integration with Google Drive Index using fetch
+ * Integration with Google Drive Index
+ * Based on mahina-bot implementation
  */
 
 export class AnimeZeyAPI {
@@ -10,126 +11,143 @@ export class AnimeZeyAPI {
             { id: 0, name: 'AnimeZeY - Animes e Desenhos', path: '/0:' },
             { id: 1, name: 'AnimeZeY - Filmes e Séries', path: '/1:' }
         ];
-        this.cache = new Map();
-        this.iframe = null;
+        this.sessionHeaders = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+            'Content-Type': 'application/json',
+            'Accept': '*/*'
+        };
     }
 
     /**
-     * Initialize iframe to render AnimezeyWorker content
+     * Make a request to AnimeZey API
      */
-    initIframe() {
-        if (this.iframe) return this.iframe;
-
-        this.iframe = document.createElement('iframe');
-        this.iframe.style.display = 'none';
-        this.iframe.src = this.baseUrl + '/1:/';
-        document.body.appendChild(this.iframe);
-
-        return new Promise((resolve) => {
-            this.iframe.onload = () => {
-                console.log('✅ Animezey iframe loaded');
-                resolve(this.iframe);
+    async request(endpoint, method = 'GET', data = null) {
+        try {
+            const options = {
+                method: method,
+                headers: this.sessionHeaders
             };
-        });
+
+            if (data && method === 'POST') {
+                options.body = JSON.stringify(data);
+            }
+
+            const response = await fetch(this.baseUrl + endpoint, options);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('AnimeZey API error:', error);
+            return null;
+        }
     }
 
     /**
-     * Fetch folder contents using real fetch
+     * Search for anime (Drive 0)
+     * @param {string} query - Search query
+     * @param {string|null} pageToken - Pagination token
+     * @returns {Promise<Object>} Search results with files array
      */
-    async getFolderContents(driveId = 1, path = '') {
-        const cacheKey = `${driveId}:${path}`;
+    async searchAnime(query, pageToken = null) {
+        const response = await this.request('/0:search', 'POST', {
+            q: query,
+            page_token: pageToken,
+            page_index: 0
+        });
 
-        if (this.cache.has(cacheKey)) {
-            console.log('📦 Cache hit for:', cacheKey);
-            return this.cache.get(cacheKey);
+        return this.parseSearchResponse(response);
+    }
+
+    /**
+     * Search for movies/series (Drive 1)
+     * @param {string} query - Search query
+     * @param {string|null} pageToken - Pagination token
+     * @returns {Promise<Object>} Search results with files array
+     */
+    async searchMovie(query, pageToken = null) {
+        const response = await this.request('/1:search', 'POST', {
+            q: query,
+            page_token: pageToken,
+            page_index: 0
+        });
+
+        return this.parseSearchResponse(response);
+    }
+
+    /**
+     * Search across all drives
+     * @param {string} query - Search query
+     * @param {number} driveId - Drive ID (0 for anime, 1 for movies)
+     * @returns {Promise<Array>} Formatted video results
+     */
+    async search(query, driveId = 1) {
+        console.log(`🔍 Searching in drive ${driveId}:`, query);
+
+        let response;
+        if (driveId === 0) {
+            response = await this.searchAnime(query);
+        } else {
+            response = await this.searchMovie(query);
         }
 
-        try {
-            const drivePath = this.drives[driveId].path;
-            const fullPath = path ? `${drivePath}${path}/` : `${drivePath}/`;
-            const url = `${this.baseUrl}${fullPath}`;
-
-            console.log('🌐 Fetching:', url);
-
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'text/html',
-                    'User-Agent': 'Mozilla/5.0'
-                }
-            });
-
-            const html = await response.text();
-
-            // Parse HTML
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-
-            // Extract file list from JavaScript
-            const files = this.extractFilesFromHTML(doc);
-
-            // Cache
-            this.cache.set(cacheKey, files);
-
-            console.log('✅ Found files:', files.length);
-
-            return files;
-
-        } catch (error) {
-            console.error('❌ Error fetching:', error);
+        if (!response || !response.files) {
             return [];
         }
+
+        return response.files.filter(f => this.isVideoFile(f.name));
     }
 
     /**
-     * Extract files from HTML document
+     * Get popular/recent content
+     * @param {number} driveId - Drive ID
+     * @param {number} limit - Max results
+     * @returns {Promise<Array>} Video results
      */
-    extractFilesFromHTML(doc) {
-        const files = [];
+    async getPopularContent(driveId = 1, limit = 20) {
+        console.log(`⭐ Getting content from drive ${driveId}...`);
 
-        // Method 1: Try to get from window.list if available
-        try {
-            const scripts = doc.querySelectorAll('script');
-            for (const script of scripts) {
-                const text = script.textContent;
+        // Search with empty query to get recent files
+        const results = await this.search('', driveId);
 
-                // Look for list data
-                if (text.includes('window.list') || text.includes('files')) {
-                    console.log('📜 Found potential file list in script');
-                }
-            }
-        } catch (e) {
-            console.log('Could not extract from scripts');
+        return results.slice(0, limit);
+    }
+
+    /**
+     * Parse search response from API
+     */
+    parseSearchResponse(response) {
+        if (!response) {
+            return { files: [], nextPageToken: null };
         }
 
-        // Method 2: Parse the file links
-        const links = doc.querySelectorAll('a[href]');
-        links.forEach(link => {
-            const href = link.getAttribute('href');
-            const text = link.textContent.trim();
+        // Handle different response structures
+        const files = response.data?.files || response.files || [];
+        const nextPageToken = response.nextPageToken || null;
 
-            if (href && href.startsWith('/') && text && text !== 'Home') {
-                const isFolder = !this.isVideoFile(text);
-                const isVideo = this.isVideoFile(text);
+        const parsedFiles = files.map(file => ({
+            id: file.id,
+            name: file.name,
+            path: file.link || file.path,
+            url: `${this.baseUrl}${file.link || file.path}`,
+            size: file.size,
+            mimeType: file.mimeType,
+            modifiedTime: file.modifiedTime,
+            isVideo: this.isVideoFile(file.name),
+            thumbnail: this.getThumbnailForFile(file.name),
+            driveId: file.driveId
+        }));
 
-                if (isVideo) {
-                    files.push({
-                        name: text,
-                        path: href,
-                        url: `${this.baseUrl}${href}`,
-                        isFolder: false,
-                        isVideo: true,
-                        thumbnail: this.getThumbnailForFile(text)
-                    });
-                }
-            }
-        });
-
-        return files;
+        return {
+            files: parsedFiles,
+            nextPageToken
+        };
     }
 
     /**
-     * Check if file is video
+     * Check if file is a video
      */
     isVideoFile(filename) {
         const videoExts = ['.mp4', '.mkv', '.avi', '.mov', '.webm', '.m4v', '.flv', '.wmv', '.3gp', '.ts'];
@@ -137,88 +155,46 @@ export class AnimeZeyAPI {
     }
 
     /**
-     * Get thumbnail for file
+     * Get thumbnail for file (placeholder generator)
      */
     getThumbnailForFile(filename) {
-        // Generate random seed from filename
+        // Generate deterministic seed from filename
         const seed = filename.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
         return `https://picsum.photos/seed/${seed}/400/225`;
     }
 
     /**
-     * Get popular content
-     */
-    async getPopularContent(driveId = 1, limit = 20) {
-        console.log('⭐ Getting popular content...');
-
-        const allFiles = await this.getFolderContents(driveId, '');
-
-        // Get all videos
-        const videos = allFiles.filter(f => f.isVideo);
-
-        return videos.slice(0, limit);
-    }
-
-    /**
-     * Search for content
-     */
-    async search(query, driveId = 1) {
-        console.log('🔍 Searching for:', query);
-
-        const allFiles = await this.getFolderContents(driveId, '');
-
-        const lowerQuery = query.toLowerCase();
-        return allFiles.filter(f =>
-            f.isVideo && f.name.toLowerCase().includes(lowerQuery)
-        );
-    }
-
-    /**
-     * Get direct video URL
+     * Get direct video URL for streaming
+     * @param {string} filePath - File path from API
+     * @returns {string} Full streaming URL
      */
     getVideoUrl(filePath) {
+        // If already full URL, return as is
+        if (filePath.startsWith('http')) {
+            return filePath;
+        }
+        // Otherwise prepend base URL
         return `${this.baseUrl}${filePath}`;
     }
 
     /**
-     * Get all drives
+     * Get all available drives
      */
     getDrives() {
         return this.drives;
     }
 
     /**
-     * Browse by category/folder
+     * Browse by folder/category
+     * @param {number} driveId - Drive ID
+     * @param {string} folderPath - Folder path
+     * @returns {Promise<Array>} Files in folder
      */
-    async browseCategory(driveId, categoryPath) {
-        return await this.getFolderContents(driveId, categoryPath);
-    }
-
-    /**
-     * Clear cache
-     */
-    clearCache() {
-        this.cache.clear();
-    }
-
-    /**
-     * Fetch using embedded iframe (alternative method)
-     */
-    async fetchViaIframe(path = '') {
-        await this.initIframe();
-
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                try {
-                    const iframeDoc = this.iframe.contentDocument || this.iframe.contentWindow.document;
-                    const files = this.extractFilesFromHTML(iframeDoc);
-                    resolve(files);
-                } catch (error) {
-                    console.error('Error accessing iframe:', error);
-                    resolve([]);
-                }
-            }, 2000); // Wait for JavaScript to render
-        });
+    async browseFolder(driveId, folderPath = '') {
+        // For now, use search with folder name
+        // In future, implement proper folder navigation
+        const query = folderPath.split('/').pop() || '';
+        return await this.search(query, driveId);
     }
 }
 
