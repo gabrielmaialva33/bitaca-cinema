@@ -49,7 +49,7 @@ export class FirebaseChat {
 
             // Redirect if not logged in
             if (!user && !window.location.pathname.includes('login')) {
-                window.location.href = 'https://play.abitaca.com.br/login.html?redirect=' + encodeURIComponent(window.location.href);
+                window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.href);
             }
         });
     }
