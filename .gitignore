@@ -23,3 +23,4 @@ test-results
 tests/report
 backend/.env
 playwright-report
+tmp/abitaca-8451c-firebase-adminsdk-fbsvc-80409445aa.json
