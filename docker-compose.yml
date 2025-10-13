@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # Bitaca API Backend
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bitaca-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+      - WORKERS=4
+    ports:
+      - "3000:3000"
+    networks:
+      - bitaca-network
+    volumes:
+      - ./logs:/app/logs
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.abitaca.project=bitaca-cinema"
+      - "com.abitaca.service=api"
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: bitaca-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./nginx/logs:/var/log/nginx
+      - ./www:/var/www/bitaca-cinema:ro
+    networks:
+      - bitaca-network
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "com.abitaca.project=bitaca-cinema"
+      - "com.abitaca.service=nginx"
+
+networks:
+  bitaca-network:
+    driver: bridge
+    name: bitaca-network
+
+volumes:
+  logs:
+    name: bitaca-logs
