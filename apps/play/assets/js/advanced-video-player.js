@@ -403,7 +403,7 @@ export class AdvancedVideoPlayer {
             touchStartY = e.touches[0].clientY;
             touchStartTime = Date.now();
             isSeeking = false;
-        }, { passive: true });
+        }, {passive: true});
 
         overlay.addEventListener('touchmove', (e) => {
             if (isSeeking) return;
@@ -420,7 +420,7 @@ export class AdvancedVideoPlayer {
                 this.seek(seekAmount);
                 this.showGestureFeedback(seekAmount > 0 ? 'forward' : 'backward', Math.abs(seekAmount));
             }
-        }, { passive: true });
+        }, {passive: true});
 
         overlay.addEventListener('touchend', (e) => {
             const touchEndTime = Date.now();
@@ -554,7 +554,7 @@ export class AdvancedVideoPlayer {
             });
 
             this.player.on('error', (error) => {
-                this.trackEvent('video_error', { error: error.message });
+                this.trackEvent('video_error', {error: error.message});
             });
         } else {
             // Native HTML5 video events
@@ -594,7 +594,7 @@ export class AdvancedVideoPlayer {
         } else {
             // Regular video
             if (typeof this.player.src === 'function') {
-                this.player.src({ src: streamUrl, type: 'video/mp4' });
+                this.player.src({src: streamUrl, type: 'video/mp4'});
             } else {
                 this.player.src = streamUrl;
             }
@@ -656,7 +656,7 @@ export class AdvancedVideoPlayer {
             speedLabel.textContent = speed + 'x';
         }
 
-        this.trackEvent('playback_speed_change', { speed });
+        this.trackEvent('playback_speed_change', {speed});
     }
 
     increaseSpeed() {

@@ -2,16 +2,17 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bitaca Play - Plataforma de streaming das produções audiovisuais de Capão Bonito">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Bitaca Play - Plataforma de streaming das produções audiovisuais de Capão Bonito" name="description">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Bitaca Play - Streaming de Cinema Independente">
-    <meta property="og:description" content="Assista às 24 produções audiovisuais fomentadas pelas Leis Paulo Gustavo e PNAB">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="assets/images/og-play.png">
+    <meta content="Bitaca Play - Streaming de Cinema Independente" property="og:title">
+    <meta content="Assista às 24 produções audiovisuais fomentadas pelas Leis Paulo Gustavo e PNAB"
+          property="og:description">
+    <meta content="website" property="og:type">
+    <meta content="assets/images/og-play.png" property="og:image">
 
-    <meta name="theme-color" content="#C41E3A">
+    <meta content="#C41E3A" name="theme-color">
 
     <title>Bitaca Play | Streaming de Cinema Independente</title>
 
@@ -22,419 +23,420 @@
     <link href="../frontend/assets/vendors/keenicons/styles.bundle.css" rel="stylesheet">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Staatliches&display=swap"
+          rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-brand">
-                <div class="logo">
-                    <svg viewBox="0 0 60 40" width="40" height="40">
-                        <polygon fill="#C41E3A" points="30,5 38,12.5 38,20 22,20 22,12.5"/>
-                        <text fill="#C41E3A" font-family="Staatliches" font-size="14" x="10" y="32">BITACA</text>
-                    </svg>
-                </div>
-                <span class="brand-text">PLAY</span>
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-brand">
+            <div class="logo">
+                <svg height="40" viewBox="0 0 60 40" width="40">
+                    <polygon fill="#C41E3A" points="30,5 38,12.5 38,20 22,20 22,12.5"/>
+                    <text fill="#C41E3A" font-family="Staatliches" font-size="14" x="10" y="32">BITACA</text>
+                </svg>
             </div>
-
-            <div class="navbar-menu">
-                <a href="#" class="nav-link active">Início</a>
-                <a href="#patrimonio" class="nav-link">Patrimônio</a>
-                <a href="#musica" class="nav-link">Música</a>
-                <a href="#ambiente" class="nav-link">Meio Ambiente</a>
-                <a href="../frontend/" class="nav-link">Site Oficial</a>
-            </div>
-
-            <div class="navbar-actions">
-                <button class="btn-icon" id="search-btn" title="Buscar">
-                    <i class="ki-filled ki-magnifier"></i>
-                </button>
-                <button class="btn-icon" id="3d-btn" title="Modo 3D">
-                    <i class="ki-filled ki-cube-3d"></i>
-                </button>
-                <button class="btn-icon" id="menu-toggle">
-                    <i class="ki-filled ki-burger-menu"></i>
-                </button>
-            </div>
+            <span class="brand-text">PLAY</span>
         </div>
-    </nav>
 
-    <!-- Hero Banner -->
-    <section class="hero-banner" id="hero-banner">
-        <div class="hero-gradient"></div>
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">Cinema Underground de Capão Bonito</h1>
-                <p class="hero-subtitle">
-                    24 produções audiovisuais fomentadas pelas Leis Paulo Gustavo e PNAB
-                </p>
-                <div class="hero-actions">
-                    <button class="btn btn-primary" id="hero-play-btn">
-                        <i class="ki-filled ki-play"></i>
-                        Assistir Agora
-                    </button>
-                    <button class="btn btn-secondary" id="hero-info-btn">
-                        <i class="ki-filled ki-information-3"></i>
-                        Mais Informações
-                    </button>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-value">24</span>
-                        <span class="stat-label">Produções</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-value">3</span>
-                        <span class="stat-label">Eixos Temáticos</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-value">2025</span>
-                        <span class="stat-label">Lançamento</span>
-                    </div>
-                </div>
-            </div>
+        <div class="navbar-menu">
+            <a class="nav-link active" href="#">Início</a>
+            <a class="nav-link" href="#patrimonio">Patrimônio</a>
+            <a class="nav-link" href="#musica">Música</a>
+            <a class="nav-link" href="#ambiente">Meio Ambiente</a>
+            <a class="nav-link" href="../frontend/">Site Oficial</a>
         </div>
-    </section>
 
-    <!-- Search Overlay -->
-    <div class="search-overlay" id="search-overlay">
-        <div class="search-container">
-            <input type="text" class="search-input" id="search-input" placeholder="Buscar por título, diretor, gênero...">
-            <button class="search-close" id="search-close">
-                <i class="ki-filled ki-cross"></i>
+        <div class="navbar-actions">
+            <button class="btn-icon" id="search-btn" title="Buscar">
+                <i class="ki-filled ki-magnifier"></i>
+            </button>
+            <button class="btn-icon" id="3d-btn" title="Modo 3D">
+                <i class="ki-filled ki-cube-3d"></i>
+            </button>
+            <button class="btn-icon" id="menu-toggle">
+                <i class="ki-filled ki-burger-menu"></i>
             </button>
         </div>
-        <div class="search-results" id="search-results"></div>
     </div>
+</nav>
 
-    <!-- Main Container with Sidebar -->
-    <div class="main-container">
-        <!-- Left: Content Area (70%) -->
-        <main class="content-area">
-            <!-- Tabs Navigation -->
-            <div class="tabs-navigation">
-                <button class="tab-btn active" data-tab="all">
-                    <i class="ki-filled ki-category"></i>
-                    Todos
+<!-- Hero Banner -->
+<section class="hero-banner" id="hero-banner">
+    <div class="hero-gradient"></div>
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">Cinema Underground de Capão Bonito</h1>
+            <p class="hero-subtitle">
+                24 produções audiovisuais fomentadas pelas Leis Paulo Gustavo e PNAB
+            </p>
+            <div class="hero-actions">
+                <button class="btn btn-primary" id="hero-play-btn">
+                    <i class="ki-filled ki-play"></i>
+                    Assistir Agora
                 </button>
-                <button class="tab-btn" data-tab="patrimonio">
-                    <i class="ki-filled ki-bank"></i>
-                    Patrimônio
-                </button>
-                <button class="tab-btn" data-tab="musica">
-                    <i class="ki-filled ki-note-2"></i>
-                    Música
-                </button>
-                <button class="tab-btn" data-tab="ambiente">
-                    <i class="ki-filled ki-tree"></i>
-                    Ambiente
+                <button class="btn btn-secondary" id="hero-info-btn">
+                    <i class="ki-filled ki-information-3"></i>
+                    Mais Informações
                 </button>
             </div>
-
-            <!-- Continue Watching -->
-            <section class="content-section" id="continue-watching" style="display: none;">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="ki-filled ki-timer"></i>
-                        Continue Assistindo
-                    </h2>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-value">24</span>
+                    <span class="stat-label">Produções</span>
                 </div>
-                <div class="carousel" id="continue-carousel"></div>
-            </section>
-
-            <!-- Featured Productions -->
-            <section class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="ki-filled ki-star"></i>
-                        Destaques
-                    </h2>
-                    <div class="section-filters">
-                        <button class="filter-btn active" data-filter="all">Todos</button>
-                        <button class="filter-btn" data-filter="documentary">Documentários</button>
-                        <button class="filter-btn" data-filter="videoclipe">Videoclipes</button>
-                        <button class="filter-btn" data-filter="short">Curtas</button>
-                    </div>
+                <div class="stat">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Eixos Temáticos</span>
                 </div>
-                <div class="productions-grid" id="featured-grid"></div>
-            </section>
-
-            <!-- Patrimônio Section -->
-            <section class="content-section" id="patrimonio">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="ki-filled ki-bank"></i>
-                        Patrimônio & Memória
-                    </h2>
-                    <a href="#" class="section-link">Ver todos →</a>
+                <div class="stat">
+                    <span class="stat-value">2025</span>
+                    <span class="stat-label">Lançamento</span>
                 </div>
-                <div class="carousel" id="patrimonio-carousel"></div>
-            </section>
+            </div>
+        </div>
+    </div>
+</section>
 
-            <!-- Música Section -->
-            <section class="content-section" id="musica">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="ki-filled ki-note-2"></i>
-                        Cultura Musical
-                    </h2>
-                    <a href="#" class="section-link">Ver todos →</a>
-                </div>
-                <div class="carousel" id="musica-carousel"></div>
-            </section>
+<!-- Search Overlay -->
+<div class="search-overlay" id="search-overlay">
+    <div class="search-container">
+        <input class="search-input" id="search-input" placeholder="Buscar por título, diretor, gênero..." type="text">
+        <button class="search-close" id="search-close">
+            <i class="ki-filled ki-cross"></i>
+        </button>
+    </div>
+    <div class="search-results" id="search-results"></div>
+</div>
 
-            <!-- Meio Ambiente Section -->
-            <section class="content-section" id="ambiente">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="ki-filled ki-tree"></i>
-                        Meio Ambiente & Urbano
-                    </h2>
-                    <a href="#" class="section-link">Ver todos →</a>
-                </div>
-                <div class="carousel" id="ambiente-carousel"></div>
-            </section>
+<!-- Main Container with Sidebar -->
+<div class="main-container">
+    <!-- Left: Content Area (70%) -->
+    <main class="content-area">
+        <!-- Tabs Navigation -->
+        <div class="tabs-navigation">
+            <button class="tab-btn active" data-tab="all">
+                <i class="ki-filled ki-category"></i>
+                Todos
+            </button>
+            <button class="tab-btn" data-tab="patrimonio">
+                <i class="ki-filled ki-bank"></i>
+                Patrimônio
+            </button>
+            <button class="tab-btn" data-tab="musica">
+                <i class="ki-filled ki-note-2"></i>
+                Música
+            </button>
+            <button class="tab-btn" data-tab="ambiente">
+                <i class="ki-filled ki-tree"></i>
+                Ambiente
+            </button>
+        </div>
 
-            <!-- Top Rated -->
-            <section class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="ki-filled ki-cup"></i>
-                        Melhores Avaliações
-                    </h2>
-                </div>
-                <div class="carousel" id="toprated-carousel"></div>
-            </section>
-        </main>
+        <!-- Continue Watching -->
+        <section class="content-section" id="continue-watching" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="ki-filled ki-timer"></i>
+                    Continue Assistindo
+                </h2>
+            </div>
+            <div class="carousel" id="continue-carousel"></div>
+        </section>
 
-        <!-- Right: Chat AI Sidebar (30%) -->
-        <aside class="chat-sidebar" id="chat-sidebar">
-            <div class="chat-header">
-                <div class="chat-avatar">
-                    <img src="https://avatars.dicebear.com/api/bottts/derona.svg" alt="Derona" class="avatar-img">
+        <!-- Featured Productions -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="ki-filled ki-star"></i>
+                    Destaques
+                </h2>
+                <div class="section-filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="documentary">Documentários</button>
+                    <button class="filter-btn" data-filter="videoclipe">Videoclipes</button>
+                    <button class="filter-btn" data-filter="short">Curtas</button>
                 </div>
-                <div class="chat-info">
-                    <h3 class="chat-title">Chat com Derona</h3>
-                    <span class="chat-status online">
+            </div>
+            <div class="productions-grid" id="featured-grid"></div>
+        </section>
+
+        <!-- Patrimônio Section -->
+        <section class="content-section" id="patrimonio">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="ki-filled ki-bank"></i>
+                    Patrimônio & Memória
+                </h2>
+                <a class="section-link" href="#">Ver todos →</a>
+            </div>
+            <div class="carousel" id="patrimonio-carousel"></div>
+        </section>
+
+        <!-- Música Section -->
+        <section class="content-section" id="musica">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="ki-filled ki-note-2"></i>
+                    Cultura Musical
+                </h2>
+                <a class="section-link" href="#">Ver todos →</a>
+            </div>
+            <div class="carousel" id="musica-carousel"></div>
+        </section>
+
+        <!-- Meio Ambiente Section -->
+        <section class="content-section" id="ambiente">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="ki-filled ki-tree"></i>
+                    Meio Ambiente & Urbano
+                </h2>
+                <a class="section-link" href="#">Ver todos →</a>
+            </div>
+            <div class="carousel" id="ambiente-carousel"></div>
+        </section>
+
+        <!-- Top Rated -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="ki-filled ki-cup"></i>
+                    Melhores Avaliações
+                </h2>
+            </div>
+            <div class="carousel" id="toprated-carousel"></div>
+        </section>
+    </main>
+
+    <!-- Right: Chat AI Sidebar (30%) -->
+    <aside class="chat-sidebar" id="chat-sidebar">
+        <div class="chat-header">
+            <div class="chat-avatar">
+                <img alt="Derona" class="avatar-img" src="https://avatars.dicebear.com/api/bottts/derona.svg">
+            </div>
+            <div class="chat-info">
+                <h3 class="chat-title">Chat com Derona</h3>
+                <span class="chat-status online">
                         <i class="ki-filled ki-check-circle"></i>
                         Online
                     </span>
-                </div>
-                <button class="chat-toggle" id="chat-toggle" title="Minimizar Chat">
-                    <i class="ki-filled ki-arrow-right"></i>
-                </button>
             </div>
-
-            <div class="chat-messages" id="chat-messages">
-                <div class="chat-message bot-message">
-                    <div class="message-avatar">
-                        <img src="https://avatars.dicebear.com/api/bottts/derona.svg" alt="Derona">
-                    </div>
-                    <div class="message-content">
-                        <div class="message-bubble">
-                            Eae parceiro! Sou a Derona do Bitaca Cinema 🎬 Como posso te ajudar?
-                        </div>
-                        <span class="message-time">Agora</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="chat-suggestions" id="chat-suggestions">
-                <button class="suggestion-btn">
-                    <i class="ki-filled ki-magnifier"></i>
-                    Filmes sobre patrimônio
-                </button>
-                <button class="suggestion-btn">
-                    <i class="ki-filled ki-note-2"></i>
-                    Videoclipes musicais
-                </button>
-                <button class="suggestion-btn">
-                    <i class="ki-filled ki-tree"></i>
-                    Meio ambiente
-                </button>
-            </div>
-
-            <div class="chat-input-container">
-                <div class="chat-input-wrapper">
-                    <textarea
-                        class="chat-input"
-                        id="chat-input"
-                        placeholder="Pergunte sobre os filmes..."
-                        rows="1"
-                    ></textarea>
-                    <button class="voice-btn" id="voice-btn" title="Mensagem de voz">
-                        <i class="ki-filled ki-microphone-2"></i>
-                    </button>
-                    <button class="send-btn" id="send-btn" title="Enviar">
-                        <i class="ki-filled ki-send"></i>
-                    </button>
-                </div>
-                <div class="chat-typing-indicator hidden" id="typing-indicator">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Mobile Chat Toggle Button -->
-        <button class="mobile-chat-fab" id="mobile-chat-fab">
-            <i class="ki-filled ki-messages"></i>
-            <span class="fab-badge">1</span>
-        </button>
-    </div>
-
-    <!-- Video Player Modal -->
-    <div class="player-modal" id="player-modal">
-        <div class="player-overlay" id="player-overlay"></div>
-        <div class="player-wrapper">
-            <button class="player-close" id="player-close">
-                <i class="ki-filled ki-cross"></i>
+            <button class="chat-toggle" id="chat-toggle" title="Minimizar Chat">
+                <i class="ki-filled ki-arrow-right"></i>
             </button>
+        </div>
 
-            <div class="player-container">
-                <video class="player-video" id="player-video" controls></video>
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-message bot-message">
+                <div class="message-avatar">
+                    <img alt="Derona" src="https://avatars.dicebear.com/api/bottts/derona.svg">
+                </div>
+                <div class="message-content">
+                    <div class="message-bubble">
+                        Eae parceiro! Sou a Derona do Bitaca Cinema 🎬 Como posso te ajudar?
+                    </div>
+                    <span class="message-time">Agora</span>
+                </div>
+            </div>
+        </div>
 
-                <div class="player-controls-overlay">
-                    <button class="control-btn" id="backward-btn" title="Voltar 10s">
-                        <i class="ki-filled ki-double-left"></i>
+        <div class="chat-suggestions" id="chat-suggestions">
+            <button class="suggestion-btn">
+                <i class="ki-filled ki-magnifier"></i>
+                Filmes sobre patrimônio
+            </button>
+            <button class="suggestion-btn">
+                <i class="ki-filled ki-note-2"></i>
+                Videoclipes musicais
+            </button>
+            <button class="suggestion-btn">
+                <i class="ki-filled ki-tree"></i>
+                Meio ambiente
+            </button>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+                    <textarea
+                            class="chat-input"
+                            id="chat-input"
+                            placeholder="Pergunte sobre os filmes..."
+                            rows="1"
+                    ></textarea>
+                <button class="voice-btn" id="voice-btn" title="Mensagem de voz">
+                    <i class="ki-filled ki-microphone-2"></i>
+                </button>
+                <button class="send-btn" id="send-btn" title="Enviar">
+                    <i class="ki-filled ki-send"></i>
+                </button>
+            </div>
+            <div class="chat-typing-indicator hidden" id="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Mobile Chat Toggle Button -->
+    <button class="mobile-chat-fab" id="mobile-chat-fab">
+        <i class="ki-filled ki-messages"></i>
+        <span class="fab-badge">1</span>
+    </button>
+</div>
+
+<!-- Video Player Modal -->
+<div class="player-modal" id="player-modal">
+    <div class="player-overlay" id="player-overlay"></div>
+    <div class="player-wrapper">
+        <button class="player-close" id="player-close">
+            <i class="ki-filled ki-cross"></i>
+        </button>
+
+        <div class="player-container">
+            <video class="player-video" controls id="player-video"></video>
+
+            <div class="player-controls-overlay">
+                <button class="control-btn" id="backward-btn" title="Voltar 10s">
+                    <i class="ki-filled ki-double-left"></i>
+                </button>
+                <button class="control-btn control-btn-play" id="play-pause-btn" title="Play/Pause">
+                    <i class="ki-filled ki-play"></i>
+                </button>
+                <button class="control-btn" id="forward-btn" title="Avançar 10s">
+                    <i class="ki-filled ki-double-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="player-info">
+            <div class="player-info-content">
+                <h2 class="player-title" id="player-title"></h2>
+                <div class="player-meta">
+                    <span class="player-director" id="player-director"></span>
+                    <span class="player-genre" id="player-genre"></span>
+                    <span class="player-duration" id="player-duration"></span>
+                </div>
+                <p class="player-synopsis" id="player-synopsis"></p>
+
+                <div class="player-actions">
+                    <button class="action-btn" id="like-btn">
+                        <i class="ki-filled ki-heart"></i>
+                        Curtir
                     </button>
-                    <button class="control-btn control-btn-play" id="play-pause-btn" title="Play/Pause">
-                        <i class="ki-filled ki-play"></i>
+                    <button class="action-btn" id="share-btn">
+                        <i class="ki-filled ki-share"></i>
+                        Compartilhar
                     </button>
-                    <button class="control-btn" id="forward-btn" title="Avançar 10s">
-                        <i class="ki-filled ki-double-right"></i>
+                    <button class="action-btn" id="download-btn">
+                        <i class="ki-filled ki-file-down"></i>
+                        Download
                     </button>
                 </div>
             </div>
 
-            <div class="player-info">
-                <div class="player-info-content">
-                    <h2 class="player-title" id="player-title"></h2>
-                    <div class="player-meta">
-                        <span class="player-director" id="player-director"></span>
-                        <span class="player-genre" id="player-genre"></span>
-                        <span class="player-duration" id="player-duration"></span>
-                    </div>
-                    <p class="player-synopsis" id="player-synopsis"></p>
+            <!-- Related Productions -->
+            <div class="related-section">
+                <h3 class="related-title">Você também pode gostar</h3>
+                <div class="related-grid" id="related-grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                    <div class="player-actions">
-                        <button class="action-btn" id="like-btn">
-                            <i class="ki-filled ki-heart"></i>
-                            Curtir
-                        </button>
-                        <button class="action-btn" id="share-btn">
-                            <i class="ki-filled ki-share"></i>
-                            Compartilhar
-                        </button>
-                        <button class="action-btn" id="download-btn">
-                            <i class="ki-filled ki-file-down"></i>
-                            Download
-                        </button>
-                    </div>
-                </div>
+<!-- Production Card Template -->
+<template id="production-card-template">
+    <div class="production-card" data-id="">
+        <div class="card-image">
+            <img alt="" class="card-thumbnail" src="">
+            <div class="card-overlay">
+                <button class="card-play-btn">
+                    <i class="ki-filled ki-play-circle"></i>
+                </button>
+            </div>
+            <div class="card-badge"></div>
+            <div class="card-score"></div>
+        </div>
+        <div class="card-content">
+            <h3 class="card-title"></h3>
+            <p class="card-meta">
+                <span class="card-director"></span>
+            </p>
+        </div>
+    </div>
+</template>
 
-                <!-- Related Productions -->
-                <div class="related-section">
-                    <h3 class="related-title">Você também pode gostar</h3>
-                    <div class="related-grid" id="related-grid"></div>
-                </div>
+<!-- Loading Spinner -->
+<div class="loading-spinner" id="loading-spinner">
+    <div class="spinner"></div>
+    <p>Carregando produções...</p>
+</div>
+
+<!-- Toast Notifications -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <div class="footer-logo">
+                <svg height="40" viewBox="0 0 60 40" width="60">
+                    <polygon fill="#C41E3A" points="30,5 38,12.5 38,20 22,20 22,12.5"/>
+                    <text fill="#C41E3A" font-family="Staatliches" font-size="14" x="10" y="32">BITACA</text>
+                </svg>
+            </div>
+            <p class="footer-tagline">Cinema Underground<br>de Capão Bonito</p>
+        </div>
+
+        <div class="footer-section">
+            <h4 class="footer-title">Navegação</h4>
+            <ul class="footer-links">
+                <li><a href="#patrimonio">Patrimônio</a></li>
+                <li><a href="#musica">Música</a></li>
+                <li><a href="#ambiente">Meio Ambiente</a></li>
+                <li><a href="../frontend/">Site Oficial</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4 class="footer-title">Sobre</h4>
+            <ul class="footer-links">
+                <li><a href="../frontend/#leis">Lei Paulo Gustavo</a></li>
+                <li><a href="../frontend/#leis">PNAB</a></li>
+                <li><a href="../frontend/#contato">Contato</a></li>
+                <li><a href="https://play-3d.abitaca.com.br">Modo 3D</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4 class="footer-title">Redes Sociais</h4>
+            <div class="footer-social">
+                <a class="social-btn" href="https://instagram.com/abitacacb" target="_blank">
+                    <i class="ki-filled ki-instagram"></i>
+                </a>
+                <a class="social-btn" href="https://facebook.com/abitacacb" target="_blank">
+                    <i class="ki-filled ki-facebook"></i>
+                </a>
+                <a class="social-btn" href="https://t.me/simplelista" target="_blank">
+                    <i class="ki-filled ki-send"></i>
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- Production Card Template -->
-    <template id="production-card-template">
-        <div class="production-card" data-id="">
-            <div class="card-image">
-                <img src="" alt="" class="card-thumbnail">
-                <div class="card-overlay">
-                    <button class="card-play-btn">
-                        <i class="ki-filled ki-play-circle"></i>
-                    </button>
-                </div>
-                <div class="card-badge"></div>
-                <div class="card-score"></div>
-            </div>
-            <div class="card-content">
-                <h3 class="card-title"></h3>
-                <p class="card-meta">
-                    <span class="card-director"></span>
-                </p>
-            </div>
-        </div>
-    </template>
-
-    <!-- Loading Spinner -->
-    <div class="loading-spinner" id="loading-spinner">
-        <div class="spinner"></div>
-        <p>Carregando produções...</p>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Bitaca Cinema | Lei Paulo Gustavo + PNAB</p>
+        <p>Powered by Telegram Infrastructure</p>
     </div>
+</footer>
 
-    <!-- Toast Notifications -->
-    <div class="toast-container" id="toast-container"></div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-section">
-                <div class="footer-logo">
-                    <svg viewBox="0 0 60 40" width="60" height="40">
-                        <polygon fill="#C41E3A" points="30,5 38,12.5 38,20 22,20 22,12.5"/>
-                        <text fill="#C41E3A" font-family="Staatliches" font-size="14" x="10" y="32">BITACA</text>
-                    </svg>
-                </div>
-                <p class="footer-tagline">Cinema Underground<br>de Capão Bonito</p>
-            </div>
-
-            <div class="footer-section">
-                <h4 class="footer-title">Navegação</h4>
-                <ul class="footer-links">
-                    <li><a href="#patrimonio">Patrimônio</a></li>
-                    <li><a href="#musica">Música</a></li>
-                    <li><a href="#ambiente">Meio Ambiente</a></li>
-                    <li><a href="../frontend/">Site Oficial</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4 class="footer-title">Sobre</h4>
-                <ul class="footer-links">
-                    <li><a href="../frontend/#leis">Lei Paulo Gustavo</a></li>
-                    <li><a href="../frontend/#leis">PNAB</a></li>
-                    <li><a href="../frontend/#contato">Contato</a></li>
-                    <li><a href="https://play-3d.abitaca.com.br">Modo 3D</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4 class="footer-title">Redes Sociais</h4>
-                <div class="footer-social">
-                    <a href="https://instagram.com/abitacacb" target="_blank" class="social-btn">
-                        <i class="ki-filled ki-instagram"></i>
-                    </a>
-                    <a href="https://facebook.com/abitacacb" target="_blank" class="social-btn">
-                        <i class="ki-filled ki-facebook"></i>
-                    </a>
-                    <a href="https://t.me/simplelista" target="_blank" class="social-btn">
-                        <i class="ki-filled ki-send"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2025 Bitaca Cinema | Lei Paulo Gustavo + PNAB</p>
-            <p>Powered by Telegram Infrastructure</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script src="assets/js/play.js" type="module"></script>
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="assets/js/play.js" type="module"></script>
 </body>
 </html>

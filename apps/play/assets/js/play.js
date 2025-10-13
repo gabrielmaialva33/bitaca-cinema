@@ -3,7 +3,7 @@
  * Modern streaming interface with Animezey Worker integration
  */
 
-import { gsap } from 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm';
+import {gsap} from 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm';
 
 class BitacaPlay {
     constructor() {
@@ -148,10 +148,10 @@ class BitacaPlay {
         `;
 
         // Animate hero content
-        gsap.from('.hero-title', { opacity: 0, y: 50, duration: 1, delay: 0.3 });
-        gsap.from('.hero-subtitle', { opacity: 0, y: 30, duration: 1, delay: 0.5 });
-        gsap.from('.hero-actions', { opacity: 0, y: 30, duration: 1, delay: 0.7 });
-        gsap.from('.hero-stats', { opacity: 0, y: 30, duration: 1, delay: 0.9 });
+        gsap.from('.hero-title', {opacity: 0, y: 50, duration: 1, delay: 0.3});
+        gsap.from('.hero-subtitle', {opacity: 0, y: 30, duration: 1, delay: 0.5});
+        gsap.from('.hero-actions', {opacity: 0, y: 30, duration: 1, delay: 0.7});
+        gsap.from('.hero-stats', {opacity: 0, y: 30, duration: 1, delay: 0.9});
     }
 
     renderFeaturedGrid() {
@@ -303,7 +303,7 @@ class BitacaPlay {
     openSearch() {
         this.elements.searchOverlay.classList.add('active');
         this.elements.searchInput.focus();
-        gsap.from(this.elements.searchOverlay, { opacity: 0, duration: 0.3 });
+        gsap.from(this.elements.searchOverlay, {opacity: 0, duration: 0.3});
     }
 
     closeSearch() {
@@ -377,7 +377,7 @@ class BitacaPlay {
         this.trackView(production);
 
         // Animate modal
-        gsap.from(this.elements.playerModal, { opacity: 0, duration: 0.3 });
+        gsap.from(this.elements.playerModal, {opacity: 0, duration: 0.3});
     }
 
     closePlayer() {
@@ -455,7 +455,7 @@ class BitacaPlay {
         // Send analytics to backend
         fetch(`${this.streamAPI}/api/analytics/view`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 production_id: production.id,
                 viewer_id: this.getViewerId(),
@@ -585,7 +585,7 @@ class BitacaPlay {
         const container = document.getElementById('toast-container');
         container.appendChild(toast);
 
-        gsap.from(toast, { opacity: 0, y: 50, duration: 0.3 });
+        gsap.from(toast, {opacity: 0, y: 50, duration: 0.3});
 
         setTimeout(() => {
             gsap.to(toast, {
@@ -599,7 +599,7 @@ class BitacaPlay {
 
     getMockProductions() {
         // Fallback mock data
-        return Array.from({ length: 24 }, (_, i) => ({
+        return Array.from({length: 24}, (_, i) => ({
             id: i + 1,
             title: `Produção ${i + 1}`,
             director: `Diretor ${i + 1}`,

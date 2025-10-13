@@ -347,9 +347,9 @@ export class SmartSearchEngine {
 
         if (filters.tags && filters.tags.length > 0) {
             filtered = filtered.filter(p =>
-                p.tags && filters.tags.some(tag =>
-                    p.tags.includes(tag)
-                )
+                    p.tags && filters.tags.some(tag =>
+                        p.tags.includes(tag)
+                    )
             );
         }
 
@@ -551,7 +551,7 @@ export class SmartSearchEngine {
         });
 
         const popular = Object.entries(queryCounts)
-            .map(([query, count]) => ({ query, count }))
+            .map(([query, count]) => ({query, count}))
             .sort((a, b) => b.count - a.count)
             .slice(0, limit);
 

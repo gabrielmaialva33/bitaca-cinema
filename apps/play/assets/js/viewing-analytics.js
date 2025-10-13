@@ -4,28 +4,35 @@
  * recommendations engine, user behavior tracking
  */
 
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
 import {
-    getFirestore,
-    collection,
     addDoc,
-    updateDoc,
+    collection,
     doc,
-    getDoc,
     getDocs,
-    query,
-    where,
-    orderBy,
+    getFirestore,
     limit,
-    serverTimestamp
+    orderBy,
+    query,
+    serverTimestamp,
+    updateDoc,
+    where
 } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
 import {
     getAuth,
-    signInAnonymously,
-    onAuthStateChanged
+    onAuthStateChanged,
+    signInAnonymously
 } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
 
 export class ViewingAnalytics {
+    debouncedUpdateEvents = this.debounce(async () => {
+        if (this.currentSession) {
+            await this.updateSession({
+                events: this.watchEvents
+            });
+        }
+    }, 5000);
+
     constructor(firebaseConfig) {
         // Initialize Firebase
         this.app = initializeApp(firebaseConfig);
@@ -129,7 +136,7 @@ export class ViewingAnalytics {
      * Track video playback events
      */
     async trackPlay(currentTime) {
-        this.trackEvent('play', { currentTime });
+        this.trackEvent('play', {currentTime});
         await this.updateSession({
             lastPlayTime: serverTimestamp(),
             lastPosition: currentTime
@@ -256,14 +263,6 @@ export class ViewingAnalytics {
         // Update session events in Firestore (debounced)
         this.debouncedUpdateEvents();
     }
-
-    debouncedUpdateEvents = this.debounce(async () => {
-        if (this.currentSession) {
-            await this.updateSession({
-                events: this.watchEvents
-            });
-        }
-    }, 5000);
 
     /**
      * Update current session in Firestore
