@@ -8,6 +8,12 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:production": "TEST_ENV=production playwright test",
+    "test:avatar": "playwright test tests/e2e/avatar.spec.js --project=\"Desktop Chrome\"",
+    "test:avatar:fast": "playwright test tests/e2e/avatar.spec.js --project=\"Desktop Chrome\" --grep=\"should show avatar toggle button|should toggle avatar on and off|should create 3D scene\"",
+    "test:avatar:all": "playwright test tests/e2e/avatar.spec.js",
+    "test:backend": "cd backend && pytest tests/ -v",
+    "test:tts": "cd backend && pytest tests/test_tts.py -v",
+    "test:all": "pnpm test:avatar:fast && pnpm test:tts",
     "serve": "python3 -m http.server 8000",
     "playwright:install": "pnpm dlx playwright install chromium"
   },
