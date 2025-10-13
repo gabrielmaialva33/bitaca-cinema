@@ -188,7 +188,7 @@ class AvatarChatbotIntegration {
 
         // Intercept chatbot responses
         const self = this;
-        this.chatbot.sendMessage = async function(userMessage, onToken, onComplete) {
+        this.chatbot.sendMessage = async function (userMessage, onToken, onComplete) {
             // Call original sendMessage
             const wrappedOnComplete = (finalResponse, productions) => {
                 // Speak the response if avatar is enabled

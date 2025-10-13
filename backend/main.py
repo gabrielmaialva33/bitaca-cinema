@@ -603,6 +603,131 @@ async def agi_health():
         })
 
 
+# RL Feedback System Endpoints
+
+
+class RLFeedbackRequest(BaseModel):
+    query: str = Field(..., description="Original user query")
+    intent: str = Field(..., description="Detected intent")
+    agent_name: str = Field(..., description="Agent that handled the query")
+    response: str = Field(..., description="Generated response")
+    user_signal: Optional[float] = Field(None, ge=0, le=1, description="User feedback signal (0-1)")
+
+
+@app.post("/api/feedback")
+async def submit_feedback(request: RLFeedbackRequest, req: Request):
+    """
+    Submit user feedback for RL system
+    Allows manual feedback signals to improve agent selection
+    """
+    if not AGI_AVAILABLE or agent_manager is None:
+        raise HTTPException(
+            status_code=503,
+            detail="AGI system not available"
+        )
+
+    try:
+        # If RL is not enabled, just acknowledge
+        if not agent_manager.rl_feedback.enabled:
+            return JSONResponse(content={
+                "status": "acknowledged",
+                "message": "RL feedback system is disabled"
+            })
+
+        # Process manual feedback signal if provided
+        if request.user_signal is not None:
+            # Calculate adjusted reward based on user signal
+            factual_accuracy = request.user_signal > 0.5
+            intent_matched = request.user_signal > 0.3
+
+            feedback = agent_manager.rl_feedback.rl_agent.process_interaction(
+                query=request.query,
+                query_intent=request.intent,
+                selected_agent=request.agent_name.replace("Agent", ""),
+                response=request.response,
+                response_time_ms=1000,  # Default time for manual feedback
+                intent_matched=intent_matched,
+                agent_correct=request.user_signal > 0.6,
+                factual_accuracy=factual_accuracy
+            )
+
+            return JSONResponse(content={
+                "status": "processed",
+                "feedback": feedback,
+                "message": "Feedback incorporated into RL model"
+            })
+
+        return JSONResponse(content={
+            "status": "acknowledged",
+            "message": "Feedback received"
+        })
+
+    except Exception as e:
+        print(f"❌ RL feedback error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/rl/stats")
+async def get_rl_stats():
+    """
+    Get RL system statistics
+    Returns performance metrics and agent scores
+    """
+    if not AGI_AVAILABLE or agent_manager is None:
+        return JSONResponse(content={
+            "enabled": False,
+            "message": "AGI system not available"
+        })
+
+    try:
+        stats = agent_manager.get_rl_stats()
+        return JSONResponse(content=stats)
+
+    except Exception as e:
+        print(f"❌ RL stats error: {e}")
+        return JSONResponse(content={
+            "enabled": False,
+            "error": str(e)
+        })
+
+
+@app.get("/api/rl/scores")
+async def get_rl_scores(limit: int = 100):
+    """
+    Get recent RL scores history
+    Returns the last N interaction scores
+    """
+    if not AGI_AVAILABLE or agent_manager is None:
+        return JSONResponse(content={
+            "enabled": False,
+            "message": "AGI system not available"
+        })
+
+    try:
+        if not agent_manager.rl_feedback.enabled:
+            return JSONResponse(content={
+                "enabled": False,
+                "message": "RL feedback system is disabled"
+            })
+
+        # Get scores from RL agent
+        scores = agent_manager.rl_feedback.rl_agent.scores_history[-limit:]
+
+        return JSONResponse(content={
+            "enabled": True,
+            "scores": scores,
+            "count": len(scores),
+            "average": sum(scores) / len(scores) if scores else 0
+        })
+
+    except Exception as e:
+        print(f"❌ RL scores error: {e}")
+        return JSONResponse(content={
+            "enabled": False,
+            "error": str(e)
+        })
+
+
 @app.post("/api/tts")
 async def text_to_speech(request: TTSRequest, req: Request):
     """

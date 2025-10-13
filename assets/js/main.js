@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
     initPodioConfetti();
     initCharts();
     animateCounters();
+
+    // Initialize Voting System (loaded as ES6 module)
+    if (window.initVotingSystem) {
+        window.initVotingSystem();
+    }
 });
 
 // ===== NAVEGAÇÃO =====

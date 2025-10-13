@@ -1,0 +1,127 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================
+    // USERS COLLECTION
+    // Stores quiz completion status and user data
+    // ===============================================
+    match /users/{userId} {
+      // Anyone authenticated can read user data
+      allow read: if request.auth != null;
+
+      // Users can only write their own data
+      allow create: if request.auth != null && request.auth.uid == userId
+                    && request.resource.data.keys().hasAll(['quizPassed', 'quizAttempts'])
+                    && request.resource.data.quizPassed is bool
+                    && request.resource.data.quizAttempts is int;
+
+      // Users can update their own quiz status
+      allow update: if request.auth != null && request.auth.uid == userId
+                    && request.resource.data.quizPassed is bool
+                    && request.resource.data.quizAttempts is int
+                    && request.resource.data.quizAttempts >= resource.data.quizAttempts;
+
+      // No deletion allowed
+      allow delete: if false;
+    }
+
+    // ===============================================
+    // VOTES COLLECTION
+    // Stores individual user votes
+    // Vote ID format: {userId}_{filmId}
+    // ===============================================
+    match /votes/{voteId} {
+      // Anyone authenticated can read votes
+      allow read: if request.auth != null;
+
+      // Users can create votes with validation
+      allow create: if request.auth != null
+                    // Vote ID must match user ID and film ID
+                    && voteId == request.auth.uid + '_' + string(request.resource.data.filmId)
+                    // Must include required fields
+                    && request.resource.data.keys().hasAll(['userId', 'filmId', 'rating', 'timestamp'])
+                    // User ID must match authenticated user
+                    && request.resource.data.userId == request.auth.uid
+                    // Film ID must be a valid integer
+                    && request.resource.data.filmId is int
+                    && request.resource.data.filmId > 0
+                    // Rating must be between 1 and 5
+                    && request.resource.data.rating is int
+                    && request.resource.data.rating >= 1
+                    && request.resource.data.rating <= 5
+                    // Timestamp must be present
+                    && request.resource.data.timestamp == request.time
+                    // User must not have already voted for this film
+                    && !exists(/databases/$(database)/documents/votes/$(voteId));
+
+      // Votes cannot be updated or deleted (immutable)
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    // ===============================================
+    // FILMS COLLECTION
+    // Stores aggregated film statistics
+    // ===============================================
+    match /films/{filmId} {
+      // Anyone can read film statistics (public)
+      allow read: if true;
+
+      // Only authenticated users can create/update film stats
+      // This is used by transactions in vote-manager.js
+      allow create: if request.auth != null
+                    && request.resource.data.keys().hasAll(['voteCount', 'totalStars', 'averageRating'])
+                    && request.resource.data.voteCount is int
+                    && request.resource.data.voteCount >= 0
+                    && request.resource.data.totalStars is int
+                    && request.resource.data.totalStars >= 0
+                    && request.resource.data.averageRating is number
+                    && request.resource.data.averageRating >= 0
+                    && request.resource.data.averageRating <= 5;
+
+      allow update: if request.auth != null
+                    // Vote count can only increase
+                    && request.resource.data.voteCount >= resource.data.voteCount
+                    // Total stars can only increase
+                    && request.resource.data.totalStars >= resource.data.totalStars
+                    // Average rating must be within valid range
+                    && request.resource.data.averageRating >= 0
+                    && request.resource.data.averageRating <= 5
+                    // Verify math: averageRating = totalStars / voteCount
+                    && (request.resource.data.voteCount == 0
+                        || math.abs(request.resource.data.averageRating -
+                           (request.resource.data.totalStars / request.resource.data.voteCount)) < 0.01);
+
+      // Film statistics cannot be deleted
+      allow delete: if false;
+    }
+
+    // ===============================================
+    // HELPER FUNCTIONS
+    // ===============================================
+
+    // Check if user has passed the quiz
+    function userHasPassedQuiz(userId) {
+      return exists(/databases/$(database)/documents/users/$(userId))
+          && get(/databases/$(database)/documents/users/$(userId)).data.quizPassed == true;
+    }
+
+    // Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Check if user owns the resource
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // ===============================================
+    // DENY ALL OTHER COLLECTIONS
+    // ===============================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

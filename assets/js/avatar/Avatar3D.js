@@ -5,7 +5,7 @@
 // ===============================================
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+import {OrbitControls} from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 
 /**
  * BitacaAvatar3D - Stylized 3D avatar with voice animation
@@ -217,7 +217,7 @@ class BitacaAvatar3D {
 
         // Floor (shadow receiver)
         const floorGeometry = new THREE.PlaneGeometry(20, 20);
-        const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.3 });
+        const floorMaterial = new THREE.ShadowMaterial({opacity: 0.3});
         const floor = new THREE.Mesh(floorGeometry, floorMaterial);
         floor.rotation.x = -Math.PI / 2;
         floor.position.y = -1;

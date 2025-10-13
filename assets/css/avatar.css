@@ -9,41 +9,37 @@
     width: 100%;
     height: 300px;
     background: linear-gradient(135deg,
-        #0f0f0f 0%,
-        #1a1a1a 25%,
-        #0a0a0a 50%,
-        #1a1a1a 75%,
-        #0f0f0f 100%
+    #0f0f0f 0%,
+    #1a1a1a 25%,
+    #0a0a0a 50%,
+    #1a1a1a 75%,
+    #0f0f0f 100%
     );
     border-radius: 16px 16px 0 0;
     overflow: hidden;
     border-bottom: 3px solid var(--vermelho-bitaca);
-    box-shadow:
-        inset 0 0 60px rgba(196, 30, 58, 0.1),
-        0 -4px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 60px rgba(196, 30, 58, 0.1),
+    0 -4px 16px rgba(0, 0, 0, 0.3);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     animation: avatarGlow 3s ease-in-out infinite;
 }
 
 .bitaca-avatar-container.speaking {
     border-bottom: 3px solid #4ade80;
-    box-shadow:
-        inset 0 0 80px rgba(74, 222, 128, 0.15),
-        0 -4px 20px rgba(74, 222, 128, 0.2),
-        0 0 40px rgba(74, 222, 128, 0.1);
+    box-shadow: inset 0 0 80px rgba(74, 222, 128, 0.15),
+    0 -4px 20px rgba(74, 222, 128, 0.2),
+    0 0 40px rgba(74, 222, 128, 0.1);
     animation: avatarPulse 0.8s ease-in-out infinite;
 }
 
 @keyframes avatarGlow {
     0%, 100% {
-        box-shadow:
-            inset 0 0 60px rgba(196, 30, 58, 0.1),
-            0 -4px 16px rgba(0, 0, 0, 0.3);
+        box-shadow: inset 0 0 60px rgba(196, 30, 58, 0.1),
+        0 -4px 16px rgba(0, 0, 0, 0.3);
     }
     50% {
-        box-shadow:
-            inset 0 0 80px rgba(196, 30, 58, 0.15),
-            0 -4px 20px rgba(196, 30, 58, 0.1);
+        box-shadow: inset 0 0 80px rgba(196, 30, 58, 0.15),
+        0 -4px 20px rgba(196, 30, 58, 0.1);
     }
 }
 
@@ -140,9 +136,9 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
     );
     transition: left 0.5s;
 }
@@ -166,9 +162,8 @@
 .avatar-toggle-btn.active {
     background: rgba(196, 30, 58, 0.4);
     border-color: #4ade80;
-    box-shadow:
-        0 0 20px rgba(74, 222, 128, 0.3),
-        0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(74, 222, 128, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .avatar-toggle-btn.active::after {
@@ -260,8 +255,8 @@
     right: 0;
     height: 60px;
     background: linear-gradient(180deg,
-        transparent 0%,
-        rgba(0, 0, 0, 0.8) 100%
+    transparent 0%,
+    rgba(0, 0, 0, 0.8) 100%
     );
     display: flex;
     align-items: flex-end;
@@ -280,22 +275,45 @@
     width: 4px;
     height: 8px;
     background: linear-gradient(180deg,
-        #4ade80 0%,
-        var(--vermelho-bitaca) 100%
+    #4ade80 0%,
+    var(--vermelho-bitaca) 100%
     );
     border-radius: 2px 2px 0 0;
     transform-origin: bottom;
     animation: visualize 0.6s ease-in-out infinite;
 }
 
-.visualizer-bar:nth-child(1) { animation-delay: 0s; }
-.visualizer-bar:nth-child(2) { animation-delay: 0.1s; }
-.visualizer-bar:nth-child(3) { animation-delay: 0.2s; }
-.visualizer-bar:nth-child(4) { animation-delay: 0.3s; }
-.visualizer-bar:nth-child(5) { animation-delay: 0.4s; }
-.visualizer-bar:nth-child(6) { animation-delay: 0.3s; }
-.visualizer-bar:nth-child(7) { animation-delay: 0.2s; }
-.visualizer-bar:nth-child(8) { animation-delay: 0.1s; }
+.visualizer-bar:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.visualizer-bar:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.visualizer-bar:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.visualizer-bar:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.visualizer-bar:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.visualizer-bar:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.visualizer-bar:nth-child(7) {
+    animation-delay: 0.2s;
+}
+
+.visualizer-bar:nth-child(8) {
+    animation-delay: 0.1s;
+}
 
 @keyframes visualize {
     0%, 100% {
@@ -404,8 +422,8 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg,
-        rgba(196, 30, 58, 0.95) 0%,
-        rgba(226, 62, 22, 0.95) 100%
+    rgba(196, 30, 58, 0.95) 0%,
+    rgba(226, 62, 22, 0.95) 100%
     );
     display: flex;
     flex-direction: column;
@@ -552,11 +570,11 @@
 @media (prefers-color-scheme: dark) {
     .bitaca-avatar-container {
         background: linear-gradient(135deg,
-            #000000 0%,
-            #0f0f0f 25%,
-            #000000 50%,
-            #0f0f0f 75%,
-            #000000 100%
+        #000000 0%,
+        #0f0f0f 25%,
+        #000000 50%,
+        #0f0f0f 75%,
+        #000000 100%
         );
     }
 
