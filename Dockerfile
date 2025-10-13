@@ -28,19 +28,20 @@ RUN useradd -m -u 1000 -s /bin/bash app
 WORKDIR /app
 
 # Copy requirements first (for caching)
-COPY apps/backend/requirements.txt .
+# In production, files are already in the build context from rsync
+COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY apps/backend/main.py .
-COPY apps/backend/database.py .
-COPY apps/backend/r2_storage.py .
-COPY apps/backend/deronas_personality.py .
-COPY apps/backend/agents/ ./agents/
-COPY apps/frontend/assets/data/embeddings.json ./embeddings.json
-COPY apps/backend/.env.example .env
+COPY main.py .
+COPY database.py .
+COPY r2_storage.py .
+COPY deronas_personality.py .
+COPY agents/ ./agents/
+# Note: embeddings.json will be in the build context from CI/CD
+COPY embeddings.json ./embeddings.json
 
 # Change ownership to app user
 RUN chown -R app:app /app
