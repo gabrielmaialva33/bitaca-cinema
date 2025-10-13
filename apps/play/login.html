@@ -51,10 +51,10 @@
             border-radius: 16px;
             padding: 3rem 2.5rem;
             box-shadow: 0 20px 60px rgba(196, 30, 58, 0.3);
+            text-align: center;
         }
 
         .logo-container {
-            text-align: center;
             margin-bottom: 2rem;
         }
 
@@ -76,68 +76,15 @@
             font-family: 'Pacifico', cursive;
             font-size: 1.25rem;
             color: var(--accent);
-        }
-
-        .form-tabs {
-            display: flex;
-            gap: 0.5rem;
             margin-bottom: 2rem;
         }
 
-        .tab-btn {
-            flex: 1;
-            padding: 0.875rem;
-            border: none;
-            background: transparent;
-            color: var(--text-secondary);
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn.active {
-            background: var(--primary);
-            color: var(--text);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            background: var(--background);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .form-input::placeholder {
-            color: var(--text-secondary);
-        }
-
-        .btn {
+        .btn-google {
             width: 100%;
             padding: 1rem;
-            border: none;
+            background: #FFFFFF;
+            color: #444;
+            border: 1px solid var(--border);
             border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
@@ -149,65 +96,22 @@
             gap: 0.5rem;
         }
 
-        .btn-primary {
-            background: var(--primary);
-            color: var(--text);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(196, 30, 58, 0.4);
-        }
-
-        .btn-primary:disabled {
-            background: #555;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .btn-google {
-            background: #FFFFFF;
-            color: #444;
-            border: 1px solid var(--border);
-            margin-bottom: 1rem;
-        }
-
         .btn-google:hover {
             background: #F5F5F5;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
         }
 
-        .divider {
-            text-align: center;
-            margin: 1.5rem 0;
-            position: relative;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 45%;
-            height: 1px;
-            background: var(--border);
-        }
-
-        .divider::before {
-            left: 0;
-        }
-
-        .divider::after {
-            right: 0;
+        .btn-google:disabled {
+            background: #E0E0E0;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .alert {
             padding: 0.875rem;
             border-radius: 8px;
-            margin-bottom: 1.5rem;
+            margin-top: 1.5rem;
             display: none;
         }
 
@@ -221,12 +125,6 @@
             color: #ff6b6b;
         }
 
-        .alert-success {
-            background: rgba(0, 255, 0, 0.1);
-            border: 1px solid rgba(0, 255, 0, 0.3);
-            color: #51cf66;
-        }
-
         .form-footer {
             text-align: center;
             margin-top: 2rem;
@@ -236,20 +134,16 @@
 
         .tagline {
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 1rem;
             font-size: 0.875rem;
             color: var(--text-secondary);
             font-style: italic;
         }
 
-        .hidden {
-            display: none !important;
-        }
-
         .spinner {
             width: 20px;
             height: 20px;
-            border: 2px solid var(--text);
+            border: 2px solid #444;
             border-top-color: transparent;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
@@ -281,8 +175,8 @@
         <div class="alert alert-error" id="error-alert"></div>
 
         <!-- Google Login Only -->
-        <button class="btn btn-google" id="google-login-btn" type="button">
-            <svg width="18" height="18" viewBox="0 0 18 18" style="margin-right: 8px;">
+        <button class="btn-google" id="google-login-btn" type="button">
+            <svg width="18" height="18" viewBox="0 0 18 18">
                 <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
                 <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
                 <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.039l3.007-2.332z"/>
@@ -303,9 +197,13 @@
     <!-- Firebase -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-        import { AuthManager } from './assets/js/auth.js';
+        import {
+            getAuth,
+            signInWithPopup,
+            GoogleAuthProvider,
+            onAuthStateChanged
+        } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
 
-        // Firebase config
         const firebaseConfig = {
             apiKey: "AIzaSyBSkRy1LyKbBXvyvoOCZx5t0bIDldTityk",
             authDomain: "abitaca-8451c.firebaseapp.com",
@@ -316,8 +214,17 @@
             measurementId: "G-3RHX80J2V7"
         };
 
-        window.firebaseApp = initializeApp(firebaseConfig);
-        const auth = new AuthManager();
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Check if already logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const redirect = urlParams.get('redirect') || '/index.html';
+                window.location.href = redirect;
+            }
+        });
 
         // Google login handler
         document.getElementById('google-login-btn').addEventListener('click', async () => {
@@ -329,28 +236,25 @@
             btn.innerHTML = '<div class="spinner"></div><span>Entrando com Google...</span>';
             errorAlert.classList.remove('show');
 
-            const result = await auth.signInWithGoogle();
+            try {
+                const provider = new GoogleAuthProvider();
+                await signInWithPopup(auth, provider);
 
-            if (result.success) {
-                // Check for redirect parameter
-                const urlParams = new URLSearchParams(window.location.search);
-                const redirect = urlParams.get('redirect');
+                // Redirect will happen via onAuthStateChanged
+            } catch (error) {
+                console.error('Google sign in error:', error);
 
-                window.location.href = redirect || '/index.html';
-            } else {
-                const alert = document.getElementById('error-alert');
-
-                let errorMessage = result.error;
-                if (result.error.includes('popup-blocked')) {
+                let errorMessage = 'Erro ao fazer login com Google. Tente novamente.';
+                if (error.code === 'auth/popup-blocked') {
                     errorMessage = 'Pop-up bloqueado. Permita pop-ups para este site.';
-                } else if (result.error.includes('popup-closed-by-user')) {
+                } else if (error.code === 'auth/popup-closed-by-user') {
                     errorMessage = 'Login cancelado. Tente novamente.';
-                } else if (result.error.includes('cancelled-popup-request')) {
+                } else if (error.code === 'auth/cancelled-popup-request') {
                     errorMessage = 'Aguarde o pop-up anterior fechar.';
                 }
 
-                alert.textContent = errorMessage;
-                alert.classList.add('show');
+                errorAlert.textContent = errorMessage;
+                errorAlert.classList.add('show');
 
                 btn.disabled = false;
                 btn.innerHTML = originalHTML;
