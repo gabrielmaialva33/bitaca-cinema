@@ -49,7 +49,7 @@ export class FirebaseChat {
 
             // Redirect if not logged in
             if (!user && !window.location.pathname.includes('login')) {
-                window.location.href = '../play/login.html';
+                window.location.href = 'https://play.abitaca.com.br/login.html?redirect=' + encodeURIComponent(window.location.href);
             }
         });
     }
@@ -85,7 +85,7 @@ export class FirebaseChat {
     async signOut() {
         try {
             await signOut(this.auth);
-            window.location.href = '../play/login.html';
+            window.location.href = 'https://play.abitaca.com.br/login.html';
         } catch (error) {
             console.error('Sign out error:', error);
             throw error;
