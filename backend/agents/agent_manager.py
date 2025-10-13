@@ -63,15 +63,19 @@ class AgentManager:
         print(f"🎯 Agent classification: {agent_classification}")
 
         # Route to appropriate agent
+        result = None
+        agent_name = None
+
         if agent_classification['primary'] == 'discovery':
             # Discovery agent handles search and recommendations
             result = await self.discovery_agent.process_query(
                 query=query,
                 search_enabled=agent_classification.get('use_rag', True)
             )
-            return {
+            agent_name = 'DiscoveryAgent'
+            result = {
                 'response': result['response'],
-                'agent': 'DiscoveryAgent',
+                'agent': agent_name,
                 'productions': result.get('productions', []),
                 'metadata': {
                     'search_performed': result.get('search_performed', False),
