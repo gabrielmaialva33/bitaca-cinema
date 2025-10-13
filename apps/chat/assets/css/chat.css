@@ -403,7 +403,7 @@ body {
 
 .message.user .message-avatar {
     background: var(--primary);
-    color: var(--text-primary);
+    color: #FFFFFF;
 }
 
 .message-content {
