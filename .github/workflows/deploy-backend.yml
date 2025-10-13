@@ -52,9 +52,7 @@ jobs:
           # Copy embeddings.json from frontend to root
           cp -f apps/frontend/assets/data/embeddings.json .
 
-          # Copy Dockerfile and docker-compose from root (already in place after git pull)
-
-          # Prepare www directory for nginx
+          # Prepare www directory for system nginx to serve from /root/bitaca-cinema/www
           echo "📁 Preparing frontend files..."
           mkdir -p www
           cp -rf apps/frontend/*.html www/
@@ -62,11 +60,22 @@ jobs:
           cp -f apps/frontend/robots.txt www/ 2>/dev/null || true
           cp -f apps/frontend/sitemap.xml www/ 2>/dev/null || true
 
-          # Create necessary directories
-          mkdir -p nginx/conf.d nginx/logs nginx/ssl logs
+          # Update nginx configs on system
+          echo "🔧 Updating nginx configs..."
+          if [ -d "nginx-server-configs" ]; then
+            sudo cp -f nginx-server-configs/bitaca-api.conf /etc/nginx/sites-available/
+            sudo cp -f nginx-server-configs/bitaca-www.conf /etc/nginx/sites-available/
 
-          # Copy nginx configs if they exist
-          cp -rf apps/backend/nginx/* nginx/ 2>/dev/null || true
+            # Enable sites if not already enabled
+            [ ! -L /etc/nginx/sites-enabled/bitaca-api.conf ] && sudo ln -sf /etc/nginx/sites-available/bitaca-api.conf /etc/nginx/sites-enabled/
+            [ ! -L /etc/nginx/sites-enabled/bitaca-www.conf ] && sudo ln -sf /etc/nginx/sites-available/bitaca-www.conf /etc/nginx/sites-enabled/
+
+            # Test nginx configuration
+            sudo nginx -t
+          fi
+
+          # Create log directories
+          mkdir -p logs
 
           echo "✅ Files prepared for deployment"
           EOF

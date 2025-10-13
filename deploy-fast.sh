@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fast deployment script using git pull strategy
-# This is much faster than rsync for large projects
+# Deploys to /root/bitaca-cinema with system nginx
 
 SERVER="root@162.12.204.30"
 DEPLOY_DIR="/root/bitaca-cinema"
@@ -16,34 +16,51 @@ cd /root/bitaca-cinema
 echo "📥 Pulling latest code..."
 git pull origin main
 
-echo "📁 Preparing files..."
+echo "📁 Preparing backend files..."
 # Copy backend files to root for Docker
 cp -f apps/backend/*.py .
 cp -rf apps/backend/agents .
 cp -f apps/backend/requirements.txt .
 cp -f apps/frontend/assets/data/embeddings.json .
 
-# Prepare frontend files
+echo "📁 Preparing frontend files..."
+# Frontend files stay in /root/bitaca-cinema/www for nginx
 mkdir -p www
 cp -rf apps/frontend/*.html www/
 cp -rf apps/frontend/assets www/
 cp -f apps/frontend/robots.txt www/ 2>/dev/null || true
 cp -f apps/frontend/sitemap.xml www/ 2>/dev/null || true
 
-# Prepare nginx
-mkdir -p nginx/conf.d nginx/logs nginx/ssl logs
-cp -rf apps/backend/nginx/* nginx/ 2>/dev/null || true
+echo "🔧 Updating nginx configs..."
+# Copy nginx configs to system nginx if they exist
+if [ -d "nginx-server-configs" ]; then
+    sudo cp -f nginx-server-configs/bitaca-api.conf /etc/nginx/sites-available/
+    sudo cp -f nginx-server-configs/bitaca-www.conf /etc/nginx/sites-available/
 
-echo "🐳 Restarting containers..."
+    # Enable sites if not already enabled
+    [ ! -L /etc/nginx/sites-enabled/bitaca-api.conf ] && sudo ln -sf /etc/nginx/sites-available/bitaca-api.conf /etc/nginx/sites-enabled/
+    [ ! -L /etc/nginx/sites-enabled/bitaca-www.conf ] && sudo ln -sf /etc/nginx/sites-available/bitaca-www.conf /etc/nginx/sites-enabled/
+
+    # Test and reload nginx
+    sudo nginx -t && sudo systemctl reload nginx
+fi
+
+echo "🐳 Restarting API container..."
+# Only restart the API container (no nginx in docker)
 docker compose down
-docker compose build --no-cache
-docker compose up -d
+docker compose build --no-cache api
+docker compose up -d api
 
-echo "⏳ Waiting for services..."
+echo "⏳ Waiting for API to start..."
 sleep 10
 
 echo "✅ Deployment complete!"
 docker compose ps
+sudo systemctl status nginx --no-pager
+
+# Health check
+echo "🔍 Checking services..."
+curl -s http://localhost:3000/health | head -1
 EOF
 
 echo ""
