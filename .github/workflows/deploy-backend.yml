@@ -143,13 +143,45 @@ jobs:
           ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "cd ${{ env.DEPLOY_DIR }} && docker compose logs --tail=50"
           exit 1
 
+      - name: Purge Cloudflare cache
+        if: success()
+        run: |
+          echo "🧹 Purging Cloudflare cache..."
+
+          # Purge all cache
+          PURGE_RESULT=$(curl -X POST "https://api.cloudflare.com/client/v4/zones/523a4a3adef5549c21bc1dfcc0834c09/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}' \
+            -s)
+
+          if echo "$PURGE_RESULT" | grep -q '"success":true'; then
+            echo "✅ Cloudflare cache purged successfully!"
+          else
+            echo "⚠️  Cache purge failed: $PURGE_RESULT"
+          fi
+
+          # Set cache level to bypass
+          CACHE_RESULT=$(curl -X PATCH "https://api.cloudflare.com/client/v4/zones/523a4a3adef5549c21bc1dfcc0834c09/settings/cache_level" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"value":"bypass"}' \
+            -s)
+
+          if echo "$CACHE_RESULT" | grep -q '"success":true'; then
+            echo "✅ Cache level set to bypass"
+          else
+            echo "⚠️  Cache level update failed: $CACHE_RESULT"
+          fi
+
       - name: Show deployment info
         if: success()
         run: |
           echo "🎉 Deployment successful!"
-          echo "API URL: http://${{ env.DOMAIN }}"
-          echo "Health: http://${{ env.DOMAIN }}/health"
-          echo "Docs: http://${{ env.DOMAIN }}/docs"
+          echo "API URL: https://${{ env.DOMAIN }}"
+          echo "Health: https://${{ env.DOMAIN }}/health"
+          echo "Docs: https://${{ env.DOMAIN }}/docs"
+          echo "Frontend: https://www.abitaca.com.br"
 
       - name: Notify on failure
         if: failure()
