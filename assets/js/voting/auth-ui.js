@@ -335,13 +335,15 @@ function closeAuthModal() {
 }
 
 // ===== VIEW CONTROLS =====
-function showLoginView() {
+function showLoginView(e) {
+    if (e) e.preventDefault();
     document.getElementById('login-view').style.display = 'block';
     document.getElementById('signup-view').style.display = 'none';
     hideError();
 }
 
-function showSignupView() {
+function showSignupView(e) {
+    if (e) e.preventDefault();
     document.getElementById('login-view').style.display = 'none';
     document.getElementById('signup-view').style.display = 'block';
     hideError();
