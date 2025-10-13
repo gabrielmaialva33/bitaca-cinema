@@ -1,8 +1,13 @@
 {
   "name": "bitaca-cinema",
   "version": "1.0.0",
+  "private": true,
   "description": "Catálogo de produções audiovisuais - Leis Paulo Gustavo e PNAB - Capão Bonito/SP",
   "packageManager": "pnpm@8.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "test": "jest tests/video-recorder.test.js",
     "test:e2e": "playwright test",

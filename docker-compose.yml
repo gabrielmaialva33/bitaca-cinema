@@ -4,12 +4,12 @@ services:
   # Bitaca API Backend
   api:
     build:
-      context: .
+      context: apps/backend
       dockerfile: Dockerfile
     container_name: bitaca-api
     restart: unless-stopped
     env_file:
-      - .env
+      - apps/backend/.env
     environment:
       - HOST=0.0.0.0
       - PORT=3000
@@ -39,11 +39,11 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - ./nginx/ssl:/etc/nginx/ssl:ro
-      - ./nginx/logs:/var/log/nginx
-      - ./www:/var/www/bitaca-cinema:ro
+      - ./apps/backend/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./apps/backend/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./apps/backend/nginx/ssl:/etc/nginx/ssl:ro
+      - ./apps/backend/nginx/logs:/var/log/nginx
+      - ./apps/frontend:/var/www/bitaca-cinema:ro
     networks:
       - bitaca-network
     depends_on:
