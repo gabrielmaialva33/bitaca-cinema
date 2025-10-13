@@ -1,0 +1,635 @@
+/* ========================================
+   BITACA PLAY 3D - STYLES
+   3D Interactive Experience for Bitaca Cinema
+   ======================================== */
+
+/* Reset & Base */
+.play3d-body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0A0A0A;
+    color: #F5DEB3;
+}
+
+#play3d-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* ========================================
+   LOADING SCREEN
+   ======================================== */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+    max-width: 400px;
+    padding: 2rem;
+}
+
+.bitaca-logo-3d {
+    margin-bottom: 2rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.loading-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(245, 222, 179, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.loading-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #C41E3A, #E63946);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.loading-text {
+    font-size: 1.2rem;
+    color: #F5DEB3;
+    margin: 1rem 0 0.5rem;
+}
+
+.loading-tip {
+    font-size: 0.9rem;
+    color: rgba(245, 222, 179, 0.6);
+    font-style: italic;
+}
+
+/* ========================================
+   UI OVERLAY
+   ======================================== */
+.ui-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.ui-overlay > * {
+    pointer-events: auto;
+}
+
+/* Header */
+.play3d-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.8) 0%, transparent 100%);
+    backdrop-filter: blur(10px);
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.play3d-title {
+    font-family: 'Staatliches', sans-serif;
+    font-size: 1.5rem;
+    color: #F5DEB3;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-icon {
+    background: rgba(245, 222, 179, 0.1);
+    border: 2px solid rgba(245, 222, 179, 0.3);
+    color: #F5DEB3;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.btn-icon:hover {
+    background: rgba(196, 30, 58, 0.3);
+    border-color: #C41E3A;
+    transform: scale(1.1);
+}
+
+/* ========================================
+   WORLD SELECTOR
+   ======================================== */
+.world-selector {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    max-width: 900px;
+    padding: 2rem;
+}
+
+.world-selector-title {
+    font-family: 'Staatliches', sans-serif;
+    font-size: 2.5rem;
+    color: #F5DEB3;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 10px rgba(196, 30, 58, 0.5);
+}
+
+.world-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.world-card {
+    background: linear-gradient(135deg, rgba(196, 30, 58, 0.1) 0%, rgba(196, 30, 58, 0.05) 100%);
+    border: 2px solid rgba(245, 222, 179, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.world-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(245, 222, 179, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.world-card:hover::before {
+    left: 100%;
+}
+
+.world-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    border-color: #C41E3A;
+    box-shadow: 0 10px 40px rgba(196, 30, 58, 0.4);
+}
+
+.world-card-icon {
+    font-size: 4rem;
+    color: #C41E3A;
+    margin-bottom: 1rem;
+}
+
+.world-card-title {
+    font-family: 'Staatliches', sans-serif;
+    font-size: 1.8rem;
+    color: #F5DEB3;
+    margin-bottom: 0.5rem;
+}
+
+.world-card-desc {
+    color: rgba(245, 222, 179, 0.7);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.world-card-badge {
+    background: rgba(196, 30, 58, 0.2);
+    color: #F5DEB3;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.world-selector-hint {
+    color: rgba(245, 222, 179, 0.6);
+    font-size: 1rem;
+}
+
+/* ========================================
+   CONTROLS INFO
+   ======================================== */
+.controls-info {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    max-width: 600px;
+}
+
+.control-item {
+    background: rgba(10, 10, 10, 0.8);
+    border: 2px solid rgba(245, 222, 179, 0.2);
+    border-radius: 10px;
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: rgba(245, 222, 179, 0.8);
+}
+
+kbd {
+    background: rgba(196, 30, 58, 0.3);
+    color: #F5DEB3;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    font-family: monospace;
+    font-weight: bold;
+    border: 1px solid rgba(245, 222, 179, 0.3);
+}
+
+/* ========================================
+   DERONA DIALOG
+   ======================================== */
+.derona-dialog {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    max-width: 400px;
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
+    border: 2px solid rgba(196, 30, 58, 0.5);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    animation: slideInRight 0.5s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.derona-avatar-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #C41E3A;
+    background: rgba(196, 30, 58, 0.1);
+}
+
+.derona-avatar {
+    width: 100%;
+    height: 100%;
+    /* Three.js avatar will be rendered here */
+}
+
+.derona-name {
+    font-family: 'Staatliches', sans-serif;
+    font-size: 1.3rem;
+    color: #F5DEB3;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.derona-message {
+    color: rgba(245, 222, 179, 0.9);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.derona-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* ========================================
+   PRODUCTION CARD 3D
+   ======================================== */
+.production-card-3d {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 500px;
+    width: 90%;
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
+    border: 2px solid rgba(196, 30, 58, 0.5);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+.production-card-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(196, 30, 58, 0.8);
+    border: none;
+    color: #F5DEB3;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.production-card-close:hover {
+    background: #C41E3A;
+    transform: rotate(90deg);
+}
+
+.production-card-thumbnail {
+    width: 100%;
+    height: 250px;
+    background: rgba(196, 30, 58, 0.1);
+    background-size: cover;
+    background-position: center;
+}
+
+.production-card-content {
+    padding: 2rem;
+}
+
+.production-card-title {
+    font-family: 'Staatliches', sans-serif;
+    font-size: 1.8rem;
+    color: #F5DEB3;
+    margin-bottom: 0.5rem;
+}
+
+.production-card-director {
+    color: rgba(245, 222, 179, 0.7);
+    margin-bottom: 1rem;
+}
+
+.production-card-sinopse {
+    color: rgba(245, 222, 179, 0.9);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.production-card-badges {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.badge {
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.badge-status {
+    background: rgba(45, 80, 22, 0.3);
+    color: #7FB539;
+}
+
+.badge-category {
+    background: rgba(196, 30, 58, 0.3);
+    color: #F5DEB3;
+}
+
+.production-card-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* ========================================
+   MINIMAP
+   ======================================== */
+.minimap {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    width: 200px;
+    height: 200px;
+    background: rgba(10, 10, 10, 0.8);
+    border: 2px solid rgba(245, 222, 179, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#minimap-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.minimap-label {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(245, 222, 179, 0.7);
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* ========================================
+   MENU SIDEBAR
+   ======================================== */
+.menu-sidebar {
+    position: fixed;
+    top: 0;
+    left: -350px;
+    width: 350px;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
+    border-right: 2px solid rgba(196, 30, 58, 0.5);
+    box-shadow: 5px 0 30px rgba(0, 0, 0, 0.8);
+    transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 200;
+}
+
+.menu-sidebar.active {
+    left: 0;
+}
+
+.menu-header {
+    padding: 2rem;
+    border-bottom: 2px solid rgba(245, 222, 179, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-header h3 {
+    font-family: 'Staatliches', sans-serif;
+    font-size: 1.8rem;
+    color: #F5DEB3;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menu-content {
+    padding: 1rem 0;
+}
+
+.menu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-list li a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    color: rgba(245, 222, 179, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.menu-list li a:hover {
+    background: rgba(196, 30, 58, 0.2);
+    color: #F5DEB3;
+    padding-left: 2.5rem;
+}
+
+.menu-divider {
+    height: 2px;
+    background: rgba(245, 222, 179, 0.1);
+    margin: 1rem 0;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #C41E3A 0%, #A01828 100%);
+    color: #F5DEB3;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #E63946 0%, #C41E3A 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(196, 30, 58, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(245, 222, 179, 0.1);
+    color: #F5DEB3;
+    border: 2px solid rgba(245, 222, 179, 0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(245, 222, 179, 0.2);
+    border-color: #F5DEB3;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+    .world-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .controls-info {
+        flex-direction: column;
+        max-width: 200px;
+    }
+
+    .derona-dialog {
+        max-width: 90%;
+        bottom: 1rem;
+        right: 5%;
+    }
+
+    .production-card-3d {
+        width: 95%;
+    }
+
+    .minimap {
+        width: 150px;
+        height: 150px;
+        bottom: 1rem;
+        right: 1rem;
+    }
+}
