@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  streaming-bridge:
+    build: .
+    container_name: bitaca-streaming-bridge
+    ports:
+      - "8001:8001"
+    environment:
+      - APP_NAME=Bitaca Play 3D Streaming Bridge
+      - APP_VERSION=1.0.0
+      - DEBUG=false
+      - HOST=0.0.0.0
+      - PORT=8001
+      - STREAM_API_URL=http://stream-winx-api:8000
+      - STREAM_API_TIMEOUT=30.0
+      - LOG_LEVEL=INFO
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - bitaca-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: bitaca-streaming-cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+    networks:
+      - bitaca-network
+
+  # Optional: Include stream-winx-api if needed
+  # stream-winx-api:
+  #   build: ../../../tmp/stream-winx-api
+  #   container_name: stream-winx-api
+  #   ports:
+  #     - "8000:8000"
+  #   env_file:
+  #     - ../../../tmp/stream-winx-api/.env
+  #   restart: unless-stopped
+  #   networks:
+  #     - bitaca-network
+
+volumes:
+  redis-data:
+
+networks:
+  bitaca-network:
+    driver: bridge
