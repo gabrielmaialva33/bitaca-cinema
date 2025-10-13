@@ -85,7 +85,7 @@ export class FirebaseChat {
     async signOut() {
         try {
             await signOut(this.auth);
-            window.location.href = 'https://play.abitaca.com.br/login.html';
+            window.location.href = '/login.html';
         } catch (error) {
             console.error('Sign out error:', error);
             throw error;
