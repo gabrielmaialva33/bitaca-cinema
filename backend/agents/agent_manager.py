@@ -3,11 +3,14 @@ Bitaca Cinema - Agent Manager
 Orchestrates multi-agent system using Agno framework
 """
 
+import os
+import time
 from typing import Dict, Any
 
 from agents.cinema_agent import CinemaAgent
 from agents.cultural_agent import CulturalAgent
 from agents.discovery_agent import DiscoveryAgent
+from agents.rl_feedback import RLFeedbackIntegration
 
 
 class AgentManager:
@@ -30,6 +33,12 @@ class AgentManager:
             'cultural': self.cultural_agent,
             'discovery': self.discovery_agent
         }
+
+        # Initialize RL feedback system (enabled via environment variable)
+        rl_enabled = os.getenv('RL_ENABLED', 'false').lower() == 'true'
+        self.rl_feedback = RLFeedbackIntegration(enabled=rl_enabled)
+        if rl_enabled:
+            print("✅ RL Feedback System enabled")
 
     async def process_query(self, query: str, intent: str = None, context: Dict[str, Any] = None) -> Dict[str, Any]:
         """
