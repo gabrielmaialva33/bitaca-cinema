@@ -98,126 +98,158 @@ class BitacaAvatar3D {
     }
 
     /**
-     * Setup cinematic lighting
+     * Setup horror-style lighting (Bad Parenting aesthetic)
      */
     setupLighting() {
-        // Key light (main light - warm)
-        const keyLight = new THREE.DirectionalLight(0xffd4a3, 1.2);
-        keyLight.position.set(5, 10, 5);
+        // Dim key light from above (cold, unsettling)
+        const keyLight = new THREE.DirectionalLight(0x9090aa, 0.6);
+        keyLight.position.set(2, 8, 3);
         keyLight.castShadow = true;
-        keyLight.shadow.mapSize.width = 2048;
-        keyLight.shadow.mapSize.height = 2048;
+        keyLight.shadow.mapSize.width = 1024;
+        keyLight.shadow.mapSize.height = 1024;
         this.scene.add(keyLight);
 
-        // Fill light (softer - cool)
-        const fillLight = new THREE.DirectionalLight(0xa3c7ff, 0.5);
-        fillLight.position.set(-5, 5, 5);
-        this.scene.add(fillLight);
+        // Eerie red rim light (horror accent)
+        const rimLight = new THREE.DirectionalLight(0x881111, 0.4);
+        rimLight.position.set(-3, 2, -5);
+        this.scene.add(rimLight);
 
-        // Back light (rim light)
-        const backLight = new THREE.DirectionalLight(0xff5555, 0.3);
-        backLight.position.set(0, 5, -5);
-        this.scene.add(backLight);
-
-        // Ambient light
-        const ambientLight = new THREE.AmbientLight(0x404040, 0.3);
+        // Dim ambient (dark atmosphere)
+        const ambientLight = new THREE.AmbientLight(0x303030, 0.4);
         this.scene.add(ambientLight);
 
-        // Spotlight for dramatic effect
-        const spotlight = new THREE.SpotLight(0xff3333, 0.5);
-        spotlight.position.set(0, 10, 0);
-        spotlight.angle = Math.PI / 6;
-        spotlight.penumbra = 0.3;
+        // Unsettling spotlight from below (horror technique)
+        const spotlight = new THREE.SpotLight(0x6666ff, 0.3);
+        spotlight.position.set(0, -2, 3);
+        spotlight.angle = Math.PI / 4;
+        spotlight.penumbra = 0.8;
         spotlight.castShadow = true;
         this.scene.add(spotlight);
     }
 
     /**
-     * Create stylized avatar (geometric shapes)
+     * Create horror-style avatar (Bad Parenting aesthetic - retro 90s horror)
      */
     createAvatar() {
         const avatarGroup = new THREE.Group();
         avatarGroup.position.y = -0.5;
 
-        // Materials
-        const skinMaterial = new THREE.MeshPhongMaterial({
-            color: 0xffdbac,
-            shininess: 10
+        // Materials - Flat/cel-shaded for retro 90s PS1 aesthetic
+        const skinMaterial = new THREE.MeshToonMaterial({
+            color: 0xd4c4b0, // Desaturated pale skin
+            flatShading: true
         });
 
-        const hairMaterial = new THREE.MeshPhongMaterial({
-            color: 0x2a1810,
-            shininess: 30
+        const darkSkinMaterial = new THREE.MeshToonMaterial({
+            color: 0xa89880, // Darker skin tone
+            flatShading: true
         });
 
-        const eyeMaterial = new THREE.MeshPhongMaterial({
-            color: 0x1a1a1a,
-            shininess: 100
+        const hairMaterial = new THREE.MeshLambertMaterial({
+            color: 0x1a1410, // Very dark hair
+            flatShading: true
         });
 
-        const clothesMaterial = new THREE.MeshPhongMaterial({
-            color: 0xc41e3a, // Bitaca red
-            shininess: 20
+        const eyeMaterial = new THREE.MeshBasicMaterial({
+            color: 0x000000 // Pure black eyes (unsettling)
         });
 
-        // HEAD
-        const headGeometry = new THREE.SphereGeometry(0.8, 32, 32);
+        const mouthMaterial = new THREE.MeshBasicMaterial({
+            color: 0x330000 // Dark red mouth
+        });
+
+        const clothesMaterial = new THREE.MeshToonMaterial({
+            color: 0x8b1a1a, // Dark, desaturated red
+            flatShading: true
+        });
+
+        // HEAD - Box geometry for angular PS1-style look
+        const headGeometry = new THREE.BoxGeometry(1, 1.2, 0.9);
         this.avatar.head = new THREE.Mesh(headGeometry, skinMaterial);
         this.avatar.head.position.y = 1.5;
         this.avatar.head.castShadow = true;
         avatarGroup.add(this.avatar.head);
 
-        // HAIR (top sphere)
-        const hairGeometry = new THREE.SphereGeometry(0.85, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2);
+        // HAIR - Blocky, angular hair
+        const hairGeometry = new THREE.BoxGeometry(1.1, 0.4, 1);
         const hair = new THREE.Mesh(hairGeometry, hairMaterial);
-        hair.position.y = 0.3;
+        hair.position.y = 0.6;
         this.avatar.head.add(hair);
 
-        // JAW (lower part of head for animation)
-        const jawGeometry = new THREE.SphereGeometry(0.6, 32, 16, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2);
-        this.avatar.jaw = new THREE.Mesh(jawGeometry, skinMaterial);
-        this.avatar.jaw.position.y = -0.3;
+        // Hair sides (for more complete look)
+        const hairSideGeometry = new THREE.BoxGeometry(1.1, 0.8, 0.3);
+        const hairSide = new THREE.Mesh(hairSideGeometry, hairMaterial);
+        hairSide.position.set(0, 0.2, -0.6);
+        this.avatar.head.add(hairSide);
+
+        // JAW (lower part of head for animation) - angular box
+        const jawGeometry = new THREE.BoxGeometry(0.9, 0.6, 0.8);
+        this.avatar.jaw = new THREE.Mesh(jawGeometry, darkSkinMaterial);
+        this.avatar.jaw.position.y = -0.7;
         this.avatar.head.add(this.avatar.jaw);
 
-        // EYES
-        const eyeGeometry = new THREE.SphereGeometry(0.12, 16, 16);
+        // MOUTH - dark cavity
+        const mouthGeometry = new THREE.BoxGeometry(0.3, 0.15, 0.1);
+        const mouth = new THREE.Mesh(mouthGeometry, mouthMaterial);
+        mouth.position.set(0, -0.1, 0.45);
+        this.avatar.jaw.add(mouth);
+
+        // EYES - large, unsettling black eyes (Bad Parenting style)
+        const eyeGeometry = new THREE.SphereGeometry(0.15, 8, 8); // Low poly
 
         this.avatar.leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
-        this.avatar.leftEye.position.set(-0.25, 0.1, 0.6);
+        this.avatar.leftEye.position.set(-0.25, 0.15, 0.46);
+        this.avatar.leftEye.scale.set(1, 1.3, 0.6); // Slightly elongated
         this.avatar.head.add(this.avatar.leftEye);
 
         this.avatar.rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
-        this.avatar.rightEye.position.set(0.25, 0.1, 0.6);
+        this.avatar.rightEye.position.set(0.25, 0.15, 0.46);
+        this.avatar.rightEye.scale.set(1, 1.3, 0.6); // Slightly elongated
         this.avatar.head.add(this.avatar.rightEye);
 
-        // BODY
-        const bodyGeometry = new THREE.CylinderGeometry(0.6, 0.8, 1.5, 32);
+        // Tiny white pupils for unsettling effect
+        const pupilMaterial = new THREE.MeshBasicMaterial({color: 0xffffff});
+        const pupilGeometry = new THREE.SphereGeometry(0.03, 6, 6);
+
+        const leftPupil = new THREE.Mesh(pupilGeometry, pupilMaterial);
+        leftPupil.position.z = 0.1;
+        this.avatar.leftEye.add(leftPupil);
+
+        const rightPupil = new THREE.Mesh(pupilGeometry, pupilMaterial);
+        rightPupil.position.z = 0.1;
+        this.avatar.rightEye.add(rightPupil);
+
+        // BODY - Angular, blocky torso
+        const bodyGeometry = new THREE.BoxGeometry(1, 1.5, 0.7);
         this.avatar.body = new THREE.Mesh(bodyGeometry, clothesMaterial);
         this.avatar.body.position.y = 0;
         this.avatar.body.castShadow = true;
         avatarGroup.add(this.avatar.body);
 
-        // ARMS
-        const armGeometry = new THREE.CylinderGeometry(0.15, 0.12, 1.2, 16);
+        // ARMS - Simplified, angular arms
+        const armGeometry = new THREE.BoxGeometry(0.25, 1.2, 0.25);
 
         this.avatar.leftArm = new THREE.Mesh(armGeometry, clothesMaterial);
-        this.avatar.leftArm.position.set(-0.75, 0.2, 0);
-        this.avatar.leftArm.rotation.z = Math.PI / 8;
+        this.avatar.leftArm.position.set(-0.65, 0.2, 0);
+        this.avatar.leftArm.rotation.z = Math.PI / 12;
         this.avatar.leftArm.castShadow = true;
         avatarGroup.add(this.avatar.leftArm);
 
         this.avatar.rightArm = new THREE.Mesh(armGeometry, clothesMaterial);
-        this.avatar.rightArm.position.set(0.75, 0.2, 0);
-        this.avatar.rightArm.rotation.z = -Math.PI / 8;
+        this.avatar.rightArm.position.set(0.65, 0.2, 0);
+        this.avatar.rightArm.rotation.z = -Math.PI / 12;
         this.avatar.rightArm.castShadow = true;
         avatarGroup.add(this.avatar.rightArm);
+
+        // Add subtle rotation for unsettling effect
+        avatarGroup.rotation.y = 0.05;
 
         // Add group to scene
         this.scene.add(avatarGroup);
 
-        // Floor (shadow receiver)
+        // Floor (shadow receiver) - darker
         const floorGeometry = new THREE.PlaneGeometry(20, 20);
-        const floorMaterial = new THREE.ShadowMaterial({opacity: 0.3});
+        const floorMaterial = new THREE.ShadowMaterial({opacity: 0.6});
         const floor = new THREE.Mesh(floorGeometry, floorMaterial);
         floor.rotation.x = -Math.PI / 2;
         floor.position.y = -1;
