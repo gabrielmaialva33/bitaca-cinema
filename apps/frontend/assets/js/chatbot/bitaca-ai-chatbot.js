@@ -40,8 +40,8 @@ class BitacaAIChatbot {
         try {
             console.log('🤖 Initializing Bitaca AI Chatbot...');
 
-            // Tenta carregar embeddings do arquivo JSON
-            const response = await fetch('/assets/data/embeddings.json');
+            // Tenta carregar embeddings do arquivo JSON (caminho relativo para funcionar no GitHub Pages)
+            const response = await fetch('./assets/data/embeddings.json');
 
             if (!response.ok) {
                 console.warn('⚠️ Embeddings file not found. RAG disabled. Run rag-setup.js to generate embeddings.');
