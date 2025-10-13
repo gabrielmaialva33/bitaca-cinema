@@ -74,7 +74,7 @@ class BitacaChat {
                 this.showSettings();
             }
 
-            console.log('✅ Bitaca AI Chat - Ready!');
+            console.log('Bitaca AI Chat - Ready!');
         } catch (error) {
             console.error('Initialization error:', error);
             alert('Erro ao inicializar aplicação: ' + error.message);
@@ -525,14 +525,14 @@ class BitacaChat {
             const result = await this.nvidia.test();
 
             if (result.success) {
-                alert('✅ API key salva com sucesso!');
+                alert('API key salva com sucesso!');
                 this.elements.apiKeyInput.value = '••••••••••••••••••••';
                 this.closeModal('settings');
             } else {
                 throw new Error(result.message);
             }
         } catch (error) {
-            alert('❌ Erro ao validar API key: ' + error.message);
+            alert('Erro ao validar API key: ' + error.message);
             this.nvidia.setApiKey('');
         } finally {
             this.hideLoading();
