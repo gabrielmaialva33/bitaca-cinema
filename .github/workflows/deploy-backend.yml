@@ -89,6 +89,10 @@ jobs:
           ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} << 'EOF'
           cd ${{ env.DEPLOY_DIR }}
 
+          # Ensure we have the correct files in place
+          echo "Checking required files..."
+          ls -la main.py database.py requirements.txt Dockerfile docker-compose.yml embeddings.json | head -10
+
           # Stop existing containers
           docker compose down
 
