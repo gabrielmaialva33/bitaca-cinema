@@ -499,10 +499,12 @@ async def agi_chat(request: AGIChatRequest, req: Request):
     Routes query to appropriate specialized agent
     """
     if not AGI_AVAILABLE or agent_manager is None:
-        raise HTTPException(
-            status_code=503,
-            detail="AGI system not available"
-        )
+        print("⚠️ AGI system not available")
+        return JSONResponse(content={
+            "response": "Eae parceiro! Sou a Deronas do Bitaca Cinema. Como posso te ajudar?",
+            "agent": "Fallback",
+            "metadata": {"error": "AGI system not initialized"}
+        })
 
     # Rate limiting
     client_ip = req.client.host
@@ -513,17 +515,32 @@ async def agi_chat(request: AGIChatRequest, req: Request):
         )
 
     try:
+        print(f"📨 AGI Chat Request - Query: '{request.query[:50]}...'")
+        print(f"📍 Intent: {request.intent}")
+
         result = await agent_manager.process_query(
             query=request.query,
             intent=request.intent,
             context=request.context
         )
 
+        print(f"✅ AGI Response - Agent: {result.get('agent')}, Length: {len(result.get('response', ''))}")
         return JSONResponse(content=result)
 
     except Exception as e:
         print(f"❌ AGI chat error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        import traceback
+        traceback.print_exc()
+
+        # Return fallback response instead of error
+        return JSONResponse(content={
+            "response": "Eae parceiro! Desculpa, tive um probleminha técnico aqui. Mas tamo junto! Como posso te ajudar?",
+            "agent": "Fallback",
+            "metadata": {
+                "error": str(e),
+                "query": request.query
+            }
+        })
 
 
 @app.post("/api/agi/recommend")

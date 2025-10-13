@@ -62,19 +62,33 @@ class CulturalAgent:
         Returns:
             Agent response
         """
-        # Add specific context if available
-        enhanced_query = query
+        try:
+            # Add specific context if available
+            enhanced_query = query
 
-        if context:
-            if context.get('law_type') == 'paulo_gustavo':
-                enhanced_query += "\n\nContexto: Lei Paulo Gustavo em Capão Bonito - Editais 03 e 04/2024"
-            elif context.get('law_type') == 'pnab':
-                enhanced_query += "\n\nContexto: PNAB - Edital 005/2024 em análise"
+            if context:
+                if context.get('law_type') == 'paulo_gustavo':
+                    enhanced_query += "\n\nContexto: Lei Paulo Gustavo em Capão Bonito - Editais 03 e 04/2024"
+                elif context.get('law_type') == 'pnab':
+                    enhanced_query += "\n\nContexto: PNAB - Edital 005/2024 em análise"
 
-        # Get agent response
-        response = self.agent.run(enhanced_query)
+            # Get agent response with error handling
+            try:
+                response = self.agent.run(enhanced_query)
+                response_content = response.content if response else None
+            except Exception as agent_error:
+                print(f"❌ Cultural agent run error: {agent_error}")
+                response_content = None
 
-        return response.content if response else "Desculpe, não consegui responder sobre essa lei."
+            # Fallback response
+            if not response_content:
+                return "Eae! Te ajudo com informações sobre as leis de fomento cultural, Lei Paulo Gustavo e PNAB!"
+
+            return response_content
+
+        except Exception as e:
+            print(f"❌ Cultural agent error: {e}")
+            return "Eae! Te ajudo com informações sobre as leis de fomento cultural, Lei Paulo Gustavo e PNAB!"
 
     def get_agent_info(self) -> Dict[str, str]:
         """Get agent information"""

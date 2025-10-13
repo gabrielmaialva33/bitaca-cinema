@@ -54,24 +54,38 @@ class CinemaAgent:
         Returns:
             Agent response
         """
-        # Build enhanced prompt with context
-        enhanced_query = query
+        try:
+            # Build enhanced prompt with context
+            enhanced_query = query
 
-        if context and context.get('productions'):
-            prods = context['productions']
-            context_text = "\n\nProduções relevantes encontradas:\n"
-            for i, prod in enumerate(prods[:3], 1):
-                context_text += f"\n{i}. **{prod.get('titulo')}**\n"
-                context_text += f"   - Diretor: {prod.get('diretor')}\n"
-                context_text += f"   - Tema: {prod.get('tema')}\n"
-                context_text += f"   - Sinopse: {prod.get('sinopse', '')[:150]}...\n"
+            if context and context.get('productions'):
+                prods = context['productions']
+                context_text = "\n\nProduções relevantes encontradas:\n"
+                for i, prod in enumerate(prods[:3], 1):
+                    context_text += f"\n{i}. **{prod.get('titulo')}**\n"
+                    context_text += f"   - Diretor: {prod.get('diretor')}\n"
+                    context_text += f"   - Tema: {prod.get('tema')}\n"
+                    context_text += f"   - Sinopse: {prod.get('sinopse', '')[:150]}...\n"
 
-            enhanced_query = query + context_text
+                enhanced_query = query + context_text
 
-        # Get agent response
-        response = self.agent.run(enhanced_query)
+            # Get agent response with error handling
+            try:
+                response = self.agent.run(enhanced_query)
+                response_content = response.content if response else None
+            except Exception as agent_error:
+                print(f"❌ Cinema agent run error: {agent_error}")
+                response_content = None
 
-        return response.content if response else "Desculpe, não consegui processar sua pergunta."
+            # Fallback response
+            if not response_content:
+                return "Eae parceiro! Sou do Bitaca Cinema. Te ajudo com informações sobre nossas produções!"
+
+            return response_content
+
+        except Exception as e:
+            print(f"❌ Cinema agent error: {e}")
+            return "Eae parceiro! Sou do Bitaca Cinema. Te ajudo com informações sobre nossas produções!"
 
     def get_agent_info(self) -> Dict[str, str]:
         """Get agent information"""

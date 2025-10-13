@@ -55,103 +55,139 @@ class AgentManager:
         # Start timing
         start_time = time.time()
 
-        print(f"\n🧠 AgentManager processing query: '{query[:50]}...'")
-        print(f"📊 Intent: {intent}")
+        try:
+            print(f"\n🧠 AgentManager processing query: '{query[:50]}...'")
+            print(f"📊 Intent: {intent}")
 
-        # Classify which agent(s) should handle this
-        agent_classification = self._classify_query(query, intent)
-        print(f"🎯 Agent classification: {agent_classification}")
+            # Classify which agent(s) should handle this
+            agent_classification = self._classify_query(query, intent)
+            print(f"🎯 Agent classification: {agent_classification}")
 
-        # Route to appropriate agent
-        result = None
-        agent_name = None
+            # Route to appropriate agent
+            result = None
+            agent_name = None
 
-        if agent_classification['primary'] == 'discovery':
-            # Discovery agent handles search and recommendations
-            result = await self.discovery_agent.process_query(
-                query=query,
-                search_enabled=agent_classification.get('use_rag', True)
-            )
-            agent_name = 'DiscoveryAgent'
-            result = {
-                'response': result['response'],
-                'agent': agent_name,
-                'productions': result.get('productions', []),
+            try:
+                if agent_classification['primary'] == 'discovery':
+                    # Discovery agent handles search and recommendations
+                    result = await self.discovery_agent.process_query(
+                        query=query,
+                        search_enabled=agent_classification.get('use_rag', True)
+                    )
+                    agent_name = 'DiscoveryAgent'
+                    result = {
+                        'response': result['response'],
+                        'agent': agent_name,
+                        'productions': result.get('productions', []),
+                        'metadata': {
+                            'search_performed': result.get('search_performed', False),
+                            'intent': intent
+                        }
+                    }
+
+                elif agent_classification['primary'] == 'cultural':
+                    # Cultural agent handles laws and policies
+                    response = await self.cultural_agent.process_query(
+                        query=query,
+                        context=context
+                    )
+                    agent_name = 'CulturalAgent'
+                    result = {
+                        'response': response,
+                        'agent': agent_name,
+                        'metadata': {
+                            'intent': intent,
+                            'topic': 'cultural_laws'
+                        }
+                    }
+
+                elif agent_classification['primary'] == 'cinema':
+                    # Cinema agent handles production details
+                    # Check if we need discovery context first
+                    cinema_context = context or {}
+
+                    if agent_classification.get('needs_search', False):
+                        # First get relevant productions via discovery
+                        try:
+                            search_result = await self.discovery_agent.process_query(
+                                query=query,
+                                search_enabled=True
+                            )
+                            cinema_context['productions'] = search_result.get('productions', [])
+                        except Exception as search_error:
+                            print(f"⚠️ Discovery search for cinema failed: {search_error}")
+
+                    response = await self.cinema_agent.process_query(
+                        query=query,
+                        context=cinema_context
+                    )
+                    agent_name = 'CinemaAgent'
+                    result = {
+                        'response': response,
+                        'agent': agent_name,
+                        'metadata': {
+                            'intent': intent,
+                            'used_discovery': agent_classification.get('needs_search', False)
+                        }
+                    }
+
+                else:
+                    # Default to discovery for general queries
+                    discovery_result = await self.discovery_agent.process_query(query=query)
+                    agent_name = 'DiscoveryAgent'
+                    result = {
+                        'response': discovery_result['response'],
+                        'agent': agent_name,
+                        'metadata': {'intent': intent}
+                    }
+
+            except Exception as agent_error:
+                print(f"❌ Agent processing error: {agent_error}")
+                # Fallback response
+                result = {
+                    'response': "Eae parceiro! Sou a Deronas do Bitaca Cinema. Como posso te ajudar?",
+                    'agent': 'FallbackAgent',
+                    'metadata': {
+                        'error': str(agent_error),
+                        'intent': intent
+                    }
+                }
+                agent_name = 'FallbackAgent'
+
+            # Track with RL feedback system
+            try:
+                elapsed_time_ms = (time.time() - start_time) * 1000
+                rl_feedback = self.rl_feedback.track_response(
+                    query=query,
+                    intent=intent or 'GENERAL',
+                    agent_name=agent_name,
+                    response=result['response'],
+                    elapsed_time_ms=elapsed_time_ms
+                )
+
+                # Add RL feedback to result if available
+                if rl_feedback:
+                    result['rl_score'] = rl_feedback.get('score')
+                    result['rl_feedback'] = rl_feedback.get('feedback')
+            except Exception as rl_error:
+                print(f"⚠️ RL tracking failed: {rl_error}")
+
+            return result
+
+        except Exception as e:
+            print(f"❌ AgentManager critical error: {e}")
+            import traceback
+            traceback.print_exc()
+
+            # Last resort fallback
+            return {
+                'response': "Eae parceiro! Sou a Deronas do Bitaca Cinema. Como posso te ajudar?",
+                'agent': 'EmergencyFallback',
                 'metadata': {
-                    'search_performed': result.get('search_performed', False),
+                    'error': str(e),
                     'intent': intent
                 }
             }
-
-        elif agent_classification['primary'] == 'cultural':
-            # Cultural agent handles laws and policies
-            response = await self.cultural_agent.process_query(
-                query=query,
-                context=context
-            )
-            agent_name = 'CulturalAgent'
-            result = {
-                'response': response,
-                'agent': agent_name,
-                'metadata': {
-                    'intent': intent,
-                    'topic': 'cultural_laws'
-                }
-            }
-
-        elif agent_classification['primary'] == 'cinema':
-            # Cinema agent handles production details
-            # Check if we need discovery context first
-            cinema_context = context or {}
-
-            if agent_classification.get('needs_search', False):
-                # First get relevant productions via discovery
-                search_result = await self.discovery_agent.process_query(
-                    query=query,
-                    search_enabled=True
-                )
-                cinema_context['productions'] = search_result.get('productions', [])
-
-            response = await self.cinema_agent.process_query(
-                query=query,
-                context=cinema_context
-            )
-            agent_name = 'CinemaAgent'
-            result = {
-                'response': response,
-                'agent': agent_name,
-                'metadata': {
-                    'intent': intent,
-                    'used_discovery': agent_classification.get('needs_search', False)
-                }
-            }
-
-        else:
-            # Default to discovery for general queries
-            discovery_result = await self.discovery_agent.process_query(query=query)
-            agent_name = 'DiscoveryAgent'
-            result = {
-                'response': discovery_result['response'],
-                'agent': agent_name,
-                'metadata': {'intent': intent}
-            }
-
-        # Track with RL feedback system
-        elapsed_time_ms = (time.time() - start_time) * 1000
-        rl_feedback = self.rl_feedback.track_response(
-            query=query,
-            intent=intent or 'GENERAL',
-            agent_name=agent_name,
-            response=result['response'],
-            elapsed_time_ms=elapsed_time_ms
-        )
-
-        # Add RL feedback to result if available
-        if rl_feedback:
-            result['rl_score'] = rl_feedback.get('score')
-            result['rl_feedback'] = rl_feedback.get('feedback')
-
-        return result
 
     def _classify_query(self, query: str, intent: str = None) -> Dict[str, Any]:
         """

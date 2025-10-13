@@ -75,30 +75,56 @@ Máximo de 3-4 parágrafos por resposta, mas seja VISCERAL e AUTÊNTICA!
         """
         found_productions = []
 
-        # Perform RAG search if enabled
-        if search_enabled:
-            found_productions = await self.rag_tool.search_productions(query, top_k=3)
-            print(f"🔍 RAG Search found {len(found_productions)} productions")
+        try:
+            # Perform RAG search if enabled
+            if search_enabled:
+                try:
+                    found_productions = await self.rag_tool.search_productions(query, top_k=3)
+                    print(f"🔍 RAG Search found {len(found_productions)} productions")
+                except Exception as rag_error:
+                    print(f"⚠️ RAG search failed: {rag_error}")
+                    # Continue without RAG results
 
-        # Build context for agent
-        context_text = query
-        if found_productions:
-            context_text += "\n\n**Produções relevantes encontradas:**\n"
-            for i, prod in enumerate(found_productions, 1):
-                context_text += f"\n{i}. **{prod['titulo']}**\n"
-                context_text += f"   - Diretor: {prod['diretor']}\n"
-                context_text += f"   - Eixo temático: {prod['eixo']}\n"
-                context_text += f"   - Sinopse: {prod['sinopse'][:200]}...\n"
-                context_text += f"   - Relevância: {prod['similarity']:.0%}\n"
+            # Build context for agent
+            context_text = query
+            if found_productions:
+                context_text += "\n\n**Produções relevantes encontradas:**\n"
+                for i, prod in enumerate(found_productions, 1):
+                    context_text += f"\n{i}. **{prod['titulo']}**\n"
+                    context_text += f"   - Diretor: {prod['diretor']}\n"
+                    context_text += f"   - Eixo temático: {prod['eixo']}\n"
+                    context_text += f"   - Sinopse: {prod['sinopse'][:200]}...\n"
+                    context_text += f"   - Relevância: {prod['similarity']:.0%}\n"
 
-        # Get agent response
-        response = self.agent.run(context_text)
+            # Get agent response with error handling
+            try:
+                response = self.agent.run(context_text)
+                response_content = response.content if response else None
+            except Exception as agent_error:
+                print(f"❌ Agent run error: {agent_error}")
+                response_content = None
 
-        return {
-            "response": response.content if response else "Não encontrei produções relevantes.",
-            "productions": found_productions,
-            "search_performed": search_enabled
-        }
+            # Fallback response if agent fails
+            if not response_content:
+                if found_productions:
+                    response_content = f"Eae parceiro! Encontrei algumas produções massa aqui: {', '.join([p['titulo'] for p in found_productions[:3]])}. Dá uma olhada!"
+                else:
+                    response_content = "Eae parceiro! Sou a Deronas do Bitaca Cinema. Como posso te ajudar?"
+
+            return {
+                "response": response_content,
+                "productions": found_productions,
+                "search_performed": search_enabled
+            }
+
+        except Exception as e:
+            print(f"❌ Discovery agent error: {e}")
+            # Return fallback response
+            return {
+                "response": "Eae parceiro! Sou a Deronas do Bitaca Cinema. Como posso te ajudar?",
+                "productions": [],
+                "search_performed": False
+            }
 
     async def recommend_similar(self, production_title: str) -> Dict[str, Any]:
         """
