@@ -64,6 +64,7 @@ Complete technical architecture of the Bitaca Cinema voting system.
 ```
 
 **Flow Diagram:**
+
 ```
 User Action
     │
@@ -116,6 +117,7 @@ UI Update
 ```
 
 **Question Generation Flow:**
+
 ```
 filmesData (23 films)
     │
@@ -137,6 +139,7 @@ Return Quiz
 ```
 
 **Quiz Validation Flow:**
+
 ```
 User Answers
     │
@@ -189,6 +192,7 @@ Firestore: users/{userId}
 ```
 
 **Vote Submission Flow (Transaction):**
+
 ```
 submitVote(filmId, rating)
     │
@@ -219,6 +223,7 @@ Success / Error
 ```
 
 **Real-time Updates:**
+
 ```
 listenToFilmVotes(filmId, callback)
     │
@@ -587,6 +592,7 @@ Firebase Console
 ## Technical Decisions
 
 ### Why Firebase?
+
 - ✅ Real-time updates out of the box
 - ✅ Automatic scaling
 - ✅ Built-in authentication
@@ -594,18 +600,21 @@ Firebase Console
 - ✅ No server management
 
 ### Why Singleton Pattern?
+
 - ✅ Single source of truth
 - ✅ Consistent state across app
 - ✅ Easy to test and mock
 - ✅ Prevents multiple Firebase init
 
 ### Why Transactions?
+
 - ✅ Atomic vote + stats update
 - ✅ Prevents race conditions
 - ✅ Data consistency guaranteed
 - ✅ Rollback on failure
 
 ### Why Client-Side Quiz?
+
 - ✅ Zero latency
 - ✅ No server costs
 - ✅ Dynamic from film data
@@ -614,6 +623,7 @@ Firebase Console
 ## Summary
 
 The voting system architecture is:
+
 - **Modular**: Clear separation of concerns
 - **Scalable**: Firebase handles growth automatically
 - **Secure**: Comprehensive security rules

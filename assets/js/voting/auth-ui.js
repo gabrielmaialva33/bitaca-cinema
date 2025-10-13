@@ -3,8 +3,16 @@
 // Firebase Authentication Modal & User Management
 // ===============================================
 
-import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { app } from '../firebase-config.js';
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import {app} from '../firebase-config.js';
 
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();

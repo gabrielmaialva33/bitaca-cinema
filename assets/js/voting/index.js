@@ -3,9 +3,9 @@
 // Initialize and Coordinate All Voting Components
 // ===============================================
 
-import { initAuthUI, openAuthModal, isUserAuthenticated, getCurrentUser } from './auth-ui.js';
-import { initQuizUI, openQuizModal, checkQuizStatus } from './quiz-ui.js';
-import { initVotingUI, openVotingModal } from './vote-ui.js';
+import {getCurrentUser, initAuthUI, isUserAuthenticated, openAuthModal} from './auth-ui.js';
+import {checkQuizStatus, initQuizUI, openQuizModal} from './quiz-ui.js';
+import {initVotingUI, openVotingModal} from './vote-ui.js';
 
 // ===== INIT VOTING SYSTEM =====
 export function initVotingSystem() {

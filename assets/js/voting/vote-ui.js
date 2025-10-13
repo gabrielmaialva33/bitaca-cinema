@@ -3,9 +3,19 @@
 // Film Voting Interface with Star Ratings
 // ===============================================
 
-import { getFirestore, doc, setDoc, getDoc, collection, query, where, getDocs, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-import { app } from '../firebase-config.js';
-import { getCurrentUser } from './auth-ui.js';
+import {
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    getFirestore,
+    query,
+    setDoc,
+    updateDoc,
+    where
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import {app} from '../firebase-config.js';
+import {getCurrentUser} from './auth-ui.js';
 
 const db = getFirestore(app);
 

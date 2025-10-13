@@ -3,9 +3,9 @@
 // Knowledge Quiz for Voting Access
 // ===============================================
 
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-import { app } from '../firebase-config.js';
-import { getCurrentUser } from './auth-ui.js';
+import {doc, getDoc, getFirestore, setDoc} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import {app} from '../firebase-config.js';
+import {getCurrentUser} from './auth-ui.js';
 
 const db = getFirestore(app);
 

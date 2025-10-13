@@ -450,7 +450,8 @@ class VotingSystem {
     on(event, callback) {
         if (!this.eventCallbacks[event]) {
             console.warn(`Unknown event: ${event}`);
-            return () => {};
+            return () => {
+            };
         }
 
         this.eventCallbacks[event].push(callback);

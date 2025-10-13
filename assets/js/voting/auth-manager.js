@@ -4,15 +4,15 @@
 // ===============================================
 
 import {
-    getAuth,
-    signInWithPopup,
-    GoogleAuthProvider,
-    signInWithEmailAndPassword,
+    browserLocalPersistence,
     createUserWithEmailAndPassword,
-    signOut,
+    getAuth,
+    GoogleAuthProvider,
     onAuthStateChanged,
     setPersistence,
-    browserLocalPersistence
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 import {app} from '../firebase-config.js';

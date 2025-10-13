@@ -4,16 +4,15 @@
 // ===============================================
 
 import {
-    getFirestore,
     doc,
     getDoc,
+    getFirestore,
+    serverTimestamp,
     setDoc,
-    updateDoc,
-    serverTimestamp
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 import {app} from '../firebase-config.js';
-import authManager from './auth-manager.js';
 
 /**
  * @typedef {Object} QuizQuestion

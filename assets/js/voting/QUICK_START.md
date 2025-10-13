@@ -23,88 +23,88 @@ Add this to your HTML page:
     <title>Bitaca Cinema - Votação</title>
 </head>
 <body>
-    <!-- Auth Button -->
-    <button id="login-btn">Entrar para Votar</button>
-    <div id="user-info" style="display: none;">
-        <span id="user-name"></span>
-        <button id="logout-btn">Sair</button>
-    </div>
+<!-- Auth Button -->
+<button id="login-btn">Entrar para Votar</button>
+<div id="user-info" style="display: none;">
+    <span id="user-name"></span>
+    <button id="logout-btn">Sair</button>
+</div>
 
-    <!-- Quiz Section -->
-    <div id="quiz-section" style="display: none;">
-        <h2>Complete o Quiz para Votar</h2>
-        <div id="quiz-container"></div>
-        <button id="submit-quiz-btn">Enviar Respostas</button>
-    </div>
+<!-- Quiz Section -->
+<div id="quiz-section" style="display: none;">
+    <h2>Complete o Quiz para Votar</h2>
+    <div id="quiz-container"></div>
+    <button id="submit-quiz-btn">Enviar Respostas</button>
+</div>
 
-    <!-- Voting Section -->
-    <div id="voting-section" style="display: none;">
-        <h2>Vote nos Filmes</h2>
-        <div id="films-list"></div>
-    </div>
+<!-- Voting Section -->
+<div id="voting-section" style="display: none;">
+    <h2>Vote nos Filmes</h2>
+    <div id="films-list"></div>
+</div>
 
-    <!-- Import Voting System -->
-    <script type="module">
-        import votingSystem from './assets/js/voting/voting-system.js';
+<!-- Import Voting System -->
+<script type="module">
+    import votingSystem from './assets/js/voting/voting-system.js';
 
-        // Initialize
-        await votingSystem.initialize();
+    // Initialize
+    await votingSystem.initialize();
 
-        // Setup event listeners
-        setupUI();
+    // Setup event listeners
+    setupUI();
 
-        function setupUI() {
-            // Auth state
-            votingSystem.on('onAuthStateChange', (user) => {
-                if (user) {
-                    document.getElementById('login-btn').style.display = 'none';
-                    document.getElementById('user-info').style.display = 'block';
-                    document.getElementById('user-name').textContent = user.email;
-                } else {
-                    document.getElementById('login-btn').style.display = 'block';
-                    document.getElementById('user-info').style.display = 'none';
-                }
-            });
+    function setupUI() {
+        // Auth state
+        votingSystem.on('onAuthStateChange', (user) => {
+            if (user) {
+                document.getElementById('login-btn').style.display = 'none';
+                document.getElementById('user-info').style.display = 'block';
+                document.getElementById('user-name').textContent = user.email;
+            } else {
+                document.getElementById('login-btn').style.display = 'block';
+                document.getElementById('user-info').style.display = 'none';
+            }
+        });
 
-            // Quiz status
-            votingSystem.on('onQuizStatusChange', (passed) => {
-                if (passed) {
-                    document.getElementById('quiz-section').style.display = 'none';
-                    document.getElementById('voting-section').style.display = 'block';
-                    loadFilms();
-                } else {
-                    document.getElementById('quiz-section').style.display = 'block';
-                    showQuiz();
-                }
-            });
+        // Quiz status
+        votingSystem.on('onQuizStatusChange', (passed) => {
+            if (passed) {
+                document.getElementById('quiz-section').style.display = 'none';
+                document.getElementById('voting-section').style.display = 'block';
+                loadFilms();
+            } else {
+                document.getElementById('quiz-section').style.display = 'block';
+                showQuiz();
+            }
+        });
 
-            // Login button
-            document.getElementById('login-btn').addEventListener('click', async () => {
-                try {
-                    await votingSystem.signInWithGoogle();
-                } catch (error) {
-                    alert(error.message);
-                }
-            });
+        // Login button
+        document.getElementById('login-btn').addEventListener('click', async () => {
+            try {
+                await votingSystem.signInWithGoogle();
+            } catch (error) {
+                alert(error.message);
+            }
+        });
 
-            // Logout button
-            document.getElementById('logout-btn').addEventListener('click', async () => {
-                await votingSystem.logout();
-            });
+        // Logout button
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            await votingSystem.logout();
+        });
 
-            // Submit quiz button
-            document.getElementById('submit-quiz-btn').addEventListener('click', submitQuiz);
-        }
+        // Submit quiz button
+        document.getElementById('submit-quiz-btn').addEventListener('click', submitQuiz);
+    }
 
-        // Quiz functions
-        let currentQuiz = null;
-        let userAnswers = [];
+    // Quiz functions
+    let currentQuiz = null;
+    let userAnswers = [];
 
-        function showQuiz() {
-            currentQuiz = votingSystem.generateQuiz();
-            const container = document.getElementById('quiz-container');
+    function showQuiz() {
+        currentQuiz = votingSystem.generateQuiz();
+        const container = document.getElementById('quiz-container');
 
-            container.innerHTML = currentQuiz.map((q, qIndex) => `
+        container.innerHTML = currentQuiz.map((q, qIndex) => `
                 <div class="quiz-question">
                     <h3>${qIndex + 1}. ${q.question}</h3>
                     ${q.options.map((option, oIndex) => `
@@ -115,66 +115,66 @@ Add this to your HTML page:
                     `).join('')}
                 </div>
             `).join('');
-        }
+    }
 
-        async function submitQuiz() {
-            userAnswers = currentQuiz.map((q, i) => {
-                const selected = document.querySelector(`input[name="q${i}"]:checked`);
-                return selected ? parseInt(selected.value) : -1;
-            });
+    async function submitQuiz() {
+        userAnswers = currentQuiz.map((q, i) => {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            return selected ? parseInt(selected.value) : -1;
+        });
 
-            try {
-                const result = await votingSystem.submitQuiz(currentQuiz, userAnswers);
-                if (result.passed) {
-                    alert(`Parabéns! Você acertou ${result.score}/${result.total} questões!`);
-                } else {
-                    alert(`Você acertou ${result.score}/${result.total}. Tente novamente!`);
-                    showQuiz();
-                }
-            } catch (error) {
-                alert(error.message);
+        try {
+            const result = await votingSystem.submitQuiz(currentQuiz, userAnswers);
+            if (result.passed) {
+                alert(`Parabéns! Você acertou ${result.score}/${result.total} questões!`);
+            } else {
+                alert(`Você acertou ${result.score}/${result.total}. Tente novamente!`);
+                showQuiz();
             }
+        } catch (error) {
+            alert(error.message);
         }
+    }
 
-        // Voting functions
-        async function loadFilms() {
-            const films = window.filmesData || [];
-            const statsMap = await votingSystem.getAllFilmStats();
-            const container = document.getElementById('films-list');
+    // Voting functions
+    async function loadFilms() {
+        const films = window.filmesData || [];
+        const statsMap = await votingSystem.getAllFilmStats();
+        const container = document.getElementById('films-list');
 
-            container.innerHTML = films.map(film => {
-                const stats = statsMap.get(film.id) || {voteCount: 0, averageRating: 0};
-                return `
+        container.innerHTML = films.map(film => {
+            const stats = statsMap.get(film.id) || {voteCount: 0, averageRating: 0};
+            return `
                     <div class="film-card" data-film-id="${film.id}">
                         <h3>${film.titulo}</h3>
                         <p>${film.diretor}</p>
                         <p>⭐ ${stats.averageRating.toFixed(1)} (${stats.voteCount} votos)</p>
                         <div class="rating-stars">
-                            ${[1,2,3,4,5].map(star =>
-                                `<button class="star-btn" data-rating="${star}">⭐</button>`
-                            ).join('')}
+                            ${[1, 2, 3, 4, 5].map(star =>
+                    `<button class="star-btn" data-rating="${star}">⭐</button>`
+            ).join('')}
                         </div>
                     </div>
                 `;
-            }).join('');
+        }).join('');
 
-            // Add vote handlers
-            document.querySelectorAll('.star-btn').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const rating = parseInt(e.target.dataset.rating);
-                    const filmId = parseInt(e.target.closest('.film-card').dataset.filmId);
+        // Add vote handlers
+        document.querySelectorAll('.star-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const rating = parseInt(e.target.dataset.rating);
+                const filmId = parseInt(e.target.closest('.film-card').dataset.filmId);
 
-                    try {
-                        await votingSystem.submitVote(filmId, rating);
-                        alert('Voto registrado com sucesso!');
-                        loadFilms(); // Reload to show updated stats
-                    } catch (error) {
-                        alert(error.message);
-                    }
-                });
+                try {
+                    await votingSystem.submitVote(filmId, rating);
+                    alert('Voto registrado com sucesso!');
+                    loadFilms(); // Reload to show updated stats
+                } catch (error) {
+                    alert(error.message);
+                }
             });
-        }
-    </script>
+        });
+    }
+</script>
 </body>
 </html>
 ```
@@ -182,6 +182,7 @@ Add this to your HTML page:
 ## 3. Common Operations
 
 ### Check if user can vote
+
 ```javascript
 const eligibility = votingSystem.canVote();
 if (eligibility.canVote) {
@@ -192,6 +193,7 @@ if (eligibility.canVote) {
 ```
 
 ### Get film statistics
+
 ```javascript
 const stats = await votingSystem.getFilmStats(filmId);
 console.log(`Votes: ${stats.voteCount}`);
@@ -199,6 +201,7 @@ console.log(`Rating: ${stats.averageRating}`);
 ```
 
 ### Check if user already voted
+
 ```javascript
 const hasVoted = await votingSystem.hasVotedForFilm(filmId);
 if (hasVoted) {
@@ -208,6 +211,7 @@ if (hasVoted) {
 ```
 
 ### Real-time updates
+
 ```javascript
 const unsubscribe = votingSystem.listenToFilmVotes(filmId, (stats) => {
     updateUI(stats);
@@ -218,6 +222,7 @@ unsubscribe();
 ```
 
 ### Get top rated films
+
 ```javascript
 const topFilms = await votingSystem.getTopRatedFilms(10);
 topFilms.forEach(film => {
@@ -287,19 +292,25 @@ console.log(stats);
 ## 6. Troubleshooting
 
 ### "Você precisa completar o quiz antes de votar"
+
 User needs to pass the quiz first. Show quiz UI.
 
 ### "Você já votou neste filme"
+
 User already voted for this film. Show their existing vote.
 
 ### "Usuário não autenticado"
+
 User needs to sign in first. Show login UI.
 
 ### Pop-up blocked error
+
 Ask user to allow pop-ups for Google Sign-In.
 
 ### Security rules error
+
 Deploy the Firestore security rules:
+
 ```bash
 firebase deploy --only firestore:rules
 ```
@@ -319,6 +330,7 @@ firebase deploy --only firestore:rules
 ## 8. Monitoring
 
 Check Firebase Console:
+
 - **Authentication**: https://console.firebase.google.com/project/abitaca-8451c/authentication
 - **Firestore**: https://console.firebase.google.com/project/abitaca-8451c/firestore
 - **Analytics**: https://console.firebase.google.com/project/abitaca-8451c/analytics
@@ -326,6 +338,7 @@ Check Firebase Console:
 ## 9. Support
 
 See full documentation:
+
 - `/assets/js/voting/README.md` - Complete API documentation
 - `/assets/js/voting/example-integration.js` - Full integration example
 - `/VOTING_SYSTEM_IMPLEMENTATION.md` - Technical implementation details
