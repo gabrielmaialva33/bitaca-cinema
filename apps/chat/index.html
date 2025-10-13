@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#C41E3A">
+    <title>Bitaca AI Chat - NVIDIA Models Playground</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Staatliches&display=swap" rel="stylesheet">
+
+    <!-- KeenIcons -->
+    <link href="../play/assets/vendors/keenicons/styles.bundle.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="assets/css/chat.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="chat-header">
+        <div class="header-container">
+            <div class="header-left">
+                <svg class="logo" viewBox="0 0 200 80" width="50" height="50">
+                    <polygon fill="#C41E3A" points="100,10 120,25 120,40 80,40 80,25" stroke="#0A0A0A" stroke-width="2"/>
+                    <rect fill="#8B4513" width="8" height="12" x="90" y="28"/>
+                    <rect fill="#8B4513" width="8" height="12" x="105" y="28"/>
+                    <path d="M 70,30 Q 65,25 70,20" fill="none" stroke="#2D5016" stroke-width="3"/>
+                    <path d="M 130,30 Q 135,25 130,20" fill="none" stroke="#2D5016" stroke-width="3"/>
+                    <text fill="#C41E3A" font-family="Staatliches" font-size="28" font-weight="bold" x="40" y="65">BITACA</text>
+                </svg>
+                <div class="header-title">
+                    <h1>AI Chat</h1>
+                    <p>Powered by NVIDIA</p>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button class="btn-icon" id="model-selector-btn" title="Selecionar Modelo">
+                    <i class="ki-filled ki-technology-2"></i>
+                </button>
+                <button class="btn-icon" id="history-btn" title="Histórico">
+                    <i class="ki-filled ki-time"></i>
+                </button>
+                <button class="btn-icon" id="settings-btn" title="Configurações">
+                    <i class="ki-filled ki-setting-2"></i>
+                </button>
+                <div class="user-avatar" id="user-avatar">
+                    <i class="ki-filled ki-profile-circle"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Conversas</h2>
+                <button class="btn-icon" id="new-chat-btn" title="Nova Conversa">
+                    <i class="ki-filled ki-plus"></i>
+                </button>
+            </div>
+
+            <div class="conversations-list" id="conversations-list">
+                <!-- Conversations will be loaded here -->
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="btn-secondary" id="logout-btn">
+                    <i class="ki-filled ki-exit-right"></i>
+                    Sair
+                </button>
+            </div>
+        </aside>
+
+        <!-- Chat Area -->
+        <main class="chat-area">
+            <!-- Model Selector Bar -->
+            <div class="model-bar">
+                <div class="model-info">
+                    <i class="ki-filled ki-technology-2"></i>
+                    <span id="current-model-name">Meta Llama 3.3 70B</span>
+                </div>
+                <button class="btn-change-model" id="change-model-btn">
+                    Trocar Modelo
+                </button>
+            </div>
+
+            <!-- Messages Container -->
+            <div class="messages-container" id="messages-container">
+                <div class="welcome-screen" id="welcome-screen">
+                    <div class="welcome-icon">
+                        <i class="ki-filled ki-message-text-2"></i>
+                    </div>
+                    <h2>Bem-vindo ao Bitaca AI Chat</h2>
+                    <p>Converse com os melhores modelos de IA da NVIDIA</p>
+                    <div class="quick-prompts">
+                        <button class="quick-prompt" data-prompt="Explique o que é inteligência artificial de forma simples">
+                            <i class="ki-filled ki-information"></i>
+                            O que é IA?
+                        </button>
+                        <button class="quick-prompt" data-prompt="Me ajude a escrever um código Python para analisar dados">
+                            <i class="ki-filled ki-code"></i>
+                            Ajuda com código
+                        </button>
+                        <button class="quick-prompt" data-prompt="Sugira ideias criativas para um projeto de cinema">
+                            <i class="ki-filled ki-technology-4"></i>
+                            Ideias criativas
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-container">
+                    <button class="btn-icon" id="attach-btn" title="Anexar arquivo">
+                        <i class="ki-filled ki-file-up"></i>
+                    </button>
+                    <textarea
+                        id="message-input"
+                        placeholder="Digite sua mensagem..."
+                        rows="1"
+                        maxlength="4000"
+                    ></textarea>
+                    <button class="btn-send" id="send-btn" disabled>
+                        <i class="ki-filled ki-send"></i>
+                    </button>
+                </div>
+                <div class="input-footer">
+                    <span class="char-count"><span id="char-count">0</span>/4000</span>
+                    <span class="disclaimer">O AI pode cometer erros. Verifique informações importantes.</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Model Selector Modal -->
+    <div class="modal" id="model-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Selecionar Modelo</h2>
+                <button class="btn-close" data-modal="model">
+                    <i class="ki-filled ki-cross"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="models-grid" id="models-grid">
+                    <!-- Models will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settings-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Configurações</h2>
+                <button class="btn-close" data-modal="settings">
+                    <i class="ki-filled ki-cross"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3>Chave da API NVIDIA</h3>
+                    <p class="settings-description">Configure sua chave de API para usar os modelos da NVIDIA</p>
+                    <div class="input-group">
+                        <input
+                            type="password"
+                            id="api-key-input"
+                            placeholder="nvapi-xxxxxxxxxxxxxxxxxx"
+                            class="settings-input"
+                        >
+                        <button class="btn-primary" id="save-api-key-btn">Salvar</button>
+                    </div>
+                    <a href="https://build.nvidia.com/" target="_blank" class="link-external">
+                        <i class="ki-filled ki-arrow-up-right"></i>
+                        Obter chave da API
+                    </a>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Parâmetros do Modelo</h3>
+                    <div class="setting-item">
+                        <label for="temperature-slider">Temperature: <span id="temperature-value">0.7</span></label>
+                        <input type="range" id="temperature-slider" min="0" max="1" step="0.1" value="0.7">
+                    </div>
+                    <div class="setting-item">
+                        <label for="max-tokens-slider">Max Tokens: <span id="max-tokens-value">1024</span></label>
+                        <input type="range" id="max-tokens-slider" min="256" max="4096" step="256" value="1024">
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Interface</h3>
+                    <div class="setting-item">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="dark-mode-toggle" checked>
+                            <span>Modo Escuro</span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="sound-toggle" checked>
+                            <span>Sons de Notificação</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
+
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSkRy1LyKbBXvyvoOCZx5t0bIDldTityk",
+            authDomain: "abitaca-8451c.firebaseapp.com",
+            projectId: "abitaca-8451c",
+            storageBucket: "abitaca-8451c.firebasestorage.app",
+            messagingSenderId: "31455523643",
+            appId: "1:31455523643:web:3f8590a2e5181ee9ef3d1e",
+            measurementId: "G-3RHX80J2V7"
+        };
+
+        window.firebaseApp = initializeApp(firebaseConfig);
+    </script>
+
+    <!-- App Scripts -->
+    <script src="assets/js/nvidia-api.js" type="module"></script>
+    <script src="assets/js/firebase-chat.js" type="module"></script>
+    <script src="assets/js/chat-manager.js" type="module"></script>
+    <script src="assets/js/app.js" type="module"></script>
+</body>
+</html>
