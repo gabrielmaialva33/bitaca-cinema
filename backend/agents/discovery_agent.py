@@ -9,6 +9,7 @@ from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 
 from agents.tools.rag_tool import RAGTool
+from deronas_personality import DERONAS_SYSTEM_PROMPT
 
 
 class DiscoveryAgent:
