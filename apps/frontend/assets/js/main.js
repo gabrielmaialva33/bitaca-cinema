@@ -19,10 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initCharts();
     animateCounters();
 
-    // Initialize Voting System (loaded as ES6 module)
-    if (window.initVotingSystem) {
-        window.initVotingSystem();
-    }
+    // Voting System auto-initializes itself (see voting/index.js)
 });
 
 // ===== NAVEGAÇÃO =====
