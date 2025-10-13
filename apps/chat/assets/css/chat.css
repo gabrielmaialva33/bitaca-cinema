@@ -12,29 +12,29 @@
     --secondary-dark: #1F3810;
     --accent: #FFB700;
 
-    /* Backgrounds */
-    --bg-primary: #0A0A0A;
-    --bg-secondary: #1A1A1A;
-    --bg-tertiary: #2A2A2A;
-    --bg-hover: #333;
+    /* Backgrounds - Light Mode */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F5F5F5;
+    --bg-tertiary: #E8E8E8;
+    --bg-hover: #E0E0E0;
 
-    /* Text */
-    --text-primary: #F5DEB3;
-    --text-secondary: #A0A0A0;
-    --text-muted: #666;
+    /* Text - Light Mode */
+    --text-primary: #1A1A1A;
+    --text-secondary: #666666;
+    --text-muted: #999999;
 
-    /* Borders */
-    --border: #333;
-    --border-light: #444;
+    /* Borders - Light Mode */
+    --border: #E0E0E0;
+    --border-light: #F0F0F0;
 
     /* Fonts */
     --font-body: 'Inter', sans-serif;
     --font-display: 'Staatliches', sans-serif;
 
-    /* Shadows */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 8px 32px rgba(196, 30, 58, 0.3);
+    /* Shadows - Light Mode */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 32px rgba(196, 30, 58, 0.15);
 
     /* Spacing */
     --spacing-xs: 0.25rem;
