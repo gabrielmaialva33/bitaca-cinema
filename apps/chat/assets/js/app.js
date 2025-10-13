@@ -46,7 +46,7 @@ class BitacaChat {
      * Initialize application
      */
     async init() {
-        console.log('🎬 Bitaca AI Chat - Initializing...');
+        console.log('Bitaca AI Chat - Initializing...');
 
         // Show loading
         this.showLoading();
