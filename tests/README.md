@@ -1,41 +1,40 @@
-# Testes - Bitaca Cinema
+# 🧪 Bitaca Cinema - Test Suite
 
-## Setup
+## Quick Start
 
+### Run Core Avatar Tests (Fast - 18s)
 ```bash
-pnpm install
-pnpm playwright:install
+pnpm playwright test tests/e2e/avatar.spec.js --project="Desktop Chrome" \
+  --grep="should show avatar toggle button|should toggle avatar on and off|should create 3D scene"
 ```
 
-## Executar
-
-### Testes E2E Local
-
+### Run All Avatar Tests
 ```bash
-pnpm serve  # Terminal 1
-pnpm test:e2e  # Terminal 2
+pnpm playwright test tests/e2e/avatar.spec.js
 ```
 
-### Testes E2E Produção (GitHub Pages)
-
+### Run Backend TTS Tests
 ```bash
-pnpm test:e2e:production
+cd backend && pytest tests/test_tts.py -v
 ```
 
-### Testes com UI
+## Test Results
 
-```bash
-pnpm test:e2e:ui
-```
+✅ **Core Tests**: 3/3 passing (17.6s)
+- Avatar toggle button appears
+- Avatar enables/disables correctly  
+- 3D scene renders successfully
 
-## Cobertura
+📊 **Full Suite**: 15/21 passing
+- Desktop: 100% passing
+- Mobile: Some timeouts (under investigation)
 
-- Responsividade (Desktop, Tablet, Mobile)
-- Funcionalidade do Video Recorder
-- Performance (carregamento < 3s)
-- Screenshots automáticos em `tests/screenshots/`
+## Files
 
-## Tecnologias
+- `e2e/avatar.spec.js` - Avatar E2E tests (12 scenarios)
+- `backend/tests/test_tts.py` - TTS API tests (20 scenarios)
+- `TEST_RESULTS.md` - Detailed test report
 
-- Playwright - E2E testing
-- Jest - Unit testing (futuro)
+## Documentation
+
+See [TEST_RESULTS.md](../TEST_RESULTS.md) for complete test results and analysis.
