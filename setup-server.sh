@@ -66,13 +66,10 @@ cp -rf apps/backend/agents .
 cp -f apps/backend/requirements.txt .
 cp -f apps/frontend/assets/data/embeddings.json .
 
-# Prepare frontend files
-echo "📦 Preparing frontend files..."
-mkdir -p /var/www/bitaca-cinema
-cp -rf apps/frontend/*.html /var/www/bitaca-cinema/
-cp -rf apps/frontend/assets /var/www/bitaca-cinema/
-cp -f apps/frontend/robots.txt /var/www/bitaca-cinema/ 2>/dev/null || true
-cp -f apps/frontend/sitemap.xml /var/www/bitaca-cinema/ 2>/dev/null || true
+# Frontend via GitHub Pages proxy
+echo "📦 Frontend via GitHub Pages proxy - no files to copy"
+# www.abitaca.com.br proxies to https://gabrielmaialva33.github.io/bitaca-cinema/
+# This saves VPS resources and auto-updates!
 
 # Create necessary directories
 echo "📂 Creating directories..."
