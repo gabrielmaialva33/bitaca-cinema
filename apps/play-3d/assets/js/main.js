@@ -135,52 +135,30 @@ class BitacaPlay3D {
         this.pointerLockControls.isLocked = false;
     }
 
-    setupLights() {
-        // Ambient light
-        const ambientLight = new THREE.AmbientLight(0xF5DEB3, 0.4);
-        this.scene.add(ambientLight);
-
-        // Directional light (sun)
-        const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.8);
-        directionalLight.position.set(50, 50, 50);
-        directionalLight.castShadow = true;
-        directionalLight.shadow.mapSize.width = 2048;
-        directionalLight.shadow.mapSize.height = 2048;
-        directionalLight.shadow.camera.far = 200;
-        directionalLight.shadow.camera.left = -50;
-        directionalLight.shadow.camera.right = 50;
-        directionalLight.shadow.camera.top = 50;
-        directionalLight.shadow.camera.bottom = -50;
-        this.scene.add(directionalLight);
-
-        // Hemisphere light
-        const hemisphereLight = new THREE.HemisphereLight(0xFFE5B4, 0x080820, 0.5);
-        this.scene.add(hemisphereLight);
-
-        // Accent lights (Bitaca red)
-        const accentLight1 = new THREE.PointLight(0xC41E3A, 1, 30);
-        accentLight1.position.set(-10, 5, 0);
-        this.scene.add(accentLight1);
-
-        const accentLight2 = new THREE.PointLight(0xC41E3A, 1, 30);
-        accentLight2.position.set(10, 5, 0);
-        this.scene.add(accentLight2);
+    /**
+     * Setup cinematic lighting system with HDR and 3-point lighting
+     */
+    async setupCinematicLighting() {
+        this.cinematicLighting = new CinematicLighting(this.scene, this.renderer);
+        await this.cinematicLighting.init();
+        console.log('✅ Cinematic lighting system ready');
     }
 
     setupEnvironment() {
-        // Ground plane
+        // Ground plane with physically-based material
         const groundGeometry = new THREE.PlaneGeometry(200, 200);
         const groundMaterial = new THREE.MeshStandardMaterial({
             color: 0x1A1A1A,
-            roughness: 0.8,
-            metalness: 0.2
+            roughness: 0.85,
+            metalness: 0.15,
+            envMapIntensity: 0.8
         });
         const ground = new THREE.Mesh(groundGeometry, groundMaterial);
         ground.rotation.x = -Math.PI / 2;
         ground.receiveShadow = true;
         this.scene.add(ground);
 
-        // Grid helper
+        // Grid helper with brand color
         const gridHelper = new THREE.GridHelper(200, 50, 0xC41E3A, 0x2A2A2A);
         gridHelper.material.opacity = 0.2;
         gridHelper.material.transparent = true;
@@ -354,6 +332,11 @@ class BitacaPlay3D {
             this.currentWorldInstance.unload();
         }
 
+        // Transition cinematic lighting to match new world
+        if (this.cinematicLighting) {
+            this.cinematicLighting.transitionToPreset(worldName);
+        }
+
         // Load new world
         this.currentWorldInstance = this.worlds[worldName];
         if (this.currentWorldInstance) {
@@ -444,10 +427,21 @@ Navegação:
 • E - Interagir com objetos
 • ESC - Abrir menu
 
+Post-Processing:
+• Shift + P - Toggle post-processing ON/OFF
+• Shift + Q - Cycle quality (LOW/MED/HIGH)
+
+Sistema de Iluminação:
+• Iluminação cinematográfica 3-point (key, fill, rim)
+• HDR environment maps para reflexões realistas
+• Iluminação específica para cada mundo temático
+• Physically-based rendering (PBR)
+
 Dicas:
 • Clique nos portais para entrar nos mundos temáticos
 • Aproxime-se dos cartões de filmes para ver detalhes
 • Chame a Derona para ajuda e recomendações
+• Cada mundo tem iluminação e atmosfera únicas!
 
 Divirta-se explorando o universo Bitaca! 🎬✨`);
     }
@@ -557,4 +551,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Expose to window for debugging
     window.bitacaPlay3D = app;
+    window.LightingPresets = LightingPresets;
+
+    console.log('💡 Cinematic lighting system ready!');
+    console.log('🎨 Available presets:', Object.keys(LightingPresets));
+    console.log('🎬 Production-quality rendering enabled!');
 });
