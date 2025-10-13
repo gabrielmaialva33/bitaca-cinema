@@ -14,6 +14,7 @@ import { PatrimonioWorld } from './scenes/patrimonio-world.js';
 import { MusicaWorld } from './scenes/musica-world.js';
 import { AmbienteWorld } from './scenes/ambiente-world.js';
 import { PostProcessingManager } from './post-processing.js';
+import { CinematicLighting, LightingPresets } from './cinematic-lighting.js';
 
 console.log('🎮 Bitaca Play 3D initializing...');
 
@@ -39,6 +40,7 @@ class BitacaPlay3D {
         this.camera = null;
         this.renderer = null;
         this.postProcessing = null;
+        this.cinematicLighting = null;
         this.controls = null;
         this.pointerLockControls = null;
         this.clock = new THREE.Clock();
@@ -53,15 +55,15 @@ class BitacaPlay3D {
         this.init();
     }
 
-    init() {
+    async init() {
         console.log('🎬 Initializing Three.js scene...');
         this.setupScene();
         this.setupCamera();
         this.setupRenderer();
         this.setupPostProcessing();
         this.setupControls();
-        this.setupLights();
         this.setupEnvironment();
+        await this.setupCinematicLighting();
         this.setupEventListeners();
         this.loadAssets();
         this.animate();
@@ -87,14 +89,27 @@ class BitacaPlay3D {
         this.renderer = new THREE.WebGLRenderer({
             canvas: this.canvas,
             antialias: false, // FXAA will handle anti-aliasing
-            alpha: false
+            alpha: false,
+            powerPreference: 'high-performance'
         });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Shadow configuration
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+        // Physically-based lighting
+        this.renderer.physicallyCorrectLights = true;
+
+        // Tone mapping for cinematic look
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
         this.renderer.toneMappingExposure = 1.2;
+
+        // Output encoding for accurate colors
+        this.renderer.outputEncoding = THREE.sRGBEncoding;
+
+        console.log('✅ Renderer configured with physically correct lights');
     }
 
     setupPostProcessing() {
