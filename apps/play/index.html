@@ -398,23 +398,37 @@
 
 <!-- Auth & Protection -->
 <script type="module">
-    import { AuthManager } from './assets/js/auth.js';
+    import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
     import { AnimeZeyAPI } from './assets/js/animezey-api.js';
 
-    // Initialize Auth
-    const auth = new AuthManager();
+    const auth = getAuth(window.firebaseApp);
 
-    // Require authentication (wait for Firebase to initialize)
-    await auth.requireAuth();
+    // Check authentication
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            // Not logged in, redirect to login with current page as redirect parameter
+            const currentUrl = window.location.pathname + window.location.search;
+            window.location.href = '/login.html?redirect=' + encodeURIComponent(currentUrl);
+        } else {
+            console.log('User logged in:', user.email);
+            // User is authenticated, initialize app
+            window.bitacaUser = user;
+        }
+    });
 
-    // Make auth available globally
-    window.bitacaAuth = auth;
+    // Initialize AnimeZey API
     window.animezeyAPI = new AnimeZeyAPI();
 
     // Logout button
     document.getElementById('logout-btn')?.addEventListener('click', async () => {
         if (confirm('Deseja realmente sair?')) {
-            await auth.signOutUser();
+            try {
+                await signOut(auth);
+                window.location.href = '/login.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                alert('Erro ao sair. Tente novamente.');
+            }
         }
     });
 </script>
