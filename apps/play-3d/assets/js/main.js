@@ -13,6 +13,7 @@ import { DeronaAvatar } from './components/derona-avatar.js';
 import { PatrimonioWorld } from './scenes/patrimonio-world.js';
 import { MusicaWorld } from './scenes/musica-world.js';
 import { AmbienteWorld } from './scenes/ambiente-world.js';
+import { PostProcessingManager } from './post-processing.js';
 
 console.log('🎮 Bitaca Play 3D initializing...');
 
@@ -37,6 +38,7 @@ class BitacaPlay3D {
         this.scene = null;
         this.camera = null;
         this.renderer = null;
+        this.postProcessing = null;
         this.controls = null;
         this.pointerLockControls = null;
         this.clock = new THREE.Clock();
@@ -56,6 +58,7 @@ class BitacaPlay3D {
         this.setupScene();
         this.setupCamera();
         this.setupRenderer();
+        this.setupPostProcessing();
         this.setupControls();
         this.setupLights();
         this.setupEnvironment();
@@ -83,7 +86,7 @@ class BitacaPlay3D {
     setupRenderer() {
         this.renderer = new THREE.WebGLRenderer({
             canvas: this.canvas,
-            antialias: true,
+            antialias: false, // FXAA will handle anti-aliasing
             alpha: false
         });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -92,6 +95,15 @@ class BitacaPlay3D {
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
         this.renderer.toneMappingExposure = 1.2;
+    }
+
+    setupPostProcessing() {
+        this.postProcessing = new PostProcessingManager(
+            this.renderer,
+            this.scene,
+            this.camera
+        );
+        console.log('✅ Post-processing pipeline ready');
     }
 
     setupControls() {
@@ -213,6 +225,61 @@ class BitacaPlay3D {
         document.getElementById('btn-close-card').addEventListener('click', () => {
             this.closeProductionCard();
         });
+
+        // Post-processing UI
+        this.setupPostProcessingUI();
+    }
+
+    setupPostProcessingUI() {
+        // Add keyboard shortcut for toggling effects
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'KeyP' && e.shiftKey) {
+                this.postProcessing.setEnabled(!this.postProcessing.enabled);
+                this.showNotification(
+                    `Post-processing ${this.postProcessing.enabled ? 'ON' : 'OFF'}`
+                );
+            }
+            if (e.code === 'KeyQ' && e.shiftKey) {
+                const qualities = ['low', 'medium', 'high'];
+                const currentIndex = qualities.indexOf(this.postProcessing.currentQuality);
+                const nextQuality = qualities[(currentIndex + 1) % qualities.length];
+                this.postProcessing.setQuality(nextQuality);
+                this.showNotification(`Quality: ${nextQuality.toUpperCase()}`);
+            }
+        });
+
+        // Log current state every 5 seconds (debug)
+        setInterval(() => {
+            const state = this.postProcessing.getState();
+            console.log('📊 Post-processing state:', state);
+        }, 5000);
+    }
+
+    showNotification(message) {
+        // Simple notification system
+        const notification = document.createElement('div');
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(196, 30, 58, 0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: 'Barlow', sans-serif;
+            font-weight: 600;
+            z-index: 10000;
+            animation: slideDown 0.3s ease-out;
+        `;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.animation = 'slideUp 0.3s ease-in';
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
     }
 
     async loadAssets() {
@@ -277,6 +344,11 @@ class BitacaPlay3D {
         if (this.currentWorldInstance) {
             this.currentWorldInstance.load();
             AppState.currentWorld = worldName;
+
+            // Apply world-specific post-processing
+            if (this.postProcessing) {
+                this.postProcessing.applyWorldConfig(worldName);
+            }
 
             // Show Derona
             setTimeout(() => {
@@ -424,6 +496,11 @@ Divirta-se explorando o universo Bitaca! 🎬✨`);
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // Update post-processing
+        if (this.postProcessing) {
+            this.postProcessing.onWindowResize(window.innerWidth, window.innerHeight);
+        }
     }
 
     animate() {
@@ -447,8 +524,12 @@ Divirta-se explorando o universo Bitaca! 🎬✨`);
             this.derona.update(delta);
         }
 
-        // Render
-        this.renderer.render(this.scene, this.camera);
+        // Render with post-processing
+        if (this.postProcessing) {
+            this.postProcessing.render(delta);
+        } else {
+            this.renderer.render(this.scene, this.camera);
+        }
     }
 }
 

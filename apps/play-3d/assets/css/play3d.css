@@ -815,6 +815,80 @@ kbd {
 }
 
 /* ========================================
+   POST-PROCESSING NOTIFICATIONS
+   ======================================== */
+@keyframes slideDown {
+    from {
+        transform: translate(-50%, -100%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+    to {
+        transform: translate(-50%, -100%);
+        opacity: 0;
+    }
+}
+
+/* Post-processing debug panel (optional) */
+.pp-debug-panel {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: rgba(10, 10, 10, 0.9);
+    border: 2px solid rgba(196, 30, 58, 0.5);
+    border-radius: 10px;
+    padding: 1rem;
+    color: #F5DEB3;
+    font-family: monospace;
+    font-size: 0.85rem;
+    min-width: 200px;
+    backdrop-filter: blur(10px);
+}
+
+.pp-debug-panel h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: #C41E3A;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(245, 222, 179, 0.2);
+    padding-bottom: 0.3rem;
+}
+
+.pp-debug-panel .stat {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.3rem 0;
+    padding: 0.2rem 0;
+}
+
+.pp-debug-panel .stat-label {
+    color: rgba(245, 222, 179, 0.7);
+}
+
+.pp-debug-panel .stat-value {
+    color: #7FB539;
+    font-weight: bold;
+}
+
+.pp-debug-panel .stat-value.warning {
+    color: #FFB347;
+}
+
+.pp-debug-panel .stat-value.error {
+    color: #C41E3A;
+}
+
+/* ========================================
    RESPONSIVE
    ======================================== */
 @media (max-width: 768px) {
