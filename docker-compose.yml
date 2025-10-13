@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # Backend API (NVIDIA NIM + AI Agents)
   api:
     build:
       context: .
@@ -29,6 +30,32 @@ services:
       - "com.abitaca.project=bitaca-cinema"
       - "com.abitaca.service=api"
 
+  # Streaming Bridge (Telegram Video Proxy)
+  streaming-bridge:
+    build:
+      context: ./apps/play-3d-streaming-bridge
+      dockerfile: Dockerfile
+    container_name: bitaca-streaming-bridge
+    restart: unless-stopped
+    environment:
+      - STREAM_API_URL=http://localhost:8000
+      - PORT=8001
+      - CORS_ORIGINS=https://play.abitaca.com.br,https://abitaca.com.br
+    ports:
+      - "8001:8001"
+    networks:
+      - bitaca-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8001/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    labels:
+      - "com.abitaca.project=bitaca-cinema"
+      - "com.abitaca.service=streaming-bridge"
+    depends_on:
+      - api
 
 networks:
   bitaca-network:
