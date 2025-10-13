@@ -549,7 +549,7 @@ body {
 .btn-send {
     background: var(--primary);
     border: none;
-    color: var(--text-primary);
+    color: #FFFFFF;
     width: 40px;
     height: 40px;
     border-radius: 8px;
@@ -700,7 +700,7 @@ body {
 .model-badge {
     padding: 0.25rem 0.5rem;
     background: var(--secondary);
-    color: var(--text-primary);
+    color: #FFFFFF;
     border-radius: 4px;
     font-size: 0.75rem;
     font-weight: 600;
@@ -760,7 +760,7 @@ body {
     padding: var(--spacing-md) var(--spacing-lg);
     background: var(--primary);
     border: none;
-    color: var(--text-primary);
+    color: #FFFFFF;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
