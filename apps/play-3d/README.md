@@ -1,29 +1,29 @@
-# 🎮 Bitaca Play 3D
+# Bitaca Play 3D
 
 Experiência interativa 3D para explorar o universo cultural de Capão Bonito/SP.
 
-## 📐 Visão Geral
+## Visão Geral
 
 Bitaca Play 3D é uma aplicação web imersiva construída com **Three.js** que transforma o catálogo de produções audiovisuais em uma experiência 3D navegável. Os usuários podem explorar 3 mundos temáticos, interagir com a avatar Derona (guia com IA), e descobrir produções de forma visual e interativa.
 
-## 🌍 Mundos Temáticos
+## Mundos Temáticos
 
-### 1. **Patrimônio & Memória** 🏛️
+### 1. **Patrimônio & Memória**
 - Ambiente estilo museu/galeria
 - 9 produções sobre história, gastronomia e memória cultural
 - Elementos interativos: pilares dourados, portais, cards 3D
 
-### 2. **Música** 🎸
+### 2. **Música**
 - Ambiente de palco/show
 - 8 produções musicais (viola, choro, rock, hip-hop)
 - Elementos: instrumentos 3D, palco, luzes dinâmicas
 
-### 3. **Meio Ambiente** 🌳
+### 3. **Meio Ambiente**
 - Ambiente natural/urbano
 - 7 produções sobre natureza e sustentabilidade
 - Elementos: floresta, cidade, ecossistema
 
-## 🛠️ Stack Técnico
+## Stack Técnico
 
 ```javascript
 {
@@ -39,7 +39,7 @@ Bitaca Play 3D é uma aplicação web imersiva construída com **Three.js** que 
 }
 ```
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 play-3d/
@@ -68,7 +68,7 @@ play-3d/
         └── bitaca-play3d.conf # Configuração nginx
 ```
 
-## 🎮 Controles
+## Controles
 
 ### Navegação
 - **W A S D** ou **Setas** - Mover câmera
@@ -81,7 +81,7 @@ play-3d/
 - **Aproximar dos cards** - Ver detalhes da produção
 - **Botão "Chamar Derona"** - Abrir diálogo com IA
 
-## 🤖 Integração com IA
+## Integração com IA
 
 O Play 3D está integrado com o backend existente do Bitaca Cinema:
 
@@ -108,7 +108,7 @@ const results = await apiClient.search('gastronomia regional');
 2. **CulturalAgent** - Leis culturais (Paulo Gustavo, Aldir Blanc)
 3. **DiscoveryAgent** - Recomendações e busca semântica (RAG)
 
-## 🚀 Deploy
+## Deploy
 
 ### 1. Configurar DNS
 
@@ -151,7 +151,7 @@ nginx -t && systemctl reload nginx
 certbot --nginx -d play.abitaca.com.br
 ```
 
-## 🎨 Customização
+## Customização
 
 ### Adicionar novo mundo
 
@@ -202,7 +202,7 @@ const gltf = await loader.loadAsync('assets/models/derona.glb');
 this.model = gltf.scene;
 ```
 
-## 📊 Performance
+## Performance
 
 - **FPS Target**: 60 FPS
 - **Polygon Budget**: ~100k triangles por cena
@@ -217,7 +217,7 @@ this.model = gltf.scene;
 - ✅ Object pooling para cards de filmes
 - ✅ Texture compression (recomendado: KTX2)
 
-## 🧪 Testes
+## Testes
 
 ```bash
 # Abrir no navegador
@@ -228,13 +228,13 @@ cd apps/play-3d
 python3 -m http.server 8000
 ```
 
-## 📚 Recursos
+## Recursos
 
 - [Three.js Docs](https://threejs.org/docs/)
 - [WebGL Fundamentals](https://webglfundamentals.org/)
 - [Bitaca Backend API](https://api.abitaca.com.br/docs)
 
-## 🤝 Contribuindo
+## Contribuindo
 
 1. Fork o projeto
 2. Crie uma branch (`git checkout -b feature/nova-feature`)
@@ -242,12 +242,12 @@ python3 -m http.server 8000
 4. Push para a branch
 5. Abra um Pull Request
 
-## 📄 Licença
+## Licença
 
 Este projeto faz parte do **Bitaca Cinema** - Catálogo de produções audiovisuais de Capão Bonito/SP.
 
 ---
 
-**Desenvolvido com ❤️ para a cultura de Capão Bonito**
+**Desenvolvido para a cultura de Capão Bonito**
 
-🎬 [Mostra de Cinema](https://abitaca.com.br) | 🎨 [Galeria Bitaca](https://galeria.abitaca.com.br) | 🤖 [API](https://api.abitaca.com.br)
+[Mostra de Cinema](https://abitaca.com.br) | [Galeria Bitaca](https://galeria.abitaca.com.br) | [API](https://api.abitaca.com.br)

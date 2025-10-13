@@ -2535,4 +2535,295 @@ ul {
         left: 1rem;
         max-width: calc(100% - 2rem);
     }
+
+    /* Cards de filmes - ajustes mobile */
+    .filme-card {
+        border-radius: 16px;
+    }
+
+    .filme-card__poster {
+        height: 180px;
+    }
+
+    .filme-card__body {
+        padding: 1.25rem 1rem 1rem;
+    }
+
+    .filme-card__title {
+        font-size: 1.2rem;
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+    }
+
+    .filme-card__diretor {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Meta informações - stacked em mobile */
+    .filme-card__meta {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+        margin-bottom: 0.75rem;
+    }
+
+    .filme-meta {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.65rem;
+    }
+
+    /* Badges - menores e wrap */
+    .filme-card__badges {
+        gap: 0.4rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .badge {
+        padding: 0.35rem 0.75rem;
+        font-size: 0.65rem;
+        letter-spacing: 0.5px;
+    }
+
+    /* TOP badges - menores */
+    .top-badge {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.65rem;
+        top: 8px;
+        right: 8px;
+    }
+
+    /* Sinopse - menos linhas */
+    .filme-card__sinopse {
+        font-size: 0.85rem;
+        line-height: 1.6;
+        -webkit-line-clamp: 2;
+        max-height: 3em;
+    }
+
+    .filme-card:hover .filme-card__sinopse {
+        -webkit-line-clamp: 3;
+        max-height: 4.8em;
+        font-size: 0.85rem;
+    }
+
+    /* Ver Detalhes - adaptado para mobile */
+    .filme-card::after {
+        bottom: 0.75rem;
+        right: 1rem;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.65rem;
+    }
+
+    /* Botões - touch targets adequados (min 44px) */
+    .btn {
+        padding: 0.875rem 1.75rem;
+        font-size: 0.95rem;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+        min-width: 120px;
+    }
+
+    /* Filtros - melhor scrolling horizontal */
+    .filters__top {
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .filters__search {
+        width: 100%;
+        max-width: none;
+        min-width: auto;
+    }
+
+    .search-input {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.95rem;
+    }
+
+    .filters__sort {
+        padding: 0.625rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .sort-label {
+        font-size: 0.85rem;
+    }
+
+    .sort-select {
+        font-size: 0.85rem;
+    }
+
+    /* Filtros de categoria - scroll suave */
+    .filters__buttons {
+        justify-content: flex-start;
+        padding: 0 0.5rem 0.5rem 0;
+    }
+
+    .filter-btn {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        min-height: 44px;
+    }
+
+    /* Eixos cards - padding reduzido */
+    .eixo-card {
+        padding: 2rem 1.5rem;
+        min-height: 350px;
+    }
+
+    .eixo-card__icon {
+        font-size: 4rem;
+        width: 100px;
+        height: 100px;
+    }
+
+    .eixo-card__title {
+        font-size: 1.4rem;
+    }
+
+    .eixo-card__percentage {
+        font-size: 3rem;
+    }
+
+    .eixo-card__description {
+        font-size: 0.9rem;
+    }
+
+    /* Modal - full screen em mobile */
+    .modal__content {
+        max-width: 95%;
+        max-height: 95vh;
+        padding: 1.5rem 1rem;
+        border-radius: 12px;
+    }
+
+    .modal__close {
+        width: 36px;
+        height: 36px;
+        font-size: 1.3rem;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+
+    /* Scroll to top - posição ajustada */
+    .scroll-top {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 48px;
+        height: 48px;
+        font-size: 1.3rem;
+    }
+}
+
+/* Mobile muito pequeno - ajustes extras */
+@media (max-width: 360px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    .section {
+        padding: 3rem 0;
+    }
+
+    .filme-card__poster {
+        height: 160px;
+        font-size: 3.5rem;
+    }
+
+    .filme-card__title {
+        font-size: 1.1rem;
+    }
+
+    .stat-card {
+        padding: 1.25rem 1.5rem;
+        min-width: 100px;
+    }
+
+    .stat-number {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+    }
+
+    .hero__cta .btn {
+        width: 100%;
+    }
+}
+
+/* Landscape mobile - ajustes para orientação horizontal */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: 2rem 0;
+    }
+
+    .stat-card {
+        padding: 1rem 1.5rem;
+    }
+
+    .filme-card__poster {
+        height: 150px;
+    }
+}
+
+/* Touch-specific - remover hover effects em touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .filme-card:hover {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(45, 80, 22, 0.06),
+                    0 4px 8px rgba(45, 80, 22, 0.08),
+                    0 8px 16px rgba(45, 80, 22, 0.1);
+    }
+
+    .filme-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+
+    .eixo-card:hover {
+        transform: none;
+    }
+
+    .eixo-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+
+    /* Mostrar "Ver Detalhes" sempre em touch */
+    .filme-card::after {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Preferência de movimento reduzido - acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .filme-card:hover {
+        transform: none;
+    }
+
+    .eixo-card:hover {
+        transform: none;
+    }
 }
