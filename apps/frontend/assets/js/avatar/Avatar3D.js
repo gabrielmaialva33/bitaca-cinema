@@ -52,7 +52,7 @@ class BitacaAvatar3D {
 
         // Scene
         this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x0a0a0a); // Dark background
+        this.scene.background = new THREE.Color(0x0f0f12); // Dark horror background (slightly purple-tinted)
 
         // Camera
         this.camera = new THREE.PerspectiveCamera(
