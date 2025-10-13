@@ -67,29 +67,11 @@ class AvatarChatbotIntegration {
         // Create avatar container
         this.avatarContainer = document.createElement('div');
         this.avatarContainer.className = 'bitaca-avatar-container';
-        this.avatarContainer.style.cssText = `
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-            border-radius: 12px 12px 0 0;
-            overflow: hidden;
-            position: relative;
-            display: none;
-            border-bottom: 2px solid #c41e3a;
-        `;
+        this.avatarContainer.style.display = 'none';
 
         // Add loading indicator
         const loadingIndicator = document.createElement('div');
         loadingIndicator.className = 'avatar-loading';
-        loadingIndicator.style.cssText = `
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #c41e3a;
-            font-size: 14px;
-            font-weight: 500;
-        `;
         loadingIndicator.textContent = '⏳ Carregando avatar...';
         this.avatarContainer.appendChild(loadingIndicator);
 
@@ -116,26 +98,6 @@ class AvatarChatbotIntegration {
         this.avatarToggleButton.className = 'avatar-toggle-btn';
         this.avatarToggleButton.innerHTML = '🎬';
         this.avatarToggleButton.title = 'Ativar Avatar 3D';
-        this.avatarToggleButton.style.cssText = `
-            background: rgba(196, 30, 58, 0.2);
-            border: 2px solid #c41e3a;
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-left: 10px;
-        `;
-
-        this.avatarToggleButton.addEventListener('mouseenter', () => {
-            this.avatarToggleButton.style.background = 'rgba(196, 30, 58, 0.4)';
-            this.avatarToggleButton.style.transform = 'scale(1.1)';
-        });
-
-        this.avatarToggleButton.addEventListener('mouseleave', () => {
-            this.avatarToggleButton.style.background = 'rgba(196, 30, 58, 0.2)';
-            this.avatarToggleButton.style.transform = 'scale(1)';
-        });
 
         this.avatarToggleButton.addEventListener('click', () => {
             this.toggleAvatar();
@@ -190,7 +152,7 @@ class AvatarChatbotIntegration {
         // Update button
         this.avatarToggleButton.innerHTML = '🎭';
         this.avatarToggleButton.title = 'Desativar Avatar 3D';
-        this.avatarToggleButton.style.background = 'rgba(196, 30, 58, 0.5)';
+        this.avatarToggleButton.classList.add('active');
 
         console.log('✅ Avatar enabled');
     }
@@ -212,7 +174,7 @@ class AvatarChatbotIntegration {
         // Update button
         this.avatarToggleButton.innerHTML = '🎬';
         this.avatarToggleButton.title = 'Ativar Avatar 3D';
-        this.avatarToggleButton.style.background = 'rgba(196, 30, 58, 0.2)';
+        this.avatarToggleButton.classList.remove('active');
 
         console.log('✅ Avatar disabled');
     }
