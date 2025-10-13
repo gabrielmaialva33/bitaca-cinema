@@ -13,6 +13,7 @@ import { DeronaAvatar } from './components/derona-avatar.js';
 import { PatrimonioWorld } from './scenes/patrimonio-world.js';
 import { MusicaWorld } from './scenes/musica-world.js';
 import { AmbienteWorld } from './scenes/ambiente-world.js';
+import { VirtualCinema } from './components/virtual-cinema.js';
 import { PostProcessingManager } from './post-processing.js';
 import { CinematicLighting, LightingPresets } from './cinematic-lighting.js';
 
@@ -46,6 +47,7 @@ class BitacaPlay3D {
         this.clock = new THREE.Clock();
         this.worlds = {};
         this.currentWorldInstance = null;
+        this.virtualCinema = null;
         this.derona = null;
 
         // Input
@@ -304,6 +306,11 @@ class BitacaPlay3D {
                 musica: new MusicaWorld(this.scene, this.camera),
                 ambiente: new AmbienteWorld(this.scene, this.camera)
             };
+
+            // Initialize Virtual Cinema
+            this.virtualCinema = new VirtualCinema(this.scene, this.camera, this.renderer);
+            await this.virtualCinema.init();
+            console.log('✅ Virtual Cinema initialized');
 
             clearInterval(interval);
             loadingProgress.style.width = '100%';
