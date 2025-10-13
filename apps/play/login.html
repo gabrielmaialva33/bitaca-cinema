@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="#C41E3A" name="theme-color">
+    <title>Login - Bitaca Play</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Staatliches&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- KeenIcons -->
+    <link href="assets/vendors/keenicons/styles.bundle.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #C41E3A;
+            --primary-dark: #9B1B30;
+            --secondary: #2D5016;
+            --accent: #FFB700;
+            --background: #0A0A0A;
+            --surface: #1A1A1A;
+            --text: #F5DEB3;
+            --text-secondary: #A0A0A0;
+            --border: #333;
+            --font-body: 'Inter', sans-serif;
+            --font-display: 'Staatliches', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, var(--background) 0%, #1a0a0a 50%, var(--background) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .login-container {
+            max-width: 450px;
+            width: 100%;
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 20px 60px rgba(196, 30, 58, 0.3);
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-container svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+
+        .brand-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--primary);
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-subtitle {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.25rem;
+            color: var(--accent);
+        }
+
+        .form-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 0.875rem;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: var(--text);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--text);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(196, 30, 58, 0.4);
+        }
+
+        .btn-primary:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .alert {
+            padding: 0.875rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+        }
+
+        .alert-success {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            color: #51cf66;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .tagline {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--text);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-container">
+            <svg viewBox="0 0 200 80">
+                <!-- Casinha -->
+                <polygon fill="#C41E3A" points="100,10 120,25 120,40 80,40 80,25" stroke="#0A0A0A" stroke-width="2"/>
+                <rect fill="#8B4513" height="12" width="8" x="90" y="28"/>
+                <rect fill="#8B4513" height="12" width="8" x="105" y="28"/>
+                <!-- Folhagens -->
+                <path d="M 70,30 Q 65,25 70,20" fill="none" stroke="#2D5016" stroke-width="3"/>
+                <path d="M 130,30 Q 135,25 130,20" fill="none" stroke="#2D5016" stroke-width="3"/>
+                <!-- Texto BITACA -->
+                <text fill="#C41E3A" font-family="Staatliches" font-size="28" font-weight="bold" x="40" y="65">BITACA</text>
+            </svg>
+            <div class="brand-title">PLAY</div>
+            <div class="brand-subtitle">Cinema Underground</div>
+        </div>
+
+        <div class="form-tabs">
+            <button class="tab-btn active" data-tab="login">Entrar</button>
+            <button class="tab-btn" data-tab="register">Criar Conta</button>
+        </div>
+
+        <div class="alert alert-error" id="error-alert"></div>
+        <div class="alert alert-success" id="success-alert"></div>
+
+        <!-- Login Form -->
+        <form id="login-form">
+            <div class="form-group">
+                <label class="form-label" for="login-email">Email</label>
+                <input
+                    class="form-input"
+                    id="login-email"
+                    placeholder="seu@email.com"
+                    required
+                    type="email"
+                >
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="login-password">Senha</label>
+                <input
+                    class="form-input"
+                    id="login-password"
+                    placeholder="••••••••"
+                    required
+                    type="password"
+                >
+            </div>
+            <button class="btn btn-primary" id="login-btn" type="submit">
+                <i class="ki-filled ki-entrance-right"></i>
+                <span>Entrar</span>
+            </button>
+        </form>
+
+        <!-- Register Form -->
+        <form class="hidden" id="register-form">
+            <div class="form-group">
+                <label class="form-label" for="register-email">Email</label>
+                <input
+                    class="form-input"
+                    id="register-email"
+                    placeholder="seu@email.com"
+                    required
+                    type="email"
+                >
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="register-password">Senha</label>
+                <input
+                    class="form-input"
+                    id="register-password"
+                    minlength="6"
+                    placeholder="••••••••"
+                    required
+                    type="password"
+                >
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="register-password-confirm">Confirmar Senha</label>
+                <input
+                    class="form-input"
+                    id="register-password-confirm"
+                    minlength="6"
+                    placeholder="••••••••"
+                    required
+                    type="password"
+                >
+            </div>
+            <button class="btn btn-primary" id="register-btn" type="submit">
+                <i class="ki-filled ki-user"></i>
+                <span>Criar Conta</span>
+            </button>
+        </form>
+
+        <div class="form-footer">
+            Acesso exclusivo para membros do Bitaca Cinema
+        </div>
+
+        <div class="tagline">
+            Underground | Visceral | Democrático
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { AuthManager } from './assets/js/auth.js';
+
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBQ9LqLgXPh2B-lMvqGT5DWcFkx3yBSvI0",
+            authDomain: "bitaca-cinema.firebaseapp.com",
+            projectId: "bitaca-cinema",
+            storageBucket: "bitaca-cinema.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef"
+        };
+
+        window.firebaseApp = initializeApp(firebaseConfig);
+        const auth = new AuthManager();
+
+        // Check if already logged in
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                window.location.href = '/index.html';
+            }
+        });
+
+        // Tab switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const tab = btn.dataset.tab;
+                if (tab === 'login') {
+                    loginForm.classList.remove('hidden');
+                    registerForm.classList.add('hidden');
+                } else {
+                    loginForm.classList.add('hidden');
+                    registerForm.classList.remove('hidden');
+                }
+
+                // Clear alerts
+                hideAlerts();
+            });
+        });
+
+        // Login form
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const btn = document.getElementById('login-btn');
+
+            btn.disabled = true;
+            btn.innerHTML = '<div class="spinner"></div><span>Entrando...</span>';
+
+            const result = await auth.signIn(email, password);
+
+            if (result.success) {
+                showSuccess('Login realizado com sucesso!');
+                setTimeout(() => {
+                    window.location.href = '/index.html';
+                }, 1000);
+            } else {
+                showError(result.error);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="ki-filled ki-entrance-right"></i><span>Entrar</span>';
+            }
+        });
+
+        // Register form
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const passwordConfirm = document.getElementById('register-password-confirm').value;
+            const btn = document.getElementById('register-btn');
+
+            // Validate passwords match
+            if (password !== passwordConfirm) {
+                showError('As senhas não coincidem');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<div class="spinner"></div><span>Criando conta...</span>';
+
+            const result = await auth.signUp(email, password);
+
+            if (result.success) {
+                showSuccess('Conta criada com sucesso!');
+                setTimeout(() => {
+                    window.location.href = '/index.html';
+                }, 1000);
+            } else {
+                showError(result.error);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="ki-filled ki-user"></i><span>Criar Conta</span>';
+            }
+        });
+
+        // Alert functions
+        function showError(message) {
+            const alert = document.getElementById('error-alert');
+            alert.textContent = message;
+            alert.classList.add('show');
+        }
+
+        function showSuccess(message) {
+            const alert = document.getElementById('success-alert');
+            alert.textContent = message;
+            alert.classList.add('show');
+        }
+
+        function hideAlerts() {
+            document.getElementById('error-alert').classList.remove('show');
+            document.getElementById('success-alert').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

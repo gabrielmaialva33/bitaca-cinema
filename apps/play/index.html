@@ -63,6 +63,9 @@
             <button aria-label="Modo 3D" class="btn-icon" id="3d-btn" title="Visualização 3D">
                 <i class="ki-filled ki-cube-3d"></i>
             </button>
+            <button aria-label="Sair" class="btn-icon" id="logout-btn" title="Sair">
+                <i class="ki-filled ki-exit-right"></i>
+            </button>
             <button aria-label="Menu mobile" class="btn-icon mobile-menu-btn" id="mobile-menu-btn">
                 <i class="ki-filled ki-burger-menu"></i>
             </button>
@@ -390,6 +393,29 @@
     };
 
     window.firebaseApp = initializeApp(firebaseConfig);
+</script>
+
+<!-- Auth & Protection -->
+<script type="module">
+    import { AuthManager } from './assets/js/auth.js';
+    import { AnimeZeyAPI } from './assets/js/animezey-api.js';
+
+    // Initialize Auth
+    const auth = new AuthManager();
+
+    // Require authentication
+    auth.requireAuth();
+
+    // Make auth available globally
+    window.bitacaAuth = auth;
+    window.animezeyAPI = new AnimeZeyAPI();
+
+    // Logout button
+    document.getElementById('logout-btn')?.addEventListener('click', async () => {
+        if (confirm('Deseja realmente sair?')) {
+            await auth.signOutUser();
+        }
+    });
 </script>
 
 <!-- App Scripts -->
