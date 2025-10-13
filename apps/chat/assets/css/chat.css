@@ -140,7 +140,7 @@ body {
     cursor: pointer;
     transition: transform var(--transition-base);
     font-size: 1.5rem;
-    color: var(--text-primary);
+    color: #FFFFFF;
 }
 
 .user-avatar:hover {
@@ -398,7 +398,7 @@ body {
 
 .message.assistant .message-avatar {
     background: var(--secondary);
-    color: var(--text-primary);
+    color: #FFFFFF;
 }
 
 .message.user .message-avatar {
