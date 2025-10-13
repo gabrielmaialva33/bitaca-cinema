@@ -5,10 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'backend/**'
-      - 'assets/**'
-      - 'index.html'
-      - '*.html'
+      - 'apps/backend/**'
+      - 'apps/frontend/**'
   workflow_dispatch: # Permite executar manualmente
 
 env:
@@ -42,7 +40,7 @@ jobs:
 
       - name: Copy backend files to server
         run: |
-          cd backend
+          # Copy backend files from new structure to server's flat structure
           rsync -avz --delete \
             --exclude '.git' \
             --exclude '.env' \
@@ -51,7 +49,10 @@ jobs:
             --exclude 'logs/' \
             --exclude '.github/' \
             --exclude 'www/' \
-            ./ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/
+            apps/backend/ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/
+
+          # Copy Dockerfile and docker-compose from root
+          rsync -avz Dockerfile docker-compose.yml ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/
 
       - name: Copy frontend files to server
         run: |
@@ -59,13 +60,13 @@ jobs:
           ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "mkdir -p ${{ env.DEPLOY_DIR }}/www"
 
           # Copy HTML files
-          rsync -avz *.html ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/www/
+          rsync -avz apps/frontend/*.html ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/www/
 
           # Copy assets directory
-          rsync -avz assets/ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/www/assets/
+          rsync -avz apps/frontend/assets/ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/www/assets/
 
           # Copy robots and sitemap
-          rsync -avz robots.txt sitemap.xml ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/www/ || true
+          rsync -avz apps/frontend/robots.txt apps/frontend/sitemap.xml ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.DEPLOY_DIR }}/www/ || true
 
       - name: Configure environment
         run: |

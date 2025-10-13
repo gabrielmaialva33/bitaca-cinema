@@ -28,19 +28,19 @@ RUN useradd -m -u 1000 -s /bin/bash app
 WORKDIR /app
 
 # Copy requirements first (for caching)
-COPY requirements.txt .
+COPY apps/backend/requirements.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY main.py .
-COPY database.py .
-COPY r2_storage.py .
-COPY deronas_personality.py .
-COPY agents/ ./agents/
-COPY embeddings.json ./embeddings.json
-COPY .env.example .env
+COPY apps/backend/main.py .
+COPY apps/backend/database.py .
+COPY apps/backend/r2_storage.py .
+COPY apps/backend/deronas_personality.py .
+COPY apps/backend/agents/ ./agents/
+COPY apps/frontend/assets/data/embeddings.json ./embeddings.json
+COPY apps/backend/.env.example .env
 
 # Change ownership to app user
 RUN chown -R app:app /app
