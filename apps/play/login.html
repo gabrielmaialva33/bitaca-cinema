@@ -278,93 +278,18 @@
             <div class="brand-subtitle">Cinema Underground</div>
         </div>
 
-        <div class="form-tabs">
-            <button class="tab-btn active" data-tab="login">Entrar</button>
-            <button class="tab-btn" data-tab="register">Criar Conta</button>
-        </div>
-
         <div class="alert alert-error" id="error-alert"></div>
-        <div class="alert alert-success" id="success-alert"></div>
 
-        <!-- Login Form -->
-        <form id="login-form">
-            <button class="btn btn-google" id="google-login-btn" type="button">
-                <svg width="18" height="18" viewBox="0 0 18 18" style="margin-right: 8px;">
-                    <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
-                    <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
-                    <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.039l3.007-2.332z"/>
-                    <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z"/>
-                </svg>
-                <span>Entrar com Google</span>
-            </button>
-
-            <div class="divider">ou</div>
-
-            <div class="form-group">
-                <label class="form-label" for="login-email">Email</label>
-                <input
-                    class="form-input"
-                    id="login-email"
-                    placeholder="seu@email.com"
-                    required
-                    type="email"
-                >
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="login-password">Senha</label>
-                <input
-                    class="form-input"
-                    id="login-password"
-                    placeholder="••••••••"
-                    required
-                    type="password"
-                >
-            </div>
-            <button class="btn btn-primary" id="login-btn" type="submit">
-                <i class="ki-filled ki-entrance-right"></i>
-                <span>Entrar</span>
-            </button>
-        </form>
-
-        <!-- Register Form -->
-        <form class="hidden" id="register-form">
-            <div class="form-group">
-                <label class="form-label" for="register-email">Email</label>
-                <input
-                    class="form-input"
-                    id="register-email"
-                    placeholder="seu@email.com"
-                    required
-                    type="email"
-                >
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="register-password">Senha</label>
-                <input
-                    class="form-input"
-                    id="register-password"
-                    minlength="6"
-                    placeholder="••••••••"
-                    required
-                    type="password"
-                >
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="register-password-confirm">Confirmar Senha</label>
-                <input
-                    class="form-input"
-                    id="register-password-confirm"
-                    minlength="6"
-                    placeholder="••••••••"
-                    required
-                    type="password"
-                >
-            </div>
-            <button class="btn btn-primary" id="register-btn" type="submit">
-                <i class="ki-filled ki-user"></i>
-                <span>Criar Conta</span>
-            </button>
-        </form>
+        <!-- Google Login Only -->
+        <button class="btn btn-google" id="google-login-btn" type="button">
+            <svg width="18" height="18" viewBox="0 0 18 18" style="margin-right: 8px;">
+                <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+                <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+                <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.039l3.007-2.332z"/>
+                <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z"/>
+            </svg>
+            <span>Entrar com Google</span>
+        </button>
 
         <div class="form-footer">
             Acesso exclusivo para membros do Bitaca Cinema
@@ -394,136 +319,43 @@
         window.firebaseApp = initializeApp(firebaseConfig);
         const auth = new AuthManager();
 
-        // Tab switching
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const loginForm = document.getElementById('login-form');
-        const registerForm = document.getElementById('register-form');
-
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                tabBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const tab = btn.dataset.tab;
-                if (tab === 'login') {
-                    loginForm.classList.remove('hidden');
-                    registerForm.classList.add('hidden');
-                } else {
-                    loginForm.classList.add('hidden');
-                    registerForm.classList.remove('hidden');
-                }
-
-                // Clear alerts
-                hideAlerts();
-            });
-        });
-
-        // Google login
+        // Google login handler
         document.getElementById('google-login-btn').addEventListener('click', async () => {
             const btn = document.getElementById('google-login-btn');
             const originalHTML = btn.innerHTML;
+            const errorAlert = document.getElementById('error-alert');
 
             btn.disabled = true;
             btn.innerHTML = '<div class="spinner"></div><span>Entrando com Google...</span>';
+            errorAlert.classList.remove('show');
 
             const result = await auth.signInWithGoogle();
 
             if (result.success) {
-                showSuccess('Login realizado com sucesso!');
-
                 // Check for redirect parameter
                 const urlParams = new URLSearchParams(window.location.search);
                 const redirect = urlParams.get('redirect');
 
-                setTimeout(() => {
-                    window.location.href = redirect || '/index.html';
-                }, 1000);
+                window.location.href = redirect || '/index.html';
             } else {
-                showError(result.error);
+                const alert = document.getElementById('error-alert');
+
+                let errorMessage = result.error;
+                if (result.error.includes('popup-blocked')) {
+                    errorMessage = 'Pop-up bloqueado. Permita pop-ups para este site.';
+                } else if (result.error.includes('popup-closed-by-user')) {
+                    errorMessage = 'Login cancelado. Tente novamente.';
+                } else if (result.error.includes('cancelled-popup-request')) {
+                    errorMessage = 'Aguarde o pop-up anterior fechar.';
+                }
+
+                alert.textContent = errorMessage;
+                alert.classList.add('show');
+
                 btn.disabled = false;
                 btn.innerHTML = originalHTML;
             }
         });
-
-        // Login form
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            const btn = document.getElementById('login-btn');
-
-            btn.disabled = true;
-            btn.innerHTML = '<div class="spinner"></div><span>Entrando...</span>';
-
-            const result = await auth.signIn(email, password);
-
-            if (result.success) {
-                showSuccess('Login realizado com sucesso!');
-
-                // Check for redirect parameter
-                const urlParams = new URLSearchParams(window.location.search);
-                const redirect = urlParams.get('redirect');
-
-                setTimeout(() => {
-                    window.location.href = redirect || '/index.html';
-                }, 1000);
-            } else {
-                showError(result.error);
-                btn.disabled = false;
-                btn.innerHTML = '<i class="ki-filled ki-entrance-right"></i><span>Entrar</span>';
-            }
-        });
-
-        // Register form
-        registerForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            const passwordConfirm = document.getElementById('register-password-confirm').value;
-            const btn = document.getElementById('register-btn');
-
-            // Validate passwords match
-            if (password !== passwordConfirm) {
-                showError('As senhas não coincidem');
-                return;
-            }
-
-            btn.disabled = true;
-            btn.innerHTML = '<div class="spinner"></div><span>Criando conta...</span>';
-
-            const result = await auth.signUp(email, password);
-
-            if (result.success) {
-                showSuccess('Conta criada com sucesso!');
-                setTimeout(() => {
-                    window.location.href = '/index.html';
-                }, 1000);
-            } else {
-                showError(result.error);
-                btn.disabled = false;
-                btn.innerHTML = '<i class="ki-filled ki-user"></i><span>Criar Conta</span>';
-            }
-        });
-
-        // Alert functions
-        function showError(message) {
-            const alert = document.getElementById('error-alert');
-            alert.textContent = message;
-            alert.classList.add('show');
-        }
-
-        function showSuccess(message) {
-            const alert = document.getElementById('success-alert');
-            alert.textContent = message;
-            alert.classList.add('show');
-        }
-
-        function hideAlerts() {
-            document.getElementById('error-alert').classList.remove('show');
-            document.getElementById('success-alert').classList.remove('show');
-        }
     </script>
 </body>
 </html>
