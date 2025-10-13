@@ -1,36 +1,9 @@
 {
-  "name": "bitaca-cinema",
+  "name": "@bitaca-cinema/frontend",
   "version": "1.0.0",
   "private": true,
-  "description": "Catálogo de produções audiovisuais - Leis Paulo Gustavo e PNAB - Capão Bonito/SP",
-  "packageManager": "pnpm@8.0.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "description": "Frontend for Bitaca Cinema - Cultural cinema project",
   "scripts": {
-    "test": "jest tests/video-recorder.test.js",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
-    "test:e2e:production": "TEST_ENV=production playwright test",
-    "test:avatar": "playwright test tests/e2e/avatar.spec.js --project=\"Desktop Chrome\"",
-    "test:avatar:fast": "playwright test tests/e2e/avatar.spec.js --project=\"Desktop Chrome\" --grep=\"should show avatar toggle button|should toggle avatar on and off|should create 3D scene\"",
-    "test:avatar:all": "playwright test tests/e2e/avatar.spec.js",
-    "test:backend": "cd backend && pytest tests/ -v",
-    "test:tts": "cd backend && pytest tests/test_tts.py -v",
-    "test:all": "pnpm test:avatar:fast && pnpm test:tts",
-    "serve": "python3 -m http.server 8000",
-    "playwright:install": "pnpm dlx playwright install chromium"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com:gabrielmaialva33/bitaca-cinema.git"
-  },
-  "author": "Gabriel Maia",
-  "license": "MIT",
-  "homepage": "https://gabrielmaialva33.github.io/bitaca-cinema/",
-  "devDependencies": {
-    "@playwright/test": "^1.56.0",
-    "jest": "^30.2.0"
+    "serve": "python3 -m http.server 8000"
   }
 }
