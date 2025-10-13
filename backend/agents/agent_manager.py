@@ -89,9 +89,10 @@ class AgentManager:
                 query=query,
                 context=context
             )
-            return {
+            agent_name = 'CulturalAgent'
+            result = {
                 'response': response,
-                'agent': 'CulturalAgent',
+                'agent': agent_name,
                 'metadata': {
                     'intent': intent,
                     'topic': 'cultural_laws'
@@ -115,9 +116,10 @@ class AgentManager:
                 query=query,
                 context=cinema_context
             )
-            return {
+            agent_name = 'CinemaAgent'
+            result = {
                 'response': response,
-                'agent': 'CinemaAgent',
+                'agent': agent_name,
                 'metadata': {
                     'intent': intent,
                     'used_discovery': agent_classification.get('needs_search', False)
@@ -126,12 +128,30 @@ class AgentManager:
 
         else:
             # Default to discovery for general queries
-            result = await self.discovery_agent.process_query(query=query)
-            return {
-                'response': result['response'],
-                'agent': 'DiscoveryAgent (default)',
+            discovery_result = await self.discovery_agent.process_query(query=query)
+            agent_name = 'DiscoveryAgent'
+            result = {
+                'response': discovery_result['response'],
+                'agent': agent_name,
                 'metadata': {'intent': intent}
             }
+
+        # Track with RL feedback system
+        elapsed_time_ms = (time.time() - start_time) * 1000
+        rl_feedback = self.rl_feedback.track_response(
+            query=query,
+            intent=intent or 'GENERAL',
+            agent_name=agent_name,
+            response=result['response'],
+            elapsed_time_ms=elapsed_time_ms
+        )
+
+        # Add RL feedback to result if available
+        if rl_feedback:
+            result['rl_score'] = rl_feedback.get('score')
+            result['rl_feedback'] = rl_feedback.get('feedback')
+
+        return result
 
     def _classify_query(self, query: str, intent: str = None) -> Dict[str, Any]:
         """
@@ -269,5 +289,12 @@ class AgentManager:
             'cultural_agent': self.cultural_agent is not None,
             'discovery_agent': self.discovery_agent is not None,
             'embeddings_loaded': len(self.discovery_agent.rag_tool.embeddings) > 0,
+            'rl_feedback_enabled': self.rl_feedback.enabled,
             'system_ready': True
         }
+
+    def get_rl_stats(self) -> Dict[str, Any]:
+        """
+        Get reinforcement learning statistics
+        """
+        return self.rl_feedback.get_stats()
