@@ -166,6 +166,44 @@
             transform: none;
         }
 
+        .btn-google {
+            background: #FFFFFF;
+            color: #444;
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+        }
+
+        .btn-google:hover {
+            background: #F5F5F5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
         .alert {
             padding: 0.875rem;
             border-radius: 8px;
