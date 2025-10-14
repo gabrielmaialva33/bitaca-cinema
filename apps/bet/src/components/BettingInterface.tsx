@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { usePlaceBet, useUserBets } from '../hooks/useBetting';
+import AIInsights from './AIInsights';
+import LiveCommentary from './LiveCommentary';
+import LiveBattle from './LiveBattle';
 
 interface BettingInterfaceProps {
   userId: string;
@@ -9,15 +12,15 @@ interface BettingInterfaceProps {
 const MOCK_BATTLES = [
   {
     id: 'battle-1',
-    title: 'AI Battle: GPT-4 vs Claude',
-    contestants: ['GPT-4', 'Claude'],
+    title: 'Batalha Underground: Emicida vs Criolo',
+    contestants: ['Emicida', 'Criolo'],
     status: 'live',
     odds: [1.8, 2.2],
   },
   {
     id: 'battle-2',
-    title: 'Human vs AI: MC Flow vs Gemini',
-    contestants: ['MC Flow', 'Gemini AI'],
+    title: 'Clash: BK vs Djonga',
+    contestants: ['BK', 'Djonga'],
     status: 'upcoming',
     odds: [2.5, 1.5],
   },
@@ -54,41 +57,65 @@ export default function BettingInterface({ userId }: BettingInterfaceProps) {
       <h2 className="text-3xl font-bold text-white">🎤 Batalhas de Rima</h2>
 
       {/* Active Battles */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {MOCK_BATTLES.map((battle) => (
-          <div key={battle.id} className="battle-card">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-white">{battle.title}</h3>
-              <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                battle.status === 'live' ? 'bg-red-500 text-white animate-pulse' : 'bg-gray-700 text-gray-300'
-              }`}>
-                {battle.status === 'live' ? '🔴 AO VIVO' : '📅 EM BREVE'}
-              </span>
+          <div key={battle.id} className="space-y-4">
+            <div className="battle-card">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-bold text-white">{battle.title}</h3>
+                <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                  battle.status === 'live' ? 'bg-red-500 text-white animate-pulse' : 'bg-gray-700 text-gray-300'
+                }`}>
+                  {battle.status === 'live' ? '🔴 AO VIVO' : '📅 EM BREVE'}
+                </span>
+              </div>
+
+              {/* Contestants */}
+              <div className="space-y-3">
+                {battle.contestants.map((contestant, idx) => (
+                  <div key={idx} className="bg-gray-800 rounded-lg p-4 hover:bg-gray-750 transition">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-white font-semibold text-lg">{contestant}</p>
+                        <p className="text-gray-400 text-sm">Odds: {battle.odds[idx]}x</p>
+                      </div>
+                      <button
+                        onClick={() => {
+                          setSelectedBattle(battle.id);
+                          setBetOn(contestant);
+                        }}
+                        disabled={battle.status !== 'live'}
+                        className="btn-primary text-sm"
+                      >
+                        Apostar
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Contestants */}
-            <div className="space-y-3">
-              {battle.contestants.map((contestant, idx) => (
-                <div key={idx} className="bg-gray-800 rounded-lg p-4 hover:bg-gray-750 transition">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-white font-semibold text-lg">{contestant}</p>
-                      <p className="text-gray-400 text-sm">Odds: {battle.odds[idx]}x</p>
-                    </div>
-                    <button
-                      onClick={() => {
-                        setSelectedBattle(battle.id);
-                        setBetOn(contestant);
-                      }}
-                      disabled={battle.status !== 'live'}
-                      className="btn-primary text-sm"
-                    >
-                      Apostar
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {/* NVIDIA Live Battle with Audio */}
+            <LiveBattle
+              rapper1={battle.contestants[0]}
+              rapper2={battle.contestants[1]}
+              isLive={battle.status === 'live'}
+              onBattleEnd={(winner) => console.log('Battle ended, winner:', winner)}
+            />
+
+            {/* NVIDIA Live Commentary */}
+            <LiveCommentary
+              battleId={battle.id}
+              rapper1={battle.contestants[0]}
+              rapper2={battle.contestants[1]}
+              isLive={battle.status === 'live'}
+            />
+
+            {/* NVIDIA AI Insights */}
+            <AIInsights
+              rapper1={battle.contestants[0]}
+              rapper2={battle.contestants[1]}
+            />
           </div>
         ))}
       </div>
