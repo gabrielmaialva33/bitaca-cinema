@@ -16,6 +16,10 @@ export default {
         'dead-white': '#E0E0E0',
         'warning-red': '#FF0000',
         'toxic-green': '#00FF41',
+        // Aliases for components
+        'primary': '#C41E3A',
+        'secondary': '#00C853',
+        'dark': '#0D0D0D',
       },
       fontFamily: {
         'creepy': ['Creepster', 'cursive'],
