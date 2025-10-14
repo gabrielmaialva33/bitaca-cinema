@@ -132,16 +132,55 @@ export class OnboardingSystem {
         `;
 
         document.body.insertAdjacentHTML('beforeend', modalHTML);
-        this.attachEventListeners();
+
+        // Use requestAnimationFrame to ensure DOM is ready
+        requestAnimationFrame(() => {
+            this.attachEventListeners();
+        });
     }
 
     /**
      * Attach event listeners to onboarding buttons
      */
     attachEventListeners() {
-        document.getElementById('onboarding-next')?.addEventListener('click', () => this.nextStep());
-        document.getElementById('onboarding-back')?.addEventListener('click', () => this.previousStep());
-        document.getElementById('onboarding-skip')?.addEventListener('click', () => this.skipOnboarding());
+        const nextBtn = document.getElementById('onboarding-next');
+        const backBtn = document.getElementById('onboarding-back');
+        const skipBtn = document.getElementById('onboarding-skip');
+
+        if (!nextBtn || !backBtn || !skipBtn) {
+            console.error('Onboarding buttons not found in DOM');
+            return;
+        }
+
+        // Wrap async calls in error handlers
+        nextBtn.addEventListener('click', async () => {
+            try {
+                await this.nextStep();
+            } catch (error) {
+                console.error('Error in nextStep:', error);
+                alert('Ocorreu um erro. Por favor, tente novamente.');
+            }
+        });
+
+        backBtn.addEventListener('click', () => {
+            try {
+                this.previousStep();
+            } catch (error) {
+                console.error('Error in previousStep:', error);
+            }
+        });
+
+        skipBtn.addEventListener('click', async () => {
+            try {
+                await this.skipOnboarding();
+            } catch (error) {
+                console.error('Error in skipOnboarding:', error);
+                // Still close onboarding even if save fails
+                this.closeOnboarding();
+            }
+        });
+
+        console.log('Onboarding event listeners attached successfully');
     }
 
     /**
@@ -353,7 +392,16 @@ export class OnboardingSystem {
 
         if (this.currentStep === 2) {
             // Final step - save preferences
-            await this.savePreferences();
+            try {
+                await Promise.race([
+                    this.savePreferences(),
+                    new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))
+                ]);
+            } catch (error) {
+                console.error('Failed to save preferences:', error);
+                // Continue anyway to not block user
+            }
+
             this.closeOnboarding();
             this.showWelcomeToast();
             return;
@@ -376,8 +424,19 @@ export class OnboardingSystem {
      */
     async skipOnboarding() {
         if (confirm('Tem certeza que deseja pular? Você pode configurar suas preferências depois.')) {
-            this.userPreferences.completedAt = null; // Mark as skipped
-            await this.savePreferences();
+            this.userPreferences.completedAt = new Date().toISOString();
+
+            // Try to save, but don't block closing
+            try {
+                await Promise.race([
+                    this.savePreferences(),
+                    new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))
+                ]);
+            } catch (error) {
+                console.warn('Failed to save preferences on skip:', error);
+                // Continue anyway
+            }
+
             this.closeOnboarding();
         }
     }
@@ -386,39 +445,57 @@ export class OnboardingSystem {
      * Save user preferences to Firebase
      */
     async savePreferences() {
-        try {
-            const user = this.auth.currentUser;
-            if (!user) {
-                console.error('No user logged in');
-                return;
-            }
+        const user = this.auth.currentUser;
+        if (!user) {
+            console.error('No user logged in');
+            throw new Error('No user logged in');
+        }
 
+        if (!this.userPreferences.completedAt) {
             this.userPreferences.completedAt = new Date().toISOString();
+        }
 
-            await setDoc(doc(this.db, 'user_preferences', user.uid), this.userPreferences, { merge: true });
-
-            console.log('✅ Preferences saved:', this.userPreferences);
-
-            // Also send to backend for MongoDB storage (if available)
-            try {
-                await fetch('/api/user/preferences', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${await user.getIdToken()}`
-                    },
-                    body: JSON.stringify({
-                        userId: user.uid,
-                        preferences: this.userPreferences
-                    })
-                });
-            } catch (error) {
-                console.warn('Could not sync to MongoDB:', error);
-                // Not critical - continue
-            }
+        // Try Firestore with timeout
+        try {
+            await Promise.race([
+                setDoc(doc(this.db, 'user_preferences', user.uid), this.userPreferences, { merge: true }),
+                new Promise((_, reject) => setTimeout(() => reject(new Error('Firestore timeout')), 3000))
+            ]);
+            console.log('Preferences saved to Firestore:', this.userPreferences);
         } catch (error) {
-            console.error('Error saving preferences:', error);
-            alert('Erro ao salvar preferências. Tente novamente.');
+            console.warn('Could not save to Firestore (may be offline):', error);
+            // Continue - localStorage fallback
+            try {
+                localStorage.setItem(`bitaca_prefs_${user.uid}`, JSON.stringify(this.userPreferences));
+                console.log('Preferences saved to localStorage as fallback');
+            } catch (e) {
+                console.error('localStorage fallback failed:', e);
+            }
+        }
+
+        // Try backend MongoDB (non-blocking)
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+            await fetch('/api/user/preferences', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${await user.getIdToken()}`
+                },
+                body: JSON.stringify({
+                    userId: user.uid,
+                    preferences: this.userPreferences
+                }),
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+            console.log('Preferences synced to MongoDB');
+        } catch (error) {
+            console.warn('Could not sync to MongoDB:', error);
+            // Not critical - continue
         }
     }
 
