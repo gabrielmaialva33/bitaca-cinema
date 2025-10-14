@@ -113,18 +113,30 @@ async function populateGrid(gridId, videos) {
 /**
  * Create a production card element
  */
-function createProductionCard(video) {
+async function createProductionCard(video) {
     const card = document.createElement('div');
     card.className = 'production-card';
     card.dataset.url = video.url;
     card.dataset.name = video.name;
 
-    // Extract thumbnail from video (placeholder for now)
-    const thumbnailUrl = 'https://images.unsplash.com/photo-1574267432644-f74f3d76d53a?w=400&h=225&fit=crop';
+    // Get TMDB metadata for thumbnail
+    let thumbnailUrl = window.tmdbAPI ? window.tmdbAPI.getPlaceholderImage() : 'https://images.unsplash.com/photo-1574267432644-f74f3d76d53a?w=500&h=750&fit=crop';
+    let metadata = null;
+
+    if (window.tmdbAPI) {
+        try {
+            metadata = await window.tmdbAPI.getMetadataForVideo(video.name);
+            if (metadata && metadata.posterURL) {
+                thumbnailUrl = metadata.posterURL;
+            }
+        } catch (error) {
+            console.error('Error fetching TMDB metadata:', error);
+        }
+    }
 
     card.innerHTML = `
         <div class="card-image">
-            <img alt="${video.name}" class="card-thumbnail" src="${thumbnailUrl}">
+            <img alt="${video.name}" class="card-thumbnail" src="${thumbnailUrl}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1574267432644-f74f3d76d53a?w=500&h=750&fit=crop'">
             <div class="card-overlay">
                 <button class="card-play-btn">
                     <i class="ki-filled ki-play"></i>
@@ -135,14 +147,14 @@ function createProductionCard(video) {
             <h3 class="card-title">${truncateText(video.name, 40)}</h3>
             <p class="card-meta">
                 <i class="ki-filled ki-video"></i>
-                Vídeo
+                ${metadata && metadata.mediaType ? (metadata.mediaType === 'tv' ? 'Série' : 'Filme') : 'Vídeo'}
             </p>
         </div>
     `;
 
     // Add click listener
     card.addEventListener('click', () => {
-        playVideo(video);
+        playVideo(video, metadata);
     });
 
     return card;
@@ -151,7 +163,7 @@ function createProductionCard(video) {
 /**
  * Play a video
  */
-function playVideo(video) {
+function playVideo(video, metadata = null) {
     const modal = document.getElementById('player-modal');
     const videoElement = document.getElementById('player-video');
     const playerInfo = document.getElementById('player-info');
@@ -161,13 +173,20 @@ function playVideo(video) {
     // Set video source
     videoElement.src = animezeyAPI.getVideoUrl(video.path);
 
+    // Build player info with metadata
+    const mediaType = metadata && metadata.mediaType ? (metadata.mediaType === 'tv' ? 'Série' : 'Filme') : 'Vídeo';
+    const overview = metadata && metadata.overview ? `<p class="player-synopsis">${metadata.overview}</p>` : '';
+    const rating = metadata && metadata.voteAverage ? `<span><i class="ki-filled ki-star"></i> ${metadata.voteAverage.toFixed(1)}</span>` : '';
+
     // Update player info
     playerInfo.innerHTML = `
         <h2 class="player-title">${video.name}</h2>
         <div class="player-meta">
-            <span><i class="ki-filled ki-video"></i> Vídeo</span>
+            <span><i class="ki-filled ki-video"></i> ${mediaType}</span>
+            ${rating}
             <span><i class="ki-filled ki-eye"></i> Streaming</span>
         </div>
+        ${overview}
         <div class="player-actions">
             <button class="action-btn" onclick="window.open('${video.url}', '_blank')">
                 <i class="ki-filled ki-file-down"></i>
