@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, type User } from 'firebase/auth';
@@ -6,6 +6,7 @@ import CoinWallet from './components/CoinWallet';
 import DailyBonus from './components/DailyBonus';
 import BettingInterface from './components/BettingInterface';
 import AgeGate from './components/AgeGate';
+import HorrorBackground3D from './components/HorrorBackground3D';
 
 // Firebase config (same as Play app)
 const firebaseConfig = {
@@ -142,9 +143,14 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-dark text-white">
+      <div className="min-h-screen bg-dark text-white relative">
+        {/* 3D Horror Background */}
+        <Suspense fallback={null}>
+          <HorrorBackground3D />
+        </Suspense>
+
         {/* Header */}
-        <header className="bg-gray-900 border-b border-gray-800 sticky top-0 z-40">
+        <header className="bg-gray-900/80 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-40">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <h1 className="text-2xl font-bold text-primary">🎲 Bitaca Bet</h1>

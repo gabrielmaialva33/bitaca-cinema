@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useWallet, useDailyBonus } from '../hooks/useWallet';
+import CoinExplosion3D from './CoinExplosion3D';
 
 interface DailyBonusProps {
   userId: string;
@@ -31,13 +32,15 @@ export default function DailyBonus({ userId }: DailyBonusProps) {
   };
 
   return (
-    <div className="card relative overflow-hidden">
-      {/* Celebration Animation */}
-      {showCelebration && (
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 animate-pulse z-10 flex items-center justify-center">
-          <div className="text-6xl animate-bounce">🎉 +100 coins!</div>
-        </div>
-      )}
+    <>
+      {/* 3D Coin Explosion */}
+      <CoinExplosion3D
+        show={showCelebration}
+        amount={100}
+        onComplete={() => setShowCelebration(false)}
+      />
+
+      <div className="card relative overflow-hidden">
 
       <div className="flex items-center justify-between">
         <div>
