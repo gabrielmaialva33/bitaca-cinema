@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    console.log('🎬 Bitaca Play initialized');
+    console.log('Bitaca Play initialized');
 
     // Load initial content
     await loadContent();
@@ -43,7 +43,7 @@ async function loadContent() {
         populateGrid('filmes-carousel', movies.filter(v => !v.name.toLowerCase().includes('season' || 'ep' || 'episod')));
         populateGrid('series-carousel', movies.filter(v => v.name.toLowerCase().includes('season' || 'ep' || 'episod')));
 
-        console.log('✅ Content loaded - Animes:', animes.length, '| Movies:', movies.length);
+        console.log('Content loaded - Animes:', animes.length, '| Movies:', movies.length);
 
     } catch (error) {
         console.error('Error loading content:', error);

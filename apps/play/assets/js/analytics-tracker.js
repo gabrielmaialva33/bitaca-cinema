@@ -487,7 +487,7 @@ export class AnalyticsTracker {
                 console.warn('Could not sync to backend:', error);
             }
 
-            console.log('💾 Session saved:', this.sessionId);
+            console.log('Session saved:', this.sessionId);
         } catch (error) {
             console.error('Error saving session:', error);
         }
