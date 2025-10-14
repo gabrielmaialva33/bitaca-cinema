@@ -13,6 +13,8 @@ const SEARCH_QUERIES = {
 test.describe('Search Functionality', () => {
   // Desktop tests
   test.describe('Desktop', () => {
+    test.skip(({ browserName, $projectName }) => $projectName !== 'Desktop', 'Desktop tests only');
+
     test('should open search overlay when clicking search button', async ({ page }) => {
       await page.goto(BASE_URL);
 
@@ -137,7 +139,7 @@ test.describe('Search Functionality', () => {
 
   // Mobile tests
   test.describe('Mobile', () => {
-    test.use({ ...devices['iPhone 13'] });
+    test.skip(({ browserName, $projectName }) => $projectName !== 'Mobile', 'Mobile tests only');
 
     test('should be responsive on mobile', async ({ page }) => {
       await page.goto(BASE_URL);
@@ -229,7 +231,7 @@ test.describe('Search Functionality', () => {
 
   // Tablet tests
   test.describe('Tablet', () => {
-    test.use({ ...devices['iPad Pro'] });
+    test.skip(({ browserName, $projectName }) => $projectName !== 'Tablet', 'Tablet tests only');
 
     test('should be responsive on tablet', async ({ page }) => {
       await page.goto(BASE_URL);
