@@ -95,14 +95,17 @@ window.addEventListener('preferences-updated', async () => {
 /**
  * Populate a grid with productions
  */
-function populateGrid(gridId, videos) {
+async function populateGrid(gridId, videos) {
     const grid = document.getElementById(gridId);
     if (!grid || !videos || videos.length === 0) return;
 
     grid.innerHTML = '';
 
-    videos.forEach(video => {
-        const card = createProductionCard(video);
+    // Create all cards in parallel
+    const cardPromises = videos.map(video => createProductionCard(video));
+    const cards = await Promise.all(cardPromises);
+
+    cards.forEach(card => {
         grid.appendChild(card);
     });
 }
