@@ -553,6 +553,15 @@ def init_indexes():
         db[COLLECTIONS["bet_records"]].create_index("status")
         db[COLLECTIONS["bet_records"]].create_index("created_at")
 
+        # RL audit logs indexes
+        db[COLLECTIONS["rl_audit_logs"]].create_index("battle_id")
+        db[COLLECTIONS["rl_audit_logs"]].create_index("timestamp")
+        db[COLLECTIONS["rl_audit_logs"]].create_index([("battle_id", 1), ("timestamp", 1)])
+
+        # RL model snapshots indexes
+        db[COLLECTIONS["rl_model_snapshots"]].create_index("version")
+        db[COLLECTIONS["rl_model_snapshots"]].create_index("created_at")
+
         print("✅ Database indexes created")
     except Exception as e:
         print(f"⚠️  Index creation warning: {e}")
