@@ -2,9 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Bad Parenting Horror Theme */
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&display=swap');
+
 @layer base {
   body {
-    @apply bg-dark text-white font-sans antialiased;
+    @apply bg-void-black text-dead-white font-horror antialiased;
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(74, 0, 0, 0.15) 0%, transparent 50%),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.3) 2px,
+        rgba(0, 0, 0, 0.3) 4px
+      );
+    background-size: 100% 100%, 100% 100%, 100% 4px;
+  }
+
+  * {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="%23FF0000" opacity="0.3"/><circle cx="12" cy="12" r="3" fill="%23FFFFFF"/></svg>'), auto;
+  }
+
+  button, a {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="%23FF0000" opacity="0.6"/><circle cx="12" cy="12" r="5" fill="%23FFFFFF"/></svg>'), pointer;
   }
 }
 
