@@ -40,6 +40,7 @@ COPY database.py .
 COPY r2_storage.py .
 COPY deronas_personality.py .
 COPY agents/ ./agents/
+COPY models/ ./models/
 # Note: embeddings.json will be in the build context from CI/CD
 COPY embeddings.json ./embeddings.json
 
