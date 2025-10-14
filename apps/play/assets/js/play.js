@@ -60,7 +60,7 @@ async function loadPersonalizedContent(preferences) {
     showLoading();
 
     try {
-        console.log('🎯 Loading personalized content for:', preferences);
+        console.log('Loading personalized content for:', preferences);
 
         // Get user's favorite genres from onboarding
         const genres = preferences.favoriteGenres || [];
@@ -76,7 +76,7 @@ async function loadPersonalizedContent(preferences) {
         // Update featured grid with personalized content
         if (personalizedResults.length > 0) {
             populateGrid('featured-grid', personalizedResults.slice(0, 8));
-            console.log('✅ Personalized content loaded:', personalizedResults.length);
+            console.log('Personalized content loaded:', personalizedResults.length);
         }
 
     } catch (error) {
@@ -88,7 +88,7 @@ async function loadPersonalizedContent(preferences) {
 
 // Listen for preferences update event
 window.addEventListener('preferences-updated', async () => {
-    console.log('🔄 Preferences updated, reloading content...');
+    console.log('Preferences updated, reloading content...');
     await loadContent();
 });
 
@@ -183,7 +183,7 @@ function playVideo(video) {
     // Play video
     videoElement.play();
 
-    console.log('▶️ Playing:', video.name);
+    console.log('Playing:', video.name);
 }
 
 /**

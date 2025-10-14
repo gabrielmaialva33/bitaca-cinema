@@ -52,14 +52,14 @@ export class ViewingAnalytics {
     }
 
     async init() {
-        console.log('📊 Initializing Viewing Analytics...');
+        console.log(' Initializing Viewing Analytics...');
 
         // Sign in anonymously if no user
         if (!this.currentUser) {
             await this.signInAnonymous();
         }
 
-        console.log('✅ Viewing Analytics initialized');
+        console.log(' Viewing Analytics initialized');
     }
 
     setupAuthListener() {

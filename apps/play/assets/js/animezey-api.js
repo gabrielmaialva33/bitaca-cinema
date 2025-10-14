@@ -84,7 +84,7 @@ export class AnimeZeyAPI {
      * @returns {Promise<Array>} Formatted video results
      */
     async search(query, driveId = 1) {
-        console.log(`🔍 Searching in drive ${driveId}:`, query);
+        console.log(`Searching in drive ${driveId}:`, query);
 
         let response;
         if (driveId === 0) {
@@ -107,7 +107,7 @@ export class AnimeZeyAPI {
      * @returns {Promise<Array>} Video results
      */
     async getPopularContent(driveId = 1, limit = 20) {
-        console.log(`⭐ Getting content from drive ${driveId}...`);
+        console.log(`Getting content from drive ${driveId}...`);
 
         // Search with empty query to get recent files
         const results = await this.search('', driveId);

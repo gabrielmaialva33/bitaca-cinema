@@ -43,7 +43,7 @@ export class AdvancedVideoPlayer {
     }
 
     async init() {
-        console.log('🎬 Initializing Advanced Video Player...');
+        console.log(' Initializing Advanced Video Player...');
 
         // Create video element
         this.createVideoElement();
@@ -70,7 +70,7 @@ export class AdvancedVideoPlayer {
             this.setupAnalytics();
         }
 
-        console.log('✅ Advanced Video Player initialized');
+        console.log(' Advanced Video Player initialized');
     }
 
     createVideoElement() {

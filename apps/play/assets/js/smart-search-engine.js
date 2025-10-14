@@ -25,12 +25,12 @@ export class SmartSearchEngine {
     }
 
     async init() {
-        console.log('🔍 Initializing Smart Search Engine...');
+        console.log(' Initializing Smart Search Engine...');
 
         try {
             await this.loadEmbeddings();
             this.loaded = true;
-            console.log('✅ Smart Search Engine initialized');
+            console.log('Smart Search Engine initialized');
         } catch (error) {
             console.error('Error initializing search engine:', error);
             throw error;
