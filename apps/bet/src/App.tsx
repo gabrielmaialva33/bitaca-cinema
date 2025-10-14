@@ -52,7 +52,7 @@ function App() {
       setAgeVerified(true);
     }
 
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = auth ? onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
 
@@ -61,6 +61,8 @@ function App() {
         setShowLogin(true);
       }
     });
+
+    }) : () => { setLoading(false); };
 
     return () => unsubscribe();
   }, []);
