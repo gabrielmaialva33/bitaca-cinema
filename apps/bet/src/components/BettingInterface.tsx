@@ -3,6 +3,7 @@ import { usePlaceBet, useUserBets } from '../hooks/useBetting';
 import AIInsights from './AIInsights';
 import LiveCommentary from './LiveCommentary';
 import LiveBattle from './LiveBattle';
+import RapperCard from './RapperCard';
 
 interface BettingInterfaceProps {
   userId: string;
@@ -70,27 +71,19 @@ export default function BettingInterface({ userId }: BettingInterfaceProps) {
                 </span>
               </div>
 
-              {/* Contestants */}
+              {/* Rapper Cards with Smart Tags */}
               <div className="space-y-3">
                 {battle.contestants.map((contestant, idx) => (
-                  <div key={idx} className="bg-gray-800 rounded-lg p-4 hover:bg-gray-750 transition">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-white font-semibold text-lg">{contestant}</p>
-                        <p className="text-gray-400 text-sm">Odds: {battle.odds[idx]}x</p>
-                      </div>
-                      <button
-                        onClick={() => {
-                          setSelectedBattle(battle.id);
-                          setBetOn(contestant);
-                        }}
-                        disabled={battle.status !== 'live'}
-                        className="btn-primary text-sm"
-                      >
-                        Apostar
-                      </button>
-                    </div>
-                  </div>
+                  <RapperCard
+                    key={idx}
+                    rapperName={contestant}
+                    odds={battle.odds[idx]}
+                    onBet={() => {
+                      setSelectedBattle(battle.id);
+                      setBetOn(contestant);
+                    }}
+                    isDisabled={battle.status !== 'live'}
+                  />
                 ))}
               </div>
             </div>
