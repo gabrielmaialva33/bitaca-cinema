@@ -25,29 +25,61 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 /**
+ * Fallback mock data for when API is unavailable (CORS issues)
+ */
+const MOCK_DATA = {
+    animes: [
+        { name: 'Naruto Shippuden', url: '#', path: '/naruto.mp4' },
+        { name: 'One Piece', url: '#', path: '/onepiece.mp4' },
+        { name: 'Attack on Titan', url: '#', path: '/aot.mp4' },
+        { name: 'My Hero Academia', url: '#', path: '/mha.mp4' },
+        { name: 'Demon Slayer', url: '#', path: '/demonslayer.mp4' },
+        { name: 'Jujutsu Kaisen', url: '#', path: '/jjk.mp4' },
+        { name: 'Death Note', url: '#', path: '/deathnote.mp4' },
+        { name: 'Tokyo Ghoul', url: '#', path: '/tokyoghoul.mp4' }
+    ],
+    movies: [
+        { name: 'Spider-Man: No Way Home', url: '#', path: '/spiderman.mp4' },
+        { name: 'The Batman', url: '#', path: '/batman.mp4' },
+        { name: 'Top Gun: Maverick', url: '#', path: '/topgun.mp4' },
+        { name: 'Avatar: The Way of Water', url: '#', path: '/avatar.mp4' },
+        { name: 'John Wick 4', url: '#', path: '/johnwick.mp4' },
+        { name: 'Oppenheimer', url: '#', path: '/oppenheimer.mp4' }
+    ]
+};
+
+/**
  * Load content from AnimeZey based on user preferences
  */
 async function loadContent() {
     showLoading();
 
     try {
-        // Load from both drives
+        // Try to load from API
         const [animes, movies] = await Promise.all([
-            animezeyAPI.getPopularContent(0, 20), // Drive 0: Animes
-            animezeyAPI.getPopularContent(1, 20)  // Drive 1: Filmes e Séries
+            animezeyAPI.getPopularContent(0, 20).catch(() => []), // Drive 0: Animes
+            animezeyAPI.getPopularContent(1, 20).catch(() => [])  // Drive 1: Filmes e Séries
         ]);
 
-        // Populate grids
-        populateGrid('featured-grid', [...animes.slice(0, 4), ...movies.slice(0, 4)]);
-        populateGrid('animes-carousel', animes);
-        populateGrid('filmes-carousel', movies.filter(v => !v.name.toLowerCase().includes('season' || 'ep' || 'episod')));
-        populateGrid('series-carousel', movies.filter(v => v.name.toLowerCase().includes('season' || 'ep' || 'episod')));
+        // If API fails (CORS or network error), use mock data
+        const finalAnimes = animes.length > 0 ? animes : MOCK_DATA.animes;
+        const finalMovies = movies.length > 0 ? movies : MOCK_DATA.movies;
 
-        console.log('Content loaded - Animes:', animes.length, '| Movies:', movies.length);
+        // Populate grids
+        populateGrid('featured-grid', [...finalAnimes.slice(0, 4), ...finalMovies.slice(0, 4)]);
+        populateGrid('animes-carousel', finalAnimes);
+        populateGrid('filmes-carousel', finalMovies.filter(v => !v.name.toLowerCase().includes('season' || 'ep' || 'episod')));
+        populateGrid('series-carousel', finalMovies.filter(v => v.name.toLowerCase().includes('season' || 'ep' || 'episod')));
+
+        console.log('Content loaded - Animes:', finalAnimes.length, '| Movies:', finalMovies.length);
+
+        if (animes.length === 0 && movies.length === 0) {
+            console.warn('Using fallback mock data due to API unavailability (CORS)');
+        }
 
     } catch (error) {
         console.error('Error loading content:', error);
-        showErrorToast('Erro ao carregar conteúdo. Tente novamente.');
+        showErrorToast('Usando conteúdo de demonstração. API indisponível.');
     } finally {
         hideLoading();
     }
