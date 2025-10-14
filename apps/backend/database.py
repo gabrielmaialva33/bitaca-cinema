@@ -84,7 +84,9 @@ COLLECTIONS = {
     "wallets": "wallets",
     "coin_transactions": "coin_transactions",
     "daily_bonuses": "daily_bonuses",
-    "bet_records": "bet_records"
+    "bet_records": "bet_records",
+    "rl_audit_logs": "rl_audit_logs",
+    "rl_model_snapshots": "rl_model_snapshots"
 }
 
 
