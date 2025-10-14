@@ -25,29 +25,72 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 /**
- * Load content from AnimeZey
+ * Load content from AnimeZey based on user preferences
  */
 async function loadContent() {
     showLoading();
 
     try {
-        // Get content from "Filmes e Séries" drive (driveId = 1)
-        const featured = await animezeyAPI.getPopularContent(1, 20);
+        // Load from both drives
+        const [animes, movies] = await Promise.all([
+            animezeyAPI.getPopularContent(0, 20), // Drive 0: Animes
+            animezeyAPI.getPopularContent(1, 20)  // Drive 1: Filmes e Séries
+        ]);
 
         // Populate grids
-        populateGrid('featured-grid', featured.slice(0, 8));
-        populateGrid('patrimonio-carousel', featured.filter(v => v.name.toLowerCase().includes('patrimônio' || 'memorial' || 'história')).slice(0, 8));
-        populateGrid('musica-carousel', featured.filter(v => v.name.toLowerCase().includes('música' || 'clipe' || 'show')).slice(0, 8));
-        populateGrid('ambiente-carousel', featured.filter(v => v.name.toLowerCase().includes('ambiente' || 'natureza' || 'paisagem')).slice(0, 8));
+        populateGrid('featured-grid', [...animes.slice(0, 4), ...movies.slice(0, 4)]);
+        populateGrid('animes-carousel', animes);
+        populateGrid('filmes-carousel', movies.filter(v => !v.name.toLowerCase().includes('season' || 'ep' || 'episod')));
+        populateGrid('series-carousel', movies.filter(v => v.name.toLowerCase().includes('season' || 'ep' || 'episod')));
 
-        console.log('✅ Content loaded:', featured.length, 'videos');
+        console.log('✅ Content loaded - Animes:', animes.length, '| Movies:', movies.length);
 
     } catch (error) {
         console.error('Error loading content:', error);
+        showErrorToast('Erro ao carregar conteúdo. Tente novamente.');
     } finally {
         hideLoading();
     }
 }
+
+/**
+ * Load personalized content based on user preferences
+ */
+async function loadPersonalizedContent(preferences) {
+    showLoading();
+
+    try {
+        console.log('🎯 Loading personalized content for:', preferences);
+
+        // Get user's favorite genres from onboarding
+        const genres = preferences.favoriteGenres || [];
+
+        // Search for content matching user preferences
+        const personalizedResults = [];
+
+        for (const genre of genres.slice(0, 3)) {
+            const results = await animezeyAPI.search(genre, 1);
+            personalizedResults.push(...results.slice(0, 5));
+        }
+
+        // Update featured grid with personalized content
+        if (personalizedResults.length > 0) {
+            populateGrid('featured-grid', personalizedResults.slice(0, 8));
+            console.log('✅ Personalized content loaded:', personalizedResults.length);
+        }
+
+    } catch (error) {
+        console.error('Error loading personalized content:', error);
+    } finally {
+        hideLoading();
+    }
+}
+
+// Listen for preferences update event
+window.addEventListener('preferences-updated', async () => {
+    console.log('🔄 Preferences updated, reloading content...');
+    await loadContent();
+});
 
 /**
  * Populate a grid with productions
