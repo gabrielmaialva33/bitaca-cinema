@@ -132,7 +132,7 @@ export function useSpeechRecognition() {
     recognitionInstance.continuous = false;
     recognitionInstance.interimResults = false;
 
-    recognitionInstance.onresult = (event) => {
+    recognitionInstance.onresult = (event: any) => {
       const result = event.results[0][0].transcript;
       setTranscript(result);
     };
@@ -141,7 +141,7 @@ export function useSpeechRecognition() {
       setListening(false);
     };
 
-    recognitionInstance.onerror = (event) => {
+    recognitionInstance.onerror = (event: any) => {
       console.error('Speech recognition error:', event.error);
       setListening(false);
     };
@@ -181,7 +181,7 @@ export function useSpeechRecognition() {
       const amount = amountMatch ? parseInt(amountMatch[1]) : 100;
 
       // Check for rapper mentions
-      let rapper = null;
+      let rapper: string | undefined = undefined;
       if (lowerText.includes('primeiro') || lowerText.includes('um')) {
         rapper = 'first';
       } else if (lowerText.includes('segundo') || lowerText.includes('dois')) {
