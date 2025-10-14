@@ -208,39 +208,65 @@ document.getElementById('player-overlay')?.addEventListener('click', () => {
 });
 
 /**
- * Search functionality
+ * Search functionality with debounce
  */
-document.getElementById('search-input')?.addEventListener('input', async (e) => {
+let searchTimeout;
+const searchInput = document.getElementById('search-input');
+
+searchInput?.addEventListener('input', async (e) => {
     const query = e.target.value.trim();
     const resultsContainer = document.getElementById('search-results');
 
-    if (!query || query.length < 3) {
+    // Clear previous timeout
+    clearTimeout(searchTimeout);
+
+    if (!query || query.length < 2) {
         resultsContainer.innerHTML = '';
         return;
     }
 
-    try {
-        const results = await animezeyAPI.search(query, 1);
+    // Show loading indicator
+    resultsContainer.innerHTML = '<div class="search-loading"><div class="spinner"></div><p>Buscando...</p></div>';
 
-        if (results.length === 0) {
-            resultsContainer.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nenhum resultado encontrado</p>';
-            return;
+    // Debounce search (wait 500ms after user stops typing)
+    searchTimeout = setTimeout(async () => {
+        try {
+            // Search in both drives (anime and movies)
+            const [animeResults, movieResults] = await Promise.all([
+                animezeyAPI.search(query, 0).catch(() => []),
+                animezeyAPI.search(query, 1).catch(() => [])
+            ]);
+
+            const allResults = [...animeResults, ...movieResults];
+
+            if (allResults.length === 0) {
+                resultsContainer.innerHTML = '<p class="search-empty">Nenhum resultado encontrado para "' + query + '"</p>';
+                return;
+            }
+
+            resultsContainer.innerHTML = '';
+
+            // Add results count
+            const countElement = document.createElement('p');
+            countElement.className = 'search-count';
+            countElement.textContent = `${allResults.length} resultado(s) encontrado(s)`;
+            resultsContainer.appendChild(countElement);
+
+            const grid = document.createElement('div');
+            grid.className = 'productions-grid';
+
+            allResults.slice(0, 24).forEach(video => {
+                const card = createProductionCard(video);
+                grid.appendChild(card);
+            });
+
+            resultsContainer.appendChild(grid);
+
+        } catch (error) {
+            console.error('Search error:', error);
+            resultsContainer.innerHTML = '<p class="search-error">Erro ao buscar. Tente novamente.</p>';
         }
-
-        resultsContainer.innerHTML = '';
-        const grid = document.createElement('div');
-        grid.className = 'productions-grid';
-
-        results.slice(0, 12).forEach(video => {
-            const card = createProductionCard(video);
-            grid.appendChild(card);
-        });
-
-        resultsContainer.appendChild(grid);
-
-    } catch (error) {
-        console.error('Search error:', error);
-    }
+    }, 500);
 });
 
 // Utility functions
