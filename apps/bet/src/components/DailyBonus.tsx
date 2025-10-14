@@ -79,5 +79,6 @@ export default function DailyBonus({ userId }: DailyBonusProps) {
         </div>
       )}
     </div>
+    </>
   );
 }
