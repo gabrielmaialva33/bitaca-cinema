@@ -13,8 +13,6 @@ const SEARCH_QUERIES = {
 test.describe('Search Functionality', () => {
   // Desktop tests
   test.describe('Desktop', () => {
-    test.skip(({ browserName, $projectName }) => $projectName !== 'Desktop', 'Desktop tests only');
-
     test('should open search overlay when clicking search button', async ({ page }) => {
       await page.goto(BASE_URL);
 
@@ -265,6 +263,8 @@ test.describe('Search Functionality', () => {
 
   // Performance tests
   test.describe('Performance', () => {
+    test.skip(({ browserName, $projectName }) => $projectName !== 'Desktop', 'Performance tests on Desktop only');
+
     test('should debounce search requests', async ({ page }) => {
       await page.goto(BASE_URL);
 
@@ -313,6 +313,8 @@ test.describe('Search Functionality', () => {
 
   // Accessibility tests
   test.describe('Accessibility', () => {
+    test.skip(({ browserName, $projectName }) => $projectName !== 'Desktop', 'Accessibility tests on Desktop only');
+
     test('should have proper ARIA labels', async ({ page }) => {
       await page.goto(BASE_URL);
 
