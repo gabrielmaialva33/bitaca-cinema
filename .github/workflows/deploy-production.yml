@@ -60,6 +60,7 @@ jobs:
           - play
           - chat
           - play-3d
+          - bet
         include:
           - app: backend
             source: apps/backend
@@ -77,6 +78,11 @@ jobs:
             source: apps/play-3d
             target: /opt/bitaca-cinema/apps/play-3d
             service: nginx
+          - app: bet
+            source: apps/bet
+            target: /opt/bitaca-cinema/apps/bet
+            service: nginx
+            needs_build: true
 
     steps:
       - name: Checkout code
