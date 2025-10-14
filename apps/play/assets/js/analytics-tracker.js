@@ -26,7 +26,7 @@ export class AnalyticsTracker {
         };
 
         this.setupTracking();
-        console.log('📊 Analytics Tracker initialized', this.deviceInfo);
+        console.log('Analytics Tracker initialized', this.deviceInfo);
     }
 
     /**
@@ -259,7 +259,7 @@ export class AnalyticsTracker {
         // Update heatmap
         this.updateHeatmap(clickData);
 
-        console.log('🖱️ Click tracked:', clickData);
+        console.log('Click tracked:', clickData);
     }
 
     /**
@@ -380,7 +380,7 @@ export class AnalyticsTracker {
         this.rlState.rewards.push(reward);
         this.rlState.states.push(state);
 
-        console.log('🎯 RL Action:', action, 'Reward:', reward);
+        console.log('RL Action:', action, 'Reward:', reward);
     }
 
     /**
@@ -538,7 +538,7 @@ window.addEventListener('auth-ready', () => {
         // Expose toggle heatmap function
         window.toggleHeatmap = () => analyticsTracker.toggleHeatmap();
 
-        console.log('📊 Analytics ready. Type toggleHeatmap() to see click heatmap!');
+        console.log('Analytics ready. Type toggleHeatmap() to see click heatmap!');
     }
 });
 

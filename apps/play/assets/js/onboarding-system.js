@@ -206,7 +206,7 @@ export class OnboardingSystem {
     getWelcomeStep() {
         return `
             <div class="onboarding-step welcome-step">
-                <div class="welcome-icon">🎬</div>
+                <div class="welcome-icon"></div>
                 <h2 class="welcome-title">Bem-vindo ao Bitaca Play!</h2>
                 <p class="welcome-subtitle">
                     Vamos personalizar sua experiência para recomendar os melhores animes e filmes para você.
