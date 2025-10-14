@@ -261,5 +261,21 @@ function truncateText(text, maxLength) {
     return text.substring(0, maxLength) + '...';
 }
 
+function showErrorToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'error-toast';
+    toast.innerHTML = `
+        <i class="ki-filled ki-information-2"></i>
+        <span>${message}</span>
+    `;
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.classList.add('show'), 100);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
 // Export for other modules
-export { animezeyAPI, playVideo };
+export { animezeyAPI, playVideo, loadPersonalizedContent };
