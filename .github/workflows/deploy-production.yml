@@ -98,6 +98,20 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ env.SERVER_HOST }} >> ~/.ssh/known_hosts
 
+      - name: Setup Node.js (for bet app build)
+        if: matrix.app == 'bet'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build bet app
+        if: matrix.app == 'bet'
+        run: |
+          cd ${{ matrix.source }}
+          npm install
+          npm run build
+          echo "✅ Bet app built successfully"
+
       - name: Deploy ${{ matrix.app }}
         run: |
           ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} << 'EOF'
