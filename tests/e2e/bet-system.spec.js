@@ -23,7 +23,7 @@ test.describe('Bitaca Bet - Coin System E2E', () => {
         await expect(page.locator('button:has-text("Voltar")')).toBeVisible();
         await expect(page.locator('button:has-text("Prosseguir")')).toBeVisible();
 
-        console.log('✅ Age gate displayed correctly');
+        console.log('[PASS] Age gate displayed correctly');
     });
 
     test('Should require age confirmation before proceeding', async ({ page }) => {
@@ -40,7 +40,7 @@ test.describe('Bitaca Bet - Coin System E2E', () => {
         // Now button should be enabled
         await expect(proceedBtn).toBeEnabled();
 
-        console.log('✅ Age confirmation required');
+        console.log('[PASS] Age confirmation required');
     });
 
     test('Should redirect to Google login after age confirmation', async ({ page }) => {
@@ -57,7 +57,7 @@ test.describe('Bitaca Bet - Coin System E2E', () => {
         await expect(page.locator('text=/Entre com sua conta Google/i')).toBeVisible();
         await expect(page.locator('button:has-text("Entrar com Google")')).toBeVisible();
 
-        console.log('✅ Google login screen shown');
+        console.log('[PASS] Google login screen shown');
     });
 
     test('Should show wallet components after auth (mock)', async ({ page, context }) => {
@@ -79,7 +79,7 @@ test.describe('Bitaca Bet - Coin System E2E', () => {
 
         // Check if wallet components would load (may timeout waiting for real auth)
         // This test is limited without real auth, but verifies page structure
-        console.log('✅ Auth flow structure verified');
+        console.log('[PASS] Auth flow structure verified');
     });
 
     test('Should display API endpoints documentation', async ({ page }) => {
@@ -96,7 +96,7 @@ test.describe('Bitaca Bet - Coin System E2E', () => {
         await expect(page.locator('text=/\\/api\\/coins\\/daily-bonus/i')).toBeVisible();
         await expect(page.locator('text=/\\/api\\/coins\\/bet/i')).toBeVisible();
 
-        console.log('✅ API documentation accessible');
+        console.log('[PASS] API documentation accessible');
     });
 });
 
@@ -117,7 +117,7 @@ test.describe('RL Auditing System E2E', () => {
         expect(data).toHaveProperty('min_odds');
         expect(data).toHaveProperty('max_odds');
 
-        console.log('✅ Fairness report:', JSON.stringify(data, null, 2));
+        console.log('[PASS] Fairness report:', JSON.stringify(data, null, 2));
     });
 
     test('RL model info should be accessible', async ({ request }) => {
@@ -127,7 +127,7 @@ test.describe('RL Auditing System E2E', () => {
 
         const data = await response.json();
 
-        console.log('✅ Model info:', JSON.stringify(data, null, 2));
+        console.log('[PASS] Model info:', JSON.stringify(data, null, 2));
     });
 
     test('Audit trail should be retrievable for battle', async ({ request }) => {
@@ -143,7 +143,7 @@ test.describe('RL Auditing System E2E', () => {
         expect(data).toHaveProperty('auditable');
         expect(data.auditable).toBe(true);
 
-        console.log('✅ Audit trail structure verified');
+        console.log('[PASS] Audit trail structure verified');
     });
 
     test('Battle verification should work', async ({ request }) => {
@@ -157,7 +157,7 @@ test.describe('RL Auditing System E2E', () => {
         expect(data).toHaveProperty('total_decisions');
         expect(data).toHaveProperty('anomalies');
 
-        console.log('✅ Verification endpoint works');
+        console.log('[PASS] Verification endpoint works');
     });
 });
 
@@ -182,7 +182,7 @@ test.describe('Coin System API E2E', () => {
         expect(typeof data.balance).toBe('number');
         expect(data.balance).toBeGreaterThanOrEqual(0);
 
-        console.log('✅ Wallet structure:', JSON.stringify(data, null, 2));
+        console.log('[PASS] Wallet structure:', JSON.stringify(data, null, 2));
     });
 
     test('Leaderboard should return valid data', async ({ request }) => {
@@ -203,7 +203,7 @@ test.describe('Coin System API E2E', () => {
             expect(entry).toHaveProperty('display_name');
         }
 
-        console.log('✅ Leaderboard works');
+        console.log('[PASS] Leaderboard works');
     });
 
     test('Transaction history endpoint should work', async ({ request }) => {
@@ -220,7 +220,7 @@ test.describe('Coin System API E2E', () => {
         expect(data).toHaveProperty('page');
         expect(Array.isArray(data.transactions)).toBeTruthy();
 
-        console.log('✅ Transactions endpoint works');
+        console.log('[PASS] Transactions endpoint works');
     });
 });
 
@@ -235,7 +235,7 @@ test.describe('Security & Performance', () => {
 
         expect(response.status()).toBeLessThan(500);
 
-        console.log('✅ Page loads successfully');
+        console.log('[PASS] Page loads successfully');
     });
 
     test('Should load within acceptable time', async ({ page }) => {
@@ -252,7 +252,7 @@ test.describe('Security & Performance', () => {
 
         expect(loadTime).toBeLessThan(5000); // Should load in under 5s
 
-        console.log('✅ Performance acceptable');
+        console.log('[PASS] Performance acceptable');
     });
 
     test('API should have rate limiting headers', async ({ request }) => {
@@ -264,6 +264,6 @@ test.describe('Security & Performance', () => {
         const timing = await response.request().timing();
         console.log('API response timing:', timing);
 
-        console.log('✅ API responsive');
+        console.log('[PASS] API responsive');
     });
 });
