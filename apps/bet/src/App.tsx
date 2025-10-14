@@ -20,8 +20,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+let app;
+let auth;
+try {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+} catch (error) {
+  console.error('Firebase initialization error:', error);
+}
 
 // Create React Query client
 const queryClient = new QueryClient({
@@ -66,6 +72,10 @@ function App() {
   };
 
   const handleGoogleSignIn = async () => {
+    if (!auth) {
+      alert('Firebase não inicializado corretamente. Por favor, recarregue a página.');
+      return;
+    }
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
