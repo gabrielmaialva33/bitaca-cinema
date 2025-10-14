@@ -143,12 +143,12 @@ class BitacaChat {
         // Settings
         this.elements.temperatureSlider.addEventListener('input', (e) => {
             this.elements.temperatureValue.textContent = e.target.value;
-            this.chat.updateSettings({ temperature: parseFloat(e.target.value) });
+            this.chat.updateSettings({temperature: parseFloat(e.target.value)});
         });
 
         this.elements.maxTokensSlider.addEventListener('input', (e) => {
             this.elements.maxTokensValue.textContent = e.target.value;
-            this.chat.updateSettings({ maxTokens: parseInt(e.target.value) });
+            this.chat.updateSettings({maxTokens: parseInt(e.target.value)});
         });
 
         this.elements.saveApiKeyBtn.addEventListener('click', () => this.saveApiKey());
