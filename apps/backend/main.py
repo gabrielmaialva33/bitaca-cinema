@@ -827,6 +827,258 @@ async def text_to_speech(request: TTSRequest, req: Request):
         )
 
 
+# Coin System Endpoints
+
+@app.get("/api/coins/wallet")
+async def get_wallet(user_id: str, req: Request):
+    """
+    Get user wallet information
+    """
+    if not MONGODB_AVAILABLE:
+        raise HTTPException(
+            status_code=503,
+            detail="Database not available"
+        )
+
+    try:
+        # Get wallet
+        wallet = WalletDB.get_or_create_wallet(user_id)
+
+        # Check daily bonus status
+        can_claim, next_claim_at = DailyBonusDB.can_claim_bonus(user_id)
+
+        # Get last bonus claim
+        last_claim = DailyBonusDB.get_last_claim(user_id)
+
+        # Calculate seconds until next bonus
+        next_bonus_in = None
+        if not can_claim and next_claim_at:
+            next_bonus_in = int((next_claim_at - datetime.utcnow()).total_seconds())
+
+        return JSONResponse(content={
+            "user_id": wallet["user_id"],
+            "balance": wallet["balance"],
+            "total_earned": wallet.get("total_earned", 0),
+            "total_spent": wallet.get("total_spent", 0),
+            "last_daily_bonus": last_claim["claimed_at"].isoformat() if last_claim else None,
+            "can_claim_bonus": can_claim,
+            "next_bonus_in": max(0, next_bonus_in) if next_bonus_in else None
+        })
+
+    except Exception as e:
+        print(f"❌ Wallet error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/coins/daily-bonus")
+async def claim_daily_bonus(user_id: str, req: Request):
+    """
+    Claim daily bonus coins
+    """
+    if not MONGODB_AVAILABLE:
+        raise HTTPException(
+            status_code=503,
+            detail="Database not available"
+        )
+
+    # Rate limiting
+    client_ip = req.client.host
+    if not check_rate_limit(client_ip):
+        raise HTTPException(
+            status_code=429,
+            detail="Rate limit exceeded. Try again in 1 minute."
+        )
+
+    try:
+        result = DailyBonusDB.claim_bonus(user_id, bonus_amount=100)
+
+        return JSONResponse(content={
+            "success": result["success"],
+            "bonus_amount": result["bonus_amount"],
+            "new_balance": result["new_balance"],
+            "streak_days": result["streak_days"],
+            "next_bonus_at": result["next_bonus_at"].isoformat()
+        })
+
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        print(f"❌ Daily bonus error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/coins/transactions")
+async def get_transactions(user_id: str, page: int = 1, page_size: int = 20, req: Request = None):
+    """
+    Get user transaction history
+    """
+    if not MONGODB_AVAILABLE:
+        raise HTTPException(
+            status_code=503,
+            detail="Database not available"
+        )
+
+    try:
+        skip = (page - 1) * page_size
+
+        transactions = WalletDB.get_transactions(user_id, limit=page_size, skip=skip)
+        total_count = WalletDB.get_transaction_count(user_id)
+
+        # Convert ObjectId to string and datetime to ISO format
+        for txn in transactions:
+            if "_id" in txn:
+                txn["_id"] = str(txn["_id"])
+            if "created_at" in txn:
+                txn["created_at"] = txn["created_at"].isoformat()
+
+        return JSONResponse(content={
+            "transactions": transactions,
+            "total_count": total_count,
+            "page": page,
+            "page_size": page_size
+        })
+
+    except Exception as e:
+        print(f"❌ Transactions error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/coins/bet")
+async def place_bet(request: PlaceBetRequest, req: Request):
+    """
+    Place a bet on rap battle
+    """
+    if not MONGODB_AVAILABLE:
+        raise HTTPException(
+            status_code=503,
+            detail="Database not available"
+        )
+
+    # Rate limiting
+    client_ip = req.client.host
+    if not check_rate_limit(client_ip):
+        raise HTTPException(
+            status_code=429,
+            detail="Rate limit exceeded. Try again in 1 minute."
+        )
+
+    try:
+        # Calculate odds (simple 2.0x for now, could be dynamic based on betting pool)
+        odds = 2.0
+
+        result = BettingDB.place_bet(
+            user_id=request.user_id,
+            battle_id=request.battle_id,
+            bet_on=request.bet_on,
+            bet_amount=request.bet_amount,
+            odds=odds
+        )
+
+        return JSONResponse(content=result)
+
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        print(f"❌ Bet placement error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/coins/bets")
+async def get_user_bets(user_id: str, limit: int = 50):
+    """
+    Get user's betting history
+    """
+    if not MONGODB_AVAILABLE:
+        raise HTTPException(
+            status_code=503,
+            detail="Database not available"
+        )
+
+    try:
+        bets = BettingDB.get_user_bets(user_id, limit=limit)
+
+        # Convert ObjectId to string and datetime to ISO format
+        for bet in bets:
+            if "_id" in bet:
+                bet["_id"] = str(bet["_id"])
+            if "created_at" in bet:
+                bet["created_at"] = bet["created_at"].isoformat()
+            if "resolved_at" in bet and bet["resolved_at"]:
+                bet["resolved_at"] = bet["resolved_at"].isoformat()
+
+        return JSONResponse(content={"bets": bets, "count": len(bets)})
+
+    except Exception as e:
+        print(f"❌ Get bets error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/coins/leaderboard")
+async def get_leaderboard(limit: int = 100):
+    """
+    Get coin leaderboard (top users by balance)
+    """
+    if not MONGODB_AVAILABLE:
+        raise HTTPException(
+            status_code=503,
+            detail="Database not available"
+        )
+
+    try:
+        from database import get_database
+
+        db = get_database()
+
+        # Get top users by balance
+        top_wallets = db["wallets"].find().sort("balance", -1).limit(limit)
+
+        entries = []
+        for rank, wallet in enumerate(top_wallets, start=1):
+            entries.append({
+                "rank": rank,
+                "user_id": wallet["user_id"],
+                "display_name": wallet["user_id"][:8] + "...",  # Anonymized
+                "balance": wallet["balance"],
+                "total_earned": wallet.get("total_earned", 0)
+            })
+
+        return JSONResponse(content={
+            "entries": entries,
+            "total_users": len(entries)
+        })
+
+    except Exception as e:
+        print(f"❌ Leaderboard error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/coins/resolve-bet/{bet_id}")
+async def resolve_bet_endpoint(bet_id: str, won: bool, req: Request):
+    """
+    Resolve a bet (admin endpoint - should be protected)
+    """
+    if not MONGODB_AVAILABLE:
+        raise HTTPException(
+            status_code=503,
+            detail="Database not available"
+        )
+
+    try:
+        BettingDB.resolve_bet(bet_id, won)
+
+        return JSONResponse(content={
+            "success": True,
+            "bet_id": bet_id,
+            "result": "won" if won else "lost"
+        })
+
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        print(f"❌ Resolve bet error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     """Global exception handler"""
