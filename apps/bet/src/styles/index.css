@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark text-white font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* Coin Animation */
+  @keyframes coinSpin {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+  }
+
+  .coin-spin {
+    animation: coinSpin 1s ease-in-out;
+  }
+
+  /* Pulse Animation for Buttons */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(196, 30, 58, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(196, 30, 58, 0.8);
+    }
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 hover:bg-red-700 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 hover:bg-green-800 active:scale-95;
+  }
+
+  .card {
+    @apply bg-gray-900 rounded-xl p-6 shadow-xl border border-gray-800;
+  }
+
+  /* Wallet Card */
+  .wallet-card {
+    @apply card bg-gradient-to-br from-primary/20 to-primary/5 border-primary/30;
+  }
+
+  /* Battle Card */
+  .battle-card {
+    @apply card hover:border-primary/50 transition-all duration-300 cursor-pointer;
+  }
+
+  .battle-card:hover {
+    @apply transform scale-105;
+  }
+}
