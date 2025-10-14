@@ -20,8 +20,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-let app;
-let auth;
+let app: ReturnType<typeof initializeApp> | undefined;
+let auth: ReturnType<typeof getAuth> | undefined;
 try {
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
@@ -52,7 +52,12 @@ function App() {
       setAgeVerified(true);
     }
 
-    const unsubscribe = auth ? onAuthStateChanged(auth, (currentUser) => {
+    if (!auth) {
+      setLoading(false);
+      return;
+    }
+
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
 
@@ -61,8 +66,6 @@ function App() {
         setShowLogin(true);
       }
     });
-
-    }) : () => { setLoading(false); };
 
     return () => unsubscribe();
   }, []);
