@@ -32,13 +32,12 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Run E2E tests (Production)
+      - name: Run E2E smoke tests
         env:
           TEST_ENV: production
-          BASE_URL: https://play.abitaca.com.br
         run: |
-          echo "🧪 Running E2E tests against production..."
-          npx playwright test tests/e2e/play-content.spec.js --project="Desktop Chrome" --reporter=list || true
+          echo "🧪 Running smoke tests against production..."
+          npx playwright test tests/e2e/smoke.spec.js --project="Desktop Chrome" --reporter=list
 
       - name: Upload test results
         if: always()
