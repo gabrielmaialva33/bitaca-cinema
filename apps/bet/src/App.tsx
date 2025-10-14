@@ -109,7 +109,7 @@ function App() {
       const result = await signInWithPopup(auth, provider);
       // Check if email is Gmail
       if (!result.user.email?.endsWith('@gmail.com')) {
-        alert('⚠️ Apenas contas Gmail são permitidas!');
+        alert('AVISO: Apenas contas Gmail são permitidas!');
         await auth.signOut();
         return;
       }
