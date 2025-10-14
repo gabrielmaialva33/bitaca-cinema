@@ -8,8 +8,8 @@ import BettingInterface from './components/BettingInterface';
 import AgeGate from './components/AgeGate';
 import VoiceControl from './components/VoiceControl';
 import { useTextToSpeech } from './hooks/useVoice';
-import HorrorBackground3D from './components/HorrorBackground3D';
-import { Suspense } from 'react';
+// import HorrorBackground3D from './components/HorrorBackground3D';
+// import { Suspense } from 'react';
 
 // Firebase config (same as Play app)
 const firebaseConfig = {
@@ -182,10 +182,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen bg-dark text-white relative">
-        {/* 3D Horror Background */}
-        <Suspense fallback={null}>
+        {/* 3D Horror Background - Temporarily disabled due to React 18/19 compatibility */}
+        {/* <Suspense fallback={null}>
           <HorrorBackground3D />
-        </Suspense>
+        </Suspense> */}
 
         {/* Header */}
         <header className="bg-gray-900/80 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-40">
