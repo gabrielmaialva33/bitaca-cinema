@@ -137,8 +137,6 @@ test.describe('Search Functionality', () => {
 
   // Mobile tests
   test.describe('Mobile', () => {
-    test.skip(({ browserName, $projectName }) => $projectName !== 'Mobile', 'Mobile tests only');
-
     test('should be responsive on mobile', async ({ page }) => {
       await page.goto(BASE_URL);
 
@@ -229,8 +227,6 @@ test.describe('Search Functionality', () => {
 
   // Tablet tests
   test.describe('Tablet', () => {
-    test.skip(({ browserName, $projectName }) => $projectName !== 'Tablet', 'Tablet tests only');
-
     test('should be responsive on tablet', async ({ page }) => {
       await page.goto(BASE_URL);
 
@@ -263,8 +259,6 @@ test.describe('Search Functionality', () => {
 
   // Performance tests
   test.describe('Performance', () => {
-    test.skip(({ browserName, $projectName }) => $projectName !== 'Desktop', 'Performance tests on Desktop only');
-
     test('should debounce search requests', async ({ page }) => {
       await page.goto(BASE_URL);
 
@@ -313,8 +307,6 @@ test.describe('Search Functionality', () => {
 
   // Accessibility tests
   test.describe('Accessibility', () => {
-    test.skip(({ browserName, $projectName }) => $projectName !== 'Desktop', 'Accessibility tests on Desktop only');
-
     test('should have proper ARIA labels', async ({ page }) => {
       await page.goto(BASE_URL);
 
