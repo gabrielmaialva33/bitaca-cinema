@@ -19,14 +19,27 @@ const firebaseConfig = {
   measurementId: "G-3RHX80J2V7"
 };
 
-// Initialize Firebase
+// Initialize Firebase with defensive checks
 let app: ReturnType<typeof initializeApp> | undefined;
 let auth: ReturnType<typeof getAuth> | undefined;
-try {
-  app = initializeApp(firebaseConfig);
-  auth = getAuth(app);
-} catch (error) {
-  console.error('Firebase initialization error:', error);
+
+if (typeof window !== 'undefined') {
+  try {
+    // Check if Firebase is already initialized
+    const existingApp = initializeApp(firebaseConfig);
+    app = existingApp;
+    auth = getAuth(app);
+    console.log('[INFO] Firebase initialized successfully');
+  } catch (error: any) {
+    // Firebase might already be initialized
+    if (error.code === 'app/duplicate-app') {
+      console.log('[INFO] Firebase already initialized, using existing instance');
+    } else {
+      console.error('[ERROR] Firebase initialization failed:', error);
+      // Show user-friendly error
+      alert('Erro ao inicializar autenticação. Por favor, recarregue a página.');
+    }
+  }
 }
 
 // Create React Query client
