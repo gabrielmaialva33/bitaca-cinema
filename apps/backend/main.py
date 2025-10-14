@@ -1079,6 +1079,157 @@ async def resolve_bet_endpoint(bet_id: str, won: bool, req: Request):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# RL Auditing Endpoints
+
+@app.get("/api/rl/audit/{battle_id}")
+async def get_rl_audit_trail(battle_id: str, limit: int = 100):
+    """
+    Get RL decision audit trail for a battle
+    Provides full transparency of AI decisions
+    """
+    if not MONGODB_AVAILABLE:
+        raise HTTPException(
+            status_code=503,
+            detail="Database not available"
+        )
+
+    try:
+        from database import get_database
+
+        db = get_database()
+
+        # Get audit logs for battle
+        audit_logs = db["rl_audit_logs"].find(
+            {"battle_id": battle_id}
+        ).sort("timestamp", 1).limit(limit)
+
+        logs = []
+        for log in audit_logs:
+            log["_id"] = str(log["_id"])
+            log["timestamp"] = log["timestamp"].isoformat()
+            logs.append(log)
+
+        return JSONResponse(content={
+            "battle_id": battle_id,
+            "audit_trail": logs,
+            "count": len(logs),
+            "auditable": True
+        })
+
+    except Exception as e:
+        print(f"❌ RL audit error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/rl/fairness-report")
+async def get_fairness_report():
+    """
+    Get comprehensive fairness report
+    Shows RL agent performance metrics
+    """
+    try:
+        # Load RL agent (in production, this would be a singleton)
+        from agents.betting_rl_agent import BettingRLAgent
+
+        agent = BettingRLAgent()
+
+        # Try to load latest model
+        if MONGODB_AVAILABLE:
+            from database import get_database
+            db = get_database()
+
+            latest_snapshot = db["rl_model_snapshots"].find_one(
+                sort=[("created_at", -1)]
+            )
+
+            if latest_snapshot:
+                agent.import_model(latest_snapshot["model_data"])
+
+        # Generate report
+        report = agent.get_fairness_report()
+
+        return JSONResponse(content=report)
+
+    except Exception as e:
+        print(f"❌ Fairness report error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/rl/verify/{battle_id}")
+async def verify_battle_fairness(battle_id: str):
+    """
+    Verify that a battle's odds were calculated fairly
+    Checks for anomalies and manipulation
+    """
+    if not MONGODB_AVAILABLE:
+        raise HTTPException(
+            status_code=503,
+            detail="Database not available"
+        )
+
+    try:
+        from database import get_database
+        from agents.betting_rl_agent import AuditLogger
+
+        db = get_database()
+        audit_logger = AuditLogger(db["rl_audit_logs"])
+
+        # Verify fairness
+        verification = audit_logger.verify_fairness(battle_id)
+
+        return JSONResponse(content=verification)
+
+    except Exception as e:
+        print(f"❌ Verification error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/rl/model-info")
+async def get_rl_model_info():
+    """
+    Get current RL model information
+    Shows configuration and training status
+    """
+    try:
+        if not MONGODB_AVAILABLE:
+            return JSONResponse(content={
+                "available": False,
+                "message": "Database not available"
+            })
+
+        from database import get_database
+
+        db = get_database()
+
+        # Get latest model snapshot
+        latest = db["rl_model_snapshots"].find_one(
+            sort=[("created_at", -1)]
+        )
+
+        if not latest:
+            return JSONResponse(content={
+                "available": False,
+                "message": "No model trained yet"
+            })
+
+        # Get audit log stats
+        total_decisions = db["rl_audit_logs"].count_documents({})
+
+        return JSONResponse(content={
+            "available": True,
+            "version": latest.get("version", "1.0.0"),
+            "created_at": latest["created_at"].isoformat(),
+            "decision_count": latest.get("decision_count", 0),
+            "total_audit_logs": total_decisions,
+            "config": latest.get("model_data", {}).get("config", {}),
+            "metrics": latest.get("model_data", {}).get("metrics", {})
+        })
+
+    except Exception as e:
+        print(f"❌ Model info error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     """Global exception handler"""
