@@ -25,7 +25,8 @@ load_dotenv()
 try:
     from database import (
         get_mongo_client, close_mongo_connection, init_indexes,
-        ConversationDB, AnalyticsDB, EmbeddingsCacheDB
+        ConversationDB, AnalyticsDB, EmbeddingsCacheDB,
+        WalletDB, DailyBonusDB, BettingDB
     )
 
     MONGODB_AVAILABLE = True
@@ -114,6 +115,19 @@ class TTSRequest(BaseModel):
     text: str = Field(..., description="Text to convert to speech")
     voice: str = Field("pt-BR", description="Voice language code (e.g., pt-BR, en-US)")
     format: str = Field("audio/wav", description="Audio format")
+
+
+# Coin System Models (import from models/coin_system.py)
+try:
+    from models.coin_system import (
+        WalletResponse, ClaimDailyBonusRequest, ClaimDailyBonusResponse,
+        PlaceBetRequest, PlaceBetResponse, TransactionHistoryResponse,
+        LeaderboardResponse, LeaderboardEntry
+    )
+    COIN_SYSTEM_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️  Coin system models not available: {e}")
+    COIN_SYSTEM_AVAILABLE = False
 
 
 # Rate limiting store (simple in-memory)

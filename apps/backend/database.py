@@ -531,6 +531,26 @@ def init_indexes():
         # Embeddings cache indexes
         db[COLLECTIONS["embeddings_cache"]].create_index([("text", 1), ("model", 1)], unique=True)
 
+        # Wallet indexes
+        db[COLLECTIONS["wallets"]].create_index("user_id", unique=True)
+        db[COLLECTIONS["wallets"]].create_index("balance")
+        db[COLLECTIONS["wallets"]].create_index("total_earned")
+
+        # Coin transactions indexes
+        db[COLLECTIONS["coin_transactions"]].create_index("user_id")
+        db[COLLECTIONS["coin_transactions"]].create_index("transaction_type")
+        db[COLLECTIONS["coin_transactions"]].create_index("created_at")
+
+        # Daily bonuses indexes
+        db[COLLECTIONS["daily_bonuses"]].create_index("user_id")
+        db[COLLECTIONS["daily_bonuses"]].create_index("claimed_at")
+
+        # Bet records indexes
+        db[COLLECTIONS["bet_records"]].create_index("user_id")
+        db[COLLECTIONS["bet_records"]].create_index("battle_id")
+        db[COLLECTIONS["bet_records"]].create_index("status")
+        db[COLLECTIONS["bet_records"]].create_index("created_at")
+
         print("✅ Database indexes created")
     except Exception as e:
         print(f"⚠️  Index creation warning: {e}")
