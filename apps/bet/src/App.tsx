@@ -6,6 +6,8 @@ import CoinWallet from './components/CoinWallet';
 import DailyBonus from './components/DailyBonus';
 import BettingInterface from './components/BettingInterface';
 import AgeGate from './components/AgeGate';
+import VoiceControl from './components/VoiceControl';
+import { useTextToSpeech } from './hooks/useVoice';
 // import HorrorBackground3D from './components/HorrorBackground3D';
 
 // Firebase config (same as Play app)
@@ -57,6 +59,13 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [ageVerified, setAgeVerified] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const { speak } = useTextToSpeech();
+
+  const handleVoiceCommand = (command: { action: string; rapper?: string; amount?: number }) => {
+    console.log('Voice command:', command);
+    speak(`Comando recebido: ${command.action}`);
+    // Handle commands in BettingInterface
+  };
 
   useEffect(() => {
     // Check age verification from localStorage
@@ -209,6 +218,9 @@ function App() {
           {/* Betting Interface */}
           <BettingInterface userId={user.uid} />
         </main>
+
+        {/* Voice Control */}
+        <VoiceControl onCommand={handleVoiceCommand} />
 
         {/* Footer */}
         <footer className="bg-gray-900 border-t border-gray-800 mt-12">

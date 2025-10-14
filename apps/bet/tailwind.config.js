@@ -7,23 +7,31 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Bad Parenting inspired dark theme
-        'blood-red': '#8B0000',
-        'deep-red': '#4A0000',
-        'shadow-black': '#0D0D0D',
-        'void-black': '#050505',
-        'pale-gray': '#2A2A2A',
-        'dead-white': '#E0E0E0',
-        'warning-red': '#FF0000',
-        'toxic-green': '#00FF41',
+        // Enhanced dark mode palette
+        'blood-red': '#DC2626',
+        'deep-red': '#7F1D1D',
+        'shadow-black': '#0F1419',
+        'void-black': '#000000',
+        'slate-darker': '#0F172A',
+        'slate-dark': '#1E293B',
+        'slate-medium': '#334155',
+        'slate-light': '#64748B',
+        'pale-gray': '#94A3B8',
+        'dead-white': '#F1F5F9',
+        'warning-red': '#EF4444',
+        'toxic-green': '#10B981',
+        'neon-green': '#00FF41',
+        'electric-blue': '#3B82F6',
         // Aliases for components
-        'primary': '#C41E3A',
-        'secondary': '#00C853',
-        'dark': '#0D0D0D',
+        'primary': '#DC2626',
+        'secondary': '#10B981',
+        'dark': '#0F1419',
       },
       fontFamily: {
-        'creepy': ['Creepster', 'cursive'],
-        'horror': ['Special Elite', 'cursive'],
+        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'display': ['Orbitron', 'sans-serif'],
+        'mono': ['Rubik Mono One', 'monospace'],
+        'horror': ['Inter', 'sans-serif'],
       },
       animation: {
         'glitch': 'glitch 1s linear infinite',

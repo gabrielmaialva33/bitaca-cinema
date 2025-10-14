@@ -3,22 +3,16 @@
 @tailwind utilities;
 
 /* Bad Parenting Horror Theme */
-@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&family=Rubik+Mono+One&display=swap');
 
 @layer base {
   body {
-    @apply bg-void-black text-dead-white font-horror antialiased;
+    @apply bg-shadow-black text-dead-white font-sans antialiased;
     background-image:
-      radial-gradient(circle at 20% 50%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(74, 0, 0, 0.15) 0%, transparent 50%),
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.3) 2px,
-        rgba(0, 0, 0, 0.3) 4px
-      );
-    background-size: 100% 100%, 100% 100%, 100% 4px;
+      radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at top, rgba(15, 20, 25, 0.5) 0%, transparent 50%);
+    background-attachment: fixed;
   }
 
   * {
@@ -60,7 +54,7 @@
   }
 
   .card {
-    @apply bg-gray-900 rounded-xl p-6 shadow-xl border border-gray-800;
+    @apply bg-slate-darker/80 backdrop-blur-sm rounded-xl p-6 shadow-2xl border border-slate-dark hover:border-slate-medium transition-all duration-300;
   }
 
   /* Wallet Card */
