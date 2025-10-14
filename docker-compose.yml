@@ -1,6 +1,51 @@
 version: '3.8'
 
 services:
+  # Redis (Cache & Session Store)
+  redis:
+    image: redis:7-alpine
+    container_name: bitaca-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - bitaca-network
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    labels:
+      - "com.abitaca.project=bitaca-cinema"
+      - "com.abitaca.service=redis"
+
+  # TimescaleDB (Time-Series Database)
+  timescaledb:
+    image: timescale/timescaledb:latest-pg17
+    container_name: bitaca-timescaledb
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=bitaca_cinema
+    ports:
+      - "5432:5432"
+    networks:
+      - bitaca-network
+    volumes:
+      - timescaledb-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    labels:
+      - "com.abitaca.project=bitaca-cinema"
+      - "com.abitaca.service=timescaledb"
+
   # Backend API (NVIDIA NIM + AI Agents)
   api:
     build:
@@ -14,6 +59,8 @@ services:
       - HOST=0.0.0.0
       - PORT=3000
       - WORKERS=4
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgresql://postgres:postgres@timescaledb:5432/bitaca_cinema
     ports:
       - "3000:3000"
     networks:
@@ -29,6 +76,11 @@ services:
     labels:
       - "com.abitaca.project=bitaca-cinema"
       - "com.abitaca.service=api"
+    depends_on:
+      redis:
+        condition: service_healthy
+      timescaledb:
+        condition: service_healthy
 
   # Streaming Bridge (Telegram Video Proxy)
   streaming-bridge:
@@ -65,3 +117,7 @@ networks:
 volumes:
   logs:
     name: bitaca-logs
+  redis-data:
+    name: bitaca-redis-data
+  timescaledb-data:
+    name: bitaca-timescaledb-data
