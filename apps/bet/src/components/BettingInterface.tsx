@@ -4,6 +4,7 @@ import AIInsights from './AIInsights';
 import LiveCommentary from './LiveCommentary';
 import LiveBattle from './LiveBattle';
 import RapperCard from './RapperCard';
+import HorrorBettingGraph from './HorrorBettingGraph';
 
 interface BettingInterfaceProps {
   userId: string;
@@ -55,7 +56,7 @@ export default function BettingInterface({ userId }: BettingInterfaceProps) {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-white">🎤 Batalhas de Rima</h2>
+      <h2 className="text-3xl font-bold text-white">BATALHAS DE RIMA</h2>
 
       {/* Active Battles */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -67,7 +68,7 @@ export default function BettingInterface({ userId }: BettingInterfaceProps) {
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                   battle.status === 'live' ? 'bg-red-500 text-white animate-pulse' : 'bg-gray-700 text-gray-300'
                 }`}>
-                  {battle.status === 'live' ? '🔴 AO VIVO' : '📅 EM BREVE'}
+                  {battle.status === 'live' ? 'AO VIVO' : 'EM BREVE'}
                 </span>
               </div>
 
@@ -87,6 +88,14 @@ export default function BettingInterface({ userId }: BettingInterfaceProps) {
                 ))}
               </div>
             </div>
+
+            {/* Horror-style Betting Graph */}
+            <HorrorBettingGraph
+              rapper1={battle.contestants[0]}
+              rapper2={battle.contestants[1]}
+              rapper1Score={battle.odds[0] * 5}
+              rapper2Score={battle.odds[1] * 5}
+            />
 
             {/* NVIDIA Live Battle with Audio */}
             <LiveBattle
