@@ -2,6 +2,7 @@
  * Onboarding System
  * First-time user experience with tag/genre selection
  * Stores preferences in Firebase + MongoDB for personalized recommendations
+ * Updated: 2025-10-14 - Fixed event listeners with requestAnimationFrame
  */
 
 import { getAuth } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
