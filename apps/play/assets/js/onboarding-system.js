@@ -22,32 +22,32 @@ export class OnboardingSystem {
         // Available tags organized by category
         this.availableTags = {
             genres: [
-                { id: 'action', name: 'Ação', icon: '⚔️', color: '#FF6B6B' },
-                { id: 'adventure', name: 'Aventura', icon: '🗺️', color: '#4ECDC4' },
-                { id: 'comedy', name: 'Comédia', icon: '😂', color: '#FFE66D' },
-                { id: 'drama', name: 'Drama', icon: '🎭', color: '#A8DADC' },
-                { id: 'fantasy', name: 'Fantasia', icon: '🧙', color: '#C77DFF' },
-                { id: 'horror', name: 'Terror', icon: '👻', color: '#8B4513' },
-                { id: 'mystery', name: 'Mistério', icon: '🔍', color: '#457B9D' },
-                { id: 'romance', name: 'Romance', icon: '💖', color: '#F72585' },
-                { id: 'sci-fi', name: 'Ficção Científica', icon: '🚀', color: '#4361EE' },
-                { id: 'slice-of-life', name: 'Slice of Life', icon: '🌸', color: '#FFB5A7' },
-                { id: 'sports', name: 'Esportes', icon: '⚽', color: '#06FFA5' },
-                { id: 'thriller', name: 'Suspense', icon: '🎬', color: '#2B2D42' }
+                { id: 'action', name: 'Ação', icon: '', color: '#FF6B6B' },
+                { id: 'adventure', name: 'Aventura', icon: '', color: '#4ECDC4' },
+                { id: 'comedy', name: 'Comédia', icon: '', color: '#FFE66D' },
+                { id: 'drama', name: 'Drama', icon: '', color: '#A8DADC' },
+                { id: 'fantasy', name: 'Fantasia', icon: '', color: '#C77DFF' },
+                { id: 'horror', name: 'Terror', icon: '', color: '#8B4513' },
+                { id: 'mystery', name: 'Mistério', icon: '', color: '#457B9D' },
+                { id: 'romance', name: 'Romance', icon: '', color: '#F72585' },
+                { id: 'sci-fi', name: 'Ficção Científica', icon: '', color: '#4361EE' },
+                { id: 'slice-of-life', name: 'Slice of Life', icon: '', color: '#FFB5A7' },
+                { id: 'sports', name: 'Esportes', icon: '', color: '#06FFA5' },
+                { id: 'thriller', name: 'Suspense', icon: '', color: '#2B2D42' }
             ],
             moods: [
-                { id: 'dark', name: 'Sombrio', icon: '🌑', color: '#2B2D42' },
-                { id: 'lighthearted', name: 'Leve', icon: '☀️', color: '#FFE66D' },
-                { id: 'intense', name: 'Intenso', icon: '🔥', color: '#FF6B6B' },
-                { id: 'emotional', name: 'Emocional', icon: '💙', color: '#A8DADC' },
-                { id: 'inspiring', name: 'Inspirador', icon: '⭐', color: '#FFD700' },
-                { id: 'relaxing', name: 'Relaxante', icon: '🎵', color: '#90EE90' }
+                { id: 'dark', name: 'Sombrio', icon: '', color: '#2B2D42' },
+                { id: 'lighthearted', name: 'Leve', icon: '', color: '#FFE66D' },
+                { id: 'intense', name: 'Intenso', icon: '', color: '#FF6B6B' },
+                { id: 'emotional', name: 'Emocional', icon: '', color: '#A8DADC' },
+                { id: 'inspiring', name: 'Inspirador', icon: '', color: '#FFD700' },
+                { id: 'relaxing', name: 'Relaxante', icon: '', color: '#90EE90' }
             ],
             audience: [
-                { id: 'kids', name: 'Infantil', icon: '👶', color: '#FFB5A7' },
-                { id: 'teen', name: 'Adolescente', icon: '🎓', color: '#4ECDC4' },
-                { id: 'adult', name: 'Adulto', icon: '🎯', color: '#457B9D' },
-                { id: 'family', name: 'Família', icon: '👨‍👩‍👧‍👦', color: '#90EE90' }
+                { id: 'kids', name: 'Infantil', icon: '', color: '#FFB5A7' },
+                { id: 'teen', name: 'Adolescente', icon: '', color: '#4ECDC4' },
+                { id: 'adult', name: 'Adulto', icon: '', color: '#457B9D' },
+                { id: 'family', name: 'Família', icon: '', color: '#90EE90' }
             ]
         };
     }
