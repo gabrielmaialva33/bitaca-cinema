@@ -248,7 +248,7 @@ test.describe('Security & Performance', () => {
 
         const loadTime = Date.now() - startTime;
 
-        console.log(`⏱️  Page load time: ${loadTime}ms`);
+        console.log(`[TIME] Page load time: ${loadTime}ms`);
 
         expect(loadTime).toBeLessThan(5000); // Should load in under 5s
 
