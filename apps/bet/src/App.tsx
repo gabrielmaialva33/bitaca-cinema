@@ -8,7 +8,8 @@ import BettingInterface from './components/BettingInterface';
 import AgeGate from './components/AgeGate';
 import VoiceControl from './components/VoiceControl';
 import { useTextToSpeech } from './hooks/useVoice';
-// import HorrorBackground3D from './components/HorrorBackground3D';
+import HorrorBackground3D from './components/HorrorBackground3D';
+import { Suspense } from 'react';
 
 // Firebase config (same as Play app)
 const firebaseConfig = {
@@ -141,7 +142,7 @@ function App() {
       <div className="min-h-screen flex items-center justify-center bg-dark p-4">
         <div className="max-w-md w-full bg-gray-900 border border-gray-800 rounded-xl p-8 shadow-2xl">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-primary mb-2">🎲 Bitaca Bet</h1>
+            <h1 className="text-3xl font-bold text-primary mb-2">Bitaca Bet</h1>
             <p className="text-gray-400">Entre com sua conta Google</p>
           </div>
 
@@ -171,7 +172,7 @@ function App() {
           </button>
 
           <p className="text-xs text-gray-500 text-center mt-6">
-            ⚠️ Apenas contas @gmail.com são aceitas
+            AVISO: Apenas contas @gmail.com são aceitas
           </p>
         </div>
       </div>
@@ -181,20 +182,20 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen bg-dark text-white relative">
-        {/* 3D Horror Background - Temporarily disabled due to React 18 compatibility */}
-        {/* <Suspense fallback={null}>
+        {/* 3D Horror Background */}
+        <Suspense fallback={null}>
           <HorrorBackground3D />
-        </Suspense> */}
+        </Suspense>
 
         {/* Header */}
         <header className="bg-gray-900/80 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-40">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-bold text-primary">🎲 Bitaca Bet</h1>
+              <h1 className="text-2xl font-bold text-primary">Bitaca Bet</h1>
               <div className="flex items-center gap-4">
                 <span className="text-gray-400 text-sm">{user.email}</span>
                 <a href="/play.html" className="btn-secondary text-sm">
-                  ← Voltar ao Play
+                  Voltar ao Play
                 </a>
               </div>
             </div>
