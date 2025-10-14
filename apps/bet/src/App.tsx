@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, type User } from 'firebase/auth';
