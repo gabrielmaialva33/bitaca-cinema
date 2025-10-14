@@ -173,7 +173,7 @@ export default function BettingInterface({ userId }: BettingInterfaceProps) {
                   disabled={placeBetMutation.isPending}
                   className="flex-1 btn-primary"
                 >
-                  {placeBetMutation.isPending ? 'Apostando...' : `Apostar ${betAmount} 🪙`}
+                  {placeBetMutation.isPending ? 'Apostando...' : `Apostar ${betAmount} COINS`}
                 </button>
               </div>
             </div>
@@ -184,7 +184,7 @@ export default function BettingInterface({ userId }: BettingInterfaceProps) {
       {/* Recent Bets */}
       {betsData && betsData.bets.length > 0 && (
         <div className="card">
-          <h3 className="text-xl font-bold text-white mb-4">📊 Suas Apostas Recentes</h3>
+          <h3 className="text-xl font-bold text-white mb-4">SUAS APOSTAS RECENTES</h3>
           <div className="space-y-2">
             {betsData.bets.slice(0, 5).map((bet) => (
               <div key={bet._id} className="bg-gray-800 rounded-lg p-3 flex items-center justify-between">
@@ -199,9 +199,9 @@ export default function BettingInterface({ userId }: BettingInterfaceProps) {
                   bet.status === 'lost' ? 'bg-red-500 text-white' :
                   'bg-yellow-500 text-black'
                 }`}>
-                  {bet.status === 'won' ? '✅ Ganhou' :
-                   bet.status === 'lost' ? '❌ Perdeu' :
-                   '⏳ Pendente'}
+                  {bet.status === 'won' ? 'GANHOU' :
+                   bet.status === 'lost' ? 'PERDEU' :
+                   'PENDENTE'}
                 </span>
               </div>
             ))}
