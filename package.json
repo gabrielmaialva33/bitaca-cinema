@@ -1,9 +1,23 @@
 {
-  "name": "@bitaca-cinema/frontend",
+  "name": "@bitaca-cinema/monorepo",
   "version": "1.0.0",
   "private": true,
-  "description": "Frontend for Bitaca Cinema - Cultural cinema project",
+  "description": "Bitaca Cinema - Monorepo for cultural cinema platform",
   "scripts": {
-    "serve": "python3 -m http.server 8000"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "deploy": "turbo run deploy",
+    "clean": "turbo run clean",
+    "serve:www": "python3 -m http.server 8000 --directory apps/institucional"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=9.0.0"
   }
 }

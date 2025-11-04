@@ -49,12 +49,12 @@ services:
   # Backend API (NVIDIA NIM + AI Agents)
   api:
     build:
-      context: .
+      context: ../../apps/api
       dockerfile: Dockerfile
     container_name: bitaca-api
     restart: unless-stopped
     env_file:
-      - .env
+      - ../../apps/api/.env
     environment:
       - HOST=0.0.0.0
       - PORT=3000
@@ -66,7 +66,7 @@ services:
     networks:
       - bitaca-network
     volumes:
-      - ./logs:/app/logs
+      - ../../apps/api/logs:/app/logs
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:3000/health" ]
       interval: 30s
@@ -85,7 +85,7 @@ services:
   # Streaming Bridge (Telegram Video Proxy)
   streaming-bridge:
     build:
-      context: ./apps/play-3d-streaming-bridge
+      context: ../../apps/streaming-bridge
       dockerfile: Dockerfile
     container_name: bitaca-streaming-bridge
     restart: unless-stopped
