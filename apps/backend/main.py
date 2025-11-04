@@ -59,7 +59,21 @@ except ImportError as e:
 NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY")
 NVIDIA_API_URL = os.getenv("NVIDIA_API_URL", "https://integrate.api.nvidia.com/v1")
 NVIDIA_MODEL = os.getenv("NVIDIA_MODEL", "qwen/qwen3-next-80b-a3b-thinking")
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "").split(",")
+
+# CORS Configuration with default allowed origins
+DEFAULT_ORIGINS = [
+    "https://gabrielmaialva33.github.io",
+    "http://localhost:8000",
+    "https://abitaca.com.br",
+    "https://www.abitaca.com.br",
+    "https://mostra.abitaca.com.br",  # NEW: Cinema showcase
+    "https://bet.abitaca.com.br",
+    "https://play.abitaca.com.br",
+    "http://localhost:3000",
+]
+origins_env = os.getenv("ALLOWED_ORIGINS", "")
+ALLOWED_ORIGINS = origins_env.split(",") if origins_env else DEFAULT_ORIGINS
+
 RATE_LIMIT_PER_MINUTE = int(os.getenv("RATE_LIMIT_PER_MINUTE", 60))
 
 # Global AGI manager (initialized on startup)

@@ -1,0 +1,12 @@
+<svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+    <!-- Casinha -->
+    <polygon fill="#C41E3A" points="100,10 120,25 120,40 80,40 80,25" stroke="#0A0A0A" stroke-width="2"/>
+    <rect fill="#8B4513" height="12" width="8" x="90" y="28"/>
+    <rect fill="#8B4513" height="12" width="8" x="105" y="28"/>
+    <!-- Folhagens -->
+    <path d="M 70,30 Q 65,25 70,20" fill="none" stroke="#2D5016" stroke-width="3"/>
+    <path d="M 130,30 Q 135,25 130,20" fill="none" stroke="#2D5016" stroke-width="3"/>
+    <!-- Texto BITACA -->
+    <text fill="#C41E3A" font-family="Staatliches, sans-serif" font-size="28" font-weight="bold" x="40" y="65">BITACA</text>
+    <text fill="#0A0A0A" font-family="Pacifico, cursive" font-size="14" x="60" y="78">Cinema</text>
+</svg>
