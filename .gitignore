@@ -33,16 +33,17 @@ wheels/
 # IDEs
 .vscode/
 .idea/
+.junie/
 *.swp
 *.swo
 
-# Node modules (if added later)
+# Node modules
 node_modules/
 package-lock.json
-.claude
-.playwright-mcp
-test-results
-tests/report
+dist/
+.turbo/
+.next/
+out/
 # Environment variables
 .env
 .env.*
@@ -59,3 +60,8 @@ playwright-report/
 test-results/
 coverage/
 .nyc_output/
+
+# Claude & Tools
+.claude/
+.playwright-mcp/
+tests/report/
