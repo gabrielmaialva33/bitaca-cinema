@@ -1,9 +1,0 @@
-{
-  "name": "@bitaca-cinema/frontend",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Frontend for Bitaca Cinema - Cultural cinema project",
-  "scripts": {
-    "serve": "python3 -m http.server 8000"
-  }
-}

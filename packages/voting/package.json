@@ -1,0 +1,14 @@
+{
+  "name": "@bitaca/voting",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared voting system for Bitaca Cinema",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./styles": "./src/voting.css"
+  },
+  "files": [
+    "src"
+  ]
+}

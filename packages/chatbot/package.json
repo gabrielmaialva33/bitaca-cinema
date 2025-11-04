@@ -1,0 +1,14 @@
+{
+  "name": "@bitaca/chatbot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI chatbot with RAG for Bitaca Cinema",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./styles": "./src/chatbot.css"
+  },
+  "files": [
+    "src"
+  ]
+}

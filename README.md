@@ -19,11 +19,13 @@ bitaca-cinema/
 ├── apps/
 │   ├── api/              # FastAPI backend with AI agents
 │   ├── bet/              # Betting interface application
-│   ├── frontend/         # Main frontend application
 │   ├── mostra/           # Film showcase platform (23 productions)
 │   ├── institucional/    # Institutional website (www.abitaca.com.br)
 │   └── streaming-bridge/ # Telegram video streaming proxy
 ├── packages/
+│   ├── voting/           # Shared voting system
+│   ├── chatbot/          # AI chatbot with RAG
+│   ├── avatar/           # 3D avatar system
 │   ├── ui/               # Shared UI components
 │   ├── types/            # Shared TypeScript types
 │   └── config/           # Shared configuration
@@ -115,10 +117,16 @@ High-performance streaming proxy for Telegram video content.
 
 **Stack:** Python, FastAPI, Redis caching
 
-### 🎮 Frontend (`apps/frontend`)
-Main frontend application (to be consolidated with mostra).
+## 📦 Shared Packages
 
-**Stack:** React 19, Vite
+### 🗳️ Voting (`packages/voting`)
+Complete voting system with Firebase integration, D3 visualizations, and quiz functionality.
+
+### 🤖 Chatbot (`packages/chatbot`)
+AI-powered chatbot with RAG (Retrieval-Augmented Generation), intent detection, and streaming responses.
+
+### 👤 Avatar (`packages/avatar`)
+3D avatar system with Three.js integration for interactive experiences.
 
 ## 🛠️ Technology Stack
 

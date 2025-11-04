@@ -1,0 +1,14 @@
+{
+  "name": "@bitaca/avatar",
+  "version": "0.1.0",
+  "private": true,
+  "description": "3D avatar system for Bitaca Cinema",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./styles": "./src/avatar.css"
+  },
+  "files": [
+    "src"
+  ]
+}
